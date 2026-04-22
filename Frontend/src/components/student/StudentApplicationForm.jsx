@@ -41,7 +41,8 @@ const ApplyMissedExam = () => {
         setFormData(prev => ({
           ...prev,
           studentId: user.userID, // auto-fill studentId
-          name: user.name        // auto-fill name
+          name: user.name,        // auto-fill name
+          department: user.department // auto-fill department
         }))
       }
     } catch (err) {
@@ -149,7 +150,7 @@ const ApplyMissedExam = () => {
                 // }
               }}
             />
-          </div>
+          </div>     
 
           <div className="form-group">
             <label>Name</label>
@@ -164,12 +165,15 @@ const ApplyMissedExam = () => {
           </div>
 
           <div className="form-group">
-            <label>Missed Exam Type</label>
-            <select name="missedExamType" required value={formData.missedExamType} onChange={handleChange}>
-              <option value="">Select</option>
-              <option value="mid">Mid</option>
-              <option value="final">Final</option>
-            </select>
+            <label>Department</label>
+            <input
+              type="text"
+              placeholder="Department Name"
+              name="name"
+              readOnly                                   
+              value={formData.department}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="form-group">
@@ -220,13 +224,11 @@ const ApplyMissedExam = () => {
           </div>
 
           <div className="form-group">
-            <label>Department</label>
-            <select name="department" required onChange={handleChange}>
-              <option value="">Select Department</option>
-              <option value="CSE">CSE</option>
-              <option value="EEE">EEE</option>
-              <option value="BBA">BBA</option>
-              <option value="Law">Law</option>
+            <label>Missed Exam Type</label>
+            <select name="missedExamType" required value={formData.missedExamType} onChange={handleChange}>
+              <option value="">Select</option>
+              <option value="mid">Mid</option>
+              <option value="final">Final</option>
             </select>
           </div>
 

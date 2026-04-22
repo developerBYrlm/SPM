@@ -90,7 +90,9 @@ const Add = () => {
 
           <div className="form-group">
             <label>ID / Acronym</label>
-            <input type="text" name="studentId" placeholder='Insert Full ID / Acronym'  required onChange={handleChange} />
+            <input type="text" name="studentId" placeholder='Insert Full ID / Acronym'  required 
+            onInput={(e) => e.target.value = e.target.value.replace(/[^A-Z0-9\s]/g, '')}
+            onChange={handleChange} />
           </div>
 
           <div className="form-group">

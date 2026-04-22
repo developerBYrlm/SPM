@@ -2,8 +2,10 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import './ViewActionButton/ViewActionButton.css'
+import "./routine.css"
 
-const FacultyProfile = () =>{
+
+const AuthorityProfile = () =>{
   const { id } = useParams()             
   const [student, setStudent] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -35,12 +37,12 @@ const FacultyProfile = () =>{
       } finally {
         setLoading(false)
       }
-    }
+    } 
 
     fetchStudent()
   }, [id])
 
-  if (loading) { return <div  className="publish-btn"> <i className="fa-solid fa-spinner fa-spin"></i> Loading...</div>}
+  if (loading) { return <div  className="loading"> <i className="fa-solid fa-spinner fa-spin"></i> Loading...</div>}
 
   if (!student || !student.user) { return <div>No authority data found for ID: {id}</div> }
 
@@ -75,4 +77,4 @@ const FacultyProfile = () =>{
   )
 }  
 
-export default FacultyProfile
+export default AuthorityProfile
