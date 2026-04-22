@@ -9,15 +9,45 @@ const List = () => {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
+  const [authority, setAuthority] = useState(null); 
 
  
-   const filteredStudents = students.filter((student) =>
-   student.studentId.toLowerCase().includes(search.toLowerCase())
-    )
+  const fetchAuthorityProfile = async () => {
+    try {
+      const res = await axios.get("http://localhost:8000/api/auth/me", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+      if (res.data.success) {
+        setAuthority(res.data.user); 
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+ 
+  const filteredStudents = students
+    .filter((student) => {
+      if (!authority) return true;
+
+      return (
+        student.department?.toLowerCase() ===
+        authority.department?.toLowerCase()
+      );
+    })
+    
+    .filter((student) =>
+      (student.studentId || "")
+        .toLowerCase()
+        .includes(search.toLowerCase())
+    );
+
 
 
   const columns = [
-    { name: "S No", selector: (row) => row.sno, width: "120px" },
+    // { name: "S No", selector: (row) => row.sno, width: "120px" },
     { name: "ACAD ID", selector: (row) => row.studentId, sortable: true, width: "170px" },
     {
       name: "Image",
@@ -52,6 +82,7 @@ const List = () => {
             sno: i++,
             studentId: s.user?.userID || "N/A",
             name: s.user?.name || "N/A",
+            department: s.user?.department,
             profileImage: s.user?.profileImage  ? `http://localhost:8000/imageUploads/uploads/${s.user.profileImage}`: "",
           })));
         }
@@ -62,6 +93,7 @@ const List = () => {
       }
     }; 
 
+    fetchAuthorityProfile(); 
     fetchStudents();
   }, []);
 

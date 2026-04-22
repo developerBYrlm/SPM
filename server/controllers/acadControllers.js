@@ -13,7 +13,7 @@ const getAcads = async (req, res) => {
       .populate({
         path: "user",
         match: { role: "ACAD" }, 
-        select: "name email userID profileImage role ",
+        select: "name email userID profileImage role department",
       });
 
     const filteredStudents = students.filter((s) => s.user !== null);

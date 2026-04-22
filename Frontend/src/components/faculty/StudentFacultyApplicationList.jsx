@@ -14,7 +14,7 @@ const List = () => {
   // logged-in faculty profile fetch (department + acronym)
   const fetchFacultyProfile = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/auth/me", { // 🆕
+      const res = await axios.get("http://localhost:8000/api/auth/me", { 
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
 
@@ -42,7 +42,7 @@ const List = () => {
   );
  
   const columns = [
-    { name: "S No", selector: (row) => row.sno, width: "100px" },
+    // { name: "S No", selector: (row) => row.sno, width: "100px" },
     { name: "Student ID", selector: (row) => row.studentId, sortable: true, width: "170px" },
     { name: "Name", selector: (row) => row.name, sortable: true, width: "220px" },
     { 

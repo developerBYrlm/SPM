@@ -9,15 +9,40 @@ const ApplicationPending = () => {
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
+   const [authority, setAuthority] = useState(null); 
+
+  const fetchAuthorityProfile = async () => {
+    try {
+      const res = await axios.get("http://localhost:8000/api/auth/me", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+      if (res.data.success) {
+        setAuthority(res.data.user); 
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const filteredApplications = applications
+  .filter((student) => {
+      if (!authority) return false;
+
+      return (
+        student.department?.toLowerCase() ===
+        authority.department?.toLowerCase()
+      );
+    })
   .filter((app) => app.authorityStatus === "Pending") 
   .filter((app) => app.studentId.toLowerCase().includes(search.toLowerCase())
 
   );
  
   const columns = [
-    { name: "S No", selector: (row) => row.sno, width: "100px" },
+    // { name: "S No", selector: (row) => row.sno, width: "100px" },
     { name: "Student ID", selector: (row) => row.studentId, sortable: true, width: "170px" },
     { name: "Name", selector: (row) => row.name, sortable: true, width: "220px" },
     { 
@@ -55,6 +80,7 @@ const ApplicationPending = () => {
           sno: i++,
           studentId: app.studentId,
           name: app.name,
+          department: app.department,
           missedExamType: app.missedExamType
         })));
       }
@@ -66,6 +92,8 @@ const ApplicationPending = () => {
   };
 
   useEffect(() => {
+
+    fetchAuthorityProfile();
     fetchApplications();
   }, []);
 

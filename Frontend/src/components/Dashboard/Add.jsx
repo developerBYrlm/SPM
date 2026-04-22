@@ -85,7 +85,9 @@ const Add = () => {
 
           <div className="form-group">
             <label>Email</label>
-            <input type="email" name="email" placeholder='Insert Email' required onChange={handleChange} />
+            <input type="email" name="email" placeholder='Insert Email' required 
+            onInput={(e) => e.target.value = e.target.value.replace(/[^a-z0-9@.\s]/g, '')}
+            onChange={handleChange} />
           </div>
 
           <div className="form-group">
@@ -120,6 +122,17 @@ const Add = () => {
           </div>
 
           <div className="form-group">
+            <label>Department</label>
+            <select name="department" required onChange={handleChange}>
+              <option value="">Select Department</option>
+              <option value="CSE">CSE</option>
+              <option value="EEE">EEE</option>
+              <option value="BBA">BBA</option>
+              <option value="Law">Law</option>
+            </select>
+          </div>
+
+          <div className="form-group">
             <label>Role</label>
             <select name="role" required onChange={handleChange}>
               <option value="">Select Role</option>
@@ -130,16 +143,6 @@ const Add = () => {
             </select>
           </div>
 
-          <div className="form-group">
-            <label>Department</label>
-            <select name="department" required onChange={handleChange}>
-              <option value="">Select Department</option>
-              <option value="CSE">CSE</option>
-              <option value="EEE">EEE</option>
-              <option value="BBA">BBA</option>
-              <option value="Law">Law</option>
-            </select>
-          </div>
 
 
 

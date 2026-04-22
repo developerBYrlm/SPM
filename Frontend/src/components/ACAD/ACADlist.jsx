@@ -17,7 +17,7 @@ const List = () => {
 
 
   const columns = [
-    { name: "S No", selector: (row) => row.sno, width: "120px" },
+    // { name: "S No", selector: (row) => row.sno, width: "120px" },
     { name: "Student ID", selector: (row) => row.studentId, sortable: true, width: "170px" },
     {
       name: "Image",

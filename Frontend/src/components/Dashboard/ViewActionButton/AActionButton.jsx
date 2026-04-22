@@ -57,6 +57,7 @@ const AActionButton = () => {
         </div>
 
         <div className="student-info">
+          <p><strong>ACAD Department:</strong> {student.user.department}</p>
           <p><strong>ACAD ID:</strong> {student.studentId}</p>
           <p><strong>ACAD Name:</strong> {student.user.name}</p>
           <p><strong>Email:</strong> {student.user.email}</p>

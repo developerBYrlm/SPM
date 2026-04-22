@@ -57,6 +57,7 @@ const SActionButton = () => {
            </div>
 
            <div className="student-info">
+            <p><strong>Department:</strong> {student.user.department}</p>
             <p><strong>Student ID:</strong> {student.studentId}</p>
             <p><strong>Student Name:</strong> {student.user.name}</p>
             <p><strong>Email:</strong> {student.user.email}</p>
