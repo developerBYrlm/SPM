@@ -1,0 +1,206 @@
+/* ===============================
+   MAIN CONTENT AREA
+================================ */
+.main-content {
+  margin-left: 265px; /* sidebar width */
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 40px 30px;
+}
+
+/* ===============================
+   DASHBOARD CONTAINER
+================================ */
+.dashboard-container {
+  width: 100%;
+  max-width: 1400px;
+
+  padding: 45px 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* Glassmorphism */
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+
+  border-radius: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* ===============================
+   TITLE
+================================ */
+.dashboard-title {
+  font-size: 42px;
+  font-weight: 700;
+  color: #ffffff;
+
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+/* ===============================
+   SEARCH BOX
+================================ */
+.search-box {
+  width: 100%;
+  max-width: 220px;
+  margin-bottom: 9px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 6px 15px;
+
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.393);
+
+  background: rgba(4, 4, 4, 0.255) ;
+  backdrop-filter: blur(12px);
+
+  color: #fff;
+  font-size: 17px;
+  outline: none;
+  display: flex;
+  text-align: center;
+}
+
+.search-box input::placeholder {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.459);
+}
+
+/* ===============================
+   TABLE WRAPPER
+================================ */
+.table-wrapper {
+  width: 100%;
+  max-width: 1200px;   /* 🔥 green area wider */
+  padding: 30px;
+
+  border-radius: 22px;
+  background: rgba(4, 4, 4, 0.27) !important;
+  backdrop-filter: blur(20px);
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.rdt_Table,
+.rdt_TableRow,
+.rdt_TableCell {
+  font-size: 20px;     /* 🔥 table font bigger */
+  color: #ffffff;
+}
+
+
+/* table header */
+
+.rdt_TableHead {
+  background: transparent !important;   /* 🔵 remove white */
+}
+
+.rdt_TableHeadRow {
+  background: rgba(4, 4, 4, 0.204) !important;
+}
+
+.rdt_TableCol {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 600;
+ 
+}
+
+/* table footer */
+
+.rdt_Pagination {
+  background: transparent !important;
+  color: #ffffff !important;
+  font-size: 18px;
+}
+
+.rdt_Pagination select,
+.rdt_Pagination option {
+  background: #22222272;
+  color: #fff;
+  border-radius: 7px;
+}
+
+
+/* ===============================
+   DATATABLE OVERRIDE
+================================ */
+
+.student-image {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: rgba(4, 4, 4, 0.295);
+}
+
+.rdt_Table {
+  background: transparent !important;
+}
+
+.rdt_TableHead {
+  background: rgba(255, 255, 255, 0.316);
+}
+
+.rdt_TableRow {
+  background: transparent !important;
+  color: #ffffff;
+}
+
+.rdt_TableRow:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Pagination */
+.rdt_Pagination {
+  background: transparent !important;
+  color: #ffffff;
+}
+
+
+/* back button */
+
+.back {
+  position: fixed;     
+  top: 18px;            /* x axis */
+  left: 20px;           /* y axis */
+  z-index: 1000;        /* z axis */
+}
+
+.back a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background-color: #1e1e1e00; /* dark background */
+  color: #fff;              /* white icon color */
+  padding: 22px 14px;
+  border-radius: 8px;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.back a:hover {
+  
+  color: #fff;
+  transform: translateX(-6px); /* slight left movement on hover */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0);
+}
+
+.back i {
+    font-size: 23px;
+}
+
+.back:active {
+    transform: scale(0.96);
+}

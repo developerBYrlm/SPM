@@ -1,0 +1,313 @@
+/* -------------------------------------------
+   Dashboard Background Container
+--------------------------------------------*/
+.main-content {
+  margin-left: 265px; /* sidebar width */
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 40px 30px;
+}
+
+
+.dashboard-container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 40px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.20);
+}
+
+
+.dashboard-title {
+  font-size: 45px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* -------------------------------------------
+   Cards Layout (Flex + Wrap)
+--------------------------------------------*/
+.dashboard-cards {
+  width: 100%;
+  max-width: 1000px;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  gap: 14px; 
+  margin: 0 auto;
+  padding: 15px ; 
+}
+
+.card-common {
+  background: rgba(0, 0, 0, 0.299);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  height: px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  color: white;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: 0.3s ease;
+  cursor: pointer;
+  padding: 10px; 
+  font-size: 20px;
+  white-space: nowrap; 
+  flex: 1; 
+}
+
+.card1:hover { background: rgba(15, 90, 221, 0.753); }
+.card2:hover { background: rgba(9, 196, 37, 0.532); }
+.card3:hover { background: rgba(183, 155, 14, 0.662); }
+.card4:hover { background: rgba(255, 0, 0, 0.536); }
+
+.card-common:active { transform: scale(0.96); }
+
+/* Each Card */
+.card1 {
+  background: rgba(0, 0, 0, 0.299);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 25px;
+  border-radius: 20px;
+
+  color: white;
+  text-align: center;
+  
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.card1:hover {
+  transform: translateY(-8px);
+  background: rgba(15, 90, 221, 0.753);
+  box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+}
+
+.card1 p {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.card1 span {
+  font-size: 32px;
+  font-weight: 700;
+  margin-top: 10px;
+  display: block;
+}
+
+.card1:active {
+    background: rgba(15, 90, 221);
+    transform: scale(0.96);
+    box-shadow: 0 0 10px rgba(15, 90, 221);
+}
+
+.card2 {
+  background: rgba(0, 0, 0, 0.299);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 25px;
+  border-radius: 20px;
+
+  color: white;
+  text-align: center;
+  
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.card2:hover {
+  transform: translateY(-8px);
+  background: rgba(9, 196, 37, 0.532);
+  box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+}
+
+.card2 p {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.card2 span {
+  font-size: 32px;
+  font-weight: 700;
+  margin-top: 10px;
+  display: block;
+}
+
+.card2:active {
+  background: rgb(9, 183, 35);
+    transform: scale(0.96);
+    box-shadow: 0 0 10px rgba(9, 196, 37);
+}
+
+
+.card3 {
+  background: rgba(0, 0, 0, 0.299);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 25px;
+  border-radius: 20px;
+
+  color: white;
+  text-align: center;
+  
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.card3:hover {
+  transform: translateY(-8px);
+  background: rgba(183, 155, 14, 0.662);
+  box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+}
+
+.card3 p {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.card3 span {
+  font-size: 32px;
+  font-weight: 700;
+  margin-top: 10px;
+  display: block;
+}
+
+.card3:active {
+  background: rgba(183, 175, 14, 0.996);
+    transform: scale(0.96);
+    box-shadow: 0 0 10px rgba(183, 155, 14);
+}
+
+
+.card4 {
+  background: rgba(0, 0, 0, 0.299);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 25px;
+  border-radius: 20px;
+
+  color: white;
+  text-align: center;
+  
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.card4:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 0, 0, 0.536);
+  box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+}
+
+.card4 p {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.card4 span {
+  font-size: 32px;
+  font-weight: 700;
+  margin-top: 10px;
+  display: block;
+}
+
+.card4:active {
+  background: rgba(255, 0, 0, 0.816);
+    transform: scale(0.96);
+    box-shadow: 0 0 15px rgb(255, 0, 0);
+}
+
+/* user */
+
+.user {
+  width: 250px;
+  max-width: 1000px;
+  font-size: 18px; 
+  color: #ffffff;
+  font-weight: 400;
+
+  
+
+  /* center alignment */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* glass card look */
+  background: rgba(0, 0, 0, 0.30);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  
+  padding: 15px;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  transition: 0.35s ease;
+  cursor: pointer;
+
+}
+.user-design {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  gap: 20px; 
+  flex-wrap: wrap; 
+  margin-top: 20px;
+}
+
+
+/* hover effect */
+.user:hover {
+  transform: translateY(-8px);
+  background: rgba(20, 155, 218, 0.944);
+  box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+}
+
+/* active effect */
+.user:active {
+   background: rgb(20, 155, 218);
+    transform: scale(0.96);
+    box-shadow: 0 0 10px rgb(20, 155, 218);
+}
+
+
+
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .dashboard-cards {
+    grid-template-columns: repeat(1, 5fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .dashboard-cards {
+    grid-template-columns: repeat(1, 5fr);
+  }
+}

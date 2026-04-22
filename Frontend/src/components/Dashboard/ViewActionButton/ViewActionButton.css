@@ -1,0 +1,383 @@
+/* ===============================
+   MAIN CONTENT AREA
+================================ */
+.main-content {
+  margin-left: 265px; /* sidebar width */
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center; /* Center the dashboard horizontally */
+  align-items: center;     /* Center the dashboard vertically */
+
+  padding: 40px 30px;
+}
+
+/* ===============================
+   DASHBOARD CONTAINER
+================================ */
+.dashboard-container {
+  width: 100%;
+  max-width: 1400px;
+  min-width: 500px;
+  padding: 45px 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center title & image */
+
+  /* Glassmorphism */
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+
+  border-radius: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* ===============================
+   TITLE
+================================ */
+.dashboard-title {
+  font-size: 42px;
+  font-weight: 700;
+  color: #ffffff;
+
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+/* ===============================
+   IMAGE FRAME
+================================ */
+.ImageFrame {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.ImageFrame img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #00b7ff87;
+}
+
+/* ===============================
+   STUDENT INFO
+================================ */
+.student-info {
+  width: 100%;
+  max-width: 600px; 
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+  gap: 12px;
+}
+
+.student-info p {
+  font-size: 22px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.student-info p strong {
+  color: #56c0fe;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 500px) {
+  .dashboard-container {
+    padding: 30px 20px;
+  }
+
+  .ImageFrame img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .student-info p {
+    font-size: 20px;
+  }
+}
+
+
+/* back button */
+
+.back {
+  position: fixed;     
+  top: 25px;            /* x axis */
+  left: 10px;           /* y axis */
+  z-index: 1000;        /* z axis */
+}
+
+.back a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background-color: #1e1e1e00; 
+  color: #fff;              
+  padding: 22px 14px;
+  border-radius: 8px;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.back a:hover {
+  
+  color: #fff;
+  transform: translateX(-6px); 
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0);
+}
+
+.back i {
+    font-size: 23px;
+}
+
+.back:active {
+    transform: scale(0.96);
+}
+
+
+/* application details css */
+
+/* ===============================
+   DETAILS CARD
+================================ */
+.details-card {
+  width: 100%;
+  max-width: 900px;
+  background: rgba(0, 0, 0, 0.366); /* glass effect */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 25px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  color: #ffffff;
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: 300;
+}
+
+/* ===============================
+   REASON BOX
+================================ */
+.reason-box {
+  background: rgba(255,255,255,0.05);
+  padding: 15px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 20px;
+  line-height: 1;
+  color: #ffffff;
+  width: 750px;
+  overflow-y: auto;    
+}
+h3{
+  font-size: 30px;
+  font-weight: 600;
+}
+/* ===============================
+   PDF VIEW
+================================ */
+.pdf-view {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pdf-view h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #f9f9f9;
+}
+
+.pdf-view iframe {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  width: 100%;         /* full width of container */
+  height: 500px;       /* smaller height */
+  max-width: 100%;    /* optional: limit width */
+}
+
+/* ===============================
+   COURSES LIST
+================================ */
+.details-card ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.details-card ul li {
+  font-size: 17px;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 600px) {
+  .details-card {
+    padding: 20px;
+  }
+
+  .reason-box {
+    max-height: 100px;
+    font-size: 15px;
+  }
+
+  .pdf-view iframe {
+    height: 180px;
+  }
+
+  .details-card p,
+  .details-card ul li {
+    font-size: 15px;
+  }
+}
+
+
+/* approve reject pending */
+
+/* ---------------- BUTTON WRAPPER ---------------- */
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+/* ---------------- DEFAULT (NOT CLICKED) ---------------- */
+.btn-authority,
+.btn-faculty {
+  background-color: #00b7ff87; /* sky blue */
+  color: #ffffff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 17px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 
+    background-color 0.25s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+/* ---------------- HOVER EFFECT ---------------- */
+.btn-authority:hover,
+.btn-faculty:hover {
+  background-color: #00b7ff87; /* darker sky blue */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+/* ---------------- CLICK EFFECT ---------------- */
+.btn-authority:active,
+.btn-faculty:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* ---------------- APPROVED STATE ---------------- */
+.btn-authority.approved,
+.btn-faculty.approved {
+  background-color: #18d72552; /* green */
+}
+
+.btn-authority.approved:hover,
+.btn-faculty.approved:hover {
+  background-color: #0ba744;
+}
+
+/* ---------------- REJECTED STATE ---------------- */
+.btn-authority.rejected,
+.btn-faculty.rejected {
+  background-color: #ef4444af; 
+}
+
+.btn-authority.rejected:hover,
+.btn-faculty.rejected:hover {
+  background-color: #dc2626;
+}
+
+/* ---------------- DISABLED ---------------- */
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+
+/* consider */
+.consider-amount {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  margin: 10px 0;
+}
+
+.consider-amount label {
+  font-weight: 500;
+  font-size: 20px;
+  color: #ffffff;
+}
+
+.consider-amount select {
+  padding: 6px 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0);
+  background-color: rgba(0, 0, 0, 0.311);
+  color: #ffffff;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.consider-amount select:focus {
+  border-color: #00b7ff;
+}
+
+.consider-amount button {
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 500;
+  font-size: 16px;
+  color: #fff;
+  background-color: #4caf4fb5; /* green */
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.consider-amount button:hover:not(:disabled) {
+  background-color: #1ac823;
+  transform: translateY(-2px);
+}
+
+.consider-amount button:disabled {
+  background-color: #a0a0a0;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.consider-amount button:active {
+  transform: translateY(-3);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+
+
+

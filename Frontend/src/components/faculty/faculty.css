@@ -1,0 +1,12 @@
+/* -------------------------------------------
+   Cards Layout (Flex + Wrap)
+--------------------------------------------*/
+.dashboard-three-cards {
+  width: 100%;
+  max-width: 1000px;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 25px;
+}

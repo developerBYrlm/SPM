@@ -1,0 +1,128 @@
+
+after open vs code run surver "npm run dev" run on Frontend file path --> open local host link on browser 
+
+sever connection "node --env-file=.env" 
+
+================================================================================================================================
+employee = students
+department
+admin = authority (multiple)
+ACAD = almost same as authority
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+[[[  authority dashboard  ]]]
+if student want to create account they must be contact with authority
+student info submit by an Specific authority member
+name, id, gender, email, phone, role, department, image [ password default set from authority --> after creating account student should change their pass]
+Action button area for student View, Edit, payment consider, leave
+in view also display student problems images (consider purpose)
+
+
+
+faculty member account also create by authority
+their info also submit by an Specific authority member
+name, accury name,  id, gender, email, phone, role, department, image [ password default set from authority --> after creating account student should change their pass]
+Action button area for faculty View, Edit, leave
+
+
+ACAD create account they must be contact with authority
+student info submit by an Specific authority member
+
+[[[  student dashboard  ]]]
+
+profile, exam leave history --> where also application options  {{ leave type, from date to date, reason, submit valid file }}
+salary option = exam fine details
+setting section where has password reset option
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+[[[  faculty dashboard  ]]]
+profile
+confirm applications ... application receive on their profile by tracking their accury name {{ their is two option faculty check if the student was absent then click on confirm otherwise cancel}}
+setting section where has password reset option
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+[[[  ACAD dashboard  ]]]
+
+only show student info they are not able to add any info or remove
+setting section where has password reset option
+
+
+
+
+for server
+
+                if(response.data.user.role === "authority"){
+                    navigate('/authority-dashboard')
+                } else if(response.data.user.role === "student"){
+                    navigate('/student-dashboard')
+                } else if(response.data.user.role === "faculty"){
+                    navigate('/faculty-dashboard')
+                } else {
+                    navigate('/ACAD-dashboard')
+                }
+
+
+const [actionLoading, setActionLoading] = useState(false);
+
+const handleStatusChange = async (status) => {
+    try {
+      setActionLoading(true);
+
+      await axios.put(
+        `http://localhost:8000/api/student-application/update-status/${id}`,
+        { status },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+
+      setApp((prev) => ({ ...prev, status }));
+
+      alert(`Application ${status.replaceAll("_", " ").toUpperCase()}`);
+    } catch (error) {
+      alert("Failed to update status");
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
+
+
+
+
+ <div className="action-buttons">
+            <button
+              className="btn-authority"
+              disabled={actionLoading || app.status === "approved_by_authority"}
+              onClick={() => handleStatusChange("approved_by_authority")}
+            >
+              Approve (Authority)
+            </button>
+
+            <button
+              className="btn-faculty"
+              disabled={actionLoading || app.status === "approved_by_faculty"}
+              onClick={() => handleStatusChange("approved_by_faculty")}
+            >
+              Approve (Faculty)
+            </button>
+
+            <button
+              className="btn-remove"
+              disabled={actionLoading}
+              onClick={() => handleStatusChange("removed")}
+            >
+              Remove
+            </button>
+          </div>
+
+-----------------------------------------------------------
+nub34node
+mongodb+srv://dataBASE753:nub34node@cluster0.3refzk4.mongodb.net/?appName=Cluster0

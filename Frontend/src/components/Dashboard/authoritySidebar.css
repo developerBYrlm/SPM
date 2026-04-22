@@ -1,0 +1,182 @@
+/* authority side bar */
+.sidebar {
+  width: 270px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(20, 20, 20, 0.76);
+  backdrop-filter: blur(12px);
+  border-radius: 10px;
+  padding: 35px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Push logout to bottom */
+  border-right: 2px solid rgba(255, 255, 255, 0.1);
+  z-index: 1000;
+}
+
+/* Sidebar Title */
+.sidebar-title {
+  font-size: 25px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 5px;
+  
+  text-align: center;
+  line-height: 1.1;
+}
+
+.sidebar-titlee {
+  
+  margin-bottom: 5px;
+  font-size: 50px;
+  font-weight: 800;
+  color: #ffffff;
+  text-align: center;
+  line-height: 1.1;
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  letter-spacing: 2px;
+  transition: 0.35s ease;
+}
+
+
+/* Hover Effect */
+.sidebar-titlee:hover {
+  color: #ffffff;
+  background: rgba(20, 155, 218, 0);
+  transform: translateY(-3px);
+
+  /* Glow shadow */
+  text-shadow:
+    0 0 10px rgba(20, 155, 218, 0.8),
+    0 0 18px rgba(20, 155, 218, 0.9),
+    0 0 30px rgba(20, 155, 218, 1);
+
+  /* Optional drop shadow for whole element */
+  filter: drop-shadow(0 6px 12px rgba(20, 155, 218, 0.45));
+  
+  letter-spacing: 4px;
+  border-color: #fff;
+}
+
+
+.sidebar-titles {
+  font-size: 25px;
+  font-weight: 700;
+  color: #fff;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+  text-align: center;
+  line-height: 1.1;
+}
+
+/* Welcome Section */
+.sidebar-welcome {
+  padding: 12px 14px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.sidebar-welcome .welcome-text {
+  font-size: 24px;
+  font-weight: 800;
+  color: #e7e7e7;
+  margin: 0;
+  line-height: 1.2;
+  text-align: center;
+}
+
+
+
+/* Menu Items */
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 12px 14px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #e7e7e7;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: 0.3s ease;
+}
+
+.custom-hover:hover {
+    padding: 18px 14px;
+  background: rgba(20, 155, 218, 0.162);
+  transform: translateY(-3px);
+  box-shadow:
+    0 8px 20px rgba(20, 155, 218, 0.412),
+    0 0 12px rgb(20, 155, 218);
+  border-color: rgb(255, 94, 0);
+  color: #fff;
+}
+
+.custom-hover:active {
+  background: rgba(20, 155, 218, 0);
+    transform: scale(0.96);
+    box-shadow: 0 0 10px rgba(20, 155, 218, 0.93);
+}
+
+.sidebar-item.active {
+   background: rgba(20, 155, 218, 0.944);
+    box-shadow: 0 0 10px rgba(20, 155, 218, 0.93);
+}
+
+
+
+.sidebar-item i {
+  font-size: 18px;
+  min-width: 30px;
+  text-align: center;
+}
+
+/* Logout Button Section pinned at bottom */
+.logout-section {
+  padding-top: 10px;
+  border-top: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+/* log out btn */
+.logout-btn {
+  width: 100%;
+  padding: 10px 0;
+  border: none;
+  border-radius: 30px;
+  background-color: #0000005a;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 20px;
+}
+
+/* log out cursor effect */
+.logout-btn:hover {
+   
+    background: rgba(255, 0, 0, 0.327);
+  transform: translateY(-3px);
+  box-shadow:
+    0 8px 20px rgba(255, 0, 0, 0.412),
+    0 0 12px rgb(255, 0, 0);
+  border-color: rgb(255, 94, 0);
+  color: #fff;
+}
+/* log out click effect */
+.logout-btn:active {
+  background: rgb(254, 3, 3);
+    transform: scale(0.96);
+    box-shadow: 0 0 10px rgb(255, 0, 0);
+}

@@ -1,0 +1,288 @@
+/* Reset + Default Font */
+* {
+    margin: 0; 
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "League Spartan", sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url("/nnn.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+
+    
+}
+
+/* WRAPPER */
+.wrapper {
+    width: 650px;
+    background: transparent;
+    border: 2.5px solid rgba(255,255,255,0.3);   /* FIXED */
+    backdrop-filter: blur(16px);
+    color: #fff;
+    border-radius: 30px;
+    padding: 55px 50px;
+    
+}
+
+/* H1 */
+.wrapper h1 {
+    font-size: 36px;
+    text-align: center;
+    font-weight: 600;   
+}
+
+.wrapper h2 {
+    font-size: 55px;
+    text-align: center;
+    font-weight: 650;  
+    margin-top: 20px; 
+    margin-bottom: -15px;
+}
+
+/* INPUT AREA */
+.wrapper .input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+    background: rgba(255, 255, 255, 0.1); /* semi-transparent */
+    border-radius: 30px;
+    backdrop-filter: blur(10px); /* glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    transition: 0.3s ease;
+}
+
+/* Hover effect */
+.wrapper .input-box:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+}
+
+/* input field inside */
+.wrapper .input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;              /* white text because background is transparent/glass */
+    font-size: 18px;
+}
+
+/* Focus glow effect */
+.wrapper .input-box input:focus {
+    color: #fff;
+}
+
+.wrapper .input-box:focus-within {
+    box-shadow: 0 0 15px rgba(50, 150, 255, 0.6);
+    border-color: rgba(50, 150, 255, 0.9);
+    background: rgba(255, 255, 255, 0.22);
+}
+
+
+ .text {
+   color: #ff0000;         
+   font-size: 18px;         
+   margin-top: 10px;         
+   margin-bottom: -25px;     
+   font-weight: 600; 
+   margin-left: 18px;
+   text-shadow: 0px 0px 6px rgba(246, 246, 246, 1);
+
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    outline: none;
+    border: 2px solid rgba(255,255,255,0.6);   
+    border-radius: 40px;
+    font-size: 20px;
+    color: #ffffff;
+    padding: 0 20px;
+    font-weight: 300;
+}
+
+.input-box input::placeholder {
+    color: #ffffff85;
+}
+
+.input-box i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);   
+    font-size: 20px;
+}
+
+/* REMEMBER + FORGOT */
+.wrapper .remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    margin: -10px 0 15px;
+    
+}
+
+.remember-forgot label input {
+    accent-color: #fff;
+    margin-right: 6px;
+    
+}
+
+.remember-forgot a {
+    color: #fff;
+    text-decoration: none;
+    
+}
+
+.remember-forgot a:hover {
+    text-decoration: underline;
+    
+}
+
+/* BUTTON */
+.wrapper .button {
+    
+    width: 100%;
+    height: 45px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 25px;
+    color: #266bdb;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;   
+    align-items: center;      
+    box-shadow: 0 0 10px rgba(0,0,0,0.8);  
+    transition: 0.3s ease; 
+}
+
+/* Login button effect */
+.wrapper .button {
+    width: 100%;
+    height: 45px;
+    background: rgb(255, 255, 255);   /* glass transparent */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 40px;
+
+    cursor: pointer;
+    font-size: 25px;
+    color: #266bdb;
+    font-weight: 600;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    transition: 0.3s ease;
+}
+
+/* Login buttonNEW HOVER EFFECT */
+.wrapper .button:hover {
+    background: rgba(255, 255, 255, 0.22);  /* clearer glass */
+    color: #fff;           
+    transform: translateY(-4px);  
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35),
+                0 0 12px rgba(50, 150, 255, 0.7); /* blue glow */
+    border-color: rgba(255, 255, 255, 0.55);
+}
+
+/* login button Active (click) effect */
+.wrapper .button:active {
+    transform: scale(0.96);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* successful pop-up */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex ;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999; 
+}
+
+.popup-box {
+    
+    font-size: 18px;
+    border-radius: 19px;
+    text-align: center;
+    background: transparent;
+    border: 2.5px solid rgba(255,255,255,0.3);   /* FIXED */
+    backdrop-filter: blur(8px);
+    color: #fff;
+    padding: 14px 45px;
+    gap: 18px;
+}
+
+
+
+.popup-box h2 {
+  margin-bottom: 7px;   
+}
+
+/* successful OK button  */
+.popup-box button {
+    font-size: 17px;
+    font-weight: 600;
+    margin-top: 10px;
+    padding: 8px 22px;
+
+    background: rgba(76, 175, 80, 0.25); 
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(76, 175, 80, 0.4);
+    border-radius: 50px;
+
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s ease;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.4);
+}
+
+/* successful OK button Hover effect */
+.popup-box button:hover {
+    background: rgb(76, 175, 79);   /* brighter glass */
+    transform: translateY(-3px);           /* lift up */
+    box-shadow: 
+        0 8px 20px rgba(0, 0, 0, 0.25),
+        0 0 12px rgba(76, 175, 80, 0.7);   /* green glow */
+    border-color: rgba(76, 175, 80, 0.7);
+}
+
+/* successful OK button Active (click) effect */
+.popup-box button:active {
+    transform: scale(0.95);
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+}
+
+
+
+/* ===================================================== */
+
+
+

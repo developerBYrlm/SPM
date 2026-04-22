@@ -1,0 +1,43 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios'; 
+import "./studentButtons.css"
+
+const StudentApplicationButtons = ({ id, onDeleteSuccess }) => {
+  const navigate = useNavigate();
+
+  const handleRemove = async () => {
+    if (window.confirm("Are you sure you want to remove this application?")) {
+      try {
+        const res = await axios.delete(`http://localhost:8000/api/student-application/application-remove/${id}`, {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        });
+        if (res.data.success) {
+          alert("Application removed");
+          onDeleteSuccess(); 
+        }
+      } catch (err) {
+        alert("Failed to remove application");
+      }
+    }
+  };
+
+  return (
+    <div className="action-btn-group">
+      <button 
+        className="student-action-btn btn-view" 
+        onClick={() => navigate(`/authority-dashboard/application/application-view/${id}`)}
+      >
+        View
+      </button>
+      <button 
+        className="student-action-btn btn-leave" 
+        onClick={handleRemove}
+      >
+        Remove
+      </button>
+    </div>
+  );
+};
+
+export default StudentApplicationButtons;
