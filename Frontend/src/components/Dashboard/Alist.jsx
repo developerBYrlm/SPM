@@ -5,6 +5,8 @@ import DataTable from "react-data-table-component";
 import AcadButtons from "./acadButtons";
 import "./list.css";
 
+// acad done
+
 const List = () => {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(false);
