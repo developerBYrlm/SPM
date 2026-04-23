@@ -9,11 +9,40 @@ const List = () => {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
+  const [acad, setAcad] = useState(null);
 
+  const fetchAcadProfile = async () => {
+    try {
+      const res = await axios.get("http://localhost:8000/api/auth/me", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
 
-   const filteredStudents = students.filter((student) =>
-   student.studentId.toLowerCase().includes(search.toLowerCase())
-    )
+      if (res.data.success) {
+        setAuthority(res.data.user); 
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const filteredApplications = applications
+
+  .filter((student) => {
+      if (!acad) return false;
+
+      return (
+        student.department?.toLowerCase() ===
+        acad.department?.toLowerCase()
+      );
+    })
+  
+    .filter((student) =>
+      (student.studentId || "")
+        .toLowerCase()
+        .includes(search.toLowerCase())
+    );
 
 
   const columns = [
@@ -52,6 +81,7 @@ const List = () => {
             sno: i++,
             studentId: s.user?.userID || "N/A",
             name: s.user?.name || "N/A",
+            department: app.department,
             profileImage: s.user?.profileImage  ? `http://localhost:8000/imageUploads/uploads/${s.user.profileImage}`: "",
           })));
         }
@@ -62,6 +92,7 @@ const List = () => {
       }
     };
 
+    fetchAcadProfile();
     fetchStudents();
   }, []);
 

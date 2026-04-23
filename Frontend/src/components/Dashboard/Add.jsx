@@ -4,7 +4,10 @@ import axios from 'axios'
 import './add.css'
 
 const Add = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  
+  const [showPassword, setShowPassword] = useState(false);
+
 
   const [formData, setFormData] = useState({
     email: '',
@@ -146,15 +149,30 @@ const Add = () => {
 
 
 
-          <div className="form-group">
+          <div className="form-group password-group">
             <label>Password</label>
-            <input type="password" placeholder='Include letters, symbol & numbers'  name="password" required onChange={handleChange} />
+
+            <div className="password-wrapper">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Include letters, symbol & numbers"
+                name="password"
+                required
+                onChange={handleChange}
+              />
+
+              <i
+                className={`fa-solid ${showPassword ? "fa-eye-slash" : "fa-eye"}`}
+                onClick={() => setShowPassword(!showPassword)}
+             />
+            </div>
           </div>
 
           <div className="form-group">
             <label>Profile Image</label>
             <input type="file" name="image" accept="image/*" onChange={handleChange} />
           </div>
+
 
           <button type="submit" className="submit-btn">
             Submit

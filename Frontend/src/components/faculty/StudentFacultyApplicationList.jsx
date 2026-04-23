@@ -80,6 +80,7 @@ const List = () => {
           sno: i++,
           studentId: app.studentId,
           name: app.name,
+          department: app.department,
           missedExamType: app.missedExamType
         })));
       }

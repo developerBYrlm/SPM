@@ -1,0 +1,11 @@
+{
+  "name": "spm",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "rlm": "concurrently \"cd server && npm start\" \"cd Frontend && npm run dev\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
