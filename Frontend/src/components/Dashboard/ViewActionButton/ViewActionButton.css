@@ -1,31 +1,36 @@
-/* ===============================
+/* =====================================================
    MAIN CONTENT AREA
-================================ */
+   ===================================================== */
+
 .main-content {
-  margin-left: 265px; /* sidebar width */
+  margin-left: 265px;             /* Sidebar width offset */
   min-height: 100vh;
 
   display: flex;
-  justify-content: center; /* Center the dashboard horizontally */
-  align-items: center;     /* Center the dashboard vertically */
+  justify-content: center;        /* Horizontal center */
+  align-items: center;            /* Vertical center */
 
   padding: 40px 30px;
 }
 
-/* ===============================
-   DASHBOARD CONTAINER
-================================ */
+/* =====================================================
+   DASHBOARD CONTAINER (GLASS CARD)
+   ===================================================== */
+
 .dashboard-container {
   width: 100%;
   max-width: 1400px;
   min-width: 500px;
+
   padding: 45px 50px;
+
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center title & image */
+  align-items: center;            /* Title & image centered */
 
-  /* Glassmorphism */
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.164);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.514);
+
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
 
@@ -33,21 +38,23 @@
   border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
-/* ===============================
-   TITLE
-================================ */
+/* =====================================================
+   DASHBOARD TITLE
+   ===================================================== */
+
 .dashboard-title {
   font-size: 42px;
   font-weight: 700;
   color: #ffffff;
 
-  margin-bottom: 8px;
   text-align: center;
+  margin-bottom: 8px;
 }
 
-/* ===============================
-   IMAGE FRAME
-================================ */
+/* =====================================================
+   PROFILE IMAGE
+   ===================================================== */
+
 .ImageFrame {
   display: flex;
   justify-content: center;
@@ -57,20 +64,23 @@
 .ImageFrame img {
   width: 250px;
   height: 250px;
+
   object-fit: cover;
   border-radius: 50%;
   border: 3px solid #00b7ff87;
 }
 
-/* ===============================
-   STUDENT INFO
-================================ */
+/* =====================================================
+   STUDENT INFO SECTION
+   ===================================================== */
+
 .student-info {
   width: 100%;
-  max-width: 600px; 
+  max-width: 600px;
+
   display: flex;
   flex-direction: column;
-  align-items: flex-start; 
+  align-items: flex-start;
   gap: 12px;
 }
 
@@ -85,9 +95,10 @@
   color: #56c0fe;
 }
 
-/* ===============================
-   RESPONSIVE
-================================ */
+/* =====================================================
+   RESPONSIVE (SMALL DEVICES)
+   ===================================================== */
+
 @media (max-width: 500px) {
   .dashboard-container {
     padding: 30px 20px;
@@ -103,89 +114,102 @@
   }
 }
 
-
-/* back button */
+/* =====================================================
+   BACK BUTTON (FIXED)
+   ===================================================== */
 
 .back {
-  position: fixed;     
-  top: 25px;            /* x axis */
-  left: 10px;           /* y axis */
-  z-index: 1000;        /* z axis */
+  position: fixed;
+  top: 25px;
+  left: 10px;
+  z-index: 1000;
 }
 
 .back a {
   display: flex;
   align-items: center;
   justify-content: center;
+
   text-decoration: none;
-  background-color: #1e1e1e00; 
-  color: #fff;              
+  color: #fff;
+
+  background-color: #1e1e1e00;
   padding: 22px 14px;
   border-radius: 8px;
   font-size: 18px;
+
   transition: all 0.3s ease;
 }
 
 .back a:hover {
-  
-  color: #fff;
-  transform: translateX(-6px); 
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0);
+  transform: translateX(-6px);
 }
 
 .back i {
-    font-size: 23px;
+  font-size: 23px;
 }
 
 .back:active {
-    transform: scale(0.96);
+  transform: scale(0.96);
 }
 
+/* =====================================================
+   DETAILS CARD (APPLICATION INFO)
+   ===================================================== */
 
-/* application details css */
-
-/* ===============================
-   DETAILS CARD
-================================ */
 .details-card {
   width: 100%;
   max-width: 900px;
-  background: rgba(0, 0, 0, 0.366); /* glass effect */
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  margin-top: 20px;
   padding: 25px 30px;
+
   display: flex;
   flex-direction: column;
   gap: 11px;
-  color: #ffffff;
-  margin-top: 20px;
+
   font-size: 20px;
   font-weight: 300;
+  color: #ffffff;
+
+  background: rgba(0, 0, 0, 0.366);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* ===============================
+/* =====================================================
    REASON BOX
-================================ */
+   ===================================================== */
+
 .reason-box {
-  background: rgba(255,255,255,0.05);
+  width: 750px;
   padding: 15px 18px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+
   font-size: 20px;
   line-height: 1;
-  color: #ffffff;
-  width: 750px;
-  overflow-y: auto;    
+
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  overflow-y: auto;
 }
-h3{
+
+/* Section heading */
+h3 {
   font-size: 30px;
   font-weight: 600;
 }
-/* ===============================
-   PDF VIEW
-================================ */
+
+/* =====================================================
+   PDF VIEWER
+   ===================================================== */
+
 .pdf-view {
   margin-top: 15px;
   display: flex;
@@ -200,17 +224,18 @@ h3{
 }
 
 .pdf-view iframe {
+  width: 100%;
+  height: 500px;
+
   border: none;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  width: 100%;         /* full width of container */
-  height: 500px;       /* smaller height */
-  max-width: 100%;    /* optional: limit width */
 }
 
-/* ===============================
-   COURSES LIST
-================================ */
+/* =====================================================
+   COURSE LIST
+   ===================================================== */
+
 .details-card ul {
   list-style-type: disc;
   padding-left: 20px;
@@ -223,9 +248,10 @@ h3{
   margin-bottom: 4px;
 }
 
-/* ===============================
-   RESPONSIVE
-================================ */
+/* =====================================================
+   DETAILS RESPONSIVE
+   ===================================================== */
+
 @media (max-width: 600px) {
   .details-card {
     padding: 20px;
@@ -246,10 +272,10 @@ h3{
   }
 }
 
+/* =====================================================
+   ACTION BUTTONS (APPROVE / REJECT)
+   ===================================================== */
 
-/* approve reject pending */
-
-/* ---------------- BUTTON WRAPPER ---------------- */
 .action-buttons {
   display: flex;
   gap: 12px;
@@ -257,42 +283,43 @@ h3{
   margin-bottom: 16px;
 }
 
-/* ---------------- DEFAULT (NOT CLICKED) ---------------- */
+/* Default button */
 .btn-authority,
 .btn-faculty {
-  background-color: #00b7ff87; /* sky blue */
+  background-color: #00b7ff87;
   color: #ffffff;
+
   padding: 8px 16px;
-  border: none;
   border-radius: 8px;
+  border: none;
+
   font-size: 17px;
   font-weight: 500;
   cursor: pointer;
-  transition: 
+
+  transition:
     background-color 0.25s ease,
     transform 0.15s ease,
     box-shadow 0.15s ease;
 }
 
-/* ---------------- HOVER EFFECT ---------------- */
+/* Hover */
 .btn-authority:hover,
 .btn-faculty:hover {
-  background-color: #00b7ff87; /* darker sky blue */
   transform: translateY(-2px);
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
 }
 
-/* ---------------- CLICK EFFECT ---------------- */
+/* Active */
 .btn-authority:active,
 .btn-faculty:active {
-  transform: translateY(0);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* ---------------- APPROVED STATE ---------------- */
+/* Approved state */
 .btn-authority.approved,
 .btn-faculty.approved {
-  background-color: #18d72552; /* green */
+  background-color: #18d72552;
 }
 
 .btn-authority.approved:hover,
@@ -300,10 +327,10 @@ h3{
   background-color: #0ba744;
 }
 
-/* ---------------- REJECTED STATE ---------------- */
+/* Rejected state */
 .btn-authority.rejected,
 .btn-faculty.rejected {
-  background-color: #ef4444af; 
+  background-color: #ef4444af;
 }
 
 .btn-authority.rejected:hover,
@@ -311,16 +338,17 @@ h3{
   background-color: #dc2626;
 }
 
-/* ---------------- DISABLED ---------------- */
+/* Disabled */
 button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
-  transform: none;
   box-shadow: none;
 }
 
+/* =====================================================
+   CONSIDER AMOUNT SECTION
+   ===================================================== */
 
-/* consider */
 .consider-amount {
   display: flex;
   align-items: center;
@@ -329,21 +357,23 @@ button:disabled {
 }
 
 .consider-amount label {
-  font-weight: 500;
   font-size: 20px;
+  font-weight: 500;
   color: #ffffff;
 }
 
 .consider-amount select {
   padding: 6px 10px;
   font-size: 16px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0);
+
   background-color: rgba(0, 0, 0, 0.311);
   color: #ffffff;
+
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0);
   outline: none;
+
   cursor: pointer;
-  transition: border-color 0.2s ease;
 }
 
 .consider-amount select:focus {
@@ -352,13 +382,17 @@ button:disabled {
 
 .consider-amount button {
   padding: 6px 14px;
+
+  font-size: 16px;
+  font-weight: 500;
+
+  color: #fff;
+  background-color: #4caf4fb5;
+
   border-radius: 8px;
   border: none;
-  font-weight: 500;
-  font-size: 16px;
-  color: #fff;
-  background-color: #4caf4fb5; /* green */
   cursor: pointer;
+
   transition: background 0.3s ease, transform 0.2s ease;
 }
 
@@ -370,14 +404,8 @@ button:disabled {
 .consider-amount button:disabled {
   background-color: #a0a0a0;
   cursor: not-allowed;
-  transform: none;
 }
 
 .consider-amount button:active {
-  transform: translateY(-3);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
-
-
-
-

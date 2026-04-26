@@ -81,8 +81,8 @@
 
 /* Each Card */
 .card1 {
-  background: rgba(0, 0, 0, 0.299);
-  backdrop-filter: blur(12px);
+  background: rgba(0, 0, 0, 0.123);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.514);  backdrop-filter: blur(12px);  backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(12px);
   padding: 25px;
   border-radius: 20px;
@@ -121,8 +121,8 @@
 }
 
 .card2 {
-  background: rgba(0, 0, 0, 0.299);
-  backdrop-filter: blur(12px);
+  background: rgba(0, 0, 0, 0.123);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.514);  backdrop-filter: blur(12px);  backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(12px);
   padding: 25px;
   border-radius: 20px;
@@ -162,8 +162,8 @@
 
 
 .card3 {
-  background: rgba(0, 0, 0, 0.299);
-  backdrop-filter: blur(12px);
+  background: rgba(0, 0, 0, 0.123);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.514);  backdrop-filter: blur(12px);  backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(12px);
   padding: 25px;
   border-radius: 20px;
@@ -203,8 +203,8 @@
 
 
 .card4 {
-  background: rgba(0, 0, 0, 0.299);
-  backdrop-filter: blur(12px);
+  background: rgba(0, 0, 0, 0.123);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.514);  backdrop-filter: blur(12px);  backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(12px);
   padding: 25px;
   border-radius: 20px;
@@ -259,8 +259,8 @@
   align-items: center;
 
   /* glass card look */
-  background: rgba(0, 0, 0, 0.30);
-  backdrop-filter: blur(14px);
+  background: rgba(0, 0, 0, 0.123);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.514);  backdrop-filter: blur(12px);  backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   
   padding: 15px;

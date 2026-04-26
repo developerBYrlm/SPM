@@ -1,25 +1,33 @@
+/* =====================================================
+   USER DASHBOARD WRAPPER (GLASS CARD)
+   ===================================================== */
+
 .user-dashboard {
   width: 100%;
   min-height: 10vh;
-  
-  
+
   padding: 40px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  /* Glass Background */
-  background: rgba(255, 255, 255, 0.10);
-  backdrop-filter: blur(55px);
+  /* Glass background */
+background: rgba(0, 0, 0, 0.164);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.514);  backdrop-filter: blur(55px);
   -webkit-backdrop-filter: blur(20px);
+
   border-radius: 25px;
   border: 1px solid rgba(255, 255, 255, 0.20);
   margin-top: 0px;
 }
 
+/* =====================================================
+   MAIN CONTENT AREA
+   ===================================================== */
 
 .main-content {
-  margin-left: 265px; /* sidebar width */
+  margin-left: 265px;        /* Sidebar width */
   min-height: 10vh;
 
   display: flex;
@@ -27,8 +35,8 @@
   align-items: center;
 }
 
+/* Forgot password layout */
 .main-content-forgot {
-  
   min-height: 10vh;
 
   display: flex;
@@ -36,6 +44,9 @@
   align-items: center;
 }
 
+/* =====================================================
+   FORM TITLE
+   ===================================================== */
 
 .form-title {
   text-align: center;
@@ -44,6 +55,10 @@
   color: #ffffff;
   margin-bottom: 25px;
 }
+
+/* =====================================================
+   GLASS FORM CONTAINER
+   ===================================================== */
 
 .glass-form {
   display: grid;
@@ -56,96 +71,112 @@
   background: rgba(255, 255, 255, 0);
   backdrop-filter: blur(0px);
   -webkit-backdrop-filter: blur(20px);
+
   border: 1px solid rgba(255, 255, 255, 0.25);
 }
+
+/* =====================================================
+   FORM GROUP
+   ===================================================== */
 
 .form-group {
   display: flex;
   flex-direction: column;
-  
+  transition: transform 0.1s ease-in-out;
 }
 
-.form-group label {
-  font-size: 22px;
-  color: #fff;
-  margin-bottom: 6px;
-  font-weight: 600;
-  
-}
-
-.course-box label {
-  font-size: 22px;
-  color: #fff;
-  margin-bottom: px;
-  font-weight: 600;
-  
-}
-
-.form-group {
-  transition: transform 0.1s ease-in-out; /* smooth scaling */
-}
-
+/* Scale effect on click */
 .form-group:active {
   transform: scale(0.96);
 }
-.form-group input,
-.form-group select {
-    padding: 12px 14px;
-    border-radius: 14px;
-    border: 1px solid rgba(255,255,255,0.35);
-    background: rgba(7, 7, 7, 0.221);
-    color: #ffffff;
-    outline: none;
-    width: 100%;
-    height: 100%;
-    outline: none;
-    font-size: 20px;
-    color: #ffffff;
-    font-weight: 400;
 
+/* =====================================================
+   LABELS
+   ===================================================== */
+
+.form-group label,
+.course-box label {
+  font-size: 22px;
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 6px;
 }
 
+/* =====================================================
+   INPUTS & SELECTS
+   ===================================================== */
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  height: 100%;
+  padding: 12px 14px;
+
+  font-size: 20px;
+  font-weight: 400;
+  color: #ffffff;
+
+  background: rgba(7, 7, 7, 0.221);
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.35);
+
+  outline: none;
+}
+
+/* Placeholder */
 .form-group input::placeholder {
   color: rgba(255,255,255,0.6);
 }
 
+/* Select dropdown text */
 .form-group select option {
   color: #000;
 }
 
+/* =====================================================
+   SUBMIT BUTTON
+   ===================================================== */
 
 .submit-btn {
   grid-column: span 2;
 
   margin-top: 15px;
   padding: 14px 0;
-  border-radius: 30px;
 
-  background: rgba(20,155,218,0.8);
+  border-radius: 30px;
   border: none;
 
+  background: rgba(20,155,218,0.8);
   color: #fff;
+
   font-size: 22px;
   font-weight: 700;
+
   cursor: pointer;
   transition: 0.3s ease;
 }
 
+/* Hover */
 .submit-btn:hover {
-    background: rgb(228, 227, 227);  /* clearer glass */
-    color: #0da6e2cb;           
-    transform: translateY(-4px);  
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35),
-                0 0 12px rgba(50, 150, 255, 0.7); /* blue glow */
-    border-color: rgba(255, 255, 255, 0.55);
+  background: rgb(228, 227, 227);
+  color: #0da6e2cb;
+
+  transform: translateY(-4px);
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.35),
+    0 0 12px rgba(50, 150, 255, 0.7);
 }
 
-/* (click) effect */
+/* Active */
 .submit-btn:active {
-    transform: scale(0.96);
-    box-shadow: 0 0 10px rgb(0, 179, 255);
+  transform: scale(0.96);
+  box-shadow: 0 0 10px rgb(0, 179, 255);
 }
-/* Mobile */
+
+/* =====================================================
+   MOBILE FORM LAYOUT
+   ===================================================== */
+
 @media (max-width: 768px) {
   .glass-form {
     grid-template-columns: 1fr;
@@ -156,64 +187,65 @@
   }
 }
 
-/* back button */
+/* =====================================================
+   BACK BUTTON
+   ===================================================== */
 
 .back {
-  position: fixed;     
-  top: 18px;            /* x axis */
-  left: 20px;           /* y axis */
-  z-index: 1000;        /* z axis */
+  position: fixed;
+  top: 18px;
+  left: 20px;
+  z-index: 1000;
 }
 
 .back a {
   display: flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
-  background-color: #1e1e1e00; /* dark background */
-  color: #fff;              /* white icon color */
+
   padding: 22px 14px;
   border-radius: 8px;
+
+  background-color: #1e1e1e00;
+  color: #fff;
+
   font-size: 18px;
+  text-decoration: none;
   transition: all 0.3s ease;
 }
 
 .back a:hover {
-  
-  color: #fff;
-  transform: translateX(-6px); /* slight left movement on hover */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0);
+  transform: translateX(-6px);
 }
 
 .back i {
-    font-size: 23px;
+  font-size: 23px;
 }
 
 .back:active {
-    transform: scale(0.96);
+  transform: scale(0.96);
 }
 
+/* =====================================================
+   EXTRA COURSE SECTION
+   ===================================================== */
 
-/* extra course add  */
-
-/* ===== Missed Courses Heading (h3.form-title) ===== */
+/* Missed courses title */
 .glass-form .form-title {
   grid-column: span 2;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin: 10px 0;
 }
 
-/* ===== Course Box ===== */
+/* Course row */
 .course-box {
   grid-column: span 2;
+
   display: flex;
-  gap: 14px;
   align-items: center;
-  
+  gap: 14px;
 }
 
-/* Course inputs already styled globally,
-   but grid height fix */
+/* Course input flex fill */
 .course-box input {
   flex: 1;
 }
@@ -222,11 +254,14 @@
 .course-box button {
   width: 42px;
   height: 42px;
+
   border-radius: 50%;
   border: none;
-  background: rgba(255, 70, 70, 0.464);
-  cursor: pointer;
+
   font-size: 18px;
+  cursor: pointer;
+
+  background: rgba(255, 70, 70, 0.464);
   transition: 0.3s ease;
 }
 
@@ -239,43 +274,55 @@
   transform: scale(0.75);
 }
 
-/* ===== Add Course Button ===== */
+/* =====================================================
+   ADD COURSE BUTTON
+   ===================================================== */
+
 .add-btn {
   grid-column: span 2;
+
   padding: 14px 0;
   border-radius: 26px;
+
   background: rgba(0, 170, 255, 0.645);
-  border: 1px  rgba(255,255,255,0.5);
+  border: 1px rgba(255,255,255,0.5);
+
   color: #ffffff;
   font-size: 20px;
   font-weight: 600;
+
   cursor: pointer;
   transition: 0.3s ease;
 }
 
+/* Hover */
 .add-btn:hover {
-    background: rgba(0, 170, 255, 0.645);
-    color: #ffffff;;           
-    transform: translateY(-4px);  
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35),
-                0 0 12px rgba(50, 150, 255, 0.7); /* blue glow */
-    border-color: rgba(255, 255, 255, 0.55);
+  transform: translateY(-4px);
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.35),
+    0 0 12px rgba(50, 150, 255, 0.7);
 }
 
-/* (click) effect */
+/* Active */
 .add-btn:active {
-    transform: scale(0.96);
-    box-shadow: 0 0 10px rgb(0, 179, 255);
+  transform: scale(0.96);
+  box-shadow: 0 0 10px rgb(0, 179, 255);
 }
 
-/* ===== Reason textarea ===== */
+/* =====================================================
+   REASON TEXTAREA
+   ===================================================== */
+
 .form-group textarea {
-  min-height: 100px;
   width: 203%;
+  min-height: 100px;
+
   padding: 14px;
   border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.35);
+
   background: rgba(7, 7, 7, 0.221);
+  border: 1px solid rgba(255,255,255,0.35);
+
   color: #ffffff;
   font-size: 24px;
   resize: none;
@@ -285,42 +332,56 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
-/* ===== Reason helper div (currently empty) ===== */
+/* Spacer helper */
 .reason {
-  height: 6px; /* spacing helper */
+  height: 6px;
 }
 
-/* ===== File Input polish ===== */
+/* =====================================================
+   FILE INPUT
+   ===================================================== */
+
 .form-group input[type="file"] {
   padding: 10px;
   border-radius: 14px;
+
   background: rgba(7, 7, 7, 0.221);
   color: #ffffff;
+
   cursor: pointer;
 }
 
-/* ===== Mobile fix for extra course ===== */
+/* =====================================================
+   RESPONSIVE – EXTRA COURSE
+   ===================================================== */
+
 @media (max-width: 1250px) {
   .course-box {
     flex-direction: column;
   }
 
-  .glass-form .form-title
-  {
+  .glass-form .form-title {
     grid-column: span 1;
   }
 }
 
+/* =====================================================
+   COURSE TITLE INPUT
+   ===================================================== */
+
 .course-title {
+  width: 100%;
   padding: 12px 14px;
-  border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  background: rgba(7, 7, 7, 0.22);
-  color: #ffffff;
+
   font-size: 20px;
   font-weight: 400;
+  color: #ffffff;
+
+  background: rgba(7, 7, 7, 0.22);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+
   outline: none;
-  width: 100%;
   transition: 0.3s ease, transform 0.1s ease-in-out;
 }
 
@@ -328,20 +389,18 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
-/* Hover effect same as .form-group input */
 .course-title:hover {
-  
   background: rgba(10, 10, 10, 0.35);
 }
 
-
-/* Active click effect */
 .course-title:active {
   transform: scale(0.96);
 }
 
+/* =====================================================
+   PASSWORD SHOW / HIDE
+   ===================================================== */
 
-/* show & hide in new user */
 .password-wrapper {
   position: relative;
 }
@@ -356,6 +415,7 @@
   right: 12px;
   top: 50%;
   transform: translateY(-50%);
+
   cursor: pointer;
   color: #ffffff;
 }
