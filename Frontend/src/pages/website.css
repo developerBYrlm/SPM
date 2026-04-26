@@ -1,288 +1,339 @@
-/* Reset + Default Font */
+/* =====================================================
+   GLOBAL RESET & DEFAULT FONT
+   ===================================================== */
+
 * {
-    margin: 0; 
+    margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "League Spartan", sans-serif;
 }
+
+/* =====================================================
+   BODY STYLING (CENTERED GLASS UI BACKGROUND)
+   ===================================================== */
 
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+
     background-image: url("/ghghgh.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-
-
-    
 }
 
-/* WRAPPER */
+/* =====================================================
+   MAIN WRAPPER (GLASS CONTAINER)
+   ===================================================== */
+
 .wrapper {
     width: 650px;
-    background: transparent;
-    border: 2.5px solid rgba(255,255,255,0.3);   /* FIXED */
-    backdrop-filter: blur(16px);
-    color: #fff;
-    border-radius: 30px;
     padding: 55px 50px;
-    
+
+    background: transparent;
+    color: #fff;
+
+    border: 2.5px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+    backdrop-filter: blur(16px);
 }
 
-/* H1 */
+/* =====================================================
+   HEADINGS
+   ===================================================== */
+
 .wrapper h1 {
     font-size: 36px;
+    font-weight: 600;
     text-align: center;
-    font-weight: 600;   
 }
 
 .wrapper h2 {
     font-size: 55px;
+    font-weight: 650;
     text-align: center;
-    font-weight: 650;  
-    margin-top: 20px; 
+    margin-top: 20px;
     margin-bottom: -15px;
 }
 
-/* INPUT AREA */
+/* =====================================================
+   INPUT BOX WRAPPER (GLASS FIELD)
+   ===================================================== */
+
 .wrapper .input-box {
     position: relative;
     width: 100%;
     height: 50px;
     margin: 30px 0;
-    background: rgba(255, 255, 255, 0.1); /* semi-transparent */
-    border-radius: 30px;
-    backdrop-filter: blur(10px); /* glass effect */
-    border: 1px solid rgba(255, 255, 255, 0.3);
+
     display: flex;
     align-items: center;
     padding: 0 15px;
+
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+
     transition: 0.3s ease;
 }
 
-/* Hover effect */
+/* Hover effect on input container */
 .wrapper .input-box:hover {
     background: rgba(255, 255, 255, 0.18);
     border-color: rgba(255, 255, 255, 0.5);
     box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
 }
 
-/* input field inside */
+/* Focus glow when input is active */
+.wrapper .input-box:focus-within {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(50, 150, 255, 0.9);
+    box-shadow: 0 0 15px rgba(50, 150, 255, 0.6);
+}
+
+/* =====================================================
+   INPUT FIELD (FIRST DEFINITION - BASE GLASS TEXT)
+   ===================================================== */
+
 .wrapper .input-box input {
     width: 100%;
     height: 100%;
     background: transparent;
+
     border: none;
     outline: none;
-    color: #fff;              /* white text because background is transparent/glass */
+
     font-size: 18px;
+    color: #fff;
 }
 
-/* Focus glow effect */
+/* Keep text white on focus */
 .wrapper .input-box input:focus {
     color: #fff;
 }
 
-.wrapper .input-box:focus-within {
-    box-shadow: 0 0 15px rgba(50, 150, 255, 0.6);
-    border-color: rgba(50, 150, 255, 0.9);
-    background: rgba(255, 255, 255, 0.22);
-}
-
-
- .text {
-   color: #ff0000;         
-   font-size: 18px;         
-   margin-top: 10px;         
-   margin-bottom: -25px;     
-   font-weight: 600; 
-   margin-left: 18px;
-   text-shadow: 0px 0px 6px rgba(246, 246, 246, 1);
-
-}
+/* =====================================================
+   INPUT FIELD (SECOND DEFINITION - VISUAL OVERRIDE)
+   NOTE: This overrides the earlier definition
+   ===================================================== */
 
 .input-box input {
     width: 100%;
     height: 100%;
+    padding: 0 20px;
+
     background: transparent;
     outline: none;
-    border: 2px solid rgba(255,255,255,0.6);   
+
+    border: 2px solid rgba(255, 255, 255, 0.6);
     border-radius: 40px;
+
     font-size: 20px;
-    color: #ffffff;
-    padding: 0 20px;
     font-weight: 300;
+    color: #ffffff;
 }
 
+/* Input placeholder styling */
 .input-box input::placeholder {
     color: #ffffff85;
 }
 
+/* Icon inside input */
 .input-box i {
     position: absolute;
     right: 20px;
     top: 50%;
-    transform: translateY(-50%);   
+
+    transform: translateY(-50%);
     font-size: 20px;
 }
 
-/* REMEMBER + FORGOT */
+/* =====================================================
+   ERROR / TEXT MESSAGE
+   ===================================================== */
+
+.text {
+    margin-top: 10px;
+    margin-bottom: -25px;
+    margin-left: 18px;
+
+    font-size: 18px;
+    font-weight: 600;
+    color: #ff0000;
+
+    text-shadow: 0px 0px 6px rgba(246, 246, 246, 1);
+}
+
+/* =====================================================
+   REMEMBER ME & FORGOT PASSWORD
+   ===================================================== */
+
 .wrapper .remember-forgot {
     display: flex;
     justify-content: space-between;
+
     font-size: 18px;
     margin: -10px 0 15px;
-    
 }
 
+/* Checkbox styling */
 .remember-forgot label input {
     accent-color: #fff;
     margin-right: 6px;
-    
 }
 
+/* Forgot password link */
 .remember-forgot a {
     color: #fff;
     text-decoration: none;
-    
 }
 
 .remember-forgot a:hover {
     text-decoration: underline;
-    
 }
 
-/* BUTTON */
+/* =====================================================
+   BUTTON (FIRST DEFINITION - BASE)
+   ===================================================== */
+
 .wrapper .button {
-    
     width: 100%;
     height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     background: #fff;
+    color: #266bdb;
+
+    font-size: 25px;
+    font-weight: 600;
+
     border: none;
     outline: none;
     border-radius: 40px;
-    cursor: pointer;
-    font-size: 25px;
-    color: #266bdb;
-    font-weight: 600;
-    display: flex;
-    justify-content: center;   
-    align-items: center;      
-    box-shadow: 0 0 10px rgba(0,0,0,0.8);  
-    transition: 0.3s ease; 
-}
-
-/* Login button effect */
-.wrapper .button {
-    width: 100%;
-    height: 45px;
-    background: rgb(255, 255, 255);   /* glass transparent */
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(10px);
-    border-radius: 40px;
 
     cursor: pointer;
-    font-size: 25px;
-    color: #266bdb;
-    font-weight: 600;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
     transition: 0.3s ease;
 }
 
-/* Login buttonNEW HOVER EFFECT */
-.wrapper .button:hover {
-    background: rgba(255, 255, 255, 0.22);  /* clearer glass */
-    color: #fff;           
-    transform: translateY(-4px);  
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35),
-                0 0 12px rgba(50, 150, 255, 0.7); /* blue glow */
-    border-color: rgba(255, 255, 255, 0.55);
+/* =====================================================
+   BUTTON (SECOND DEFINITION - GLASS OVERRIDE)
+   NOTE: Overrides previous button styles
+   ===================================================== */
+
+.wrapper .button {
+    background: rgb(255, 255, 255);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-/* login button Active (click) effect */
+/* Hover effect */
+.wrapper .button:hover {
+    background: rgba(255, 255, 255, 0.22);
+    color: #fff;
+
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.55);
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.35),
+        0 0 12px rgba(50, 150, 255, 0.7);
+}
+
+/* Click effect */
 .wrapper .button:active {
     transform: scale(0.96);
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
-/* successful pop-up */
+/* =====================================================
+   POPUP OVERLAY (SUCCESS MESSAGE)
+   ===================================================== */
+
 .popup-overlay {
     position: fixed;
     top: 0;
     left: 0;
+
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.5);
-    display: flex ;
+
+    display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 9999; 
+
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
 }
 
+/* Popup container */
 .popup-box {
-    
-    font-size: 18px;
-    border-radius: 19px;
-    text-align: center;
-    background: transparent;
-    border: 2.5px solid rgba(255,255,255,0.3);   /* FIXED */
-    backdrop-filter: blur(8px);
-    color: #fff;
     padding: 14px 45px;
     gap: 18px;
+
+    background: transparent;
+    color: #fff;
+
+    font-size: 18px;
+    text-align: center;
+
+    border-radius: 19px;
+    border: 2.5px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(8px);
 }
 
-
-
+/* Popup heading */
 .popup-box h2 {
-  margin-bottom: 7px;   
+    margin-bottom: 7px;
 }
 
-/* successful OK button  */
+/* =====================================================
+   POPUP BUTTON (OK)
+   ===================================================== */
+
 .popup-box button {
-    font-size: 17px;
-    font-weight: 600;
     margin-top: 10px;
     padding: 8px 22px;
 
-    background: rgba(76, 175, 80, 0.25); 
+    font-size: 17px;
+    font-weight: 600;
+
+    background: rgba(76, 175, 80, 0.25);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(76, 175, 80, 0.4);
-    border-radius: 50px;
 
     color: #fff;
     cursor: pointer;
-    transition: 0.3s ease;
+
+    border: 1px solid rgba(76, 175, 80, 0.4);
+    border-radius: 50px;
+
     box-shadow: 0 0 10px rgba(76, 175, 80, 0.4);
+    transition: 0.3s ease;
 }
 
-/* successful OK button Hover effect */
+/* Popup button hover */
 .popup-box button:hover {
-    background: rgb(76, 175, 79);   /* brighter glass */
-    transform: translateY(-3px);           /* lift up */
-    box-shadow: 
-        0 8px 20px rgba(0, 0, 0, 0.25),
-        0 0 12px rgba(76, 175, 80, 0.7);   /* green glow */
+    background: rgb(76, 175, 79);
+    transform: translateY(-3px);
+
     border-color: rgba(76, 175, 80, 0.7);
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.25),
+        0 0 12px rgba(76, 175, 80, 0.7);
 }
 
-/* successful OK button Active (click) effect */
+/* Popup button active */
 .popup-box button:active {
     transform: scale(0.95);
     box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
 }
-
-
-
-/* ===================================================== */
-
-
-
