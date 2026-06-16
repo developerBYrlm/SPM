@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate,  useParams } from 'react-router-dom';
 import './add.css'
 import './routine.css'
+import './ViewActionButton/ViewActionButton.css'
+
 
 const AuthorityProfileUpdate = () => {
   const navigate = useNavigate()
@@ -52,8 +54,14 @@ const AuthorityProfileUpdate = () => {
 
     fetchStudent()
   }, [id])
-  if (loading) { return <div  className="loading"> <i className="fa-solid fa-spinner fa-spin"></i> Loading...</div>}
 
+  if (loading) { 
+    return ( 
+     <div className="loading">
+        <div className="ring"></div>
+    </div>
+    );
+  }
 
   const handleChange = (e) => {
     const { name, value, files } = e.target

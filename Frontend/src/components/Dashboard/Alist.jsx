@@ -4,6 +4,8 @@ import axios from "axios";
 import DataTable from "react-data-table-component";
 import AcadButtons from "./acadButtons";
 import "./list.css";
+import './ViewActionButton/ViewActionButton.css'
+
 
 // acad done
 
@@ -98,6 +100,15 @@ const List = () => {
     fetchAuthorityProfile(); 
     fetchStudents();
   }, []);
+
+  
+  if (loading) { 
+    return ( 
+     <div className="loading">
+        <div className="ring"></div>
+    </div>
+    );
+  }
 
   return (
     <div className="main-content">

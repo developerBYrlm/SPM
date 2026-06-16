@@ -42,8 +42,13 @@ const AuthorityProfile = () =>{
     fetchStudent()
   }, [id])
 
-  if (loading) { return <div  className="loading"> <i className="fa-solid fa-spinner fa-spin"></i> Loading...</div>}
-
+if (loading) { 
+  return ( 
+   <div className="loading">
+      <div className="ring"></div>
+  </div>
+  );
+}
   if (!student || !student.user) { return <div>No authority data found for ID: {id}</div> }
 
   return (

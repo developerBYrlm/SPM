@@ -95,6 +95,15 @@ const List = () => {
     fetchStudents();
   }, []);
 
+  
+  if (loading) { 
+    return ( 
+     <div className="loading">
+        <div className="ring"></div>
+    </div>
+    );
+  }
+
   return (
     <div className="main-content">
       <div className="dashboard-container">

@@ -42,12 +42,12 @@ const AuthoritySidebar = () => {
             </NavLink>
           </li>
 
-          <li>
+          {/* <li>
             <NavLink to="/authority-dashboard/students-routine"  className="sidebar-item custom-hover">
               <i class="fa-solid fa-calendar-days"></i>
               <span>Exam Routine</span>
             </NavLink>
-          </li>
+          </li> */}
 
 
           <li>

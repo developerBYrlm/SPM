@@ -34,8 +34,14 @@ const AActionButton = () => {
     fetchStudent()
   }, [id])
 
-  if (loading) { return <div>Loading...</div>}
 
+  if (loading) { 
+    return ( 
+     <div className="loading">
+        <div className="ring"></div>
+    </div>
+    );
+  }
   if (!student) { return <div>No student data found</div> }
 
   return (

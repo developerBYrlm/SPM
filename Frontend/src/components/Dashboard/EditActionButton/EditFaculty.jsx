@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import '../add.css'
+import '../ViewActionButton/ViewActionButton.css'
+
 const EditFaculty = () => {
   const navigate = useNavigate()
   const { id } = useParams() 
+  const [loading, setLoading] = useState(true)
 
   const [formData, setFormData] = useState({
     email: '',
@@ -17,6 +20,8 @@ const EditFaculty = () => {
 
   useEffect(() => {
     const fetchStudent = async () => {
+      setLoading(true)
+
       try {
         const res = await axios.get(
           `http://localhost:8000/api/faculty/faculty-view/${id}`,
@@ -41,14 +46,25 @@ const EditFaculty = () => {
         }
       } catch (err) {
         console.error(err)
+      }  finally {
+        setLoading(false)
       }
     }
 
     fetchStudent()
   }, [id])
 
+  if (loading) {
+    return (
+      <div className="loading">
+        <div className="ring"></div>
+      </div>
+    )
+  }
+
   const handleChange = (e) => {
     const { name, value, files } = e.target
+
     setFormData(prev => ({
       ...prev,
       [name]: name === "image" ? files[0] : value
@@ -59,6 +75,7 @@ const EditFaculty = () => {
     e.preventDefault()
 
     const token = localStorage.getItem("token")
+    
     if (!token) {
       alert("Unauthorized.")
       return

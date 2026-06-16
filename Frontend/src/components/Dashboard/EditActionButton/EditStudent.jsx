@@ -1,23 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
-import '../add.css' 
+import '../add.css'
+import '../ViewActionButton/ViewActionButton.css'
 
 const EditStudent = () => {
   const navigate = useNavigate()
-  const { id } = useParams() 
+  const { id } = useParams()
+  const [loading, setLoading] = useState(true)
 
   const [formData, setFormData] = useState({
     email: '',
     studentId: '',
     name: '',
-    phone: '', 
+    phone: '',
     password: '',
     image: null
   })
 
   useEffect(() => {
     const fetchStudent = async () => {
+      setLoading(true)
+
       try {
         const res = await axios.get(
           `http://localhost:8000/api/students/view/${id}`,
@@ -33,7 +37,7 @@ const EditStudent = () => {
 
           setFormData({
             email: s.user.email,
-            studentId: s.studentId,   
+            studentId: s.studentId,
             name: s.user.name,
             phone: s.phone,
             password: '',
@@ -42,14 +46,25 @@ const EditStudent = () => {
         }
       } catch (err) {
         console.error(err)
+      } finally {
+        setLoading(false)
       }
     }
 
     fetchStudent()
   }, [id])
 
+  if (loading) {
+    return (
+      <div className="loading">
+        <div className="ring"></div>
+      </div>
+    )
+  }
+
   const handleChange = (e) => {
     const { name, value, files } = e.target
+
     setFormData(prev => ({
       ...prev,
       [name]: name === "image" ? files[0] : value
@@ -60,12 +75,14 @@ const EditStudent = () => {
     e.preventDefault()
 
     const token = localStorage.getItem("token")
+
     if (!token) {
       alert("Unauthorized.")
       return
     }
 
     const formDataObj = new FormData()
+
     Object.entries(formData).forEach(([key, value]) => {
       if (value !== null && value !== "") {
         formDataObj.append(key, value)
@@ -87,7 +104,6 @@ const EditStudent = () => {
         alert("Account update successfully")
         navigate("/authority-dashboard/students")
       }
-
     } catch (error) {
       console.error(error)
       alert(
@@ -96,60 +112,96 @@ const EditStudent = () => {
       )
     }
   }
- 
+
   return (
     <div className="main-content">
       <div className="user-dashboard">
 
         <h2 className="form-title">Update Student Information</h2>
 
-            <div className="back">
-              
-                  <Link to="/authority-dashboard/students">
-                    <i className="fa-solid fa-backward"></i>
-                  </Link>
-        
-            </div>
+        <div className="back">
+          <Link to="/authority-dashboard/students">
+            <i className="fa-solid fa-backward"></i>
+          </Link>
+        </div>
 
         <form className="glass-form" onSubmit={handleSubmit}>
 
           <div className="form-group">
             <label>Email</label>
-            <input type="email" name="email" placeholder='Insert Email' 
-            onInput={(e) => e.target.value = e.target.value.replace(/[^0-9a-z@.]/g, '')}
-            onChange={handleChange} />
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              placeholder="Insert Email"
+              onInput={(e) =>
+                e.target.value = e.target.value.replace(/[^0-9a-z@.]/g, '')
+              }
+              onChange={handleChange}
+            />
           </div>
 
           <div className="form-group">
-            <label>ID </label>
-            <input type="text" name="studentId" placeholder='Insert ID' value={formData.studentId}
-            onInput={(e) => e.target.value = e.target.value.replace(/[^0-9]/g, '')}
-            required onChange={handleChange} />
+            <label>ID</label>
+            <input
+              type="text"
+              name="studentId"
+              placeholder="Insert ID"
+              value={formData.studentId}
+              onInput={(e) =>
+                e.target.value = e.target.value.replace(/[^0-9]/g, '')
+              }
+              required
+              onChange={handleChange}
+            />
           </div>
 
           <div className="form-group">
             <label>Name</label>
-            <input type="text" name="name" placeholder='Insert Full Name'   value={formData.name}
-            onInput={(e) => e.target.value = e.target.value.replace(/[^A-Za-z.\s]/g, '')}
-            onChange={handleChange} />
+            <input
+              type="text"
+              name="name"
+              placeholder="Insert Full Name"
+              value={formData.name}
+              onInput={(e) =>
+                e.target.value = e.target.value.replace(/[^A-Za-z.\s]/g, '')
+              }
+              onChange={handleChange}
+            />
           </div>
 
           <div className="form-group">
             <label>Phone</label>
-            <input type="tel" name="phone" placeholder='01xxxxxxxxx'
-            onInput={(e) => e.target.value = e.target.value.replace(/[^0-9]/g, '')}
-            onChange={handleChange}
-             />
+            <input
+              type="tel"
+              name="phone"
+              value={formData.phone}
+              placeholder="01xxxxxxxxx"
+              onInput={(e) =>
+                e.target.value = e.target.value.replace(/[^0-9]/g, '')
+              }
+              onChange={handleChange}
+            />
           </div>
 
           <div className="form-group">
             <label>Password</label>
-            <input type="password" placeholder='Include letters, symbol & numbers'  name="password"  onChange={handleChange} />
+            <input
+              type="password"
+              placeholder="Include letters, symbol & numbers"
+              name="password"
+              onChange={handleChange}
+            />
           </div>
 
           <div className="form-group">
             <label>Profile Image</label>
-            <input type="file" name="image" accept="image/*" onChange={handleChange} />
+            <input
+              type="file"
+              name="image"
+              accept="image/*"
+              onChange={handleChange}
+            />
           </div>
 
           <button type="submit" className="submit-btn">

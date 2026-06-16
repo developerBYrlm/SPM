@@ -63,7 +63,7 @@ const ForgotPassword = () => {
           </div>
 
           <div className="form-group">
-            <label>Phone</label>
+            <label>Phone*</label>
             <input type="tel" name="phone" placeholder='01xxxxxxxxx'required
             onInput={(e) => e.target.value = e.target.value.replace(/[^0-9]/g, '')}
             onChange={handleChange}

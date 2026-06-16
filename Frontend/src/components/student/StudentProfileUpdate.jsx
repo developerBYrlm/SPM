@@ -2,10 +2,13 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate,  useParams } from 'react-router-dom';
 import '../Dashboard/add.css' 
+import '../Dashboard/ViewActionButton/ViewActionButton.css'
+
 
 const StudentProfileUpdate = () => {
   const navigate = useNavigate()
   const { id } = useParams() 
+  const [loading, setLoading] = useState(true)
 
   const [formData, setFormData] = useState({
     email: '',
@@ -42,11 +45,22 @@ const StudentProfileUpdate = () => {
         }
       } catch (err) {
         console.error(err)
-      }
+      } finally {
+        setLoading(false)
+      } 
     }
 
     fetchStudent()
   }, [id])
+
+    if (loading) { 
+    return ( 
+     <div className="loading">
+        <div className="ring"></div>
+    </div>
+    );
+  }
+
 
   const handleChange = (e) => {
     const { name, value, files } = e.target
