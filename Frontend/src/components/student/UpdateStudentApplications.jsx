@@ -2,9 +2,11 @@ import "../Dashboard/add.css"
 import React, { useEffect, useState } from "react"
 import axios from "axios"
 import { Link, useNavigate } from "react-router-dom"
+import '../Dashboard/ViewActionButton/ViewActionButton.css'
 
 const UpdateMissedExam = () => {
   const navigate = useNavigate()
+  const [loading, setLoading] = useState(true)
 
   const [courses, setCourses] = useState([])
   const [totalFine, setTotalFine] = useState(0)
@@ -39,11 +41,21 @@ const UpdateMissedExam = () => {
       } catch (err) {
         alert("No application found")
         navigate("/student-dashboard")
+      } finally {
+        setLoading(false)
       }
     }
 
     fetchData()
   }, [navigate])
+
+  if (loading) { 
+  return ( 
+   <div className="loading">
+      <div className="ring"></div>
+  </div>
+  );
+}
 
 // updated info
   const handleCourseChange = (index, e) => {

@@ -4,6 +4,8 @@ import axios from "axios";
 import DataTable from "react-data-table-component";
 import StudentApplicationsButtonsForFaculty from "../StudentApplicationButtonsForFaculty"
 import '../../Dashboard/list.css'
+import '../../Dashboard/ViewActionButton/ViewActionButton.css'
+
 
 const FRejcted = () => {
   const [applications, setApplications] = useState([]);
@@ -96,10 +98,18 @@ const FRejcted = () => {
     fetchApplications();
   }, []);
 
+    if (loading) {
+    return (
+      <div className="loading">
+        <div className="ring"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="main-content">
       <div className="dashboard-container">
-        <h2 className="dashboard-title">Student Missed Exam Applications</h2>
+        <h2 className="dashboard-title">Special Exam Applications</h2>
         <div className="search-box glass">
           <input
             type="text"

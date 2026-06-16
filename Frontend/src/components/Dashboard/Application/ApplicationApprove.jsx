@@ -4,7 +4,7 @@ import axios from "axios";
 import DataTable from "react-data-table-component";
 import StudentApplicationButtons from "../StudentApplicationsButtons";
 import '../list.css';
-import '../ViewActionButton/ViewActionButton.css';
+import '../ViewActionButton/ViewActionButton.css'; 
 
 const ApplicationApprove = () => {
   const [applications, setApplications] = useState([]);
@@ -141,7 +141,7 @@ const ApplicationApprove = () => {
     <div className="main-content">
       <div className="dashboard-container">
         <h2 className="dashboard-title">
-          Student Missed Exam Applications
+          Special Exam Applications
         </h2>
 
         <div className="search-box glass">

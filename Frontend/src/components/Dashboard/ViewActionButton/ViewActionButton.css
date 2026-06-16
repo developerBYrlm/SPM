@@ -118,7 +118,7 @@
    BACK BUTTON (FIXED)
    ===================================================== */
 
-.back {
+/* .back {
   position: fixed;
   top: 25px;
   left: 10px;
@@ -151,7 +151,7 @@
 
 .back:active {
   transform: scale(0.96);
-}
+} */
 
 /* =====================================================
    DETAILS CARD (APPLICATION INFO)
@@ -162,7 +162,7 @@
   max-width: 900px;
 
   margin-top: 20px;
-  padding: 25px 30px;
+  padding: 45px 30px;
 
   display: flex;
   flex-direction: column;
@@ -428,3 +428,46 @@ button:disabled {
     transform: rotate(360deg);
   }
 }
+
+
+
+/* just view status */
+
+
+.status-container-view{
+  position: absolute;
+  top: 13px;
+  right: 25px;
+  display: flex;
+  gap: 20px;
+}
+
+.status-text-view.approved{
+  color: #00ff66;
+  font-weight: 600;
+  text-shadow:
+    0 0 5px #00ff663d,
+    0 0 10px #00ff66,
+    0 0 20px #00ff6656,
+    0 0 40px #00ff661e;
+}
+
+.status-text-view.rejected{
+  color: #ff3b3b;
+  font-weight: 600;
+  text-shadow:
+    0 0 5px #ff3b3b65,
+    0 0 10px #ff3b3b7e,
+    0 0 20px #ff3b3b,
+    0 0 40px #ff3b3b;
+}
+
+.status-text-view.pending{
+  color: #ff9100;
+  text-shadow:
+    0 0 5px #ff9100,
+    0 0 10px #ff9100,
+    0 0 20px #ff9100,
+    0 0 40px #ff9100;
+}
+

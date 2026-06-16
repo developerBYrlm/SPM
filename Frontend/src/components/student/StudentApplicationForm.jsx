@@ -125,7 +125,7 @@ const ApplyMissedExam = () => {
       </div>
     )}
       <div className="user-dashboard">
-        <h2 className="form-title">Special Exam Application</h2>
+        <h2 className="form-title">Special Exam Application form</h2>
 
         <div className="back">
           <Link to="/student-dashboard">

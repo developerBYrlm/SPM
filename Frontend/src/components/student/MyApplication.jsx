@@ -31,6 +31,14 @@ const MyApplication = () => {
     fetchApp();
   }, []);
 
+  if (loading) { 
+  return ( 
+   <div className="loading">
+      <div className="ring"></div>
+  </div>
+  );
+}
+
     const handleStatusChange = async (status) => {
       try {
         setActionLoading(true);
@@ -107,76 +115,31 @@ const MyApplication = () => {
 
         <div className="details-card">
 
-          <div className="action-buttons">
+          
+        <div className="status-container-view">
+        <span
+           className={`status-text-view ${
+             app.authorityStatus === "Approved"
+              ? "approved"
+              : app.authorityStatus === "Rejected"
+              ? "rejected"
+              : "pending"
+         }`}
+        >
+         Authority: {app.authorityStatus || "Pending"}
+        </span>
 
-          {/* Authority Approve */}
-          <button
-            className={`btn-authority ${
-              app.authorityStatus === "Approved"
-                ? "approved"
-                : app.authorityStatus === "Rejected"
-                ? "rejected"
-                : ""
-            }`}
-            onClick={() => handleStatusChange("approved_by_authority")}
-            disabled
-          >
-            {app.authorityStatus === "Approved"
-              ? "Approved"
-              : "Approve (Authority)"}
-          </button>
-
-          {/* Authority Reject */}
-          <button
-            className={`btn-authority ${
-              app.authorityStatus === "Rejected"
-                ? "rejected"
-                : app.authorityStatus === "Approved"
-                ? "approved"
-                : ""
-            }`}
-            onClick={() => handleStatusChange("rejected_by_authority")}
-            disabled
-          >
-            {app.authorityStatus === "Rejected"
-              ? "Rejected"
-              : "Reject (Authority)"}
-          </button>
-
-          {/* Faculty Approve */}
-          <button
-            className={`btn-faculty ${
-              app.facultyStatus === "Approved"
-                ? "approved"
-                : app.facultyStatus === "Rejected"
-                ? "rejected"
-                : ""
-            }`}
-            onClick={() => handleStatusChange("approved_by_faculty")}
-            disabled
-          >
-            {app.facultyStatus === "Approved"
-              ? "Approved"
-              : "Approve (Faculty)"}
-          </button>
-
-          {/* Faculty Reject */}
-          <button
-            className={`btn-faculty ${
-              app.facultyStatus === "Rejected"
-                ? "rejected"
-                : app.facultyStatus === "Approved"
-                ? "approved"
-                : ""
-            }`}
-            onClick={() => handleStatusChange("rejected_by_faculty")}
-            disabled
-          >
-            {app.facultyStatus === "Rejected"
-              ? "Rejected"
-              : "Reject (Faculty)"}
-          </button>
-
+        <span
+          className={`status-text-view ${
+            app.facultyStatus === "Approved"
+             ? "approved"
+             : app.facultyStatus === "Rejected"
+             ? "rejected"
+             : "pending"
+         }`}
+        >
+          Faculty: {app.facultyStatus || "Pending"}
+        </span>
         </div>
 
           <h3>

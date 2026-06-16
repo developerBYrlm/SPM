@@ -173,8 +173,8 @@
 
 .back {
   position: fixed;     
-  top: 18px;            /* x axis */
-  left: 20px;           /* y axis */
+  top: 27px;            /* x axis */
+  left: 2px;           /* y axis */
   z-index: 1000;        /* z axis */
 }
 
@@ -184,17 +184,17 @@
   justify-content: center;
   text-decoration: none;
   background-color: #1e1e1e00; /* dark background */
-  color: #fff;              /* white icon color */
+  color: #ffffff52;              /* white icon color */
   padding: 22px 14px;
   border-radius: 8px;
   font-size: 18px;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .back a:hover {
   
   color: #fff;
-  transform: translateX(-6px); /* slight left movement on hover */
+  transform: translateX(-2px); /* slight left movement on hover */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0);
 }
 

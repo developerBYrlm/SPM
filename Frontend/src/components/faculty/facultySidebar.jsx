@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/authContext';
 import '../Dashboard/authoritySidebar.css';
 
+
 const FacultySidebar = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const FacultySidebar = () => {
       {/* Sidebar */}
       <div className="sidebar">
         <h3 className="sidebar-titlee">NUB</h3>
-        <h3 className="sidebar-titles">Special Exam Management System</h3>
+        <h3 className="sidebar-titles">Special Exam Applications</h3>
 
         <div className="sidebar-welcome">
           <p className="welcome-text">

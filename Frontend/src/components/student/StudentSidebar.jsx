@@ -21,7 +21,7 @@ const StudentSidebar = () => {
       {/* Sidebar */}
       <div className="sidebar">
         <h3 className="sidebar-titlee">NUB</h3>
-        <h3 className="sidebar-titles">Special Exam Management System</h3>
+        <h3 className="sidebar-titles">Special Exam Application</h3>
 
         <div className="sidebar-welcome">
           <p className="welcome-text">Welcome <br className='gap' /> {user.name}</p>

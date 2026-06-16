@@ -3,6 +3,8 @@ import axios from "axios";
 import DataTable from "react-data-table-component";
 import StudentButtonForFaculty from "./StudentButtonForFaculty";
 import "../Dashboard/list.css";
+import '../Dashboard/ViewActionButton/ViewActionButton.css';
+
 
 const List = () => {
   const [students, setStudents] = useState([]);
@@ -114,6 +116,14 @@ const List = () => {
     fetchFacultyProfile(); 
     fetchStudents();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="loading">
+        <div className="ring"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="main-content">

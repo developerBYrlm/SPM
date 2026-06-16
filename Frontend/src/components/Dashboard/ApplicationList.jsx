@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; 
 import axios from "axios";
 import DataTable from "react-data-table-component";
 import StudentApplicationButtons from "./StudentApplicationsButtons";
@@ -110,7 +110,7 @@ const List = () => {
   return (
     <div className="main-content">
       <div className="dashboard-container">
-        <h2 className="dashboard-title">Student Missed Exam Applications</h2>
+        <h2 className="dashboard-title">Special Exam Applications</h2>
         <div className="search-box glass">
           <input
             type="text"

@@ -191,7 +191,7 @@ background: rgba(0, 0, 0, 0.164);
    BACK BUTTON
    ===================================================== */
 
-.back {
+/* .back {
   position: fixed;
   top: 18px;
   left: 20px;
@@ -224,7 +224,7 @@ background: rgba(0, 0, 0, 0.164);
 
 .back:active {
   transform: scale(0.96);
-}
+} */
 
 /* =====================================================
    EXTRA COURSE SECTION

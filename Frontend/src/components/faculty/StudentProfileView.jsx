@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import "../Dashboard/ViewActionButton/ViewActionButton.css"
+
   
 const SActionButton = () => {
   const { id } = useParams()             
@@ -34,8 +35,13 @@ const SActionButton = () => {
     fetchStudent()
   }, [id])
 
-  if (loading) { return <div>Loading...</div>}
-
+  if (loading) { 
+    return ( 
+     <div className="loading">
+        <div className="ring"></div>
+    </div>
+    );
+  }
   if (!student) { return <div>No student data found</div> }
 
   return (

@@ -35,6 +35,15 @@ const FacultyApplicationView = () => {
     fetchApp();
   }, [id]);
 
+  
+  if (loading) {
+    return (
+      <div className="loading">
+        <div className="ring"></div>
+      </div>
+    );
+  }
+
   const handleStatusChange = async (status) => {
     try {
       setActionLoading(true);
