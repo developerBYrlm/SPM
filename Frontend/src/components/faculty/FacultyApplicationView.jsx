@@ -101,39 +101,19 @@ const FacultyApplicationView = () => {
         {/* ================= Action Buttons ================= */}
         <div className="action-buttons">
 
-          {/* Authority Approve */}
-          <button
-            className={`btn-authority ${
-              app.authorityStatus === "Approved"
-                ? "approved"
-                : app.authorityStatus === "Rejected"
-                ? "rejected"
-                : ""
-            }`}
-            onClick={() => handleStatusChange("approved_by_authority")}
-            disabled
-          >
-            {app.authorityStatus === "Approved"
-              ? "Approved"
-              : "Approve (Authority)"}
-          </button>
-
-          {/* Authority Reject */}
-          <button
-            className={`btn-authority ${
-              app.authorityStatus === "Rejected"
-                ? "rejected"
-                : app.authorityStatus === "Approved"
-                ? "approved"
-                : ""
-            }`}
-            onClick={() => handleStatusChange("rejected_by_authority")}
-            disabled
-          >
-            {app.authorityStatus === "Rejected"
-              ? "Rejected"
-              : "Reject (Authority)"}
-          </button>
+          <div className="status-container-view">
+        <span
+           className={`status-text-view ${
+             app.authorityStatus === "Approved"
+              ? "approved"
+              : app.authorityStatus === "Rejected"
+              ? "rejected"
+              : "pending"
+         }`}
+        >
+         Authority: {app.authorityStatus || "Pending"}
+        </span>
+        </div> 
 
           {/* Faculty Approve */}
           <button
@@ -209,7 +189,7 @@ const FacultyApplicationView = () => {
 
         {/* ================= Reason ================= */}
         <div className="reason-box">
-          <strong>Reason:</strong> {app.reason}
+          <strong> </strong> {app.reason}
         </div>
         {/* ================= End Reason ================= */}
 

@@ -133,7 +133,7 @@ const ACADApplicationView = () => {
             <strong>Semester:</strong> {app.semester}
             {" "} (Section: {app.section})
           </p>
-          <p><strong>Total Fine:</strong> {app.totalFine} Tk</p>
+          <p><u><strong>  Total Fine: </strong> {app.totalFine} Tk</u></p>
 
           <h3>Courses:</h3>
           <ul>
@@ -154,21 +154,6 @@ const ACADApplicationView = () => {
             ))}
           </ul>
 
-          <div className="reason-box">
-            <strong>Reason:</strong> {app.reason}
-          </div>
-
-          {app.attachment && (
-            <div className="pdf-view">
-              <h3>Attachment:</h3>
-              <iframe
-                src={`http://localhost:8000/${app.attachment}`}
-                width="100%"
-                height="220px"
-                title="Attachment"
-              />
-            </div>
-          )}
 
         </div>
       </div>

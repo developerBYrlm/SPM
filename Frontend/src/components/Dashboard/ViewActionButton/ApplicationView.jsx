@@ -152,39 +152,19 @@ const ApplicationView = () => {
               : "Reject (Authority)"}
           </button>
         
-          {/* Faculty Approve */}
-          <button
-            className={`btn-faculty ${
-              app.facultyStatus.toLowerCase() === "approved"
-                ? "approved"
-                : app.facultyStatus.toLowerCase() === "rejected"
-                ? "rejected"
-                : ""
-            }`}
-            onClick={() => handleStatusChange("approved_by_faculty")}
-            disabled
-          >
-            {app.facultyStatus.toLowerCase() === "approved"
-              ? "Approved"
-              : "Approve (Faculty)"}
-          </button>
-        
-          {/* Faculty Reject */}
-          <button
-            className={`btn-faculty ${
-              app.facultyStatus.toLowerCase() === "rejected"
-                ? "rejected"
-                : app.facultyStatus.toLowerCase() === "approved"
-                ? "approved"
-                : ""
-            }`}
-            onClick={() => handleStatusChange("rejected_by_faculty")}
-            disabled
-          >
-            {app.facultyStatus.toLowerCase() === "rejected"
-              ? "Rejected"
-              : "Reject (Faculty)"}
-          </button>
+          <div>
+            <span
+          className={`status-text-view ${
+            app.facultyStatus === "Approved"
+             ? "approved"
+             : app.facultyStatus === "Rejected"
+             ? "rejected"
+             : "pending"
+         }`}
+        >
+          Faculty: {app.facultyStatus || "Pending"}
+        </span>
+        </div>
 
         </div>
 
@@ -248,7 +228,7 @@ const ApplicationView = () => {
           </ul>
 
           <div className="reason-box">
-            <strong>Reason:</strong> {app.reason}
+            <strong> </strong> {app.reason}
           </div>
 
           {app.attachment && (
