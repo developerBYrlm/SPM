@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import './website.css';
-import { useNavigate } from 'react-router-dom';
+import './pageAnimation.css';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/authContext';  // Add only if exists
 
 const Login = () => {
@@ -55,7 +56,7 @@ const Login = () => {
 
     return (
      <>
-
+      <div className="page slide-left">
         <div className="wrapper">
             <form onSubmit={handleSubmit}>
                 <h1>Special Exam Management</h1>
@@ -89,15 +90,13 @@ const Login = () => {
                 </div>
 
                 <div className="remember-forgot">
-                    <label>
-                        {/* <input type="checkbox" /> Remember me */}
-                    </label>
-                    <a href="/forgot">Forgot password</a>
+                    <Link to="/forgot">Forgot password</Link>
                 </div>
 
                 <button type="submit" className="button">Login</button>
             </form>
         </div>
+      </div>
      </> 
     );
 };

@@ -198,6 +198,8 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
 
   overflow-y: auto;
+
+  white-space: pre-wrap;
 }
 
 /* Section heading */

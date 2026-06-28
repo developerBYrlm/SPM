@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import '../components/Dashboard/add.css'
+import './pageAnimation.css';
+
 
 const ForgotPassword = () => {
   const navigate = useNavigate()
@@ -32,6 +34,7 @@ const ForgotPassword = () => {
   }
 
   return (
+    <div className="page slide-right">
     <div className="main-content-forgot">
       <div className="user-dashboard">
 
@@ -82,7 +85,7 @@ const ForgotPassword = () => {
         </form>
 
       </div>
-    </div>
+    </div></div>
   )
 };
 

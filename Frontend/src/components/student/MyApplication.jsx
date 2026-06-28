@@ -167,7 +167,6 @@ const MyApplication = () => {
           </ul>
 
           <pre className="reason-box">
-            <h3>Reason:</h3> 
             {app.reason}
           </pre>
 
