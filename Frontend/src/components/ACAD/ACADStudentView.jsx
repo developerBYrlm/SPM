@@ -1,120 +1,145 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom'
 
 import '../Dashboard/authoritySummary.css'
 
-const Number = null;
-const number = null;
-const num = null;
-const Num = null;
 
 const ACADStudentView = () => {
+  const [applications, setApplications] = useState([]);
+  const [ACAD, setACAD] = useState(null);
 
-  const sId = localStorage.getItem("studentId");
+  const token = localStorage.getItem("token");
+  const fId = localStorage.getItem("studentId");
+
+  const fetchACADProfile = async () => {
+    try {
+      const res = await fetch("http://localhost:8000/api/auth/me", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setACAD(data.user);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const fetchApplications = async () => {
+    try {
+      const res = await fetch(
+        "http://localhost:8000/api/student-application",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = await res.json();
+
+      if (data.success) {
+        setApplications(data.applications);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchACADProfile();
+    fetchApplications();
+  }, []);
+
+  const filteredApps = applications.filter((app) => {
+    if (!ACAD) return false;
+
+    return (
+      app.department?.toLowerCase() ===
+      ACAD.department?.toLowerCase()
+    );
+  });
+
+  const total = filteredApps.length;
+  const approved = filteredApps.filter(
+    (a) => a.authorityStatus === "Approved"
+  ).length;
+
+  const pending = filteredApps.filter(
+    (a) => a.authorityStatus === "Pending"
+  ).length;
+
+  const rejected = filteredApps.filter(
+    (a) => a.authorityStatus === "Rejected"
+  ).length;
 
   return (
-  <div>
     <div className="main-content">
       <div className="dashboard-container">
+        
         <h3 className="dashboard-title">ACAD Dashboard</h3>
 
-        {/* Dashboard Cards */}
         <div className="dashboard-cards">
-       
-         <a 
-          href="/acad-dashboard/students-acad-applications"
-          style={{ textDecoration: "none" }}
-         >
-          <button
-            className="card-common card1"
-            style={{ textDecoration: "none", borderBottom: "none" }}
-          >
-            Total Applications {number}
-          </button>
-        </a>
 
+          <Link to="/acad-dashboard/students-applications-approve">
+            <button className="card-common card2">
+              Applications Approved
+              <span className="badge">{approved}</span>
+            </button>
+          </Link>
 
-         <a 
-          href="/acad-dashboard/students-applications-approve"
-          style={{ textDecoration: "none" }}
-         >
-          <button
-            className="card-common card2"
-            style={{ textDecoration: "none", borderBottom: "none" }}
-          >
-            Applications Approved {number}
-          </button>
-        </a>
-         <a 
-          href="/acad-dashboard/students-applications-pending"
-          style={{ textDecoration: "none" }}
-         >
-          <button
-            className="card-common card3"
-            style={{ textDecoration: "none", borderBottom: "none" }}
-          >
-            Applications Pending {number}
-          </button>
-        </a>
-         <a 
-          href="/acad-dashboard/students-applications-rejected"
-          style={{ textDecoration: "none" }}
-         >
-          <button
-            className="card-common card4"
-            style={{ textDecoration: "none", borderBottom: "none" }}
-          >
-            Applications Rejected {number}
-          </button>
-        </a>
-       
-      </div>
+          <Link to="/acad-dashboard/students-applications-pending">
+            <button className="card-common card3">
+              Applications Pending
+              <span className="badge">{pending}</span>
+            </button>
+          </Link>
 
-        {/* Profile */}
-        <div className='user-design'>
-          <a
-            href={sId ? `/acad-dashboard/acad-profile/${sId}` : "#"}
-            style={{ textDecoration: "none" }}
-          >
-            <button
-              className="user"
-              disabled={!sId}
-              style={{ textDecoration: "none", borderBottom: "none" }}
-            >
+          <Link to="/acad-dashboard/students-applications-rejected">
+            <button className="card-common card4">
+              Applications Rejected
+              <span className="badge">{rejected}</span>
+            </button>
+          </Link>
+
+        </div>
+
+        <div className="user-design">
+
+          <Link to={fId ? `/acad-dashboard/acad-profile/${fId}` : "#"}>
+            <button className="user" disabled={!fId}>
               Profile
             </button>
-          </a>
+          </Link>
 
-          {!sId && (
-            <p style={{ color: "red", fontSize: "12px" }}>
-              Profile ID missing. Please Re-login.
-            </p>
-          )}
-        
-          <a
-            href={sId ? `/acad-dashboard/acad-profile-update/${sId}` : "#"}
-            style={{ textDecoration: "none" }}
+          <Link
+            to={
+              fId
+                ? `/acad-dashboard/acad-profile-update/${fId}`
+                : "#"
+            }
           >
-            <button
-              className="user"
-              disabled={!sId}
-              style={{ textDecoration: "none", borderBottom: "none" }}
-            >
+            <button className="user" disabled={!fId}>
               Update Profile
             </button>
-          </a>
+          </Link>
 
-          {!sId && (
+
+          {!fId && (
             <p style={{ color: "red", fontSize: "12px" }}>
               Profile ID missing. Please Re-login.
             </p>
           )}
+
         </div>
+
       </div>
     </div>
-  </div>
-);
-
+  );
 };
 
 export default ACADStudentView

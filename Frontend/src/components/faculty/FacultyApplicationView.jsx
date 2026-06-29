@@ -91,7 +91,7 @@ const FacultyApplicationView = () => {
       {/* Title & Back Button */}
       <h2 className="dashboard-title">Full Application Details</h2>
       <div className="back">
-        <Link to="/faculty-dashboard/students-faculty-applications">
+        <Link to="/faculty-dashboard">
           <i className="fa-solid fa-backward"></i>
         </Link>
       </div>

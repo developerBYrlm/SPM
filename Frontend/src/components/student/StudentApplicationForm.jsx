@@ -293,7 +293,7 @@ const ApplyMissedExam = () => {
           </button>
 
           <div className="form-group">
-            <label>Attachment (PDF)</label>
+            <label >Must Add your Application & Necessary Attacment (PDF) </label>
             <input
               type="file"
               name="attachment"
@@ -311,6 +311,7 @@ const ApplyMissedExam = () => {
             <label>Reason</label>
             <textarea
               name="reason"
+              placeholder="Write down short Application...."
               minLength={50}
               required
               rows={5}

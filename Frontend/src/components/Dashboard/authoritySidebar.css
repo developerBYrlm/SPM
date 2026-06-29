@@ -180,3 +180,41 @@
     transform: scale(0.96);
     box-shadow: 0 0 10px rgb(255, 0, 0);
 }
+
+.developer {
+  content: "Developer by RLM (NUBian)";
+  position: absolute;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-style: italic;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+
+  white-space: nowrap;
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+.developer a {
+  color: inherit;            
+  text-decoration: none;    
+}
+
+.developer a:visited,
+.developer a:active {
+  color: inherit;
+  text-decoration: none;
+}
+
+.developer a:hover {
+  color: #00c8ff;
+  text-shadow: 0 0 8px rgba(0, 200, 255, 0.6);
+}
+
+.developer:hover {
+  transform: translateX(-50%) scale(1.05);
+}
+
+

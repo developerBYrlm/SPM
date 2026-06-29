@@ -29,7 +29,7 @@ const FRejcted = () => {
   };
 
   const filteredApplications = applications
-  .filter((app) => app.authorityStatus === "Rejected") 
+  .filter((app) => app.facultyStatus === "Rejected") 
   .filter((app) => {
     if (!faculty) return false; 
 
@@ -55,7 +55,7 @@ const FRejcted = () => {
       width: "150px",
       cell: (row) => <span style={{textTransform: 'capitalize'}}>{row.missedExamType}</span>
     },
-    { name: "Status", selector: (row) => row.authorityStatus, sortable: true, width: "140px" },
+    { name: "Faculty Status", selector: (row) => row.facultyStatus, sortable: true, width: "190px" },
     { 
       name: "Action",
       cell: (row) => (

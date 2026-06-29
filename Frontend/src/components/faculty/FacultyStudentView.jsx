@@ -1,65 +1,120 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom'
 
 import '../Dashboard/authoritySummary.css'
 import './faculty.css'
  
-const number = null;
-const num = null;
-const Num = null;
 
-const FacultyStudentView = () => {
 
+const FacultyStudentView = () =>  {
+  const [applications, setApplications] = useState([]);
+  const [faculty, setFaculty] = useState(null);
+
+  const token = localStorage.getItem("token");
   const fId = localStorage.getItem("studentId");
+
+  const fetchFacultyProfile = async () => {
+    try {
+      const res = await fetch("http://localhost:8000/api/auth/me", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setFaculty(data.user);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const fetchApplications = async () => {
+    try {
+      const res = await fetch(
+        "http://localhost:8000/api/student-application",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = await res.json();
+
+      if (data.success) {
+        setApplications(data.applications);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchFacultyProfile();
+    fetchApplications();
+  }, []);
+
+  const filteredApps = applications.filter((app) => {
+    if (!faculty) return false;
+
+    return (
+      app.department?.toLowerCase() ===
+      faculty.department?.toLowerCase()
+    );
+  });
+
+  const total = filteredApps.length;
+  const approved = filteredApps.filter(
+    (a) => a.facultyStatus === "Approved"
+  ).length;
+
+  const pending = filteredApps.filter(
+    (a) => a.facultyStatus === "Pending"
+  ).length;
+
+  const rejected = filteredApps.filter(
+    (a) => a.facultyStatus === "Rejected"
+  ).length;
+
   
   return (
   <div>
     <div className="main-content">
       <div className="dashboard-container">
-        <h3 className="dashboard-title">Faculty Dashboard</h3>
+        <h3 className="dashboard-title_unknown" >Faculty Dashboard</h3>
 
         {/* Dashboard Cards */}
         <div className="dashboard-three-cards">
-          <a 
-          href="/faculty-dashboard/students-applications-approve"
-          style={{ textDecoration: "none" }}
-         >
-          <button
-            className="card-common card2"
-            style={{ textDecoration: "none", borderBottom: "none" }}
-          >
-            Applications Approved {number}
+
+        <Link to="/faculty-dashboard/students-applications-approve" >
+          <button className="card-common card2"  >
+            Applications Approved 
+            <span className="badge">{approved}</span>
           </button>
-        </a>
-         <a 
-          href="/faculty-dashboard/students-applications-pending"
-          style={{ textDecoration: "none" }}
-         >
-          <button
-            className="card-common card3"
-            style={{ textDecoration: "none", borderBottom: "none" }}
-          >
-            Applications Pending {number}
+        </Link>
+
+        <Link to="/faculty-dashboard/students-applications-pending"  >
+          <button className="card-common card3" >
+            Applications Pending 
+            <span className="badge">{pending}</span>
           </button>
-        </a>
-         <a 
-          href="/faculty-dashboard/students-applications-rejected"
-          style={{ textDecoration: "none" }}
-         >
-          <button
-            className="card-common card4"
-            style={{ textDecoration: "none", borderBottom: "none" }}
-          >
-            Applications Rejected {number}
+        </Link>
+
+        <Link to="/faculty-dashboard/students-applications-rejected" >
+          <button className="card-common card4" >
+            Applications Rejected 
+            <span className="badge">{rejected}</span>
           </button>
-        </a>
+        </Link>
        
       </div>
 
         {/* Profile */}
         <div className='user-design'>
-          <a
-            href={fId ? `/faculty-dashboard/faculty-profile/${fId}` : "#"}
+          <Link to={fId ? `/faculty-dashboard/faculty-profile/${fId}` : "#"}
             style={{ textDecoration: "none" }}
           >
             <button
@@ -69,7 +124,7 @@ const FacultyStudentView = () => {
             >
               Profile
             </button>
-          </a>
+          </Link>
 
           {!fId && (
             <p style={{ color: "red", fontSize: "12px" }}>
@@ -77,8 +132,7 @@ const FacultyStudentView = () => {
             </p>
           )}
         
-          <a
-            href={
+          <Link to={
               fId
                 ? `/faculty-dashboard/faculty-profile-update/${fId}`
                 : "#"
@@ -92,7 +146,7 @@ const FacultyStudentView = () => {
             >
               Update Profile
             </button>
-          </a>
+          </Link>
 
           {!fId && (
             <p style={{ color: "red", fontSize: "12px" }}>

@@ -53,7 +53,7 @@ const List = () => {
       width: "150px",
       cell: (row) => <span style={{textTransform: 'capitalize'}}>{row.missedExamType}</span>
     },
-    { name: "Status", selector: (row) => row.authorityStatus, sortable: true, width: "140px" },
+    { name: "Authority Status", selector: (row) => row.authorityStatus, sortable: true, width: "200px" },
     { 
       name: "Action",
       cell: (row) => (

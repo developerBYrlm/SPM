@@ -61,6 +61,12 @@ const ACADsidebar = () => {
             </NavLink>
           </li> */}
         </ul>
+        
+        <div className='developer'>
+          <a href="https://www.facebook.com/robiulislam.RLM"  target="_blank"  rel="noopener noreferrer">
+          Developer by RLM (NUBian)            
+          </a>
+        </div>
 
         <div>
           <button className="logout-btn" onClick={handleLogout}>
