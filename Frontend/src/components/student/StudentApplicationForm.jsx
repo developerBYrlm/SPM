@@ -71,7 +71,7 @@ const ApplyMissedExam = () => {
   const addCourse = () => {
     const newCourses = [
       ...courses,
-      { courseTitle: "", facultyAcr: "", courseId: "", missedExamDate: getTodayDate(), fine: 2000 }
+      { courseTitle: "", facultyAcr: "", courseId: "", missedExamDate: "", fine: 2000 }
     ]
     setCourses(newCourses)
     setTotalFine(newCourses.length * 2000)
