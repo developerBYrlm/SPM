@@ -72,7 +72,7 @@ const List = () => {
       name: "Name",
       selector: (row) => row.name,
       sortable: true,
-      width: "200px",
+      width: "310px",
     },
     {
       name: "Action",

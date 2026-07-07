@@ -97,7 +97,7 @@ const ApplicationApprove = () => {
       name: "Name",
       selector: (row) => row.name,
       sortable: true,
-      width: "220px",
+      width: "310px",
     },
     {
       name: "Exam Type",

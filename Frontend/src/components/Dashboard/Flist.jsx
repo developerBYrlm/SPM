@@ -58,7 +58,7 @@ const List = () => {
       ),
       width: "160px",
     },
-    { name: "Name", selector: (row) => row.name, sortable: true, width: "180px" },
+    { name: "Name", selector: (row) => row.name, sortable: true, width: "310px" },
     {
       name: "Action",
       cell: (row) => <FacultyButtons id={row._id} />, width: "290px", center: "true"

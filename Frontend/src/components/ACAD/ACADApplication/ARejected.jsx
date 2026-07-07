@@ -41,7 +41,7 @@ const APending = () => {
   const columns = [
     // { name: "S No", selector: (row) => row.sno, width: "100px" },
     { name: "Student ID", selector: (row) => row.studentId, sortable: true, width: "170px" },
-    { name: "Name", selector: (row) => row.name, sortable: true, width: "220px" },
+    { name: "Name", selector: (row) => row.name, sortable: true, width: "310px" },
     { 
       name: "Exam Type", 
       selector: (row) => row.missedExamType, 
