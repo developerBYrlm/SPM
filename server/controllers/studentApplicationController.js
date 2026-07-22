@@ -109,7 +109,7 @@ export const getApplicationById = async (req, res) => {
   }
 };
 
-//  remove application from DB
+//  remove single application from DB
 export const removeApplication = async (req, res) => {
   try {
     const application = await StudentApplication.findById(req.params.id);
@@ -128,6 +128,30 @@ export const removeApplication = async (req, res) => {
     });
 
   } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+// remove all applications from DB and delete attachments
+export const removeAllApplications = async (req, res) => {
+  try {
+    const applications = await StudentApplication.find();
+
+    applications.forEach((application) => {
+      if (application.attachment && fs.existsSync(application.attachment)) {
+        fs.unlinkSync(application.attachment);
+      }
+    });
+
+    await StudentApplication.deleteMany({});
+
+    res.status(200).json({
+      success: true,
+      message: "All applications and their attachments removed successfully"
+    });
+
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ success: false, error: error.message });
   }
 };

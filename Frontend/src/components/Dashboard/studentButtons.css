@@ -1,6 +1,6 @@
 .student-action-btn {
   padding: 8px 14px;
-  margin: 0 4px;
+  margin: 7px 4px;
 
   font-size: 16px;
   font-weight: 600;
@@ -30,6 +30,10 @@
 
 .btn-leave {
   background: linear-gradient(135deg, #00b7ff87, #003cff94);
+  color: white;
+}
+.btn-allLeave {
+  background: linear-gradient(135deg, #ff000098, #ff00008e);
   color: white;
 }
 

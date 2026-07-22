@@ -62,7 +62,7 @@ const List = () => {
       cell: (row) => (
         <img
           src={row.profileImage || "/default.png"}
-          alt="student"
+          alt="IMG"
           className="student-image"
         />
       ),

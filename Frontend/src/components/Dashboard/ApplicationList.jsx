@@ -4,6 +4,8 @@ import axios from "axios";
 import DataTable from "react-data-table-component";
 import StudentApplicationButtons from "./StudentApplicationsButtons";
 import "./list.css"; 
+import "./studentButtons.css"
+
 
 const List = () => {
   const [applications, setApplications] = useState([]);
@@ -41,6 +43,38 @@ const List = () => {
   .filter((app) => app.studentId.toLowerCase().includes(search.toLowerCase())
 
   );
+
+  const handleRemoveAll = async () => {
+    if (filteredApplications.length === 0) {
+      alert("No applications found to remove.");
+      return;
+    }
+
+    const firstConfirm = window.confirm("Are you sure you want to remove ALL applications?");
+    
+    if (firstConfirm) {
+      const secondConfirm = window.confirm("WARNING: This action is permanent and cannot be undone! Are you absolutely sure?");
+      
+      if (secondConfirm) {
+        setLoading(true);
+        try {
+          const res = await axios.delete("http://localhost:8000/api/student-application/application-remove-all", {
+            headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+          });
+
+          if (res.data.success) {
+            alert("All applications have been successfully removed.");
+            fetchApplications(); 
+          }
+        } catch (err) {
+          console.error(err);
+          alert("Failed to remove all applications.");
+        } finally {
+          setLoading(false);
+        }
+      }
+    }
+  };
  
   const columns = [
     // { name: "S No", selector: (row) => row.sno, width: "100px" },
@@ -119,6 +153,14 @@ const List = () => {
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
+
+        <button 
+            className="student-action-btn btn-allLeave" 
+            onClick={handleRemoveAll}
+          >
+            Remove All Applications
+        </button>
+        
         <div className="back">
           <Link to="/authority-dashboard">
             <i className="fa-solid fa-backward"></i>

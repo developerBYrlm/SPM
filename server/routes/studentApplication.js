@@ -4,6 +4,7 @@ import {
     getAllApplications,  
     getApplicationById,   
     removeApplication, 
+    removeAllApplications,
     upload, 
     getMyApplication,
     updateApplicationStatus,
@@ -18,6 +19,8 @@ const router = express.Router();
 router.post( "/apply", authMiddleware, upload.single("attachment"), applyStudentApplication );
 router.get("/", authMiddleware, getAllApplications);
 router.get("/application-view/:id",authMiddleware,  getApplicationById);
+
+router.delete("/application-remove-all", authMiddleware, removeAllApplications);
 router.delete("/application-remove/:id", authMiddleware, removeApplication);
 
 router.put("/update-status/:id", authMiddleware, updateApplicationStatus);
