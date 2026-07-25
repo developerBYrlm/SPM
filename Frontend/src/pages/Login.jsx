@@ -69,7 +69,7 @@ const Login = () => {
                         type="email"
                         placeholder="Enter email"
                         required
-                        onInput={(e) => e.target.value = e.target.value.replace(/[^0-9a-z@.]/g, '')}
+                        onInput={(e) => e.target.value = e.target.value.replace(/[^0-9a-zA-Z@.]/g, '')}
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />

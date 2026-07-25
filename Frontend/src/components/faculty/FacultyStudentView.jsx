@@ -45,6 +45,7 @@ const FacultyStudentView = () =>  {
       const data = await res.json();
 
       if (data.success) {
+        console.log(data.applications);
         setApplications(data.applications);
       }
     } catch (err) {
@@ -58,26 +59,46 @@ const FacultyStudentView = () =>  {
   }, []);
 
   const filteredApps = applications.filter((app) => {
-    if (!faculty) return false;
+  if (!faculty) return false;
 
-    return (
-      app.department?.toLowerCase() ===
-      faculty.department?.toLowerCase()
-    );
-  });
+  const deptMatch =
+    app.department?.toLowerCase() ===
+    faculty.department?.toLowerCase();
 
-  const total = filteredApps.length;
-  const approved = filteredApps.filter(
-    (a) => a.facultyStatus === "Approved"
-  ).length;
+  const facultyMatch = app.courses?.some(
+    (course) =>
+      course.facultyAcr?.trim().toUpperCase() ===
+      faculty.userID?.trim().toUpperCase()
+  );
 
-  const pending = filteredApps.filter(
-    (a) => a.facultyStatus === "Pending"
-  ).length;
+  return deptMatch && facultyMatch;
+});
 
-  const rejected = filteredApps.filter(
-    (a) => a.facultyStatus === "Rejected"
-  ).length;
+  const facultyAcr = faculty?.userID?.trim().toUpperCase();
+  
+  const approved = filteredApps.filter((app) =>
+  app.facultyStatuses?.some(
+    (item) =>
+      item.facultyAcr?.trim().toUpperCase() === facultyAcr &&
+      item.status === "Approved"
+  )
+).length;
+
+  const pending = filteredApps.filter((app) =>
+  app.facultyStatuses?.some(
+    (item) =>
+      item.facultyAcr?.trim().toUpperCase() === facultyAcr &&
+      item.status === "Pending"
+  )
+).length;
+
+  const rejected = filteredApps.filter((app) =>
+  app.facultyStatuses?.some(
+    (item) =>
+      item.facultyAcr?.trim().toUpperCase() === facultyAcr &&
+      item.status === "Rejected"
+  )
+).length;
 
   
   return (

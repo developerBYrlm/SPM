@@ -35,12 +35,11 @@ const ApplicationView = () => {
     fetchApp();
   }, [id]);
 
-  
-  if (loading) { 
-    return ( 
-     <div className="loading">
+  if (loading) {
+    return (
+      <div className="loading">
         <div className="ring"></div>
-    </div>
+      </div>
     );
   }
 
@@ -115,59 +114,61 @@ const ApplicationView = () => {
         </div>
 
         <div className="details-card">
-        
-        <div className="action-buttons">
+          <div className="action-buttons">
+            <div className="status-container-view">
 
-          {/* Authority Approve */}
-          <button
-            className={`btn-authority ${
-              app.authorityStatus.toLowerCase() === "approved"
-                ? "approved"
-                : app.authorityStatus.toLowerCase() === "rejected"
-                ? "rejected"
-                : ""
-            }`}
-            onClick={() => handleStatusChange("approved_by_authority")}
-            disabled={actionLoading}
-          >
-            {app.authorityStatus.toLowerCase() === "approved"
-              ? "Approved"
-              : "Approve (Authority)"}
-          </button>
+              {/* Authority Approve */}
+              <button
+                className={`btn-authority ${
+                  app.authorityStatus.toLowerCase() === "approved"
+                    ? "approved"
+                    : app.authorityStatus.toLowerCase() === "rejected"
+                    ? "rejected"
+                    : ""
+                }`}
+                onClick={() => handleStatusChange("approved_by_authority")}
+                disabled={actionLoading}
+              >
+                {app.authorityStatus.toLowerCase() === "approved"
+                  ? "Approved"
+                  : "Approve (Authority)"}
+              </button>
 
-          {/* Authority Reject */}
-          <button
-            className={`btn-authority ${
-              app.authorityStatus.toLowerCase() === "rejected"
-                ? "rejected"
-                : app.authorityStatus.toLowerCase() === "approved"
-                ? "approved"
-                : ""
-            }`}
-            onClick={() => handleStatusChange("rejected_by_authority")}
-            disabled={actionLoading}
-          >
-            {app.authorityStatus.toLowerCase() === "rejected"
-              ? "Rejected"
-              : "Reject (Authority)"}
-          </button>
-        
-          <div>
-            <span
-          className={`status-text-view ${
-            app.facultyStatus === "Approved"
-             ? "approved"
-             : app.facultyStatus === "Rejected"
-             ? "rejected"
-             : "pending"
-         }`}
-        >
-          Faculty: {app.facultyStatus || "Pending"}
-        </span>
-        </div>
+              {/* Authority Reject */}
+              <button
+                className={`btn-authority ${
+                  app.authorityStatus.toLowerCase() === "rejected"
+                    ? "rejected"
+                    : app.authorityStatus.toLowerCase() === "approved"
+                    ? "approved"
+                    : ""
+                }`}
+                onClick={() => handleStatusChange("rejected_by_authority")}
+                disabled={actionLoading}
+              >
+                {app.authorityStatus.toLowerCase() === "rejected"
+                  ? "Rejected"
+                  : "Reject (Authority)"}
+              </button>
 
-        </div>
-
+              <div className="faculty-status-list">
+                {app.facultyStatuses?.map((item, index) => (
+                  <span
+                    key={index}
+                    className={`status-text-view faculty-status-item ${
+                      item.status === "Approved"
+                        ? "approved"
+                        : item.status === "Rejected"
+                        ? "rejected"
+                        : "pending"
+                    }`}
+                  >
+                    Faculty: {item.status} [ {item.facultyAcr} ]
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
 
           <h3>
             <strong>Application Submit Date:</strong>{" "}
@@ -182,32 +183,32 @@ const ApplicationView = () => {
 
           <p>
             <strong>Total Fine:</strong> {consideredFine} Tk{" "}
-            {considerPercentage < 100 && `(${100-considerPercentage}% considered)`}
+            {considerPercentage < 100 && `(${100 - considerPercentage}% considered)`}
           </p>
 
           <div style={{ margin: "10px 0" }}>
             <div className="consider-amount">
-           <label>
-              Consider Amount (%):{" "}
-              <select
-                value={considerPercentage}
-                onChange={(e) => setConsiderPercentage(Number(e.target.value))}
-              >
-                <option value={0}>100%</option>
-                <option value={50}>50%</option>
-                <option value={70}>30%</option>
-                <option value={80}>20%</option>
-                <option value={90}>10%</option>
-              </select>
-            </label>
+              <label>
+                Consider Amount (%):{" "}
+                <select
+                  value={considerPercentage}
+                  onChange={(e) => setConsiderPercentage(Number(e.target.value))}
+                >
+                  <option value={0}>100%</option>
+                  <option value={50}>50%</option>
+                  <option value={70}>30%</option>
+                  <option value={80}>20%</option>
+                  <option value={90}>10%</option>
+                </select>
+              </label>
 
-            <button
-              onClick={handleConsiderAmount}
-              style={{ marginLeft: "10px" }}
-            >
-              Apply
-            </button>
-          </div>
+              <button
+                onClick={handleConsiderAmount}
+                style={{ marginLeft: "10px" }}
+              >
+                Apply
+              </button>
+            </div>
           </div>
 
           <h3>Courses:</h3>

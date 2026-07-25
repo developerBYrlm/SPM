@@ -18,7 +18,7 @@ const studentSchema = new Schema(
 
     gender: {
       type: String,
-      enum: ["male", "female"],
+      enum: ["Male", "Female"],
       required: true
     },
 
@@ -30,5 +30,5 @@ const studentSchema = new Schema(
   { timestamps: true }
 );
 
-const Student = mongoose.model("Student", studentSchema);
+const Student = mongoose.models.Student || mongoose.model("Student", studentSchema);
 export default Student;
