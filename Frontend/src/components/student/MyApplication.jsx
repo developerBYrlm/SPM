@@ -60,6 +60,7 @@ const MyApplication = () => {
 
         <div className="details-card">
           <div className="status-container-view">
+            <div className="faculty-status-list">
             <span
               className={`status-text-view ${
                 app.authorityStatus === "Approved"
@@ -71,7 +72,7 @@ const MyApplication = () => {
             >
               Authority: {app.authorityStatus || "Pending"}
             </span>
-
+            </div>
             <div className="faculty-status-list">
             {app.facultyStatuses?.map((item, index) => (
               <span
@@ -136,7 +137,13 @@ const MyApplication = () => {
           {app.attachment && (
             <div className="pdf-view">
               <h3>Attachment:</h3>
-              {`http://localhost:8000/${app.attachment}`}
+
+              <iframe
+                src={`http://localhost:8000/${app.attachment}`}
+                width="100%"
+                height="220px"
+                title="Attachment"
+              />
             </div>
           )}
         </div>

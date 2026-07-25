@@ -150,7 +150,7 @@ const ApplicationView = () => {
                   ? "Rejected"
                   : "Reject (Authority)"}
               </button>
-
+              </div>
               <div className="faculty-status-list">
                 {app.facultyStatuses?.map((item, index) => (
                   <span
@@ -167,7 +167,7 @@ const ApplicationView = () => {
                   </span>
                 ))}
               </div>
-            </div>
+            
           </div>
 
           <h3>

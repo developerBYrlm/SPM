@@ -43,13 +43,13 @@ const StudentSidebar = () => {
             </NavLink>
           </li>
 
-          {/* <li>
-            <NavLink to="/student-dashboard/student-routine-view"  className="sidebar-item custom-hover">
+          <li>
+            <NavLink to="/student-dashboard/student-faculty-view"  className="sidebar-item custom-hover">
               
-              <i class="fa-solid fa-calendar-days"></i>
-              <span>Exam Routine</span>
+              <i className="fa-solid fa-person-chalkboard"></i>
+              <span>Faculty</span>
             </NavLink>
-          </li> */}
+          </li>
          </ul>
          
         <div className='developer'>

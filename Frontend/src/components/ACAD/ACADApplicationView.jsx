@@ -82,35 +82,36 @@ const ACADApplicationView = () => {
   };
 
   return (
-    <div className="main-content">
-      <div className="dashboard-container">
-        <h2 className="dashboard-title">Full Application Details</h2>
-        <div className="back">
+      <div className="main-content">
+        <div className="dashboard-container">
+          <h2 className="dashboard-title">My Application Status</h2>
+  
+          <div className="back">
           <Link to="/acad-dashboard/students-acad-applications">
             <i className="fa-solid fa-backward"></i>
           </Link>
         </div>
-
-        <div className="details-card">
-          <div className="action-buttons">
-          <div className="status-container-view">
-            <span
-              className={`status-text-view ${
-                app.authorityStatus === "Approved"
-                  ? "approved"
-                  : app.authorityStatus === "Rejected"
-                  ? "rejected"
-                  : "pending"
-              }`}
-            >
-              Authority: {app.authorityStatus || "Pending"}
-            </span>
-
-            <div className="faculty-status-list">
+  
+          <div className="details-card">
+            <div className="status-container-view">
+              <div className="faculty-status-list">
+              <span
+                className={`status-text-view ${
+                  app.authorityStatus === "Approved"
+                    ? "approved"
+                    : app.authorityStatus === "Rejected"
+                    ? "rejected"
+                    : "pending"
+                }`}
+              >
+                Authority: {app.authorityStatus || "Pending"}
+              </span>
+              </div>
+              <div className="faculty-status-list">
               {app.facultyStatuses?.map((item, index) => (
                 <span
                   key={index}
-                  className={`status-text-view faculty-status-item ${
+                  className={`status-text-view ${
                     item.status === "Approved"
                       ? "approved"
                       : item.status === "Rejected"
@@ -123,43 +124,54 @@ const ACADApplicationView = () => {
               ))}
               </div>
             </div>
+  
+            <h3>
+              <strong>Application Submit Date:</strong>{" "}
+              {new Date(app.missedExamDate).toLocaleDateString()}
+            </h3>
+  
+            <p>
+              <strong>Department:</strong> {app.department}
+            </p>
+  
+            <p>
+              <strong>Student ID:</strong> {app.studentId}
+            </p>
+  
+            <p>
+              <strong>Name:</strong> {app.name}
+            </p>
+  
+            <p>
+              <strong>Exam Type:</strong> {app.missedExamType}
+            </p>
+  
+            <p>
+              <strong>Semester:</strong> {app.semester} (Section: {app.section})
+            </p>
+  
+            <p>
+              <strong>Total Fine:</strong> {app.totalFine} Tk
+            </p>
+  
+            <h3>Missed Courses:</h3>
+  
+            <ul>
+              {app.courses?.map((course, index) => (
+                <li key={index}>
+                  {course.courseId} - {course.courseTitle} (Faculty:{" "}
+                  {course.facultyAcr}) - Date:{" "}
+                  {new Date(course.missedExamDate).toLocaleDateString()}
+                </li>
+              ))}
+            </ul>
+  
+            <pre className="reason-box">{app.reason}</pre>
+  
           </div>
-
-          <h3>
-            <strong> Application Submit Date: </strong>
-            {new Date(app.missedExamDate).toLocaleDateString()}
-          </h3>
-
-          <p><strong>Department:</strong> {app.department}</p>
-          <p><strong>Student ID:</strong> {app.studentId}</p>
-          <p><strong>Name:</strong> {app.name}</p>
-          <p><strong>Exam Type:</strong> {app.missedExamType}</p>
-          <p>
-            <strong>Semester:</strong> {app.semester} (Section: {app.section})
-          </p>
-          <p>
-            <u><strong>Total Fine: </strong> {app.totalFine} Tk</u>
-          </p>
-
-          <h3>Courses:</h3>
-          <ul>
-            {app.courses.map((course, index) => (
-              <li key={index}>
-                {course.courseId} - {course.courseTitle} (Faculty: {course.facultyAcr}) - (Missed Exam Date:{" "}
-                {new Date(course.missedExamDate)
-                  .toISOString()
-                  .split("T")[0]
-                  .split("-")
-                  .reverse()
-                  .join("-")}
-                )
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
-    </div>
-  );
+    );
 };
 
 export default ACADApplicationView;

@@ -50,7 +50,8 @@ import StudentProfile from "./components/student/StudentProfile";
 import StudentProfileUpdate from "./components/student/StudentProfileUpdate";
 import MyApplication from "./components/student/MyApplication";
 import UpdateStudentApplications from "./components/student/UpdateStudentApplications";
-import RoutineSh from "./components/student/RoutineSh";
+import StudentFacultyView from "./components/student/StudentFacultyView";
+
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------
@@ -150,7 +151,7 @@ export default function App() {
           <Route path="current-application" element={<MyApplication />} />
           <Route path="student-profile/:id" element={<StudentProfile/>} />
           <Route path="student-profile-update/:id" element={<StudentProfileUpdate />} />
-          <Route path="student-routine-view" element={<RoutineSh />} />
+          <Route path="student-faculty-view" element={<StudentFacultyView />} />
           
         </Route>
 
