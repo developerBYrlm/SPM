@@ -13,7 +13,7 @@ const FActionButton = () => {
     const fetchStudent = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/faculty/faculty-view/${id}`,
+          `https://spm-1-u37a.onrender.com/api/faculty/faculty-view/${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -58,7 +58,7 @@ const FActionButton = () => {
 
         <div className="ImageFrame">
           <img
-            src={`http://localhost:8000/imageUploads/uploads/${student.user.profileImage}`}
+            src={`https://spm-1-u37a.onrender.com/imageUploads/uploads/${student.user.profileImage}`}
             alt="faculty"
           />
         </div>

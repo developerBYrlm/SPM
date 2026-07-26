@@ -21,7 +21,7 @@ const ForgotPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const res = await axios.post("http://localhost:8000/api/auth/reset-password", formData)
+      const res = await axios.post("https://spm-1-u37a.onrender.com/api/auth/reset-password", formData)
 
       if (res.data.success) {
         alert("Password updated successfully!") // Success Popup

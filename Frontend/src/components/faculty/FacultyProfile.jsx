@@ -18,7 +18,7 @@ const FacultyProfile = () =>{
 
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/faculty/faculty-view/${id}`,
+          `https://spm-1-u37a.onrender.com/api/faculty/faculty-view/${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -65,7 +65,7 @@ const FacultyProfile = () =>{
         </div>
           <div className="ImageFrame">
             <img
-              src={`http://localhost:8000/imageUploads/uploads/${student.user.profileImage}`}
+              src={`https://spm-1-u37a.onrender.com/imageUploads/uploads/${student.user.profileImage}`}
               alt="Student"
              />
            </div>

@@ -14,7 +14,7 @@ const MyApplication = () => {
         if (!token) return;
 
         const res = await axios.get(
-          "http://localhost:8000/api/student-application/my-application",
+          "https://spm-1-u37a.onrender.com/api/student-application/my-application",
           {
             headers: {
               Authorization: `Bearer ${token}`
@@ -139,7 +139,7 @@ const MyApplication = () => {
               <h3>Attachment:</h3>
 
               <iframe
-                src={`http://localhost:8000/${app.attachment}`}
+                src={`https://spm-1-u37a.onrender.com/${app.attachment}`}
                 width="100%"
                 height="220px"
                 title="Attachment"

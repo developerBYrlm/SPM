@@ -13,7 +13,7 @@ const ACADStudentView = () => {
 
   const fetchACADProfile = async () => {
     try {
-      const res = await fetch("http://localhost:8000/api/auth/me", {
+      const res = await fetch("https://spm-1-u37a.onrender.com/api/auth/me", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -32,7 +32,7 @@ const ACADStudentView = () => {
   const fetchApplications = async () => {
     try {
       const res = await fetch(
-        "http://localhost:8000/api/student-application",
+        "https://spm-1-u37a.onrender.com/api/student-application",
         {
           headers: {
             Authorization: `Bearer ${token}`,

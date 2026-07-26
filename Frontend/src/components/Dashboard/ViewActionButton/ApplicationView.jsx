@@ -17,7 +17,7 @@ const ApplicationView = () => {
     const fetchApp = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8000/api/student-application/application-view/${id}`,
+          `https://spm-1-u37a.onrender.com/api/student-application/application-view/${id}`,
           { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
         );
 
@@ -48,7 +48,7 @@ const ApplicationView = () => {
       setActionLoading(true);
 
       await axios.put(
-        `http://localhost:8000/api/student-application/update-status/${id}`,
+        `https://spm-1-u37a.onrender.com/api/student-application/update-status/${id}`,
         { status },
         { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
       );
@@ -84,7 +84,7 @@ const ApplicationView = () => {
       setActionLoading(true);
 
       const res = await axios.put(
-        `http://localhost:8000/api/student-application/update-consider-amount/${id}`,
+        `https://spm-1-u37a.onrender.com/api/student-application/update-consider-amount/${id}`,
         { percentage: considerPercentage },
         { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
       );
@@ -236,7 +236,7 @@ const ApplicationView = () => {
             <div className="pdf-view">
               <h3>Attachment:</h3>
               <iframe
-                src={`http://localhost:8000/${app.attachment}`}
+                src={`https://spm-1-u37a.onrender.com/${app.attachment}`}
                 width="100%"
                 height="220px"
                 title="Attachment"

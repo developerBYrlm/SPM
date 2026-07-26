@@ -41,7 +41,7 @@ const ApplyMissedExam = () => {
         const token = localStorage.getItem("token");
         if (!token) return;
 
-        const res = await axios.get("http://localhost:8000/api/auth/me", {
+        const res = await axios.get("https://spm-1-u37a.onrender.com/api/auth/me", {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -147,7 +147,7 @@ const ApplyMissedExam = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/student-application/apply",
+        "https://spm-1-u37a.onrender.com/api/student-application/apply",
         data,
         {
           headers: {

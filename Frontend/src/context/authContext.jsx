@@ -17,7 +17,7 @@ const authContext = ({children}) => {
           if(token) {
 
         
-            const response = await axios.get('http://localhost:8000/api/auth/verify', {
+            const response = await axios.get('https://spm-1-u37a.onrender.com/api/auth/verify', {
                 headers: {
                   Authorization : `Bearer ${token}`,
                 },

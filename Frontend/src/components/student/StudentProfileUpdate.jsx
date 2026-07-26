@@ -23,7 +23,7 @@ const StudentProfileUpdate = () => {
     const fetchStudent = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8000/api/students/view/${id}`,
+          `https://spm-1-u37a.onrender.com/api/students/view/${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -88,7 +88,7 @@ const StudentProfileUpdate = () => {
 
     try {
       const res = await axios.post(
-        `http://localhost:8000/api/students/edit/${id}`,
+        `https://spm-1-u37a.onrender.com/api/students/edit/${id}`,
         formDataObj,
         {
           headers: {

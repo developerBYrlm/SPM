@@ -37,7 +37,7 @@ const acadButtons = ({ id }) =>{
         if (confirmRemove) {
             try {
                 const response = await axios.delete(
-                    `http://localhost:8000/api/faculty/faculty-remove/${id}`,
+                    `https://spm-1-u37a.onrender.com/api/faculty/faculty-remove/${id}`,
                     {
                         headers: {
                             Authorization: `Bearer ${localStorage.getItem("token")}`,

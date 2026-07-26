@@ -15,7 +15,7 @@ const List = () => {
 
   const fetchAuthorityProfile = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/auth/me", {
+      const res = await axios.get("https://spm-1-u37a.onrender.com/api/auth/me", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -58,7 +58,7 @@ const List = () => {
       if (secondConfirm) {
         setLoading(true);
         try {
-          const res = await axios.delete("http://localhost:8000/api/student-application/application-remove-all", {
+          const res = await axios.delete("https://spm-1-u37a.onrender.com/api/student-application/application-remove-all", {
             headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
           });
 
@@ -104,7 +104,7 @@ const List = () => {
   const fetchApplications = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:8000/api/student-application", {
+      const res = await axios.get("https://spm-1-u37a.onrender.com/api/student-application", {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
 
