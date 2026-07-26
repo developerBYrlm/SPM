@@ -1,4 +1,4 @@
-import Student from "../../models/student.js"
+import Student from "../../models/Student.js"
 import bcrypt from "bcrypt"
 import multer from "multer"
 import path from "path" 
