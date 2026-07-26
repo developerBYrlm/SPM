@@ -1,4 +1,4 @@
-import StudentApplication from "../../models/studentApplication.js";
+import StudentApplication from "../../models/StudentApplication.js";
 import multer from "multer";
 import path from "path";
 import fs from "fs";
