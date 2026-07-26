@@ -52,4 +52,5 @@ const studentApplicationSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now }
 });
 
-export default mongoose.model("StudentApplication", studentApplicationSchema);
+const StudentApplication =  mongoose.models.StudentApplication ||  mongoose.model("StudentApplication", studentApplicationSchema);
+export default StudentApplication;

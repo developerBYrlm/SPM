@@ -1,4 +1,4 @@
-import Routine from "../models/routineUpSh.js";
+import Routine from "../models/Routine.js";
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';

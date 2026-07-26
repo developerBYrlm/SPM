@@ -177,7 +177,7 @@ background: rgba(0, 0, 0, 0.164);
    MOBILE FORM LAYOUT
    ===================================================== */
 
-@media (max-width: 768px) {
+@media (max-width: 1280px) {
   .glass-form {
     grid-template-columns: 1fr;
   }
