@@ -15,7 +15,7 @@ const List = () => {
   // Fetch logged‑in faculty profile (department)
   const fetchFacultyProfile = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/auth/me", {
+      const res = await axios.get("https://spm-1-u37a.onrender.com/api/auth/me", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
