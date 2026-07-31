@@ -357,6 +357,7 @@ const ApplyMissedExam = () => {
             <input
               type="file"
               name="attachment"
+              required
               accept="application/pdf"
               onChange={handleChange}
             />
