@@ -132,6 +132,14 @@ background: rgba(0, 0, 0, 0.164);
 .form-group select option {
   color: #000;
 }
+.submit-btn i {
+  font-size: 15px;
+  margin-left: 10px;
+  vertical-align: middle;
+  position: relative;
+  top:-3px;
+}
+
 
 /* =====================================================
    SUBMIT BUTTON
