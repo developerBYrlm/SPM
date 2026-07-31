@@ -167,7 +167,7 @@ const StudentProfileUpdate = () => {
           </div>
 
           <button type="submit" className="submit-btn">
-            Submit
+            Update
           </button>
 
         </form>
