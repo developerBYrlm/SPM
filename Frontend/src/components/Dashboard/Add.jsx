@@ -175,7 +175,7 @@ const Add = () => {
 
 
           <button type="submit" className="submit-btn">
-            Submit
+            Add<i className="fa-solid fa-user-plus"></i>
           </button>
 
         </form>
