@@ -240,26 +240,14 @@ const ApplyMissedExam = () => {
 
           <div className="form-group">
             <label>Semester</label>
-            <select
-              name="semester"
-              required
-              value={formData.semester}
-              onChange={handleChange}
-            >
-              <option value="">Select</option>
-              <option value="1st">1st Semester</option>
-              <option value="2nd">2nd Semester</option>
-              <option value="3rd">3rd Semester</option>
-              <option value="4th">4th Semester</option>
-              <option value="5th">5th Semester</option>
-              <option value="6th">6th Semester</option>
-              <option value="7th">7th Semester</option>
-              <option value="8th">8th Semester</option>
-              <option value="9th">9th Semester</option>
-              <option value="10th">10th Semester</option>
-              <option value="11th">11th Semester</option>
-              <option value="12th">12th Semester</option>
-            </select>
+           <input
+           type="text"
+           name="semester"
+           placeholder="Summer 2026 .. .."
+           required
+           value={formData.semester}
+           onChange={handleChange}
+           />
           </div>
 
           <div className="form-group">
@@ -267,7 +255,7 @@ const ApplyMissedExam = () => {
             <input
               type="text"
               name="section"
-              placeholder="Insert Section"
+              placeholder="1A, 2B, 4C .. .."
               required
               value={section}
               onChange={e => {
