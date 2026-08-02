@@ -17,3 +17,32 @@
   text-decoration: none;
   color: inherit;
 }
+
+/* =========================
+   Tablet
+========================= */
+@media (max-width: 992px) {
+  .dashboard-three-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+/* =========================
+   Mobile
+========================= */
+@media (max-width: 768px) {
+  .dashboard-three-cards {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
+
+/* =========================
+   Small Mobile
+========================= */
+@media (max-width: 480px) {
+  .dashboard-three-cards {
+    gap: 12px;
+  }
+}
