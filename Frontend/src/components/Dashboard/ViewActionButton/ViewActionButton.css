@@ -20,7 +20,7 @@
 .dashboard-container {
   width: 100%;
   max-width: 1400px;
-  min-width: 500px;
+  
 
   padding: 45px 50px;
 
@@ -185,7 +185,8 @@
    ===================================================== */
 
 .reason-box {
-  width: 750px;
+  width: 100%;
+  max-width: 750px;
   padding: 15px 18px;
 
   background: rgba(255, 255, 255, 0.05);
@@ -486,4 +487,160 @@ button:disabled {
 .faculty-status-item {
   display: block;
   width: fit-content;
+}
+
+
+/* ==========================================
+   TABLET
+========================================== */
+@media (max-width: 992px) {
+
+  .main-content {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .dashboard-container {
+    padding: 30px 20px;
+  }
+
+  .dashboard-title {
+    font-size: 32px;
+  }
+
+  .ImageFrame img {
+    width: 180px;
+    height: 180px;
+  }
+
+  .student-info p {
+    font-size: 18px;
+  }
+
+  .details-card {
+    padding: 25px 20px;
+  }
+
+  .reason-box {
+    width: 100%;
+  }
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+@media (max-width: 768px) {
+
+  .main-content {
+    margin-left: 0;
+    padding: 12px;
+    min-height: auto;
+  }
+
+  .dashboard-container {
+    padding: 20px 12px;
+    border-radius: 16px;
+  }
+
+  .dashboard-title {
+    font-size: 24px;
+  }
+
+  .ImageFrame img {
+    width: 130px;
+    height: 130px;
+  }
+
+  .student-info {
+    align-items: stretch;
+  }
+
+  .student-info p {
+    font-size: 15px;
+    word-break: break-word;
+  }
+
+  .details-card {
+    width: 100%;
+    padding: 15px;
+    font-size: 15px;
+  }
+
+  .reason-box {
+    width: 100%;
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .pdf-view iframe {
+    height: 250px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn-authority,
+  .btn-faculty {
+    width: 100%;
+  }
+
+  .consider-amount {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .consider-amount select,
+  .consider-amount button {
+    width: 100%;
+  }
+
+  .status-container-view {
+    position: static;
+    margin-bottom: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+}
+
+
+/* ==========================================
+   SMALL MOBILE
+========================================== */
+@media (max-width: 480px) {
+
+  .dashboard-title {
+    font-size: 20px;
+  }
+
+  .ImageFrame img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .student-info p {
+    font-size: 14px;
+  }
+
+  .details-card p,
+  .details-card li {
+    font-size: 13px;
+  }
+
+  .reason-box {
+    font-size: 13px;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+
+  .pdf-view iframe {
+    height: 180px;
+  }
+
 }
