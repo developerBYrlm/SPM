@@ -129,9 +129,7 @@ background: rgba(0, 0, 0, 0.164);
 }
 
 /* Select dropdown text */
-.form-group select option {
-  color: #000;
-}
+
 .submit-btn i {
   font-size: 15px;
   margin-left: 10px;
@@ -139,6 +137,7 @@ background: rgba(0, 0, 0, 0.164);
   position: relative;
   top:-3px;
 }
+
 
 
 /* =====================================================
@@ -426,4 +425,157 @@ background: rgba(0, 0, 0, 0.164);
 
   cursor: pointer;
   color: #ffffff;
+}
+
+/* ==========================================
+   TABLET
+========================================== */
+@media (max-width: 992px) {
+
+  .main-content {
+    margin-left: 0;
+    padding: 15px;
+  }
+
+  .user-dashboard {
+    padding: 25px;
+  }
+
+  .glass-form {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  .submit-btn,
+  .add-btn,
+  .course-box,
+  .glass-form .form-title {
+    grid-column: span 1;
+  }
+
+  .form-group textarea {
+    width: 100%;
+  }
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+@media (max-width: 768px) {
+
+  .main-content,
+  .main-content-forgot {
+    margin-left: 0;
+    padding: 10px;
+    width: 100%;
+  }
+
+  .user-dashboard {
+    width: 100%;
+    padding: 20px 15px;
+    border-radius: 18px;
+  }
+
+  .form-title {
+    font-size: 22px;
+    margin-bottom: 18px;
+  }
+
+  .glass-form {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 15px;
+  }
+
+  .form-group label,
+  .course-box label {
+    font-size: 16px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .course-title,
+  .form-group textarea {
+    font-size: 15px;
+    width: 100%;
+  }
+
+  .course-box {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .course-box button {
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  .submit-btn,
+  .add-btn {
+    grid-column: span 1;
+    font-size: 18px;
+    padding: 12px;
+  }
+}
+
+
+/* ==========================================
+   SMALL MOBILE
+========================================== */
+@media (max-width: 480px) {
+
+  .user-dashboard {
+    padding: 15px 10px;
+  }
+
+  .form-title {
+    font-size: 18px;
+  }
+
+  .glass-form {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .form-group label,
+  .course-box label {
+    font-size: 14px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .course-title,
+  .form-group textarea {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .submit-btn,
+  .add-btn {
+    font-size: 16px;
+  }
+}
+
+
+/* ==========================================
+   EXTRA SMALL DEVICES
+========================================== */
+@media (max-width: 320px) {
+
+  .form-title {
+    font-size: 16px;
+  }
+
+  .submit-btn,
+  .add-btn {
+    font-size: 14px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .course-title,
+  .form-group textarea {
+    font-size: 13px;
+  }
 }
