@@ -48,3 +48,45 @@
     transform: scale(0.96);
     box-shadow: 0 0 10px rgb(0, 0, 0);
 }
+
+
+/* ==========================================
+   TABLET
+========================================== */
+@media (max-width: 768px) {
+
+  .student-action-btn {
+    padding: 7px 12px;
+    font-size: 14px;
+    margin: 5px 3px;
+  }
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+@media (max-width: 576px) {
+
+  .student-action-btn {
+    width: 100%;
+    margin: 5px 0;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+}
+
+
+/* ==========================================
+   SMALL MOBILE
+========================================== */
+@media (max-width: 375px) {
+
+  .student-action-btn {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+}
