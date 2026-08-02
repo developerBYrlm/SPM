@@ -351,3 +351,178 @@
 
   box-shadow: 0 0 6px rgba(255, 0, 0, 0.6);
 }
+
+/* ==========================================
+   TABLET (992px)
+========================================== */
+@media (max-width: 992px) {
+
+  .main-content {
+    margin-left: 0;
+    padding: 25px 15px;
+  }
+
+  .dashboard-container {
+    padding: 25px;
+  }
+
+  .dashboard-title,
+  .dashboard-title_unknown {
+    font-size: 35px;
+  }
+
+  .dashboard-cards {
+    flex-wrap: wrap;
+  }
+
+  .card-common,
+  .card1,
+  .card2,
+  .card3,
+  .card4 {
+    min-width: 250px;
+  }
+}
+
+
+/* ==========================================
+   MOBILE (768px)
+========================================== */
+@media (max-width: 768px) {
+
+  .main-content {
+    margin-left: 0;
+    padding: 15px 10px;
+    min-height: auto;
+  }
+
+  .dashboard-container {
+    padding: 20px 15px;
+    border-radius: 16px;
+  }
+
+  .dashboard-title,
+  .dashboard-title_unknown {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  .dashboard-cards {
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+    gap: 15px;
+  }
+
+  .card-common,
+  .card1,
+  .card2,
+  .card3,
+  .card4 {
+    width: 100%;
+    min-width: unset;
+    padding: 18px;
+  }
+
+  .card1 p,
+  .card2 p,
+  .card3 p,
+  .card4 p {
+    font-size: 16px;
+  }
+
+  .card1 span,
+  .card2 span,
+  .card3 span,
+  .card4 span {
+    font-size: 15px;
+  }
+
+  .user-design {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .user {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .badge {
+    top: -8px;
+    right: -4px;
+    font-size: 10px;
+  }
+}
+
+
+/* ==========================================
+   SMALL MOBILE (480px)
+========================================== */
+@media (max-width: 480px) {
+
+  .dashboard-container {
+    padding: 15px 10px;
+  }
+
+  .dashboard-title,
+  .dashboard-title_unknown {
+    font-size: 22px;
+  }
+
+  .card1,
+  .card2,
+  .card3,
+  .card4 {
+    padding: 15px;
+  }
+
+  .card1 p,
+  .card2 p,
+  .card3 p,
+  .card4 p {
+    font-size: 14px;
+  }
+
+  .card1 span,
+  .card2 span,
+  .card3 span,
+  .card4 span {
+    font-size: 14px;
+  }
+
+  .user {
+    font-size: 14px;
+    padding: 12px;
+  }
+}
+
+
+/* ==========================================
+   EXTRA SMALL (320px)
+========================================== */
+@media (max-width: 320px) {
+
+  .dashboard-title,
+  .dashboard-title_unknown {
+    font-size: 18px;
+  }
+
+  .card1 p,
+  .card2 p,
+  .card3 p,
+  .card4 p {
+    font-size: 13px;
+  }
+
+  .card1 span,
+  .card2 span,
+  .card3 span,
+  .card4 span {
+    font-size: 12px;
+  }
+
+  .user {
+    font-size: 13px;
+  }
+}
