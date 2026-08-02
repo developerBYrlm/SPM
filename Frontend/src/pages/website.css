@@ -413,3 +413,146 @@ body {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+/* ==========================================
+   TABLET (768px)
+   ========================================== */
+@media (max-width: 768px) {
+
+    body {
+        padding: 20px;
+    }
+
+    .wrapper {
+        width: 100%;
+        max-width: 550px;
+        padding: 40px 30px;
+    }
+
+    .wrapper h1 {
+        font-size: 24px;
+    }
+
+    .wrapper h2 {
+        font-size: 32px;
+    }
+
+    .input-box input {
+        font-size: 18px;
+    }
+
+    .wrapper .button {
+        font-size: 20px;
+    }
+
+    .text {
+        font-size: 16px;
+        width: 100%;
+    }
+}
+
+
+/* ==========================================
+   MOBILE (576px)
+   ========================================== */
+@media (max-width: 576px) {
+
+    body {
+        padding: 15px;
+        align-items: center;
+    }
+
+    .wrapper {
+        width: 100%;
+        padding: 30px 20px;
+        border-radius: 20px;
+    }
+
+    .wrapper h1 {
+        font-size: 20px;
+    }
+
+    .wrapper h2 {
+        font-size: 26px;
+    }
+
+    .wrapper .input-box {
+        height: 50px;
+        margin: 18px 0;
+    }
+
+    .input-box input {
+        font-size: 16px;
+        padding: 0 15px;
+    }
+
+    .input-box i {
+        right: 15px;
+        font-size: 14px;
+    }
+
+    .wrapper .button {
+        height: 50px;
+        font-size: 18px;
+    }
+
+    .remember-forgot {
+        font-size: 13px !important;
+    }
+
+    .text {
+        width: 100%;
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .popup-box {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .popup-box h2 {
+        font-size: 22px;
+    }
+
+    .popup-box p {
+        font-size: 14px;
+    }
+
+}
+
+
+/* ==========================================
+   SMALL MOBILE (375px)
+   ========================================== */
+@media (max-width: 375px) {
+
+    .wrapper {
+        padding: 25px 15px;
+    }
+
+    .wrapper h1 {
+        font-size: 18px;
+    }
+
+    .wrapper h2 {
+        font-size: 22px;
+    }
+
+    .input-box input {
+        font-size: 14px;
+    }
+
+    .wrapper .button {
+        font-size: 16px;
+    }
+
+    .remember-forgot {
+        font-size: 12px !important;
+    }
+
+    .text {
+        font-size: 13px;
+    }
+
+}
