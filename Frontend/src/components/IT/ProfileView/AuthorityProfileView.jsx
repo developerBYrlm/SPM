@@ -12,7 +12,7 @@ const AuthorityProfileView = () => {
     const fetchStudent = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/authority/authority-view/${id}`,
+          `https://spm-1-u37a.onrender.com/api/authority/authority-view/${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -57,7 +57,7 @@ const AuthorityProfileView = () => {
 
         <div className="ImageFrame">
           <img
-            src={`http://localhost:8000/imageUploads/uploads/${student.user.profileImage}`}
+            src={`https://spm-1-u37a.onrender.com/imageUploads/uploads/${student.user.profileImage}`}
             alt="authority"
           />
         </div>

@@ -14,7 +14,7 @@ const ACADApplicationView = () => {
     const fetchApp = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8000/api/student-application/application-view/${id}`,
+          `https://spm-1-u37a.onrender.com/api/student-application/application-view/${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -48,7 +48,7 @@ const ACADApplicationView = () => {
       setActionLoading(true);
 
       await axios.put(
-        `http://localhost:8000/api/student-application/update-status/${id}`,
+        `https://spm-1-u37a.onrender.com/api/student-application/update-status/${id}`,
         { status },
         {
           headers: {

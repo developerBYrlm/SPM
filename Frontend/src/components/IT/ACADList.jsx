@@ -14,7 +14,7 @@ const ACADList = () => {
  
   const fetchAuthorityProfile = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/auth/me", {
+      const res = await axios.get("https://spm-1-u37a.onrender.com/api/auth/me", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -65,7 +65,7 @@ const ACADList = () => {
     const fetchStudents = async () => {
       setLoading(true);
       try {
-        const res = await axios.get("http://localhost:8000/api/acad", {
+        const res = await axios.get("https://spm-1-u37a.onrender.com/api/acad", {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
 
@@ -77,7 +77,7 @@ const ACADList = () => {
             studentId: s.user?.userID || "N/A",
             name: s.user?.name || "N/A",
             department: s.user?.department,
-            profileImage: s.user?.profileImage  ? `http://localhost:8000/imageUploads/uploads/${s.user.profileImage}`: "",
+            profileImage: s.user?.profileImage  ? `https://spm-1-u37a.onrender.com/imageUploads/uploads/${s.user.profileImage}`: "",
           })));
         }
       } catch (err) {

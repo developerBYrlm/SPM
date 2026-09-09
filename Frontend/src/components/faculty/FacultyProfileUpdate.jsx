@@ -24,7 +24,7 @@ const FacultyProfileUpdate = () => {
     const fetchStudent = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8000/api/faculty/faculty-view/${id}`,
+          `https://spm-1-u37a.onrender.com/api/faculty/faculty-view/${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -90,7 +90,7 @@ const FacultyProfileUpdate = () => {
 
     try {
       const res = await axios.post(
-        `http://localhost:8000/api/faculty/faculty-edit/${id}`,
+        `https://spm-1-u37a.onrender.com/api/faculty/faculty-edit/${id}`,
         formDataObj,
         {
           headers: {

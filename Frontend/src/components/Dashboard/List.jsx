@@ -16,7 +16,7 @@ const List = () => {
   
   const fetchAuthorityProfile = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/auth/me", {
+      const res = await axios.get("https://spm-1-u37a.onrender.com/api/auth/me", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -73,7 +73,7 @@ const List = () => {
     const fetchStudents = async () => {
       setLoading(true);
       try {
-        const res = await axios.get("http://localhost:8000/api/students", {
+        const res = await axios.get("https://spm-1-u37a.onrender.com/api/students", {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
 
@@ -86,7 +86,7 @@ const List = () => {
             name: s.user?.name || "N/A",
             department: s.user?.department || "N/A",
             specialExamCount: s.specialExamCount ?? 0,
-            profileImage: s.user?.profileImage  ? `http://localhost:8000/imageUploads/uploads/${s.user.profileImage}`: "",
+            profileImage: s.user?.profileImage  ? `https://spm-1-u37a.onrender.com/imageUploads/uploads/${s.user.profileImage}`: "",
           })));
         }
       } catch (err) {

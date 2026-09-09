@@ -15,7 +15,7 @@ const DownloadAdmit = () => {
   const getApplication = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8000/api/student-application/my-application",
+        "https://spm-1-u37a.onrender.com/api/student-application/my-application",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -39,7 +39,7 @@ const DownloadAdmit = () => {
   const downloadAdmit = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8000/api/student-application/download-admit-card",
+        "https://spm-1-u37a.onrender.com/api/student-application/download-admit-card",
         {
           responseType: "blob",
           headers: {

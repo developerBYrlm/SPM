@@ -16,7 +16,7 @@ const RoutineUpsh = () => {
 
     const fetchRoutine = async () => {
         try {
-            const res = await axios.get("http://localhost:8000/api/routine/latest");
+            const res = await axios.get("https://spm-1-u37a.onrender.com/api/routine/latest");
             if (res.data.success) {
                 setLatestRoutine(res.data.routine);
             }
@@ -39,7 +39,7 @@ const RoutineUpsh = () => {
 
         setLoading(true);
         try {
-            const res = await axios.post("http://localhost:8000/api/routine/upload", data, {
+            const res = await axios.post("https://spm-1-u37a.onrender.com/api/routine/upload", data, {
                 headers: { "Content-Type": "multipart/form-data" }
             });
             if (res.data.success) {
@@ -59,7 +59,7 @@ const RoutineUpsh = () => {
         if (!window.confirm("Are you sure you want to delete this routine? This will allow you to upload a new one.")) return;
 
         try {
-            const res = await axios.delete(`http://localhost:8000/api/routine/delete/${id}`);
+            const res = await axios.delete(`https://spm-1-u37a.onrender.com/api/routine/delete/${id}`);
             if (res.data.success) {
                 alert("Routine Deleted Successfully!");
                 setLatestRoutine(null); // UI theke routine remove hobe ebong upload form asbe
@@ -124,7 +124,7 @@ const RoutineUpsh = () => {
 
                         <div className="pdf-viewer-frame">
                             <iframe
-                                src={`http://localhost:8000/uploads/routines/${latestRoutine.filename}`}
+                                src={`https://spm-1-u37a.onrender.com/uploads/routines/${latestRoutine.filename}`}
                                 width="100%"
                                 height="600px"
                                 title="Exam Routine"

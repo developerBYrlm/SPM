@@ -23,7 +23,7 @@ const ForgotPassword = () => {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const API_BASE_URL = "http://localhost:8000/api/auth";
+  const API_BASE_URL = "https://spm-1-u37a.onrender.com/api/auth";
 
   useEffect(() => {
     if (step !== 2) return;

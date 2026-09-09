@@ -16,7 +16,7 @@ const StudentFacultyApplicationList = () => {
 const fetchFacultyProfile = async () => {
   try {
     const res = await axios.get(
-      "http://localhost:8000/api/auth/me",
+      "https://spm-1-u37a.onrender.com/api/auth/me",
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -81,7 +81,7 @@ const fetchApplications = async () => {
 
   try {
     const res = await axios.get(
-      "http://localhost:8000/api/student-application",
+      "https://spm-1-u37a.onrender.com/api/student-application",
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

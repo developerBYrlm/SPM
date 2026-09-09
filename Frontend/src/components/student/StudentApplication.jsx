@@ -14,7 +14,7 @@ const StudentApplication = () => {
         const token = localStorage.getItem("token");
         if (!token) return;
 
-        const res = await axios.get("http://localhost:8000/api/exam-schedule", {
+        const res = await axios.get("https://spm-1-u37a.onrender.com/api/exam-schedule", {
           headers: { Authorization: `Bearer ${token}` }
         });
 

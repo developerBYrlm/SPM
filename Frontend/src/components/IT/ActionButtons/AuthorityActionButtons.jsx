@@ -12,7 +12,7 @@ const AuthorityActionButtons = ({ id }) =>{
         if (confirmRemove) {
             try {
                 const response = await axios.delete(
-                    `http://localhost:8000/api/authority/authority-remove/${id}`,
+                    `https://spm-1-u37a.onrender.com/api/authority/authority-remove/${id}`,
                     {
                         headers: {
                             Authorization: `Bearer ${localStorage.getItem("token")}`,

@@ -21,7 +21,7 @@ const ExamDateTime = () => {
 
   const fetchExamSchedule = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/exam-schedule", {
+      const response = await fetch("https://spm-1-u37a.onrender.com/api/exam-schedule", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -69,7 +69,7 @@ const ExamDateTime = () => {
     setMessage("");
 
     try {
-      const response = await fetch("http://localhost:8000/api/exam-schedule", {
+      const response = await fetch("https://spm-1-u37a.onrender.com/api/exam-schedule", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -12,7 +12,7 @@ const getUserRole = (user) => {
 };
 
 const buildApplicationViewLink = (applicationId, targetType) => {
-  const baseUrl = process.env.FRONTEND_URL || "http://localhost:5173";
+  const baseUrl = process.env.FRONTEND_URL || "https://spm-1-u37a.onrender.com";
 
   if (targetType === "faculty") {
     return `${baseUrl}/faculty-dashboard/application/application-view/${applicationId}`;

@@ -9,7 +9,7 @@ const StudentApplicationButtons = ({ id, onDeleteSuccess }) => {
   const handleRemove = async () => {
     if (window.confirm("Are you sure you want to remove this application?")) {
       try {
-        const res = await axios.delete(`http://localhost:8000/api/student-application/application-remove/${id}`, {
+        const res = await axios.delete(`https://spm-1-u37a.onrender.com/api/student-application/application-remove/${id}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
         if (res.data.success) {

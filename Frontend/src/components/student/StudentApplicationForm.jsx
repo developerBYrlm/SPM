@@ -44,7 +44,7 @@ const ApplyMissedExam = () => {
         if (!token) return;
 
         // User Data Fetch
-        const resUser = await axios.get("http://localhost:8000/api/auth/me", {
+        const resUser = await axios.get("https://spm-1-u37a.onrender.com/api/auth/me", {
           headers: { Authorization: `Bearer ${token}` }
         });
         if (resUser.data.success) {
@@ -53,7 +53,7 @@ const ApplyMissedExam = () => {
         }
 
         // Exam Schedule Fetch & Check
-        const resSchedule = await axios.get("http://localhost:8000/api/exam-schedule", {
+        const resSchedule = await axios.get("https://spm-1-u37a.onrender.com/api/exam-schedule", {
           headers: { Authorization: `Bearer ${token}` }
         });
         if (resSchedule.data.success && resSchedule.data.schedule) {
@@ -154,7 +154,7 @@ const ApplyMissedExam = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/student-application/apply",
+        "https://spm-1-u37a.onrender.com/api/student-application/apply",
         data,
         {
           headers: {

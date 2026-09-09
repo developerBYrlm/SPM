@@ -26,7 +26,7 @@ const UpdateMissedExam = () => {
         if (!token) return;
 
         const res = await axios.get(
-          "http://localhost:8000/api/student-application/my-application",
+          "https://spm-1-u37a.onrender.com/api/student-application/my-application",
           {
             headers: {
               Authorization: `Bearer ${token}`
@@ -135,7 +135,7 @@ const UpdateMissedExam = () => {
 
     try {
       const res = await axios.put(
-        "http://localhost:8000/api/student-application/application-update",
+        "https://spm-1-u37a.onrender.com/api/student-application/application-update",
         data,
         {
           headers: {

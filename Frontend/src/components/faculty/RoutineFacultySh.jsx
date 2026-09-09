@@ -16,7 +16,7 @@ const RoutineFacultySh = () => {
 
     const fetchRoutine = async () => {
         try {
-            const res = await axios.get("http://localhost:8000/api/routine/latest");
+            const res = await axios.get("https://spm-1-u37a.onrender.com/api/routine/latest");
             if (res.data.success) {
                 setLatestRoutine(res.data.routine);
             }
@@ -100,7 +100,7 @@ const RoutineFacultySh = () => {
 
                         <div className="pdf-viewer-frame">
                             <iframe
-                                src={`http://localhost:8000/uploads/routines/${latestRoutine.filename}`}
+                                src={`https://spm-1-u37a.onrender.com/uploads/routines/${latestRoutine.filename}`}
                                 width="100%"
                                 height="600px"
                                 title="Exam Routine"

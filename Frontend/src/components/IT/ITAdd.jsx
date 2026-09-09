@@ -53,7 +53,7 @@ const ITAdd = () => {
       setSubmitting(true);
 
       const response = await axios.post(
-        "http://localhost:8000/api/students/add",
+        "https://spm-1-u37a.onrender.com/api/students/add",
         formDataObj,
         {
           headers: {

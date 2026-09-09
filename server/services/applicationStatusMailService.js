@@ -3,7 +3,7 @@ import User from "../models/User.js";
 import { sendEmail } from "./emailService.js";
 
 const buildStudentApplicationLink = () => {
-  const baseUrl = process.env.FRONTEND_URL || "http://localhost:5173";
+  const baseUrl = process.env.FRONTEND_URL || "https://spm-1-u37a.onrender.com";
   return `${baseUrl}/student-dashboard/current-application`;
 };
 

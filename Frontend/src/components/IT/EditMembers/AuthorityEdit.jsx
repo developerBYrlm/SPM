@@ -24,7 +24,7 @@ const AuthorityEdit = () => {
 
       try {
         const res = await axios.get(
-          `http://localhost:8000/api/authority/authority-view/${id}`,
+          `https://spm-1-u37a.onrender.com/api/authority/authority-view/${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -90,7 +90,7 @@ const AuthorityEdit = () => {
 
     try {
       const res = await axios.post(
-        `http://localhost:8000/api/authority/authority-edit/${id}`,
+        `https://spm-1-u37a.onrender.com/api/authority/authority-edit/${id}`,
         formDataObj,
         {
           headers: {

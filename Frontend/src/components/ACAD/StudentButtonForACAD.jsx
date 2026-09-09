@@ -36,7 +36,7 @@ const StudentButtonForACAD = ({ id }) =>{
     //     if(confirm){
     //         try{
     //             const response = await axios.delete (
-    //                 `http://localhost:8000/api/ deletePath /${ delete_types }`,
+    //                 `https://spm-1-u37a.onrender.com/api/ deletePath /${ delete_types }`,
     //                 {
     //                     headers: {
     //                         Authorization: `Bearere ${localStorage.getItem("token")}`,
