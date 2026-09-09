@@ -108,22 +108,6 @@ const DownloadAdmit = () => {
       </div>
     )}
 
-    <div className="admit-info-card">
-      <h3>PDF Includes</h3>
-
-      <ul>
-        <li>Student Information</li>
-        <li>Missed Exam Type</li>
-        <li>Missed Exam Date</li>
-        <li>Faculty Name & Faculty ID</li>
-        <li>Course Information</li>
-        <li>Special Exam Date</li>
-        <li>Application Deadline</li>
-        <li>Approved Authority Name</li>
-        <li>Approved Official Seal</li>
-      </ul>
-    </div>
-
   </div>
 
 </div>
