@@ -184,21 +184,28 @@ export const notifyStudentApplicationStatusChanged = async ({
       changedByUser?.userID ||
       "System";
 
-    await sendEmail({
-      to: student.email,
-      subject: `Application Status Updated`,
-      html: buildStudentStatusMailHtml({
-        application,
-        student,
-        changedBy,
-        changedRole,
-        changedStatus,
-      }),
-    });
+    try {
+      await sendEmail({
+        to: student.email,
+        subject: `Application Status Updated: ${changedStatus}`,
+        html: buildStudentStatusMailHtml({
+          application,
+          student,
+          changedBy,
+          changedRole,
+          changedStatus,
+        }),
+      });
 
-    console.log(
-      "Student status mail sent successfully"
-    );
+      console.log(
+        `Student status mail sent successfully to ${student.email}`
+      );
+    } catch (mailError) {
+      console.error(
+        `Student status mail failed for ${student.email}:`,
+        mailError
+      );
+    }
   } catch (error) {
     console.error(
       "notifyStudentApplicationStatusChanged Error:",

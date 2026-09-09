@@ -269,47 +269,42 @@ const sendPendingMailToRecipient = async ({
   }
 };
 
-export const notifyPendingApplicationUsers = async (applicationId) => {
+export const notifyPendingApplicationUsers = async (
+  applicationId
+) => {
   try {
-    console.log(
-      "notifyPendingApplicationUsers called:",
-      applicationId
-    );
-
-    const application = await StudentApplication.findById(
-      applicationId
-    );
+    const application =
+      await StudentApplication.findById(applicationId);
 
     if (!application) {
       console.log("Application not found");
       return;
     }
 
-    console.log(
-      "Application found:",
-      application._id
-    );
-
     if (application.authorityStatus === "Pending") {
       const authorityUsers =
         await getAuthorityRecipients(application);
 
       console.log(
-        "Authority users found:",
+        "Authority users:",
         authorityUsers.length
       );
 
       for (const authorityUser of authorityUsers) {
-        console.log(
-          "Sending authority mail to:",
-          authorityUser.email
-        );
+        try {
+          await sendPendingMailToRecipient({
+            application,
+            recipient: authorityUser,
+            targetType: "authority",
+          });
 
-        await sendPendingMailToRecipient({
-          application,
-          recipient: authorityUser,
-          targetType: "authority",
-        });
+          console.log(
+            "Authority mail sent:",
+            authorityUser.email
+          );
+        } catch (error) {
+          console.error(error);
+        }
       }
     }
 
@@ -317,27 +312,27 @@ export const notifyPendingApplicationUsers = async (applicationId) => {
       await getFacultyRecipients(application);
 
     console.log(
-      "Faculty recipients found:",
+      "Faculty recipients:",
       facultyRecipients.length
     );
 
     for (const item of facultyRecipients) {
-      console.log(
-        "Sending faculty mail to:",
-        item.user.email
-      );
+      try {
+        await sendPendingMailToRecipient({
+          application,
+          recipient: item.user,
+          targetType: "faculty",
+          facultyAcr: item.facultyAcr,
+        });
 
-      await sendPendingMailToRecipient({
-        application,
-        recipient: item.user,
-        targetType: "faculty",
-        facultyAcr: item.facultyAcr,
-      });
+        console.log(
+          "Faculty mail sent:",
+          item.user.email
+        );
+      } catch (error) {
+        console.error(error);
+      }
     }
-
-    console.log(
-      "notifyPendingApplicationUsers completed"
-    );
   } catch (error) {
     console.error(
       "notifyPendingApplicationUsers error:",
