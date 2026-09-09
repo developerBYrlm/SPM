@@ -116,7 +116,7 @@ const ACADEdit = () => {
     <div className="main-content">
       <div className="user-dashboard">
 
-        <h2 className="form-title">Update Student Information</h2>
+        <h2 className="form-title">Update ACAD Information</h2>
 
             <div className="back">
               

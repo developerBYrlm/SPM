@@ -141,7 +141,7 @@ const ApplicationApprove = () => {
     <div className="main-content">
       <div className="dashboard-container">
         <h2 className="dashboard-title">
-          Special Exam Applications
+          Special Exam Approve Applications
         </h2>
 
         <div className="search-box glass">

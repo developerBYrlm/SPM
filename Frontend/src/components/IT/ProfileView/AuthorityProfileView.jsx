@@ -47,7 +47,7 @@ const AuthorityProfileView = () => {
   return (
     <div className="main-content">
       <div className="dashboard-container">
-        <h2 className="dashboard-title">Faculty Details</h2>
+        <h2 className="dashboard-title">Authority Details</h2>
 
         <div className="back">
           <Link to="/it-dashboard/authority">
