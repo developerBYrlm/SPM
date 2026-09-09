@@ -1,4 +1,4 @@
-import StudentApplication from "../models/studentApplication.js";
+import StudentApplication from "../models/StudentApplication.js";
 import User from "../models/User.js";
 import { sendEmail } from "./emailService.js";
 
