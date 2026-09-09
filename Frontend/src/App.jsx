@@ -91,7 +91,7 @@ import DownloadAdmit from "./components/student/DownloadAdmit";
 
 
 import FacultyDashboard from "./pages/FacultyDashboard";
-import FacultyStudentView from "./components/faculty/facultyStudentView";
+import FacultyStudentView from "./components/faculty/FacultyStudentView";
 import FacultyList from "./components/faculty/facultyList";
 import StudentProfileView from "./components/faculty/StudentProfileView";
 import FacultyProfile from "./components/faculty/FacultyProfile";
