@@ -8,12 +8,12 @@ const userSchema = new mongoose.Schema({
 
     role: { 
         type: String, 
-        enum: ["authority", "student", "faculty", "ACAD"], 
+        enum: ["authority", "student", "faculty", "ACAD", "IT"], 
         required: true 
     },
     department: { 
         type: String, 
-        enum: ["CSE", "EEE", "BBA", "Law"], 
+        enum: ["CSE", "EEE", "BBA", "Law", "IT team"], 
         required: true 
     },
 

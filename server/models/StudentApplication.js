@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 
 const studentApplicationSchema = new mongoose.Schema({
-  user: { type: Schema.Types.ObjectId, ref: "User", required: true, unique: true },
+  user: { type: Schema.Types.ObjectId, ref: "User", required: true },
 
   studentId: { type: String, required: true },
   name: { type: String, required: true },
@@ -49,8 +49,15 @@ const studentApplicationSchema = new mongoose.Schema({
     default: "Pending"
   },
 
+  approvedByAuthority: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    default: null
+  },
+
+  specialExamCounted: { type: Boolean, default: false },
+
   createdAt: { type: Date, default: Date.now }
 });
 
-const StudentApplication =  mongoose.models.StudentApplication ||  mongoose.model("StudentApplication", studentApplicationSchema);
-export default StudentApplication;
+export default mongoose.model("StudentApplication", studentApplicationSchema);

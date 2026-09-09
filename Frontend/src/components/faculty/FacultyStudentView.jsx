@@ -15,7 +15,7 @@ const FacultyStudentView = () =>  {
 
   const fetchFacultyProfile = async () => {
     try {
-      const res = await fetch("https://spm-1-u37a.onrender.com/api/auth/me", {
+      const res = await fetch("http://localhost:8000/api/auth/me", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -34,7 +34,7 @@ const FacultyStudentView = () =>  {
   const fetchApplications = async () => {
     try {
       const res = await fetch(
-        "https://spm-1-u37a.onrender.com/api/student-application",
+        "http://localhost:8000/api/student-application",
         {
           headers: {
             Authorization: `Bearer ${token}`,

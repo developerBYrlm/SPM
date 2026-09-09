@@ -24,7 +24,7 @@ const EditStudent = () => {
 
       try {
         const res = await axios.get(
-          `https://spm-1-u37a.onrender.com/api/students/view/${id}`,
+          `http://localhost:8000/api/students/view/${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -91,7 +91,7 @@ const EditStudent = () => {
 
     try {
       const res = await axios.post(
-        `https://spm-1-u37a.onrender.com/api/students/edit/${id}`,
+        `http://localhost:8000/api/students/edit/${id}`,
         formDataObj,
         {
           headers: {
@@ -176,7 +176,7 @@ const EditStudent = () => {
               type="tel"
               name="phone"
               value={formData.phone}
-              placeholder="01xxxxxxxxx"
+              placeholder='01*********' maxLength={11}
               onInput={(e) =>
                 e.target.value = e.target.value.replace(/[^0-9]/g, '')
               }
@@ -188,6 +188,7 @@ const EditStudent = () => {
             <label>Password</label>
             <input
               type="password"
+              minLength={6}
               placeholder="Include letters, symbol & numbers"
               name="password"
               onChange={handleChange}
@@ -213,6 +214,6 @@ const EditStudent = () => {
       </div>
     </div>
   )
-}
+};
 
 export default EditStudent

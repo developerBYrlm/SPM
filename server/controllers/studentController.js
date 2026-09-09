@@ -1,10 +1,10 @@
-import Student from "../models/Student.js" 
+import Student from "../models/student.js" 
 import User from "../models/User.js"
 import bcrypt from "bcrypt"
 import multer from "multer"
 import path from "path"
   
-// add student,faculty,authority,acad into DB 
+// add student,faculty,authority,acad,it into DB 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "imageUploads/uploads")   
@@ -53,7 +53,8 @@ const addStudent = async (req, res) => {
       user: newUser._id,
       studentId,
       gender,
-      phone
+      phone,
+      specialExamCount: 0
     })
 
     res.status(201).json({
@@ -102,31 +103,44 @@ const getStudent = async (req, res) => {
   try {
     const student = await Student.findById(id).populate({
       path: "user",
-      match: { role: "student" },
-      select: "name email userID profileImage role department",
-    }); 
+      match: {
+        role: {
+          $regex: /^student$/i
+        }
+      },
+      select:
+        "name email userID profileImage role department"
+    });
 
     if (!student || !student.user) {
       return res.status(404).json({
         success: false,
-        error: "Student not found",
+        error: "Student not found"
       });
     }
 
+    const studentData = student.toObject();
+
     return res.status(200).json({
       success: true,
-      student: student,
+      student: {
+        ...studentData,
+        specialExamCount:
+          studentData.specialExamCount ?? 0
+      }
     });
-
   } catch (error) {
-    console.error(error);
+    console.error(
+      "Get student error:",
+      error
+    );
+
     return res.status(500).json({
       success: false,
-      error: "Get student server error",
+      error: "Get student server error"
     });
   }
 };
-
 // remove student from DB
 const removeStudent = async (req, res) => {
   try {

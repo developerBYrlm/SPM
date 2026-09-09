@@ -1,5 +1,4 @@
 import mongoose, { Schema } from "mongoose";
- 
 
 const studentSchema = new Schema(
   {
@@ -14,7 +13,7 @@ const studentSchema = new Schema(
       type: String,
       required: true,
       unique: true
-    }, 
+    },
 
     gender: {
       type: String,
@@ -25,10 +24,21 @@ const studentSchema = new Schema(
     phone: {
       type: String,
       required: true
+    },
+    
+    specialExamCount: {
+      type: Number,
+      default: 0,
+      min: 0
     }
   },
-  { timestamps: true }
+  {
+    timestamps: true
+  }
 );
 
-const Student = mongoose.models.Student || mongoose.model("Student", studentSchema);
+const Student =
+  mongoose.models.Student ||
+  mongoose.model("Student", studentSchema);
+
 export default Student;

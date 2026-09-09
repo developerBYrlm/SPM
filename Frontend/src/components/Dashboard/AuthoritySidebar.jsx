@@ -51,6 +51,13 @@ const AuthoritySidebar = () => {
 
 
           <li>
+            <NavLink to="/authority-dashboard/date-time" className="sidebar-item custom-hover">
+              <i className="fa-solid fa-calendar-days"></i>
+              <span>Date & Time</span>
+            </NavLink>
+          </li>
+
+          <li>
             <NavLink to="/authority-dashboard/students" className="sidebar-item custom-hover">
               <i className="fa-solid fa-user-graduate"></i>
               <span>Students</span>

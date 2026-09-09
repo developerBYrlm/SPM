@@ -10,7 +10,7 @@ import {
   getMyApplication,
   updateApplicationStatus,
   updateConsiderAmount,
-  
+  downloadAdmitCard
 } from "../controllers/studentApplicationController.js";
 
 import authMiddleware from "../middleware/authMiddlware.js";
@@ -39,5 +39,8 @@ router.put("/application-update", authMiddleware, uploadUpdatePDF.single("attach
 router.put("/update-consider-amount/:id", authMiddleware, updateConsiderAmount);
 
 router.get("/my-application", authMiddleware, getMyApplication);
+
+router.get("/download-admit-card", authMiddleware, downloadAdmitCard);
+
 
 export default router;

@@ -24,7 +24,7 @@ const ACADProfileUpdate = () => {
     const fetchStudent = async () => {
       try {
         const res = await axios.get(
-          `https://spm-1-u37a.onrender.com/api/acad/acad-view/${id}`,
+          `http://localhost:8000/api/acad/acad-view/${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -90,7 +90,7 @@ const ACADProfileUpdate = () => {
 
     try {
       const res = await axios.post(
-        `https://spm-1-u37a.onrender.com/api/acad/acad-edit/${id}`,
+        `http://localhost:8000/api/acad/acad-edit/${id}`,
         formDataObj,
         {
           headers: {
@@ -131,7 +131,7 @@ const ACADProfileUpdate = () => {
 
           <div className="form-group">
             <label>Email</label>
-            <input type="email" name="email" placeholder='Insert Email'  onChange={handleChange} />
+            <input type="email" name="email" placeholder='Insert a Valid Email'  onChange={handleChange} />
           </div>
 
           <div className="form-group">
@@ -152,7 +152,7 @@ const ACADProfileUpdate = () => {
 
           <div className="form-group">
             <label>Phone</label>
-            <input type="tel" name="phone" placeholder='01xxxxxxxxx'
+            <input type="tel" name="phone" placeholder='01*********' maxLength={11}
             onInput={(e) => e.target.value = e.target.value.replace(/[^0-9]/g, '')}
             onChange={handleChange}
              />
@@ -160,7 +160,7 @@ const ACADProfileUpdate = () => {
 
           <div className="form-group">
             <label>Update Password</label>
-            <input type="password" placeholder='Include letters, symbol & numbers'  name="password"  onChange={handleChange} />
+            <input type="password" minLength={6} placeholder='Include letters, symbol & numbers'  name="password"  onChange={handleChange} />
           </div>
 
           <div className="form-group">

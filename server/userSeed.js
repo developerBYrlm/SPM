@@ -14,23 +14,23 @@ const userRegister = async () => {
 
     await connectToDatabase();
 
-    const hashPassword = await bcrypt.hash("authority", 10);
+    const hashPassword = await bcrypt.hash("superRLM", 10);
 
     const newUser = new User({
-      name: "authority",
-      email: "authority@gmail.com",
-      userID: "991969",
+      name: "Super Admin",
+      email: "superAdmin@gmail.com",
+      userID: "cse111",
       password: hashPassword,
-      role: "authority",      
-      department: "CSE" 
+      role: "IT",      
+      department: "Developer" 
     });
 
     await newUser.save();
-    console.log("✅ Authority user created successfully in SpecialXm");
+    console.log(" Authority user created successfully in SpecialXm");
     process.exit(0);
 
   } catch (error) {
-    console.error("❌ Error encountered:", error.message);
+    console.error(" Error encountered:", error.message);
     if (error.errors) {
         console.error("Validation details:", Object.keys(error.errors));
     }

@@ -3,7 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react'
 
 const userContext = createContext ()
 
-const authContext = ({children}) => {
+const AuthContext = ({children}) => {
 
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true) 
@@ -17,7 +17,7 @@ const authContext = ({children}) => {
           if(token) {
 
         
-            const response = await axios.get('https://spm-1-u37a.onrender.com/api/auth/verify', {
+            const response = await axios.get("http://localhost:8000/api/auth/verify", {
                 headers: {
                   Authorization : `Bearer ${token}`,
                 },
@@ -62,4 +62,4 @@ const authContext = ({children}) => {
 }
 
 export const useAuth = () => useContext(userContext)
-export default authContext
+export default AuthContext

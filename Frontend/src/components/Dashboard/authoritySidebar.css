@@ -218,3 +218,132 @@
 }
 
 
+/* ==========================================
+   TABLET
+========================================== */
+@media (max-width: 992px) {
+
+  .sidebar {
+    width: 220px;
+  }
+
+  .sidebar-titlee {
+    font-size: 38px;
+  }
+
+  .sidebar-title,
+  .sidebar-titles {
+    font-size: 20px;
+  }
+
+  .sidebar-item {
+    font-size: 16px;
+  }
+
+  .logout-btn {
+    font-size: 18px;
+  }
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+@media (max-width: 768px) {
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    border-radius: 0;
+    padding: 20px 15px;
+  }
+
+  .sidebar-titlee {
+    font-size: 32px;
+    letter-spacing: 1px;
+  }
+
+  .sidebar-title,
+  .sidebar-titles {
+    font-size: 18px;
+  }
+
+  .sidebar-welcome .welcome-text {
+    font-size: 18px;
+  }
+
+  .sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .sidebar-item {
+    padding: 10px 12px;
+    font-size: 15px;
+    gap: 10px;
+  }
+
+  .sidebar-item i {
+    min-width: 20px;
+    font-size: 15px;
+  }
+
+  .logout-section {
+    margin-top: 15px;
+  }
+
+  .logout-btn {
+    font-size: 16px;
+    padding: 12px;
+  }
+
+  .developer {
+    position: static;
+    transform: none;
+    text-align: center;
+    margin-top: 15px;
+  }
+
+  .developer:hover {
+    transform: none;
+  }
+}
+
+
+/* ==========================================
+   SMALL MOBILE
+========================================== */
+@media (max-width: 480px) {
+
+  .sidebar {
+    padding: 15px 10px;
+  }
+
+  .sidebar-titlee {
+    font-size: 26px;
+  }
+
+  .sidebar-title,
+  .sidebar-titles {
+    font-size: 16px;
+  }
+
+  .sidebar-welcome .welcome-text {
+    font-size: 16px;
+  }
+
+  .sidebar-item {
+    font-size: 14px;
+    padding: 9px 10px;
+  }
+
+  .logout-btn {
+    font-size: 14px;
+  }
+
+  .developer {
+    font-size: 11px;
+  }
+}

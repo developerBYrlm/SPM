@@ -18,7 +18,7 @@ const StudentProfile = () =>{
 
       try {
         const response = await axios.get(
-          `https://spm-1-u37a.onrender.com/api/students/view/${id}`,
+          `http://localhost:8000/api/students/view/${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -64,7 +64,7 @@ const StudentProfile = () =>{
         </div>
           <div className="ImageFrame">
             <img
-              src={`https://spm-1-u37a.onrender.com/imageUploads/uploads/${student.user.profileImage}`}
+              src={`http://localhost:8000/imageUploads/uploads/${student.user.profileImage}`}
               alt="Student"
              />
            </div>
@@ -76,6 +76,15 @@ const StudentProfile = () =>{
             <p><strong>Email:</strong> {student.user.email}</p>
             <p><strong>Phone:</strong> {student.phone}</p>
             <p><strong>Gender:</strong> {student.gender}</p>
+            <p className="special-exam-count">
+              <strong>
+                Approved Special Exam Count: 
+              </strong>
+              
+              <span>
+                {student.specialExamCount ?? 0}
+              </span>
+            </p>
            </div>
           </div>
         </div>

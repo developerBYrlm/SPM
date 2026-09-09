@@ -129,9 +129,16 @@ background: rgba(0, 0, 0, 0.164);
 }
 
 /* Select dropdown text */
-.form-group select option {
-  color: #000;
+
+.submit-btn i {
+  font-size: 15px;
+  margin-left: 10px;
+  vertical-align: middle;
+  position: relative;
+  top:-3px;
 }
+
+
 
 /* =====================================================
    SUBMIT BUTTON
@@ -418,4 +425,427 @@ background: rgba(0, 0, 0, 0.164);
 
   cursor: pointer;
   color: #ffffff;
+}
+
+
+
+/* exam date and time */
+.exam-date-form {
+  width: 100%;
+}
+
+.exam-textarea-group {
+  grid-column: span 2;
+}
+
+.exam-textarea-group textarea {
+  width: 100%;
+  min-height: 130px;
+
+  padding: 14px;
+  border-radius: 16px;
+
+  background: rgba(7, 7, 7, 0.221);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+
+  color: #ffffff;
+  font-size: 18px;
+  resize: vertical;
+  outline: none;
+}
+
+.exam-textarea-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.exam-message {
+  width: 100%;
+  text-align: center;
+
+  margin-bottom: 18px;
+  padding: 12px 18px;
+
+  border-radius: 14px;
+  background: rgba(0, 170, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+@media (max-width: 992px) {
+  .exam-textarea-group {
+    grid-column: span 1;
+  }
+
+  .exam-textarea-group textarea {
+    font-size: 15px;
+  }
+}
+
+/* forgot password css */
+/* =====================================================
+   FORGOT PASSWORD OTP FLOW
+   ===================================================== */
+
+.forgot-page-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.forgot-card {
+  width: 430px;
+  min-height: 300px;
+  padding: 38px 40px;
+  position: relative;
+}
+
+.forgot-header-row {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.forgot-title {
+  margin-bottom: 22px;
+}
+
+.forgot-back-btn {
+  position: absolute;
+  left: 0;
+  top: 2px;
+
+  border: none;
+  outline: none;
+  background: transparent;
+
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 22px;
+  cursor: pointer;
+
+  transition: 0.3s ease;
+}
+
+.forgot-back-btn:hover {
+  color: #ffffff;
+  transform: translateX(-5px);
+}
+
+.forgot-back-btn:active {
+  transform: scale(0.9);
+}
+
+.forgot-form {
+  width: 270px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  padding: 27px;
+  border-radius: 22px;
+
+  background: rgba(255, 255, 255, 0);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.forgot-input-group {
+  width: 100%;
+}
+
+.forgot-input-group label {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.forgot-input-group input {
+  width: 100%;
+  height: 34px;
+
+  padding: 7px 13px;
+  border-radius: 13px;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  background: rgba(7, 7, 7, 0.221);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  color: #ffffff;
+}
+
+.forgot-input-group input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.forgot-submit-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px 0;
+
+  border-radius: 26px;
+  font-size: 19px;
+  grid-column: span 1;
+}
+
+.forgot-message {
+  width: 100%;
+  padding: 10px 12px;
+
+  border-radius: 13px;
+  text-align: center;
+
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.forgot-message.success {
+  color: #ffffff;
+  background: rgba(33, 178, 94, 0.25);
+  border: 1px solid rgba(80, 255, 150, 0.35);
+}
+
+.forgot-message.error {
+  color: #ffffff;
+  background: rgba(255, 70, 70, 0.25);
+  border: 1px solid rgba(255, 100, 100, 0.45);
+}
+
+.forgot-timer {
+  width: 100%;
+  text-align: center;
+
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.forgot-timer b {
+  color: #49d6ff;
+}
+
+.otp-expired-text {
+  color: #ff8a8a;
+}
+
+.forgot-secondary-btn {
+  width: 100%;
+  padding: 11px 0;
+
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 25px;
+
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.forgot-secondary-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: translateY(-3px);
+}
+
+.forgot-secondary-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.forgot-password-wrapper {
+  width: 100%;
+}
+
+.forgot-password-wrapper input {
+  padding-right: 42px;
+}
+
+.forgot-password-wrapper i {
+  right: 13px;
+  font-size: 14px;
+}
+
+.forgot-login-link {
+  margin-top: 17px;
+  text-align: center;
+}
+
+.forgot-login-link a {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.forgot-login-link a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+
+/* ==========================================
+   TABLET
+========================================== */
+@media (max-width: 992px) {
+
+  .main-content {
+    margin-left: 0;
+    padding: 15px;
+  }
+
+  .user-dashboard {
+    padding: 25px;
+  }
+
+  .glass-form {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  .submit-btn,
+  .add-btn,
+  .course-box,
+  .glass-form .form-title {
+    grid-column: span 1;
+  }
+
+  .form-group textarea {
+    width: 100%;
+  }
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+@media (max-width: 768px) {
+
+  .main-content,
+  .main-content-forgot {
+    margin-left: 0;
+    padding: 10px;
+    width: 100%;
+  }
+
+  .user-dashboard {
+    width: 100%;
+    padding: 20px 15px;
+    border-radius: 18px;
+  }
+
+  .form-title {
+    font-size: 22px;
+    margin-bottom: 18px;
+  }
+
+  .glass-form {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 15px;
+  }
+
+  .form-group label,
+  .course-box label {
+    font-size: 16px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .course-title,
+  .form-group textarea {
+    font-size: 15px;
+    width: 100%;
+  }
+
+  .course-box {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .course-box button {
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  .submit-btn,
+  .add-btn {
+    grid-column: span 1;
+    font-size: 18px;
+    padding: 12px;
+  }
+}
+
+
+/* ==========================================
+   SMALL MOBILE
+========================================== */
+@media (max-width: 480px) {
+
+  .user-dashboard {
+    padding: 15px 10px;
+  }
+
+  .form-title {
+    font-size: 18px;
+  }
+
+  .glass-form {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .form-group label,
+  .course-box label {
+    font-size: 14px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .course-title,
+  .form-group textarea {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .submit-btn,
+  .add-btn {
+    font-size: 16px;
+  }
+}
+
+
+/* ==========================================
+   EXTRA SMALL DEVICES
+========================================== */
+@media (max-width: 320px) {
+
+  .form-title {
+    font-size: 16px;
+  }
+
+  .submit-btn,
+  .add-btn {
+    font-size: 14px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .course-title,
+  .form-group textarea {
+    font-size: 13px;
+  }
 }

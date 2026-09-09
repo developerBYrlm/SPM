@@ -1,0 +1,323 @@
+/* ==========================================
+   ADMIT CARD PAGE
+========================================== */
+
+.admit-main-content {
+  margin-left: 265px;
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 40px 30px;
+}
+
+/* ==========================================
+   ADMIT CARD GLASS CONTAINER
+========================================== */
+
+.admit-container {
+  width: 100%;
+  max-width: 700px;
+
+  padding: 45px;
+
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+
+  text-align: center;
+
+  animation: fadeIn 0.5s ease;
+}
+
+/* ==========================================
+   TITLE
+========================================== */
+
+.admit-title {
+  font-size: 38px;
+  font-weight: 700;
+  color: #ffffff;
+
+  margin-bottom: 15px;
+}
+
+.admit-subtitle {
+  font-size: 18px;
+  color: rgba(255,255,255,0.8);
+
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+
+/* ==========================================
+   STATUS BOX
+========================================== */
+
+.admit-status {
+  padding: 18px;
+  border-radius: 18px;
+
+  font-size: 20px;
+  font-weight: 600;
+
+  margin-bottom: 25px;
+}
+
+.admit-status.approved {
+  background: rgba(0, 255, 102, 0.12);
+
+  border: 1px solid rgba(0,255,102,0.4);
+
+  color: #00ff66;
+
+  box-shadow:
+    0 0 10px rgba(0,255,102,0.4),
+    inset 0 0 10px rgba(0,255,102,0.15);
+}
+
+.admit-status.pending {
+  background: rgba(255, 217, 0, 0.12);
+
+  border: 1px solid rgba(255,217,0,0.35);
+
+  color: #ffe600;
+
+  box-shadow:
+    0 0 10px rgba(255,217,0,0.3),
+    inset 0 0 10px rgba(255,217,0,0.12);
+}
+
+/* ==========================================
+   DOWNLOAD BUTTON
+========================================== */
+
+.download-btn {
+  width: 100%;
+
+  padding: 15px;
+
+  border: none;
+  border-radius: 50px;
+
+  background: linear-gradient(
+      135deg,
+      #00b7ff,
+      #006eff
+  );
+
+  color: white;
+
+  font-size: 22px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.3s ease;
+}
+
+.download-btn i {
+  margin-right: 10px;
+}
+
+.download-btn:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+      0 12px 25px rgba(0,0,0,0.3),
+      0 0 12px rgba(0,183,255,0.8);
+}
+
+.download-btn:active {
+  transform: scale(0.96);
+}
+
+.download-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ==========================================
+   INFO CARD
+========================================== */
+
+.admit-info-card {
+  margin-top: 25px;
+
+  padding: 18px;
+
+  text-align: left;
+
+  background: rgba(255,255,255,0.06);
+
+  border-radius: 18px;
+
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.admit-info-card h3 {
+  color: #00b7ff;
+  font-size: 22px;
+
+  margin-bottom: 15px;
+}
+
+.admit-info-card ul {
+  padding-left: 20px;
+}
+
+.admit-info-card li {
+  color: white;
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+
+/* ==========================================
+   LOADING
+========================================== */
+
+.admit-loading {
+  margin-left: 265px;
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.admit-loader-box {
+  text-align: center;
+}
+
+.admit-loader-text {
+  color: white;
+  margin-top: 15px;
+  font-size: 18px;
+}
+
+.admit-spinner {
+  width: 60px;
+  height: 60px;
+
+  border: 4px solid transparent;
+  border-top: 4px solid #00b7ff;
+  border-right: 4px solid #00b7ff;
+
+  border-radius: 50%;
+
+  animation: spin 1s linear infinite;
+
+  box-shadow: 0 0 20px #00b7ff;
+}
+
+/* ==========================================
+   ANIMATION
+========================================== */
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 992px) {
+
+  .admit-main-content,
+  .admit-loading {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .admit-container {
+    padding: 30px;
+  }
+
+  .admit-title {
+    font-size: 30px;
+  }
+
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 768px) {
+
+  .admit-container {
+    padding: 25px 20px;
+  }
+
+  .admit-title {
+    font-size: 24px;
+  }
+
+  .admit-subtitle {
+    font-size: 15px;
+  }
+
+  .admit-icon {
+    font-size: 65px;
+  }
+
+  .download-btn {
+    font-size: 18px;
+  }
+
+  .admit-status {
+    font-size: 16px;
+  }
+
+  .admit-info-card li {
+    font-size: 14px;
+  }
+
+}
+
+/* ==========================================
+   SMALL MOBILE
+========================================== */
+
+@media (max-width: 480px) {
+
+  .admit-title {
+    font-size: 20px;
+  }
+
+  .download-btn {
+    font-size: 16px;
+    padding: 12px;
+  }
+
+  .admit-info-card h3 {
+    font-size: 18px;
+  }
+
+}
+

@@ -18,6 +18,8 @@ import AuthoritySummary from "./components/Dashboard/AuthoritySummary";
 
 import RoutineUpSh from "./components/Dashboard/RoutineUpSh";
 
+import ExamDateTime from "./components/Dashboard/ExamDateTime";
+
 import ApplicationApprove from "./components/Dashboard/Application/ApplicationApprove";
 import ApplicationPending from "./components/Dashboard/Application/ApplicationPending";
 import ApplicationReject from "./components/Dashboard/Application/ApplicationReject";
@@ -43,6 +45,35 @@ import EditACAD from "./components/Dashboard/EditActionButton/EditACAD";
 //-------------------------------------------------------------------------------------------------------------------------------------------
 
 
+import ITDashboard from "./pages/ITDashboard";
+import ITSummary from "./components/IT/ITSummary";
+import ITAdd from "./components/IT/ITAdd";
+import ITProfile from "./components/IT/ITProfile";
+import ITProfileUpdate from "./components/IT/ITProfileUpdate";
+
+import StudentList from "./components/IT/StudentList";
+import FacultyListt from "./components/IT/FacultyList";
+import ACADList from "./components/IT/ACADList";
+import AuthorityList from "./components/IT/AuthorityList";
+import ITList from "./components/IT/ITList";
+
+import StudentProfileVieww from "./components/IT/ProfileView/StudentProfileView";
+import FacultyProfileView from "./components/IT/ProfileView/FacultyProfileView";
+import ACADProfileView from "./components/IT/ProfileView/ACADProfileView";
+import AuthorityProfileView from "./components/IT/ProfileView/AuthorityProfileView";
+import ITProfileView from "./components/IT/ProfileView/ITProfileView";
+
+import StudentEditt from "./components/IT/EditMembers/StudentEdit";
+import FacultyEditt from "./components/IT/EditMembers/FacultyEdit";
+import ACADEditt from "./components/IT/EditMembers/ACADEdit";
+import AuthorityEdit from "./components/IT/EditMembers/AuthorityEdit";
+import ITEdit from "./components/IT/EditMembers/ITEdit";
+
+import ApplicationManage from "./components/IT/ApplicationManage";
+
+//-------------------------------------------------------------------------------------------------------------------------------------------
+
+
 import StudentDashboard from "./pages/StudentDashboard";
 import StudentApplication from "./components/student/StudentApplication";
 import StudentApplicationForm from "./components/student/StudentApplicationForm";
@@ -52,13 +83,15 @@ import MyApplication from "./components/student/MyApplication";
 import UpdateStudentApplications from "./components/student/UpdateStudentApplications";
 import StudentFacultyView from "./components/student/StudentFacultyView";
 
+import DownloadAdmit from "./components/student/DownloadAdmit";
+
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------
 
 
 import FacultyDashboard from "./pages/FacultyDashboard";
-import FacultyStudentView from "./components/faculty/FacultyStudentView";
+import FacultyStudentView from "./components/faculty/facultyStudentView";
 import FacultyList from "./components/faculty/facultyList";
 import StudentProfileView from "./components/faculty/StudentProfileView";
 import FacultyProfile from "./components/faculty/FacultyProfile";
@@ -102,6 +135,8 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/forgot" element={<ForgotPassword />} />
 
+//-------------------------------------------------------------------------------------------------------------------------------------------
+
         <Route path="/authority-dashboard" element={
           <PrivateRoutes>
             <RoleBaseRoutes requiredRole={["authority"]}>
@@ -112,13 +147,15 @@ export default function App() {
           <Route index element={<AuthoritySummary />} />
           <Route path="add-users" element={<Add />} />
           <Route path="students-routine" element={<RoutineUpSh />} />
-
+          <Route path="date-time" element={<ExamDateTime />} />
+          
           <Route path="students-applications-approve" element={<ApplicationApprove />} />
           <Route path="students-applications-pending" element={<ApplicationPending/>} />
           <Route path="students-applications-rejected" element={<ApplicationReject />} />
 
           <Route path="authority-profile/:id" element={<AuthorityProfile />} />
           <Route path="authority-profile-update/:id" element={<AuthorityProfileUpdate />} />
+
           <Route path="students-applications" element={<ApplicationList/>} />
           <Route path="application/application-view/:id" element={<ApplicationView />} />
           
@@ -133,8 +170,51 @@ export default function App() {
           <Route path="acad" element={<Alist />} />
           <Route path="acad/acad-view/:id" element={<AActionButton />} />
           <Route path="acad/acad-edit/:id" element={<EditACAD />} />
+
+          
+          
         </Route>
 
+//-------------------------------------------------------------------------------------------------------------------------------------------
+
+        <Route path="/it-dashboard" element={
+          <PrivateRoutes>
+            <RoleBaseRoutes requiredRole={["IT"]}>
+              <ITDashboard/>
+            </RoleBaseRoutes>
+          </PrivateRoutes>         
+        }>
+          <Route index element={<ITSummary />} />
+          <Route path="add-users" element={<ITAdd />} />
+
+          <Route path="it-profile/:id" element={<ITProfile />} />
+          <Route path="it-profile-update/:id" element={<ITProfileUpdate/>} />
+          <Route path="students-applications" element={<ApplicationList/>} />
+          
+          <Route path="students" element={<StudentList />} />
+          <Route path="students/view/:id" element={<StudentProfileVieww />} />
+          <Route path="students/edit/:id" element={<StudentEditt />} />
+
+          <Route path="students-applicationss" element={<ApplicationManage/>} />
+
+          <Route path="faculty" element={<FacultyListt />} />
+          <Route path="faculty/faculty-view/:id" element={<FacultyProfileView/>} />
+          <Route path="faculty/faculty-edit/:id" element={<FacultyEditt />} />
+
+          <Route path="acad" element={<ACADList />} />
+          <Route path="acad/acad-view/:id" element={<ACADProfileView />} />
+          <Route path="acad/acad-edit/:id" element={<ACADEditt />} />
+
+          <Route path="authority" element={<AuthorityList />} />
+          <Route path="authority/authority-view/:id" element={<AuthorityProfileView/>} />
+          <Route path="authority/authority-edit/:id" element={<AuthorityEdit />} />
+          
+          <Route path="it" element={<ITList />} />
+          <Route path="it/it-view/:id" element={<ITProfileView/>} />
+          <Route path="it/it-edit/:id" element={<ITEdit />} />
+          
+          
+        </Route>
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------
@@ -152,6 +232,7 @@ export default function App() {
           <Route path="student-profile/:id" element={<StudentProfile/>} />
           <Route path="student-profile-update/:id" element={<StudentProfileUpdate />} />
           <Route path="student-faculty-view" element={<StudentFacultyView />} />
+          <Route path="download-admit" element={<DownloadAdmit />} />
           
         </Route>
 

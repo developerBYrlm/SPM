@@ -368,3 +368,191 @@ body {
     transform: scale(0.95);
     box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
 }
+
+/* Popup Overlay */
+.loading-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Popup Box */
+.loading-popup-box {
+    background: #ffffff00;
+    padding: 30px 40px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.loading-popup-box p {
+    margin-top: 15px;
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: 500;
+}
+
+/* Simple Spinner Animation */
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f300;
+    border-top: 4px solid #3498db; /* Spinner color */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ==========================================
+   TABLET (768px)
+   ========================================== */
+@media (max-width: 768px) {
+
+    body {
+        padding: 20px;
+    }
+
+    .wrapper {
+        width: 100%;
+        max-width: 550px;
+        padding: 40px 30px;
+    }
+
+    .wrapper h1 {
+        font-size: 24px;
+    }
+
+    .wrapper h2 {
+        font-size: 32px;
+    }
+
+    .input-box input {
+        font-size: 18px;
+    }
+
+    .wrapper .button {
+        font-size: 20px;
+    }
+
+    .text {
+        font-size: 16px;
+        width: 100%;
+    }
+}
+
+
+/* ==========================================
+   MOBILE (576px)
+   ========================================== */
+@media (max-width: 576px) {
+
+    body {
+        padding: 15px;
+        align-items: center;
+    }
+
+    .wrapper {
+        width: 100%;
+        padding: 30px 20px;
+        border-radius: 20px;
+    }
+
+    .wrapper h1 {
+        font-size: 20px;
+    }
+
+    .wrapper h2 {
+        font-size: 26px;
+    }
+
+    .wrapper .input-box {
+        height: 50px;
+        margin: 18px 0;
+    }
+
+    .input-box input {
+        font-size: 16px;
+        padding: 0 15px;
+    }
+
+    .input-box i {
+        right: 15px;
+        font-size: 14px;
+    }
+
+    .wrapper .button {
+        height: 50px;
+        font-size: 18px;
+    }
+
+    .remember-forgot {
+        font-size: 13px !important;
+    }
+
+    .text {
+        width: 100%;
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .popup-box {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .popup-box h2 {
+        font-size: 22px;
+    }
+
+    .popup-box p {
+        font-size: 14px;
+    }
+
+}
+
+
+/* ==========================================
+   SMALL MOBILE (375px)
+   ========================================== */
+@media (max-width: 375px) {
+
+    .wrapper {
+        padding: 25px 15px;
+    }
+
+    .wrapper h1 {
+        font-size: 18px;
+    }
+
+    .wrapper h2 {
+        font-size: 22px;
+    }
+
+    .input-box input {
+        font-size: 14px;
+    }
+
+    .wrapper .button {
+        font-size: 16px;
+    }
+
+    .remember-forgot {
+        font-size: 12px !important;
+    }
+
+    .text {
+        font-size: 13px;
+    }
+
+}

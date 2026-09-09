@@ -1,75 +1,137 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "../Dashboard/authoritySummary.css";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import '../Dashboard/authoritySummary.css';
 
 const StudentApplication = () => {
   const sId = localStorage.getItem("studentId");
+  
+  const [isDeadlinePassed, setIsDeadlinePassed] = useState(false);
+  const [showDeadlinePopup, setShowDeadlinePopup] = useState(false);
+
+  useEffect(() => {
+    const fetchSchedule = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) return;
+
+        const res = await axios.get("http://localhost:8000/api/exam-schedule", {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
+        if (res.data.success && res.data.schedule) {
+          const deadline = new Date(res.data.schedule.applicationDeadlineDate);
+          deadline.setHours(23, 59, 59, 999);
+          
+          if (new Date() > deadline) {
+            setIsDeadlinePassed(true);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to fetch exam schedule", err);
+      }
+    };
+    fetchSchedule();
+  }, []);
+
+  const handleNewApplicationClick = (e) => {
+    if (isDeadlinePassed) {
+      e.preventDefault(); 
+      setShowDeadlinePopup(true); 
+    }
+  };
 
   return (
     <div>
+      {showDeadlinePopup && (
+        <div className="popup-overlay">
+          <div className="popup-box">
+            <h2 style={{color: "red"}}>Application Date is Over!</h2>
+            <p>You can no longer submit a new application.</p>
+            <button onClick={() => setShowDeadlinePopup(false)} style={{padding: '10px 20px', marginTop: '15px', cursor: 'pointer'}}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className="main-content">
         <div className="dashboard-container">
           <h3 className="dashboard-title">Student Dashboard</h3>
-
-          <div className="user-design">
-
-            <Link
-              to="/student-dashboard/new-application"
+          <div className='user-design'>
+            <a
+              href="/student-dashboard/new-application"
+              onClick={handleNewApplicationClick}
               style={{ textDecoration: "none" }}
             >
-              <button className="user">
+              <button
+                className="user"
+                style={{ textDecoration: "none", borderBottom: "none" }}
+              >
                 New Applications
               </button>
-            </Link>
-
-            <Link
-              to="/student-dashboard/update-application"
+            </a>
+            <a
+              href="/student-dashboard/update-application"
               style={{ textDecoration: "none" }}
             >
-              <button className="user">
+              <button
+                className="user"
+                style={{ textDecoration: "none", borderBottom: "none" }}
+              >
                 Update Applications
               </button>
-            </Link>
-
-            <Link
-              to="/student-dashboard/current-application"
+            </a>
+            <a
+              href="/student-dashboard/current-application"
               style={{ textDecoration: "none" }}
             >
-              <button className="user">
+              <button
+                className="user"
+                style={{ textDecoration: "none", borderBottom: "none" }}
+              >
                 Application Status
               </button>
-            </Link>
-
-            <Link
-              to={sId ? `/student-dashboard/student-profile/${sId}` : "#"}
+            </a>
+            <a
+              href="/student-dashboard/download-admit"
+              style={{ textDecoration: "none" }}
+            >
+              <button
+                className="user"
+                style={{ textDecoration: "none", borderBottom: "none" }}
+              >
+                Download Admit
+              </button>
+            </a>
+            <a
+              href={sId ? `/student-dashboard/student-profile/${sId}` : "#"}
               style={{ textDecoration: "none" }}
             >
               <button
                 className="user"
                 disabled={!sId}
+                style={{ textDecoration: "none", borderBottom: "none" }}
               >
                 Profile
               </button>
-            </Link>
-
+            </a>
             {!sId && (
               <p style={{ color: "red", fontSize: "12px" }}>
                 Profile ID missing. Please Re-login.
               </p>
             )}
-
-            <Link
-              to={sId ? `/student-dashboard/student-profile-update/${sId}` : "#"}
+            <a
+              href={sId ? `/student-dashboard/student-profile-update/${sId}` : "#"}
               style={{ textDecoration: "none" }}
             >
               <button
                 className="user"
                 disabled={!sId}
+                style={{ textDecoration: "none", borderBottom: "none" }}
               >
                 Update Profile
               </button>
-            </Link>
-
+            </a>
             {!sId && (
               <p style={{ color: "red", fontSize: "12px" }}>
                 Profile ID missing. Please Re-login.

@@ -47,7 +47,7 @@ const Add = () => {
 
     try {
       const res = await axios.post(
-        "https://spm-1-u37a.onrender.com/api/students/add",
+        "http://localhost:8000/api/students/add",
         formDataObj,
         {
           headers: {
@@ -88,7 +88,7 @@ const Add = () => {
 
           <div className="form-group">
             <label>Email</label>
-            <input type="email" name="email" placeholder='Insert Email' required 
+            <input type="email" name="email" placeholder='Insert a Valid Email' required 
             onInput={(e) => e.target.value = e.target.value.replace(/[^a-z0-9@.\s]/g, '')}
             onChange={handleChange} />
           </div>
@@ -118,7 +118,9 @@ const Add = () => {
 
           <div className="form-group">
             <label>Phone</label>
-            <input type="tel" name="phone" placeholder='01xxxxxxxxx'  required 
+            <input type="tel" name="phone" placeholder='01*********' 
+            maxLength={11}
+            required 
             onInput={(e) => e.target.value = e.target.value.replace(/[^0-9]/g, '')}
             onChange={handleChange}
              />
@@ -147,8 +149,6 @@ const Add = () => {
           </div>
 
 
-
-
           <div className="form-group password-group">
             <label>Password</label>
 
@@ -157,6 +157,7 @@ const Add = () => {
                 type={showPassword ? "text" : "password"}
                 placeholder="Include letters, symbol & numbers"
                 name="password"
+                minLength={6}
                 required
                 onChange={handleChange}
               />
@@ -175,7 +176,7 @@ const Add = () => {
 
 
           <button type="submit" className="submit-btn">
-            Submit
+            Add<i className="fa-solid fa-user-plus"></i>
           </button>
 
         </form>

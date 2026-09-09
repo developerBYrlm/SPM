@@ -9,6 +9,8 @@
     "concurrently": "^9.2.1"
   },
   "dependencies": {
-    "ldrs": "^1.1.9"
+    "ldrs": "^1.1.9",
+    "node-cron": "^4.6.0",
+    "nodemailer": "^9.0.3"
   }
 }

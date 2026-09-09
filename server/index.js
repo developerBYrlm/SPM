@@ -1,26 +1,28 @@
-import dotenv from "dotenv";
+import "dotenv/config";
+
 import express from "express";
 import cors from "cors";
 import path from "path";
-import dns from "dns"
+import dns from "dns";
 
 dns.setServers([
-    '1.1.1.1',
-    '8.8.8.8'
-])
+  "1.1.1.1",
+  "8.8.8.8"
+]);
 
-import connectToDatabase from './db/db.js';
+import connectToDatabase from "./db/db.js";
 
 // Routes
-import authRouter from './routes/auth.js';
-import authorityRouter from './routes/authority.js';
-import studentRouter from './routes/student.js';
-import facultyRouter from './routes/faculty.js';
-import acadRouter from './routes/acad.js';
-import studentApplicationRouter from './routes/studentApplication.js';
-import routineRouter from './routes/routine.js';
-
-dotenv.config();
+import authRouter from "./routes/auth.js";
+import authorityRouter from "./routes/authority.js";
+import itRouter from "./routes/it.js";
+import studentRouter from "./routes/student.js";
+import facultyRouter from "./routes/faculty.js";
+import acadRouter from "./routes/acad.js";
+import studentApplicationRouter from "./routes/studentApplication.js";
+import routineRouter from "./routes/routine.js";
+import examScheduleRouter from "./routes/examSchedule.js";
+import startExamScheduleMailJob from "./jobs/examScheduleMailJob.js";
 
 const app = express();
 
@@ -32,7 +34,7 @@ app.use(express.json());
 app.use("/imageUploads/uploads", express.static(path.join("imageUploads/uploads")));
 app.use("/uploads/studentApplications", express.static(path.join("uploads/studentApplications")));
 app.use("/uploads", express.static("uploads"));
-app.use('/uploads/routines', express.static('uploads/routines'));
+app.use("/uploads/routines", express.static("uploads/routines"));
 
 // Connect to MongoDB
 connectToDatabase();
@@ -40,14 +42,20 @@ connectToDatabase();
 // API Routes
 app.use("/api/auth", authRouter);
 app.use("/api/authority", authorityRouter);
+app.use("/api/it", itRouter);
 app.use("/api/students", studentRouter);
 app.use("/api/faculty", facultyRouter);
 app.use("/api/acad", acadRouter);
 app.use("/api/student-application", studentApplicationRouter);
-app.use('/api/routine', routineRouter);
+app.use("/api/routine", routineRouter);
+app.use("/api/exam-schedule", examScheduleRouter);
+
+// Start mail job
+startExamScheduleMailJob();
 
 // Start Server
 const PORT = process.env.PORT || 8000;
+
 app.listen(PORT, () => {
-    console.log("Server is running on port => " + PORT);
+  console.log("Server is running on port => " + PORT);
 });

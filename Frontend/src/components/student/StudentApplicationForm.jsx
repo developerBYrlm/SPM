@@ -20,6 +20,7 @@ const ApplyMissedExam = () => {
 
   const [totalFine, setTotalFine] = useState(2000);
   const [showPopup, setShowPopup] = useState(true);
+  const [deadlinePassedPopup, setDeadlinePassedPopup] = useState(false);
 
   const getTodayDate = () => new Date().toISOString().split("T")[0];
 
@@ -36,33 +37,39 @@ const ApplyMissedExam = () => {
   });
 
   useEffect(() => {
-    const fetchUser = async () => {
+    // ইউজারের ডেটা আনার আগের লজিক...
+    const fetchUserAndSchedule = async () => {
       try {
         const token = localStorage.getItem("token");
         if (!token) return;
 
-        const res = await axios.get("https://spm-1-u37a.onrender.com/api/auth/me", {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
+        // User Data Fetch
+        const resUser = await axios.get("http://localhost:8000/api/auth/me", {
+          headers: { Authorization: `Bearer ${token}` }
         });
+        if (resUser.data.success) {
+          const user = resUser.data.user;
+          setFormData(prev => ({ ...prev, studentId: user.userID, name: user.name, department: user.department }));
+        }
 
-        if (res.data.success) {
-          const user = res.data.user;
-
-          setFormData(prev => ({
-            ...prev,
-            studentId: user.userID,
-            name: user.name,
-            department: user.department
-          }));
+        // Exam Schedule Fetch & Check
+        const resSchedule = await axios.get("http://localhost:8000/api/exam-schedule", {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        if (resSchedule.data.success && resSchedule.data.schedule) {
+          const deadline = new Date(resSchedule.data.schedule.applicationDeadlineDate);
+          deadline.setHours(23, 59, 59, 999);
+          if (new Date() > deadline) {
+            setDeadlinePassedPopup(true); // ডেডলাইন পার হলে পপ-আপ দেখাবে
+            setShowPopup(false); // ওয়েলকাম পপ-আপ বন্ধ করে দিবে
+          }
         }
       } catch (err) {
-        console.error("Failed to fetch user info", err);
+        console.error("Failed to fetch data", err);
       }
     };
 
-    fetchUser();
+    fetchUserAndSchedule();
   }, []);
 
   useEffect(() => {
@@ -147,7 +154,7 @@ const ApplyMissedExam = () => {
 
     try {
       const res = await axios.post(
-        "https://spm-1-u37a.onrender.com/api/student-application/apply",
+        "http://localhost:8000/api/student-application/apply",
         data,
         {
           headers: {
@@ -172,18 +179,32 @@ const ApplyMissedExam = () => {
 
   return (
     <div className="main-content">
-      {showPopup && (
+      {/* ডেডলাইন শেষ হয়ে গেলে এই পপ-আপ দেখাবে এবং ফর্ম ব্লক করবে */}
+      {deadlinePassedPopup && (
         <div className="popup-overlay">
           <div className="popup-box">
-            <h2>Fill the Application Carefully</h2>
-            <button type="button" onClick={() => setShowPopup(false)}>
-              OK
+            <h2 style={{color: "red"}}>Application Deadline is Over!</h2>
+            <p>You cannot submit any new applications at this time.</p>
+            <button type="button" onClick={() => navigate("/student-dashboard")}>
+              Go Back to Dashboard
             </button>
           </div>
         </div>
       )}
 
-      <div className="user-dashboard">
+      {/* আপনার আগের ওয়েলকাম পপ-আপ */}
+      {showPopup && !deadlinePassedPopup && (
+        <div className="popup-overlay">
+          <div className="popup-box">
+            <h2>Fill the Application Carefully</h2>
+            <button type="button" onClick={() => setShowPopup(false)}>OK</button>
+          </div>
+        </div>
+      )}
+
+      {/* ফর্মের অংশ (যদি ডেডলাইন শেষ হয়ে যায়, তবে ফর্ম হাইড করে রাখতে পারেন, অথবা এভাবেই রাখতে পারেন কারণ পপ-আপ ব্লক করে রাখবে) */}
+      {!deadlinePassedPopup && (
+         <div className="user-dashboard">
         <h2 className="form-title">Special Exam Application form</h2>
 
         <div className="back">
@@ -240,26 +261,14 @@ const ApplyMissedExam = () => {
 
           <div className="form-group">
             <label>Semester</label>
-            <select
-              name="semester"
-              required
-              value={formData.semester}
-              onChange={handleChange}
-            >
-              <option value="">Select</option>
-              <option value="1st">1st Semester</option>
-              <option value="2nd">2nd Semester</option>
-              <option value="3rd">3rd Semester</option>
-              <option value="4th">4th Semester</option>
-              <option value="5th">5th Semester</option>
-              <option value="6th">6th Semester</option>
-              <option value="7th">7th Semester</option>
-              <option value="8th">8th Semester</option>
-              <option value="9th">9th Semester</option>
-              <option value="10th">10th Semester</option>
-              <option value="11th">11th Semester</option>
-              <option value="12th">12th Semester</option>
-            </select>
+           <input
+           type="text"
+           name="semester"
+           placeholder="Summer 2026 .. .."
+           required
+           value={formData.semester}
+           onChange={handleChange}
+           />
           </div>
 
           <div className="form-group">
@@ -267,7 +276,7 @@ const ApplyMissedExam = () => {
             <input
               type="text"
               name="section"
-              placeholder="Insert Section"
+              placeholder="1A, 2B, 4C .. .."
               required
               value={section}
               onChange={e => {
@@ -290,8 +299,8 @@ const ApplyMissedExam = () => {
               onChange={handleChange}
             >
               <option value="">Select</option>
-              <option value="mid">Mid</option>
-              <option value="final">Final</option>
+              <option value="Mid">Mid</option>
+              <option value="Final">Final</option>
             </select>
           </div>
 
@@ -385,6 +394,7 @@ const ApplyMissedExam = () => {
           </button>
         </form>
       </div>
+      )}
     </div>
   );
 };

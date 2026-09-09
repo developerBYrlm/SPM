@@ -16,7 +16,7 @@ const FacultyApplicationView = () => {
     const fetchFaculty = async () => {
     try {
       const res = await axios.get(
-        "https://spm-1-u37a.onrender.com/api/auth/me",
+        "http://localhost:8000/api/auth/me",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -37,7 +37,7 @@ const FacultyApplicationView = () => {
     const fetchApp = async () => {
       try {
         const res = await axios.get(
-          `https://spm-1-u37a.onrender.com/api/student-application/application-view/${id}`,
+          `http://localhost:8000/api/student-application/application-view/${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -64,7 +64,7 @@ const FacultyApplicationView = () => {
       setActionLoading(true);
 
       const res = await axios.put(
-        `https://spm-1-u37a.onrender.com/api/student-application/update-status/${id}`,
+        `http://localhost:8000/api/student-application/update-status/${id}`,
         { status },
         {
           headers: {
@@ -229,7 +229,7 @@ const FacultyApplicationView = () => {
               <h3>Attachment:</h3>
 
               <iframe
-                src={`https://spm-1-u37a.onrender.com/${app.attachment}`}
+                src={`http://localhost:8000/${app.attachment}`}
                 width="100%"
                 height="220px"
                 title="Attachment"

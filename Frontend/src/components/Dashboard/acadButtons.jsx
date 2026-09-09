@@ -37,7 +37,7 @@ const acadButtons = ({ id }) =>{
         if (confirmRemove) {
             try {
                 const response = await axios.delete(
-                    `https://spm-1-u37a.onrender.com/api/acad/acad-remove/${id}`,
+                    `http://localhost:8000/api/acad/acad-remove/${id}`,
                     {
                         headers: {
                             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -81,6 +81,6 @@ const acadButtons = ({ id }) =>{
     </div>
   );
 
-}
+};
 
 export default acadButtons;
