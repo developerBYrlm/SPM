@@ -151,36 +151,58 @@ export const notifyStudentApplicationStatusChanged = async ({
   changedRole,
   changedStatus,
 }) => {
-  const application = await StudentApplication.findById(applicationId);
+  try {
+    console.log(
+      "notifyStudentApplicationStatusChanged Started"
+    );
 
-  if (!application) {
-    return;
+    const application =
+      await StudentApplication.findById(applicationId);
+
+    if (!application) {
+      console.log("Application not found");
+      return;
+    }
+
+    const student = await User.findById(application.user);
+
+    if (!student) {
+      console.log("Student not found");
+      return;
+    }
+
+    if (!student.email) {
+      console.log("Student email missing");
+      return;
+    }
+
+    const changedByUser =
+      await User.findById(changedByUserId);
+
+    const changedBy =
+      changedByUser?.name ||
+      changedByUser?.userID ||
+      "System";
+
+    await sendEmail({
+      to: student.email,
+      subject: `Application Status Updated`,
+      html: buildStudentStatusMailHtml({
+        application,
+        student,
+        changedBy,
+        changedRole,
+        changedStatus,
+      }),
+    });
+
+    console.log(
+      "Student status mail sent successfully"
+    );
+  } catch (error) {
+    console.error(
+      "notifyStudentApplicationStatusChanged Error:",
+      error
+    );
   }
-
-  const student = await User.findById(application.user);
-
-  if (!student || !student.email) {
-    console.log("Student email not found. Status mail skipped.");
-    return;
-  }
-
-  const changedByUser = await User.findById(changedByUserId);
-
-  const changedBy =
-    changedByUser?.name ||
-    changedByUser?.userID ||
-    changedRole ||
-    "System";
-
-  await sendEmail({
-    to: student.email,
-    subject: `Application Status Updated: ${changedStatus}`,
-    html: buildStudentStatusMailHtml({
-      application,
-      student,
-      changedBy,
-      changedRole,
-      changedStatus,
-    }),
-  });
 };

@@ -161,42 +161,33 @@ const buildPendingMailHtml = ({
 };
 
 const getAuthorityRecipients = async (application) => {
-  const users = await User.find({
-    department: application.department,
-    email: { $exists: true, $ne: "" },
-  });
-
-  return users.filter((user) => getUserRole(user) === "authority");
-};
-
-const getFacultyRecipients = async (application) => {
-  const pendingFacultyAcronyms = [
-    ...new Set(
-      application.facultyStatuses
-        ?.filter((item) => item.status === "Pending")
-        .map((item) => normalize(item.facultyAcr))
-        .filter(Boolean)
-    ),
-  ];
-
-  if (pendingFacultyAcronyms.length === 0) {
-    return [];
-  }
+  console.log(
+    "Application Department:",
+    application.department
+  );
 
   const users = await User.find({
     department: application.department,
     email: { $exists: true, $ne: "" },
   });
 
-  return users
-    .filter((user) => getUserRole(user) === "faculty")
-    .filter((user) => pendingFacultyAcronyms.includes(normalize(user.userID)))
-    .map((user) => ({
-      user,
-      facultyAcr: normalize(user.userID),
-    }));
-};
+  console.log("Users Found:", users.length);
 
+  const authorities = users.filter(
+    (user) => getUserRole(user) === "authority"
+  );
+
+  console.log(
+    "Authority Found:",
+    authorities.length
+  );
+
+  return authorities;
+};
+console.log(
+  "Faculty Users Found:",
+  users.length
+);
 const sendPendingMailToRecipient = async ({
   application,
   recipient,
@@ -254,32 +245,78 @@ const sendPendingMailToRecipient = async ({
 };
 
 export const notifyPendingApplicationUsers = async (applicationId) => {
-  const application = await StudentApplication.findById(applicationId);
+  try {
+    console.log(
+      "notifyPendingApplicationUsers called:",
+      applicationId
+    );
 
-  if (!application) {
-    return;
-  }
+    const application = await StudentApplication.findById(
+      applicationId
+    );
 
-  if (application.authorityStatus === "Pending") {
-    const authorityUsers = await getAuthorityRecipients(application);
+    if (!application) {
+      console.log("Application not found");
+      return;
+    }
 
-    for (const authorityUser of authorityUsers) {
+    console.log(
+      "Application found:",
+      application._id
+    );
+
+    if (application.authorityStatus === "Pending") {
+      const authorityUsers =
+        await getAuthorityRecipients(application);
+
+      console.log(
+        "Authority users found:",
+        authorityUsers.length
+      );
+
+      for (const authorityUser of authorityUsers) {
+        console.log(
+          "Sending authority mail to:",
+          authorityUser.email
+        );
+
+        await sendPendingMailToRecipient({
+          application,
+          recipient: authorityUser,
+          targetType: "authority",
+        });
+      }
+    }
+
+    const facultyRecipients =
+      await getFacultyRecipients(application);
+
+    console.log(
+      "Faculty recipients found:",
+      facultyRecipients.length
+    );
+
+    for (const item of facultyRecipients) {
+      console.log(
+        "Sending faculty mail to:",
+        item.user.email
+      );
+
       await sendPendingMailToRecipient({
         application,
-        recipient: authorityUser,
-        targetType: "authority",
+        recipient: item.user,
+        targetType: "faculty",
+        facultyAcr: item.facultyAcr,
       });
     }
-  }
 
-  const facultyRecipients = await getFacultyRecipients(application);
-
-  for (const item of facultyRecipients) {
-    await sendPendingMailToRecipient({
-      application,
-      recipient: item.user,
-      targetType: "faculty",
-      facultyAcr: item.facultyAcr,
-    });
+    console.log(
+      "notifyPendingApplicationUsers completed"
+    );
+  } catch (error) {
+    console.error(
+      "notifyPendingApplicationUsers error:",
+      error
+    );
   }
 };

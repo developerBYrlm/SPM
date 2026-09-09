@@ -1,18 +1,28 @@
 import createMailTransporter from "../utils/mailTransporter.js";
 
 export const sendEmail = async ({ to, subject, html }) => {
-  const fromName =
-    process.env.MAIL_FROM_NAME || "Special Exam Application System";
+  try {
+    console.log("=================================");
+    console.log("Sending mail to:", to);
+    console.log("Subject:", subject);
 
-  const fromEmail =
-    process.env.MAIL_FROM_EMAIL || process.env.SMTP_USER;
+    const transporter = createMailTransporter();
 
-  const mailTransporter = createMailTransporter();
+    await transporter.verify();
+    console.log("SMTP Connected Successfully");
 
-  await mailTransporter.sendMail({
-    from: `"${fromName}" <${fromEmail}>`,
-    to,
-    subject,
-    html,
-  });
+    const info = await transporter.sendMail({
+      from: `"${process.env.MAIL_FROM_NAME}" <${process.env.SMTP_USER}>`,
+      to,
+      subject,
+      html,
+    });
+
+    console.log("Mail Sent:", info.messageId);
+
+    return info;
+  } catch (error) {
+    console.error("EMAIL SEND ERROR:", error);
+    throw error;
+  }
 };
