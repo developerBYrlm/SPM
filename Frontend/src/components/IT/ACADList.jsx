@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import DataTable from "react-data-table-component";
-import AcadButtons from "./ActionButtons/ACADActionButtons"; // default import
+import AcadButtons from "./ActionButtons/ACADActionButtons"; 
 import "../Dashboard/list.css";
 
 const ACADList = () => {

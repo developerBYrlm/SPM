@@ -1,3 +1,4 @@
+/* action buttons */
 .student-action-btn {
   padding: 8px 14px;
   margin: 7px 4px;
@@ -12,7 +13,6 @@
   transition: all 0.3s ease;
 }
 
-
 .btn-view {
   background: linear-gradient(135deg, #00b7ff87, #003cff94);
   color: white;
@@ -24,7 +24,7 @@
 }
 
 .btn-fine {
-  background: linear-gradient(135deg,#00b7ff87, #003cff94);
+  background: linear-gradient(135deg, #00b7ff87, #003cff94);
   color: white;
 }
 
@@ -32,6 +32,7 @@
   background: linear-gradient(135deg, #00b7ff87, #003cff94);
   color: white;
 }
+
 .btn-allLeave {
   background: linear-gradient(135deg, #ff000098, #ff00008e);
   color: white;
@@ -40,53 +41,37 @@
 .student-action-btn:hover {
   transform: scale(1.1);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.481);
-  
 }
 
 .student-action-btn:active {
-    background: rgba(20, 155, 218, 0);
-    transform: scale(0.96);
-    box-shadow: 0 0 10px rgb(0, 0, 0);
+  background: rgba(20, 155, 218, 0);
+  transform: scale(0.96);
+  box-shadow: 0 0 10px rgb(0, 0, 0);
 }
 
-
-/* ==========================================
-   TABLET
-========================================== */
+/* tablet */
 @media (max-width: 768px) {
-
   .student-action-btn {
     padding: 7px 12px;
     font-size: 14px;
     margin: 5px 3px;
   }
-
 }
 
-
-/* ==========================================
-   MOBILE
-========================================== */
+/* mobile */
 @media (max-width: 576px) {
-
   .student-action-btn {
     width: 100%;
     margin: 5px 0;
     padding: 10px;
     font-size: 14px;
   }
-
 }
 
-
-/* ==========================================
-   SMALL MOBILE
-========================================== */
+/* small mobile */
 @media (max-width: 375px) {
-
   .student-action-btn {
     font-size: 13px;
     padding: 8px;
   }
-
 }

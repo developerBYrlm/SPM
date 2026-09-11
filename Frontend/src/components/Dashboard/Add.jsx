@@ -1,110 +1,96 @@
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios'
-import './add.css'
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import "./add.css";
 
 const Add = () => {
   const navigate = useNavigate();
-  
   const [showPassword, setShowPassword] = useState(false);
-
-
   const [formData, setFormData] = useState({
-    email: '',
-    studentId: '',
-    name: '',
-    gender: '',
-    phone: '',
-    role: '', 
-    department: '', 
-    password: '',
-    image: null
-  })
+    email: "", studentId: "", name: "", gender: "", phone: "",
+    role: "", department: "", password: "", image: null
+  });
 
+  // Update input data
   const handleChange = (e) => {
-    const { name, value, files } = e.target
-    setFormData(prev => ({
+    const { name, value, files, type } = e.target;
+    setFormData((prev) => ({
       ...prev,
-      [name]: name === "image" ? files[0] : value
-    }))
-  }
+      [name]: type === "file" ? files?.[0] ?? null : value,
+    }));
+  };
 
+  // Send data to server
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    const token = localStorage.getItem("token");
 
-    const token = localStorage.getItem("token")
     if (!token) {
-      alert("Unauthorized. Please login again.")
-      return
+      alert("Unauthorized. Please login again.");
+      return;
     }
 
-    const formDataObj = new FormData()
+    // Create form data for text and image
+    const formDataObj = new FormData();
     Object.entries(formData).forEach(([key, value]) => {
-      if (value !== null && value !== "") {
-        formDataObj.append(key, value)
-      }
-    })
+      if (value !== null && value !== "") formDataObj.append(key, value);
+    });
 
     try {
       const res = await axios.post(
         "https://spm-1-u37a.onrender.com/api/students/add",
         formDataObj,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
-      )
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
 
       if (res.data.success) {
-        alert("Account created successfully")
-        navigate("/authority-dashboard")
+        alert("Account created successfully");
+        navigate("/authority-dashboard");
       }
-
     } catch (error) {
-      console.error(error)
-      alert(
-        error.response?.data?.error ||
-        "Server error occurred"
-      )
+      console.error(error);
+      alert(error.response?.data?.error || "Server error occurred");
     }
-  }
+  };
 
   return (
     <div className="main-content">
       <div className="user-dashboard">
-
         <h2 className="form-title">Add New User</h2>
 
-            <div className="back">
-              
-                  <Link to="/authority-dashboard">
-                    <i className="fa-solid fa-backward"></i>
-                  </Link>
-        
-            </div>
+        {/* Back button */}
+        <div className="back">
+          <Link to="/authority-dashboard">
+            <i className="fa-solid fa-backward"></i>
+          </Link>
+        </div>
 
         <form className="glass-form" onSubmit={handleSubmit}>
-
           <div className="form-group">
             <label>Email</label>
-            <input type="email" name="email" placeholder='Insert a Valid Email' required 
-            onInput={(e) => e.target.value = e.target.value.replace(/[^a-z0-9@.\s]/g, '')}
-            onChange={handleChange} />
+            <input
+              type="email" name="email" placeholder="Insert a Valid Email" required
+              onInput={(e) => e.target.value = e.target.value.replace(/[^a-z0-9@.\s]/g, "")}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="form-group">
             <label>ID / Acronym</label>
-            <input type="text" name="studentId" placeholder='Insert Full ID / Acronym'  required 
-            onInput={(e) => e.target.value = e.target.value.replace(/[^A-Z0-9\s]/g, '')}
-            onChange={handleChange} />
+            <input
+              type="text" name="studentId" placeholder="Insert Full ID / Acronym" required
+              onInput={(e) => e.target.value = e.target.value.replace(/[^A-Z0-9\s]/g, "")}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="form-group">
             <label>Name</label>
-            <input type="text" name="name" placeholder='Insert Full Name'  required
-            onInput={(e) => e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, '')}
-            onChange={handleChange} />
+            <input
+              type="text" name="name" placeholder="Insert Full Name" required
+              onInput={(e) => e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, "")}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="form-group">
@@ -118,12 +104,11 @@ const Add = () => {
 
           <div className="form-group">
             <label>Phone</label>
-            <input type="tel" name="phone" placeholder='01*********' 
-            maxLength={11}
-            required 
-            onInput={(e) => e.target.value = e.target.value.replace(/[^0-9]/g, '')}
-            onChange={handleChange}
-             />
+            <input
+              type="tel" name="phone" placeholder="01*********" maxLength={11} required
+              onInput={(e) => e.target.value = e.target.value.replace(/[^0-9]/g, "")}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="form-group">
@@ -148,24 +133,20 @@ const Add = () => {
             </select>
           </div>
 
-
           <div className="form-group password-group">
             <label>Password</label>
-
             <div className="password-wrapper">
               <input
-                type={showPassword ? "text" : "password"}
-                placeholder="Include letters, symbol & numbers"
-                name="password"
-                minLength={6}
-                required
-                onChange={handleChange}
+                type={showPassword ? "text" : "password"} name="password"
+                placeholder="Include letters, symbol & numbers" minLength={6}
+                required onChange={handleChange}
               />
 
+              {/* Show or hide password */}
               <i
                 className={`fa-solid ${showPassword ? "fa-eye-slash" : "fa-eye"}`}
                 onClick={() => setShowPassword(!showPassword)}
-             />
+              />
             </div>
           </div>
 
@@ -174,16 +155,13 @@ const Add = () => {
             <input type="file" name="image" accept="image/*" onChange={handleChange} />
           </div>
 
-
           <button type="submit" className="submit-btn">
-            Add<i className="fa-solid fa-user-plus"></i>
+            Add <i className="fa-solid fa-user-plus"></i>
           </button>
-
         </form>
-
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Add
+export default Add;

@@ -43,6 +43,7 @@ const FacultySidebar = () => {
             </NavLink>
           </li>
 
+              {/* under work */}
           {/* <li>
             <NavLink to="/faculty-dashboard/student-routine-view-faculty"  className="sidebar-item custom-hover">
               
@@ -65,20 +66,12 @@ const FacultySidebar = () => {
              </NavLink>
          </li> 
 
-          {/* <li>
-            <NavLink
-              to="/faculty-dashboard/settings"
-              className="sidebar-item custom-hover"
-            >
-              <i className="fa-solid fa-gears"></i>
-              <span>Settings</span>
-            </NavLink>
-          </li> */}
+        
         </ul>
         
         <div className='developer'>
           <a href="https://www.facebook.com/robiulislam.RLM"  target="_blank"  rel="noopener noreferrer">
-          Developer by RLM (NUBian)            
+          Developed by RLM (NUBian)            
           </a>
         </div>
 

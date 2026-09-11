@@ -1,6 +1,4 @@
-/* -------------------------------------------
-   Cards Layout (Flex + Wrap)
---------------------------------------------*/
+/* dashboard cards */
 .dashboard-three-cards {
   width: 100%;
   max-width: 1000px;
@@ -9,7 +7,6 @@
   grid-template-columns: repeat(3, 1fr);
 
   gap: 25px;
-  
 }
 
 .dashboard-three-cards a,
@@ -18,9 +15,7 @@
   color: inherit;
 }
 
-/* =========================
-   Tablet
-========================= */
+/* tablet */
 @media (max-width: 992px) {
   .dashboard-three-cards {
     grid-template-columns: repeat(2, 1fr);
@@ -28,9 +23,7 @@
   }
 }
 
-/* =========================
-   Mobile
-========================= */
+/* mobile */
 @media (max-width: 768px) {
   .dashboard-three-cards {
     grid-template-columns: 1fr;
@@ -38,9 +31,7 @@
   }
 }
 
-/* =========================
-   Small Mobile
-========================= */
+/* small mobile */
 @media (max-width: 480px) {
   .dashboard-three-cards {
     gap: 12px;

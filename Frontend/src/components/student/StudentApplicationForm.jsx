@@ -1,67 +1,58 @@
 import "../Dashboard/add.css";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
 const ApplyMissedExam = () => {
   const navigate = useNavigate();
-
   const [section, setSection] = useState("");
-
   const [courses, setCourses] = useState([
-    {
-      courseTitle: "",
-      facultyAcr: "",
-      courseId: "",
-      missedExamDate: "",
-      fine: 2000
-    }
+    { courseTitle: "", facultyAcr: "", courseId: "", missedExamDate: "", fine: 2000 }
   ]);
-
   const [totalFine, setTotalFine] = useState(2000);
   const [showPopup, setShowPopup] = useState(true);
   const [deadlinePassedPopup, setDeadlinePassedPopup] = useState(false);
-
   const getTodayDate = () => new Date().toISOString().split("T")[0];
 
   const [formData, setFormData] = useState({
-    studentId: "",
-    name: "",
-    missedExamType: "",
-    missedExamDate: getTodayDate(),
-    semester: "",
-    section: "",
-    department: "",
-    reason: "",
-    attachment: null
+    studentId: "", name: "", missedExamType: "", missedExamDate: getTodayDate(),
+    semester: "", section: "", department: "", reason: "", attachment: null
   });
 
+  // Get user data and exam deadline
   useEffect(() => {
-    // ইউজারের ডেটা আনার আগের লজিক...
     const fetchUserAndSchedule = async () => {
       try {
         const token = localStorage.getItem("token");
         if (!token) return;
 
-        // User Data Fetch
-        const resUser = await axios.get("https://spm-1-u37a.onrender.com/api/auth/me", {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        const resUser = await axios.get(
+          "https://spm-1-u37a.onrender.com/api/auth/me",
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+
         if (resUser.data.success) {
           const user = resUser.data.user;
-          setFormData(prev => ({ ...prev, studentId: user.userID, name: user.name, department: user.department }));
+          setFormData((prev) => ({
+            ...prev,
+            studentId: user.userID,
+            name: user.name,
+            department: user.department
+          }));
         }
 
-        // Exam Schedule Fetch & Check
-        const resSchedule = await axios.get("https://spm-1-u37a.onrender.com/api/exam-schedule", {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        const resSchedule = await axios.get(
+          "https://spm-1-u37a.onrender.com/api/exam-schedule",
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+
         if (resSchedule.data.success && resSchedule.data.schedule) {
           const deadline = new Date(resSchedule.data.schedule.applicationDeadlineDate);
           deadline.setHours(23, 59, 59, 999);
+
           if (new Date() > deadline) {
-            setDeadlinePassedPopup(true); // ডেডলাইন পার হলে পপ-আপ দেখাবে
-            setShowPopup(false); // ওয়েলকাম পপ-আপ বন্ধ করে দিবে
+            setDeadlinePassedPopup(true);
+            setShowPopup(false);
           }
         }
       } catch (err) {
@@ -72,31 +63,29 @@ const ApplyMissedExam = () => {
     fetchUserAndSchedule();
   }, []);
 
+  // Update total fine
   useEffect(() => {
     setTotalFine(courses.length * 2000);
   }, [courses]);
 
-  const handleChange = e => {
+  // Update form data
+  const handleChange = (e) => {
     const { name, value, files } = e.target;
-
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       [name]: name === "attachment" ? files[0] : value
     }));
   };
 
+  // Update course data
   const handleCourseChange = (index, e) => {
     const { name, value } = e.target;
     const updatedCourses = [...courses];
 
     if (name === "facultyAcr") {
-      updatedCourses[index][name] = value
-        .toUpperCase()
-        .replace(/[^A-Z\s]/g, "");
+      updatedCourses[index][name] = value.toUpperCase().replace(/[^A-Z\s]/g, "");
     } else if (name === "courseId") {
-      updatedCourses[index][name] = value
-        .toUpperCase()
-        .replace(/[^A-Z0-9\s]/g, "");
+      updatedCourses[index][name] = value.toUpperCase().replace(/[^A-Z0-9\s]/g, "");
     } else {
       updatedCourses[index][name] = value;
     }
@@ -104,31 +93,26 @@ const ApplyMissedExam = () => {
     setCourses(updatedCourses);
   };
 
+  // Add a new course
   const addCourse = () => {
-    setCourses(prev => [
+    setCourses((prev) => [
       ...prev,
-      {
-        courseTitle: "",
-        facultyAcr: "",
-        courseId: "",
-        missedExamDate: "",
-        fine: 2000
-      }
+      { courseTitle: "", facultyAcr: "", courseId: "", missedExamDate: "", fine: 2000 }
     ]);
   };
 
-  const removeCourse = index => {
-    const newCourses = courses.filter((_, i) => i !== index);
-    setCourses(newCourses);
+  // Remove a course
+  const removeCourse = (index) => {
+    setCourses(courses.filter((_, i) => i !== index));
   };
 
-  const handleSubmit = async e => {
+  // Submit application
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
     const token = localStorage.getItem("token");
     if (!token) return alert("Unauthorized");
 
-    const fixedCourses = courses.map(course => ({
+    const fixedCourses = courses.map((course) => ({
       ...course,
       facultyAcr: course.facultyAcr.trim().toUpperCase(),
       courseId: course.courseId.trim().toUpperCase(),
@@ -136,7 +120,6 @@ const ApplyMissedExam = () => {
     }));
 
     const data = new FormData();
-
     data.append("studentId", formData.studentId);
     data.append("name", formData.name);
     data.append("missedExamType", formData.missedExamType);
@@ -148,9 +131,7 @@ const ApplyMissedExam = () => {
     data.append("totalFine", totalFine);
     data.append("courses", JSON.stringify(fixedCourses));
 
-    if (formData.attachment) {
-      data.append("attachment", formData.attachment);
-    }
+    if (formData.attachment) data.append("attachment", formData.attachment);
 
     try {
       const res = await axios.post(
@@ -171,19 +152,19 @@ const ApplyMissedExam = () => {
     } catch (err) {
       alert(
         err.response?.data?.message ||
-          err.response?.data?.error ||
-          "Application already submitted"
+        err.response?.data?.error ||
+        "Application already submitted"
       );
     }
   };
 
   return (
     <div className="main-content">
-      {/* ডেডলাইন শেষ হয়ে গেলে এই পপ-আপ দেখাবে এবং ফর্ম ব্লক করবে */}
+      {/* Show deadline message */}
       {deadlinePassedPopup && (
         <div className="popup-overlay">
           <div className="popup-box">
-            <h2 style={{color: "red"}}>Application Deadline is Over!</h2>
+            <h2 style={{ color: "red" }}>Application Deadline is Over!</h2>
             <p>You cannot submit any new applications at this time.</p>
             <button type="button" onClick={() => navigate("/student-dashboard")}>
               Go Back to Dashboard
@@ -192,7 +173,7 @@ const ApplyMissedExam = () => {
         </div>
       )}
 
-      {/* আপনার আগের ওয়েলকাম পপ-আপ */}
+      {/* Show welcome message */}
       {showPopup && !deadlinePassedPopup && (
         <div className="popup-overlay">
           <div className="popup-box">
@@ -202,198 +183,157 @@ const ApplyMissedExam = () => {
         </div>
       )}
 
-      {/* ফর্মের অংশ (যদি ডেডলাইন শেষ হয়ে যায়, তবে ফর্ম হাইড করে রাখতে পারেন, অথবা এভাবেই রাখতে পারেন কারণ পপ-আপ ব্লক করে রাখবে) */}
+      {/* Show form before deadline */}
       {!deadlinePassedPopup && (
-         <div className="user-dashboard">
-        <h2 className="form-title">Special Exam Application form</h2>
+        <div className="user-dashboard">
+          <h2 className="form-title">Special Exam Application Form</h2>
 
-        <div className="back">
-          <Link to="/student-dashboard">
-            <i className="fa-solid fa-backward"></i>
-          </Link>
-        </div>
-
-        <form onSubmit={handleSubmit} className="glass-form">
-          <div className="form-group">
-            <label>Student ID</label>
-            <input
-              type="text"
-              name="studentId"
-              placeholder="Insert Full ID"
-              readOnly
-              value={formData.studentId}
-            />
+          <div className="back">
+            <Link to="/student-dashboard">
+              <i className="fa-solid fa-backward"></i>
+            </Link>
           </div>
 
-          <div className="form-group">
-            <label>Name</label>
-            <input
-              type="text"
-              placeholder="Full Name"
-              name="name"
-              readOnly
-              value={formData.name}
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Department</label>
-            <input
-              type="text"
-              placeholder="Department Name"
-              name="department"
-              readOnly
-              value={formData.department}
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Application Date</label>
-            <input
-              type="date"
-              name="missedExamDate"
-              required
-              value={formData.missedExamDate}
-              onChange={handleChange}
-              max={getTodayDate()}
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Semester</label>
-           <input
-           type="text"
-           name="semester"
-           placeholder="Summer 2026 .. .."
-           required
-           value={formData.semester}
-           onChange={handleChange}
-           />
-          </div>
-
-          <div className="form-group">
-            <label>Section</label>
-            <input
-              type="text"
-              name="section"
-              placeholder="1A, 2B, 4C .. .."
-              required
-              value={section}
-              onChange={e => {
-                const val = e.target.value.toUpperCase();
-                setSection(val);
-                setFormData(prev => ({
-                  ...prev,
-                  section: val
-                }));
-              }}
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Missed Exam Type</label>
-            <select
-              name="missedExamType"
-              required
-              value={formData.missedExamType}
-              onChange={handleChange}
-            >
-              <option value="">Select</option>
-              <option value="Mid">Mid</option>
-              <option value="Final">Final</option>
-            </select>
-          </div>
-
-          {courses.map((course, index) => (
-            <div key={index} className="course-box">
-              <label>Missed Exam Date</label>
+          <form onSubmit={handleSubmit} className="glass-form">
+            <div className="form-group">
+              <label>Student ID</label>
               <input
-                className="course-title"
-                type="date"
-                name="missedExamDate"
-                required
-                value={course.missedExamDate}
-                onChange={e => handleCourseChange(index, e)}
+                type="text" name="studentId" placeholder="Insert Full ID"
+                readOnly value={formData.studentId}
               />
-
-              <label>Course Title</label>
-              <input
-                className="course-title"
-                type="text"
-                name="courseTitle"
-                placeholder="Full course Name"
-                required
-                value={course.courseTitle}
-                onChange={e => handleCourseChange(index, e)}
-              />
-
-              <label>Faculty Acronym</label>
-              <input
-                className="course-title"
-                type="text"
-                name="facultyAcr"
-                placeholder="Capital Letter"
-                required
-                value={course.facultyAcr}
-                onChange={e => handleCourseChange(index, e)}
-              />
-
-              <label>Course Id</label>
-              <input
-                className="course-title"
-                type="text"
-                name="courseId"
-                placeholder="Capital letter"
-                required
-                value={course.courseId}
-                onChange={e => handleCourseChange(index, e)}
-              />
-
-              {courses.length > 1 && (
-                <button type="button" onClick={() => removeCourse(index)}>
-                  ❌
-                </button>
-              )}
             </div>
-          ))}
 
-          <button type="button" className="add-btn" onClick={addCourse}>
-            + Add Another Course
-          </button>
+            <div className="form-group">
+              <label>Name</label>
+              <input
+                type="text" name="name" placeholder="Full Name"
+                readOnly value={formData.name}
+              />
+            </div>
 
-          <div className="form-group">
-            <label>Must Add your Application & Necessary Attachment (PDF)</label>
-            <input
-              type="file"
-              name="attachment"
-              accept="application/pdf"
-              onChange={handleChange}
-            />
-          </div>
+            <div className="form-group">
+              <label>Department</label>
+              <input
+                type="text" name="department" placeholder="Department Name"
+                readOnly value={formData.department}
+              />
+            </div>
 
-          <div className="form-group">
-            <label>Total Fine (Tk)</label>
-            <input type="text" value={totalFine} readOnly />
-          </div>
+            <div className="form-group">
+              <label>Application Date</label>
+              <input
+                type="date" name="missedExamDate" required
+                value={formData.missedExamDate}
+                onChange={handleChange}
+                max={getTodayDate()}
+              />
+            </div>
 
-          <div className="form-group full-width">
-            <label>Reason</label>
-            <textarea
-              name="reason"
-              placeholder="Write down short Application...."
-              minLength={50}
-              required
-              rows={5}
-              value={formData.reason}
-              onChange={handleChange}
-            />
-          </div>
+            <div className="form-group">
+              <label>Semester</label>
+              <input
+                type="text" name="semester" placeholder="Summer 2026 .. .."
+                required value={formData.semester} onChange={handleChange}
+              />
+            </div>
 
-          <button type="submit" className="submit-btn">
-            Submit Application
-          </button>
-        </form>
-      </div>
+            <div className="form-group">
+              <label>Section</label>
+              <input
+                type="text" name="section" placeholder="1A, 2B, 4C .. .."
+                required value={section}
+                onChange={(e) => {
+                  const val = e.target.value.toUpperCase();
+                  setSection(val);
+                  setFormData((prev) => ({ ...prev, section: val }));
+                }}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Missed Exam Type</label>
+              <select
+                name="missedExamType" required
+                value={formData.missedExamType}
+                onChange={handleChange}
+              >
+                <option value="">Select</option>
+                <option value="Mid">Mid</option>
+                <option value="Final">Final</option>
+              </select>
+            </div>
+
+            {/* Course information */}
+            {courses.map((course, index) => (
+              <div key={index} className="course-box">
+                <label>Missed Exam Date</label>
+                <input
+                  className="course-title" type="date" name="missedExamDate"
+                  required value={course.missedExamDate}
+                  onChange={(e) => handleCourseChange(index, e)}
+                />
+
+                <label>Course Title</label>
+                <input
+                  className="course-title" type="text" name="courseTitle"
+                  placeholder="Full Course Name" required
+                  value={course.courseTitle}
+                  onChange={(e) => handleCourseChange(index, e)}
+                />
+
+                <label>Faculty Acronym</label>
+                <input
+                  className="course-title" type="text" name="facultyAcr"
+                  placeholder="Capital Letter" required
+                  value={course.facultyAcr}
+                  onChange={(e) => handleCourseChange(index, e)}
+                />
+
+                <label>Course ID</label>
+                <input
+                  className="course-title" type="text" name="courseId"
+                  placeholder="Capital Letter" required
+                  value={course.courseId}
+                  onChange={(e) => handleCourseChange(index, e)}
+                />
+
+                {courses.length > 1 && (
+                  <button type="button" onClick={() => removeCourse(index)}>❌</button>
+                )}
+              </div>
+            ))}
+
+            <button type="button" className="add-btn" onClick={addCourse}>
+              + Add Another Course
+            </button>
+
+            <div className="form-group">
+              <label>Must Add Your Application & Necessary Attachment (PDF)</label>
+              <input
+                type="file" name="attachment"
+                accept="application/pdf"
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Total Fine (Tk)</label>
+              <input type="text" value={totalFine} readOnly />
+            </div>
+
+            <div className="form-group full-width">
+              <label>Reason</label>
+              <textarea
+                name="reason" placeholder="Write Down Short Application..."
+                minLength={50} required rows={5}
+                value={formData.reason}
+                onChange={handleChange}
+              />
+            </div>
+
+            <button type="submit" className="submit-btn">Submit Application</button>
+          </form>
+        </div>
       )}
     </div>
   );

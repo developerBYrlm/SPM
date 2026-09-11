@@ -1,8 +1,6 @@
-/* ===============================
-   MAIN CONTENT AREA
-================================ */
+/* main content */
 .main-content {
-  margin-left: 265px; /* sidebar width */
+  margin-left: 265px;
   min-height: 100vh;
 
   display: flex;
@@ -12,9 +10,7 @@
   padding: 40px 30px;
 }
 
-/* ===============================
-   DASHBOARD CONTAINER
-================================ */
+/* dashboard container */
 .dashboard-container {
   width: 100%;
   max-width: 1400px;
@@ -24,8 +20,7 @@
   flex-direction: column;
   align-items: center;
 
-  /* Glassmorphism */
-  background:rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
 
@@ -33,9 +28,7 @@
   border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
-/* ===============================
-   TITLE
-================================ */
+/* title */
 .dashboard-title {
   font-size: 42px;
   font-weight: 700;
@@ -45,9 +38,7 @@
   text-align: center;
 }
 
-/* ===============================
-   SEARCH BOX
-================================ */
+/* search box */
 .search-box {
   width: 100%;
   max-width: 220px;
@@ -61,7 +52,7 @@
   border-radius: 14px;
   border: 1px solid rgba(255, 255, 255, 0.393);
 
-  background: rgba(4, 4, 4, 0.255) ;
+  background: rgba(4, 4, 4, 0.255);
   backdrop-filter: blur(12px);
 
   color: #fff;
@@ -76,12 +67,10 @@
   color: rgba(255, 255, 255, 0.459);
 }
 
-/* ===============================
-   TABLE WRAPPER
-================================ */
+/* table wrapper */
 .table-wrapper {
   width: 100%;
-  max-width: 1200px;   /* 🔥 green area wider */
+  max-width: 1200px;
   padding: 30px;
 
   border-radius: 22px;
@@ -94,15 +83,12 @@
 .rdt_Table,
 .rdt_TableRow,
 .rdt_TableCell {
-  font-size: 20px;     /* 🔥 table font bigger */
+  font-size: 20px;
   color: #ffffff;
 }
 
-
-/* table header */
-
 .rdt_TableHead {
-  background: transparent !important;   /* 🔵 remove white */
+  background: transparent !important;
 }
 
 .rdt_TableHeadRow {
@@ -113,10 +99,7 @@
   color: #ffffff;
   font-size: 20px;
   font-weight: 600;
- 
 }
-
-/* table footer */
 
 .rdt_Pagination {
   background: transparent !important;
@@ -131,11 +114,7 @@
   border-radius: 7px;
 }
 
-
-/* ===============================
-   DATATABLE OVERRIDE
-================================ */
-
+/* datatable override */
 .student-image {
   width: 55px;
   height: 55px;
@@ -159,23 +138,20 @@
 
 .rdt_TableRow:hover {
   background: rgba(68, 115, 160, 0.596) !important;
-  transition:  0.3s ;
+  transition: 0.3s;
 }
 
-/* Pagination */
 .rdt_Pagination {
   background: transparent !important;
   color: #ffffff;
 }
 
-
 /* back button */
-
 .back {
-  position: fixed;     
-  top: 27px;            /* x axis */
-  left: 2px;           /* y axis */
-  z-index: 1000;        /* z axis */
+  position: fixed;
+  top: 27px;
+  left: 2px;
+  z-index: 1000;
 }
 
 .back a {
@@ -183,8 +159,8 @@
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  background-color: #1e1e1e00; /* dark background */
-  color: #ffffff52;              /* white icon color */
+  background-color: #1e1e1e00;
+  color: #ffffff52;
   padding: 22px 14px;
   border-radius: 8px;
   font-size: 18px;
@@ -192,16 +168,15 @@
 }
 
 .back a:hover {
-  
   color: #fff;
-  transform: translateX(-2px); /* slight left movement on hover */
+  transform: translateX(-2px);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0);
 }
 
 .back i {
-    font-size: 23px;
+  font-size: 23px;
 }
 
 .back:active {
-    transform: scale(0.96);
+  transform: scale(0.96);
 }

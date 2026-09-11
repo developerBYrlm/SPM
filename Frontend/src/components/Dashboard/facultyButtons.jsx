@@ -2,32 +2,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import './studentButtons.css'
 
-// export const columns = [
-//     {
-//         name: "S No",
-//         selector: (row) => row.sno,
-//     },
-//     {
-//         name: "Faculty Acronym",
-//         selector: (row) => row.StudentID,
-//         sortable: true
-//     },
-//     {
-//         name: "Image",
-//         selector: (row) => row.profileImage,
-//         sortable: true
-//     },{
-//         name: "Name",
-//         selector: (row) => row.Name,
-//         sortable: true
-//     },
-//     {
-//         name: "Action",
-//         cell: (row) => <acadButtons id={row._id} />,
-//         width: "200px"
-//     },
-// ]
-
 const acadButtons = ({ id }) =>{
     const navigate = useNavigate();
 

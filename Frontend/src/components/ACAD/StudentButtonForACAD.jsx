@@ -1,71 +1,21 @@
-import React from 'react'
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import '../Dashboard/studentButtons.css'
+import "../Dashboard/studentButtons.css";
 
-// export const columns = [
-//     {
-//         name: "S No", 
-//         selector: (row) => row.sno,
-//     },
-//     {
-//         name: "Student ID",
-//         selector: (row) => row.StudentID,
-//         sortable: true
-//     },
-//     {
-//         name: "Image",
-//         selector: (row) => row.profileImage,
-//         sortable: true
-//     },{
-//         name: "Name",
-//         selector: (row) => row.Name,
-//         sortable: true
-//     },
-//     {
-//         name: "Action",
-//         cell: (row) => <studentButtons id={row._id} />,
-//         width: "200px"
-//     },
-// ]
+const StudentButtonForACAD = ({ id }) => {
+  const navigate = useNavigate();
 
-const StudentButtonForACAD = ({ id }) =>{
-    const navigate = useNavigate();
-
-    // const handleDelete = async (id) => {
-    //     const  confirm = window.confirm("Do you want to Delete?");
-    //     if(confirm){
-    //         try{
-    //             const response = await axios.delete (
-    //                 `https://spm-1-u37a.onrender.com/api/ deletePath /${ delete_types }`,
-    //                 {
-    //                     headers: {
-    //                         Authorization: `Bearere ${localStorage.getItem("token")}`,
-    //                     },
-    //                 }
-    //             );
-    //             if (response.data,success) {
-    //                 on delete_types variable ( delete_types );
-    //             }
-    //         }catch (error) {
-    //             if(error.response && !error.response.data.success){
-    //                 alert(error.response.data.error);
-    //             }
-    //         }
-    //     }
-    // };
-
-     return (
+  return (
     <div className="action-btn-group">
       <button
+        type="button"
         className="student-action-btn btn-view"
-        onClick={() => navigate(`/students/view/${id}`)}
+        onClick={() => navigate(`/acad-dashboard/student-application-view/${id}`)}
       >
         View
       </button>
-
     </div>
   );
-
-}
+};
 
 export default StudentButtonForACAD;

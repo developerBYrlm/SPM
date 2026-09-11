@@ -2,11 +2,13 @@ import StudentApplication from "../models/StudentApplication.js";
 import User from "../models/User.js";
 import { sendEmail } from "./emailService.js";
 
+// Build application view link
 const buildStudentApplicationLink = () => {
   const baseUrl = process.env.FRONTEND_URL || "https://spm-1-u37a.onrender.com";
   return `${baseUrl}/student-dashboard/current-application`;
 };
 
+// Build faculty status table rows
 const buildFacultyStatusRows = (facultyStatuses = [], courses = []) => {
   if (!facultyStatuses.length) {
     return `
@@ -19,50 +21,35 @@ const buildFacultyStatusRows = (facultyStatuses = [], courses = []) => {
     `;
   }
 
-  return facultyStatuses
-    .map((item) => {
-      const facultyAcr = item.facultyAcr?.trim().toUpperCase() || "N/A";
+  return facultyStatuses.map((item) => {
+    const facultyAcr = item.facultyAcr?.trim().toUpperCase() || "N/A";
+    const facultyCourses = courses.filter(
+      (course) => course.facultyAcr?.trim().toUpperCase() === facultyAcr
+    );
 
-      const facultyCourses = courses.filter(
-        (course) =>
-          course.facultyAcr?.trim().toUpperCase() === facultyAcr
-      );
+    if (!facultyCourses.length) {
+      return `
+        <tr>
+          <td style="padding: 8px 12px; border: 1px solid #ddd;">${facultyAcr}</td>
+          <td style="padding: 8px 12px; border: 1px solid #ddd;">N/A</td>
+          <td style="padding: 8px 12px; border: 1px solid #ddd;">No course found</td>
+          <td style="padding: 8px 12px; border: 1px solid #ddd;">${item.status || "Pending"}</td>
+        </tr>
+      `;
+    }
 
-      if (!facultyCourses.length) {
-        return `
-          <tr>
-            <td style="padding: 8px 12px; border: 1px solid #ddd;">${facultyAcr}</td>
-            <td style="padding: 8px 12px; border: 1px solid #ddd;">N/A</td>
-            <td style="padding: 8px 12px; border: 1px solid #ddd;">No course found</td>
-            <td style="padding: 8px 12px; border: 1px solid #ddd;">${item.status || "Pending"}</td>
-          </tr>
-        `;
-      }
-
-      return facultyCourses
-        .map((course, index) => {
-          return `
-            <tr>
-              <td style="padding: 8px 12px; border: 1px solid #ddd;">
-                ${index === 0 ? facultyAcr : ""}
-              </td>
-              <td style="padding: 8px 12px; border: 1px solid #ddd;">
-                ${course.courseId || "N/A"}
-              </td>
-              <td style="padding: 8px 12px; border: 1px solid #ddd;">
-                ${course.courseTitle || "N/A"}
-              </td>
-              <td style="padding: 8px 12px; border: 1px solid #ddd;">
-                ${index === 0 ? item.status || "Pending" : ""}
-              </td>
-            </tr>
-          `;
-        })
-        .join("");
-    })
-    .join("");
+    return facultyCourses.map((course, index) => `
+      <tr>
+        <td style="padding: 8px 12px; border: 1px solid #ddd;">${index === 0 ? facultyAcr : ""}</td>
+        <td style="padding: 8px 12px; border: 1px solid #ddd;">${course.courseId || "N/A"}</td>
+        <td style="padding: 8px 12px; border: 1px solid #ddd;">${course.courseTitle || "N/A"}</td>
+        <td style="padding: 8px 12px; border: 1px solid #ddd;">${index === 0 ? item.status || "Pending" : ""}</td>
+      </tr>
+    `).join("");
+  }).join("");
 };
 
+// Build student status email
 const buildStudentStatusMailHtml = ({
   application,
   student,
@@ -75,9 +62,7 @@ const buildStudentStatusMailHtml = ({
   return `
     <div style="font-family: Arial, sans-serif; line-height: 1.6;">
       <h2>Special Exam Application Status</h2>
-
       <p>Dear ${student.name || application.name || "Student"},</p>
-
       <p>Your special exam application status has been updated.</p>
 
       <table style="border-collapse: collapse; margin-bottom: 16px;">
@@ -102,7 +87,7 @@ const buildStudentStatusMailHtml = ({
           <td style="padding: 6px 12px;">${changedBy}</td>
         </tr>
         <tr>
-          <td style="padding: 6px 12px;"><strong>Updated By:</strong></td>
+          <td style="padding: 6px 12px;"><strong>Updated Role:</strong></td>
           <td style="padding: 6px 12px;">${changedRole}</td>
         </tr>
         <tr>
@@ -112,16 +97,14 @@ const buildStudentStatusMailHtml = ({
       </table>
 
       <h3>Authority Status</h3>
-
       <table style="border-collapse: collapse; margin-bottom: 16px;">
         <tr>
           <td style="padding: 8px 12px; border: 1px solid #ddd;"><strong>Authority</strong></td>
-          <td style="padding: 8px 12px; border: 1px solid #ddd;">${application.authorityStatus}</td>
+          <td style="padding: 8px 12px; border: 1px solid #ddd;">${application.authorityStatus || "Pending"}</td>
         </tr>
       </table>
 
       <h3>Faculty Course Wise Statuses</h3>
-
       <table style="border-collapse: collapse; margin-bottom: 16px;">
         <tr>
           <th style="padding: 8px 12px; border: 1px solid #ddd; text-align: left;">Faculty Acronym</th>
@@ -129,7 +112,6 @@ const buildStudentStatusMailHtml = ({
           <th style="padding: 8px 12px; border: 1px solid #ddd; text-align: left;">Course Title</th>
           <th style="padding: 8px 12px; border: 1px solid #ddd; text-align: left;">Status</th>
         </tr>
-
         ${buildFacultyStatusRows(application.facultyStatuses, application.courses)}
       </table>
 
@@ -145,6 +127,7 @@ const buildStudentStatusMailHtml = ({
   `;
 };
 
+// Send status email to student
 export const notifyStudentApplicationStatusChanged = async ({
   applicationId,
   changedByUserId,
@@ -152,20 +135,15 @@ export const notifyStudentApplicationStatusChanged = async ({
   changedStatus,
 }) => {
   try {
-    console.log(
-      "notifyStudentApplicationStatusChanged Started"
-    );
+    console.log("notifyStudentApplicationStatusChanged Started");
 
-    const application =
-      await StudentApplication.findById(applicationId);
-
+    const application = await StudentApplication.findById(applicationId);
     if (!application) {
       console.log("Application not found");
       return;
     }
 
     const student = await User.findById(application.user);
-
     if (!student) {
       console.log("Student not found");
       return;
@@ -176,13 +154,8 @@ export const notifyStudentApplicationStatusChanged = async ({
       return;
     }
 
-    const changedByUser =
-      await User.findById(changedByUserId);
-
-    const changedBy =
-      changedByUser?.name ||
-      changedByUser?.userID ||
-      "System";
+    const changedByUser = await User.findById(changedByUserId);
+    const changedBy = changedByUser?.name || changedByUser?.userID || "System";
 
     try {
       await sendEmail({
@@ -197,19 +170,11 @@ export const notifyStudentApplicationStatusChanged = async ({
         }),
       });
 
-      console.log(
-        `Student status mail sent successfully to ${student.email}`
-      );
+      console.log(`Student status mail sent successfully to ${student.email}`);
     } catch (mailError) {
-      console.error(
-        `Student status mail failed for ${student.email}:`,
-        mailError
-      );
+      console.error(`Student status mail failed for ${student.email}:`, mailError);
     }
   } catch (error) {
-    console.error(
-      "notifyStudentApplicationStatusChanged Error:",
-      error
-    );
+    console.error("notifyStudentApplicationStatusChanged Error:", error);
   }
 };

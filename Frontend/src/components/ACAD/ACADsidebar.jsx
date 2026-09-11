@@ -16,7 +16,6 @@ const ACADsidebar = () => {
  
   return (
     <div>
-      {/* Sidebar */}
       <div className="sidebar">
         <h3 className="sidebar-titlee">NUB</h3>
         <h3 className="sidebar-titles">Special Exam Application</h3>
@@ -50,21 +49,11 @@ const ACADsidebar = () => {
              </NavLink>
          </li>
           
-
-          {/* <li>
-            <NavLink
-              to="/ACAD-dashboard/settings"
-              className="sidebar-item custom-hover"
-            >
-              <i className="fa-solid fa-gears"></i>
-              <span>Settings</span>
-            </NavLink>
-          </li> */}
         </ul>
         
         <div className='developer'>
           <a href="https://www.facebook.com/robiulislam.RLM"  target="_blank"  rel="noopener noreferrer">
-          Developer by RLM (NUBian)            
+          Developed by RLM (NUBian)            
           </a>
         </div>
 

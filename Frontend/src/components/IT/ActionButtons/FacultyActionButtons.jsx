@@ -2,32 +2,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../../Dashboard/studentButtons.css";
 
-// export const columns = [
-//     {
-//         name: "S No",
-//         selector: (row) => row.sno,
-//     },
-//     {
-//         name: "Student ID",
-//         selector: (row) => row.StudentID,
-//         sortable: true
-//     },
-//     {
-//         name: "Image",
-//         selector: (row) => row.profileImage,
-//         sortable: true
-//     },{
-//         name: "Name",
-//         selector: (row) => row.Name,
-//         sortable: true
-//     },
-//     {
-//         name: "Action",
-//         cell: (row) => <StudentButtons id={row._id} />,
-//         width: "200px"
-//     },
-// ]
-
 const FacultyActionButtons = ({ id }) =>{
     const navigate = useNavigate();
 

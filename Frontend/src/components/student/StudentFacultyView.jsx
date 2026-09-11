@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import DataTable from "react-data-table-component";
-import FacultyButtons from "../Dashboard/facultyButtons"; // default import
 import "../Dashboard/list.css";
 
 const StudentFacultyView = () => {

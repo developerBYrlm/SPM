@@ -32,7 +32,7 @@ const APending = () => {
   .filter((app) => {
     if (!ACAD) return false;
 
-    return app.department === ACAD.department; // ✅ ONLY dept ম্যাচ
+    return app.department === ACAD.department; 
   })
   .filter((app) =>
     app.studentId.toLowerCase().includes(search.toLowerCase())

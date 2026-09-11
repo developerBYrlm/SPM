@@ -29,7 +29,6 @@ const RoutineSh = () => {
         setFile(e.target.files[0]);
     };
 
-    // --- Routine View Logic ---
     const handleUpload = async (e) => {
     e.preventDefault();
 

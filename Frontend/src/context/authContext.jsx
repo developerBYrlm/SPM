@@ -1,65 +1,57 @@
-import axios from 'axios'
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import axios from "axios";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
-const userContext = createContext ()
+const userContext = createContext();
 
-const AuthContext = ({children}) => {
+const AuthContext = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    const [user, setUser] = useState(null)
-    const [loading, setLoading] = useState(true) 
+  // Check user login
+  useEffect(() => {
+    const verifyUser = async () => {
+      try {
+        const token = localStorage.getItem("token");
 
-
-    useEffect(() => {
-      const verifyUser = async () => {
-        try {
-
-          const token = localStorage.getItem('token')
-          if(token) {
-
-        
-            const response = await axios.get("https://spm-1-u37a.onrender.com/api/auth/verify", {
-                headers: {
-                  Authorization : `Bearer ${token}`,
-                },
-            });
-
-            console.log(response)
-            if(response.data.user) {
-              setUser(response.data.user)
-            }
-          } else{
-            setUser(null);
-            setLoading(false)
-          }
-        } catch (error){
-          console.log(error)
-            if(error.response && !error.response.data.error) {
-              setUser(null);
-            }
-        } finally {
-          setLoading(false);
+        if (!token) {
+          setUser(null);
+          return;
         }
+
+        const response = await axios.get(
+          "https://spm-1-u37a.onrender.com/api/auth/verify",
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+
+        if (response.data.user) setUser(response.data.user);
+        else setUser(null);
+      } catch (error) {
+        console.error(error);
+        setUser(null);
+        localStorage.removeItem("token");
+      } finally {
+        setLoading(false);
       }
-      verifyUser()
+    };
 
-    }, [])
+    verifyUser();
+  }, []);
 
-    const login = (user) => {
-      setUser(user)
-    }
+  // Save user after login
+  const login = (userData) => setUser(userData);
 
-    const logout = () =>{
-      setUser(null)
-      localStorage.removeItem("token")
-    }
+  // Remove user and token
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem("token");
+  };
 
   return (
-    <userContext.Provider value={{user, login, logout, loading}}>
-        {children}
+    <userContext.Provider value={{ user, login, logout, loading }}>
+      {children}
     </userContext.Provider>
+  );
+};
 
-  )
-}
-
-export const useAuth = () => useContext(userContext)
-export default AuthContext
+export const useAuth = () => useContext(userContext);
+export default AuthContext;

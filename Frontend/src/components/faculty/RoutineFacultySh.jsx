@@ -29,11 +29,10 @@ const RoutineFacultySh = () => {
         setFile(e.target.files[0]);
     };
 
-    // --- Routine View Logic ---
+    
     const handleUpload = async (e) => {
     e.preventDefault();
 
-    // Upload disable – only view / refresh routine
     setLoading(true);
     try {
         await fetchRoutine(); 

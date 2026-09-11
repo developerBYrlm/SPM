@@ -62,7 +62,7 @@ const List = () => {
       width: "160px",
     },
     { name: "Name", selector: (row) => row.name, sortable: true, width: "310px" },
-    { name: "S.E. Count", selector: (row) => row.specialExamCount, sortable: true, width: "150px" },
+    { name: "S.E.P.", selector: (row) => row.specialExamCount, sortable: true, width: "150px" },
     {
       name: "Action",
       cell: (row) => <StudentButtons id={row._id} />, width: "290px", center: "true"

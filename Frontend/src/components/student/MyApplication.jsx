@@ -96,30 +96,13 @@ const MyApplication = () => {
             {new Date(app.missedExamDate).toLocaleDateString()}
           </h3>
 
-          <p>
-            <strong>Department:</strong> {app.department}
-          </p>
-
-          <p>
-            <strong>Student ID:</strong> {app.studentId}
-          </p>
-
-          <p>
-            <strong>Name:</strong> {app.name}
-          </p>
-
-          <p>
-            <strong>Exam Type:</strong> {app.missedExamType}
-          </p>
-
-          <p>
-            <strong>Semester:</strong> {app.semester} (Section: {app.section})
-          </p>
-
-          <p>
-            <strong>Total Fine:</strong> {app.totalFine} Tk
-          </p>
-
+          <p><strong>Department:</strong> {app.department}</p>
+          <p><strong>Student ID:</strong> {app.studentId}</p>
+          <p><strong>Name:</strong> {app.name}</p>
+          <p><strong>Exam Type:</strong> {app.missedExamType}</p>
+          <p><strong>Semester:</strong> {app.semester} (Section: {app.section})</p>
+          <p><strong>Total Fine:</strong> {app.totalFine} Tk</p>
+          
           <h3>Missed Courses:</h3>
 
           <ul>

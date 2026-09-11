@@ -3,54 +3,40 @@ import axios from "axios";
 import DataTable from "react-data-table-component";
 import StudentButtonForFaculty from "./StudentButtonForFaculty";
 import "../Dashboard/list.css";
-import '../Dashboard/ViewActionButton/ViewActionButton.css';
+import "../Dashboard/ViewActionButton/ViewActionButton.css";
 
-
-const List = () => {
+const facultyList = () => {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
-  const [faculty, setFaculty] = useState(null); 
+  const [faculty, setFaculty] = useState(null);
 
-  // Fetch logged‑in faculty profile (department)
+  // Get logged-in faculty profile
   const fetchFacultyProfile = async () => {
     try {
-      const res = await axios.get("https://spm-1-u37a.onrender.com/api/auth/me", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const res = await axios.get(
+        "https://spm-1-u37a.onrender.com/api/auth/me",
+        { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
+      );
 
-      if (res.data.success) {
-        setFaculty(res.data.user); 
-      }
+      if (res.data.success) setFaculty(res.data.user);
     } catch (err) {
       console.error(err);
     }
   };
 
-  //  Department-wise + search filter
+  // Filter students by department and student ID
   const filteredStudents = students
     .filter((student) => {
       if (!faculty) return false;
-
-      return (
-        student.department?.toLowerCase() ===
-        faculty.department?.toLowerCase()
-      );
+      return student.department?.toLowerCase() === faculty.department?.toLowerCase();
     })
     .filter((student) =>
-      (student.studentId || "")
-        .toLowerCase()
-        .includes(search.toLowerCase())
+      (student.studentId || "").toLowerCase().includes(search.toLowerCase())
     );
 
+  // Table columns
   const columns = [
-    // {
-    //   name: "S No",
-    //   selector: (row) => row.sno,
-    //   width: "120px",
-    // },
     {
       name: "Student ID",
       selector: (row) => row.studentId,
@@ -60,11 +46,15 @@ const List = () => {
     {
       name: "Image",
       cell: (row) => (
-        <img
-          src={row.profileImage || "/default.png"}
-          alt="IMG"
-          className="student-image"
-        />
+        row.profileImage ? (
+          <img
+            src={row.profileImage}
+            alt={`${row.name} profile`}
+            className="student-profile-image"
+          />
+        ) : (
+          <span>No image</span>
+        )
       ),
       width: "160px",
     },
@@ -81,27 +71,27 @@ const List = () => {
     },
   ];
 
+  // Get faculty profile and student list
   useEffect(() => {
     const fetchStudents = async () => {
       setLoading(true);
+
       try {
-        const res = await axios.get("https://spm-1-u37a.onrender.com/api/students", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
+        const res = await axios.get(
+          "https://spm-1-u37a.onrender.com/api/students",
+          { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
+        );
 
         if (res.data.success) {
-          let i = 1;
           setStudents(
-            res.data.students.map((s) => ({
-              _id: s._id,
-              sno: i++,
-              studentId: s.user?.userID || "N/A",
-              name: s.user?.name || "N/A",
-              department: s.user?.department,
-              profileImage: s.user?.profileImage
-                ? `https://spm-1-u37a.onrender.com/imageUploads/uploads/${s.user.profileImage}`
+            res.data.students.map((student, index) => ({
+              _id: student._id,
+              sno: index + 1,
+              studentId: student.user?.userID || "N/A",
+              name: student.user?.name || "N/A",
+              department: student.user?.department,
+              profileImage: student.user?.profileImage
+                ? `https://spm-1-u37a.onrender.com/imageUploads/uploads/${student.user.profileImage}`
                 : "",
             }))
           );
@@ -113,17 +103,12 @@ const List = () => {
       }
     };
 
-    fetchFacultyProfile(); 
+    fetchFacultyProfile();
     fetchStudents();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="loading">
-        <div className="ring"></div>
-      </div>
-    );
-  }
+  // Show loading
+  if (loading) return <div className="loading"><div className="ring"></div></div>;
 
   return (
     <div className="main-content">
@@ -152,4 +137,4 @@ const List = () => {
   );
 };
 
-export default List;
+export default facultyList;

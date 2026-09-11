@@ -64,7 +64,6 @@ const ensureFacultyStatuses = async application => {
   return application;
 };
 
-// তারিখ সুন্দর ফরম্যাটে দেখানোর জন্য (admit card PDF এ ব্যবহার হবে)
 const formatDate = (date) => {
   if (!date) return "N/A";
   return new Date(date).toLocaleDateString("en-GB", {
@@ -411,7 +410,6 @@ export const getMyApplication = async (req, res) => {
     });
   }
 };
-
 
 // Update student application status
 export const updateApplicationStatus = async (req, res) => {

@@ -3,14 +3,13 @@ import User from "../models/User.js";
 import PendingMailLog from "../models/PendingMailLog.js";
 import { sendEmail } from "./emailService.js";
 
-const normalize = (value) => {
-  return value?.toString().trim().toUpperCase() || "";
-};
+// Change value to uppercase format
+const normalize = (value) => value?.toString().trim().toUpperCase() || "";
 
-const getUserRole = (user) => {
-  return user.role?.toString().trim().toLowerCase() || "";
-};
+// Get user role in lowercase
+const getUserRole = (user) => user.role?.toString().trim().toLowerCase() || "";
 
+// Build application view link
 const buildApplicationViewLink = (applicationId, targetType) => {
   const baseUrl = process.env.FRONTEND_URL || "https://spm-1-u37a.onrender.com";
 
@@ -25,6 +24,7 @@ const buildApplicationViewLink = (applicationId, targetType) => {
   return `${baseUrl}/login`;
 };
 
+// Get courses for the receiver
 const getCoursesForRecipient = ({ application, targetType, facultyAcr }) => {
   const courses = application.courses || [];
 
@@ -37,6 +37,7 @@ const getCoursesForRecipient = ({ application, targetType, facultyAcr }) => {
   return courses;
 };
 
+// Build course table rows
 const buildCourseRows = ({ application, targetType, facultyAcr }) => {
   const courses = getCoursesForRecipient({
     application,
@@ -54,25 +55,16 @@ const buildCourseRows = ({ application, targetType, facultyAcr }) => {
     `;
   }
 
-  return courses
-    .map((course) => {
-      return `
-        <tr>
-          <td style="padding: 8px 12px; border: 1px solid #ddd;">
-            ${course.courseId || "N/A"}
-          </td>
-          <td style="padding: 8px 12px; border: 1px solid #ddd;">
-            ${course.courseTitle || "N/A"}
-          </td>
-          <td style="padding: 8px 12px; border: 1px solid #ddd;">
-            ${course.facultyAcr || "N/A"}
-          </td>
-        </tr>
-      `;
-    })
-    .join("");
+  return courses.map((course) => `
+    <tr>
+      <td style="padding: 8px 12px; border: 1px solid #ddd;">${course.courseId || "N/A"}</td>
+      <td style="padding: 8px 12px; border: 1px solid #ddd;">${course.courseTitle || "N/A"}</td>
+      <td style="padding: 8px 12px; border: 1px solid #ddd;">${course.facultyAcr || "N/A"}</td>
+    </tr>
+  `).join("");
 };
 
+// Build pending application email
 const buildPendingMailHtml = ({
   application,
   recipient,
@@ -80,7 +72,6 @@ const buildPendingMailHtml = ({
   facultyAcr,
 }) => {
   const viewLink = buildApplicationViewLink(application._id, targetType);
-
   const targetText =
     targetType === "authority"
       ? "Authority Approval"
@@ -94,9 +85,7 @@ const buildPendingMailHtml = ({
   return `
     <div style="font-family: Arial, sans-serif; line-height: 1.6;">
       <h2>New Pending Special Exam Application</h2>
-
       <p>Respected ${recipient.name || "User"},</p>
-
       <p>A new special exam application is pending for your approval.</p>
 
       <table style="border-collapse: collapse; margin-bottom: 16px;">
@@ -104,22 +93,18 @@ const buildPendingMailHtml = ({
           <td style="padding: 6px 12px;"><strong>Student ID:</strong></td>
           <td style="padding: 6px 12px;">${application.studentId}</td>
         </tr>
-
         <tr>
           <td style="padding: 6px 12px;"><strong>Student Name:</strong></td>
           <td style="padding: 6px 12px;">${application.name}</td>
         </tr>
-
         <tr>
           <td style="padding: 6px 12px;"><strong>Department:</strong></td>
           <td style="padding: 6px 12px;">${application.department}</td>
         </tr>
-
         <tr>
           <td style="padding: 6px 12px;"><strong>Exam Type:</strong></td>
           <td style="padding: 6px 12px;">${application.missedExamType}</td>
         </tr>
-
         <tr>
           <td style="padding: 6px 12px;"><strong>Pending For:</strong></td>
           <td style="padding: 6px 12px;">${targetText}</td>
@@ -127,25 +112,13 @@ const buildPendingMailHtml = ({
       </table>
 
       <h3>${courseSectionTitle}</h3>
-
       <table style="border-collapse: collapse; margin-bottom: 16px;">
         <tr>
-          <th style="padding: 8px 12px; border: 1px solid #ddd; text-align: left;">
-            Course Code
-          </th>
-          <th style="padding: 8px 12px; border: 1px solid #ddd; text-align: left;">
-            Course Title
-          </th>
-          <th style="padding: 8px 12px; border: 1px solid #ddd; text-align: left;">
-            Faculty Acronym
-          </th>
+          <th style="padding: 8px 12px; border: 1px solid #ddd; text-align: left;">Course Code</th>
+          <th style="padding: 8px 12px; border: 1px solid #ddd; text-align: left;">Course Title</th>
+          <th style="padding: 8px 12px; border: 1px solid #ddd; text-align: left;">Faculty Acronym</th>
         </tr>
-
-        ${buildCourseRows({
-          application,
-          targetType,
-          facultyAcr,
-        })}
+        ${buildCourseRows({ application, targetType, facultyAcr })}
       </table>
 
       <p>
@@ -160,31 +133,17 @@ const buildPendingMailHtml = ({
   `;
 };
 
+// Get authority users from application department
 const getAuthorityRecipients = async (application) => {
-  console.log(
-    "Application Department:",
-    application.department
-  );
-
   const users = await User.find({
     department: application.department,
     email: { $exists: true, $ne: "" },
   });
 
-  console.log("Users Found:", users.length);
-
-  const authorities = users.filter(
-    (user) => getUserRole(user) === "authority"
-  );
-
-  console.log(
-    "Authority Found:",
-    authorities.length
-  );
-
-  return authorities;
+  return users.filter((user) => getUserRole(user) === "authority");
 };
 
+// Get pending faculty users
 const getFacultyRecipients = async (application) => {
   const pendingFacultyAcronyms = [
     ...new Set(
@@ -195,9 +154,7 @@ const getFacultyRecipients = async (application) => {
     ),
   ];
 
-  if (pendingFacultyAcronyms.length === 0) {
-    return [];
-  }
+  if (!pendingFacultyAcronyms.length) return [];
 
   const users = await User.find({
     department: application.department,
@@ -213,6 +170,7 @@ const getFacultyRecipients = async (application) => {
     }));
 };
 
+// Send email and save mail status
 const sendPendingMailToRecipient = async ({
   application,
   recipient,
@@ -226,24 +184,16 @@ const sendPendingMailToRecipient = async ({
     facultyAcr,
   });
 
-  if (existingLog?.mailStatus === "Sent") {
-    return;
-  }
+  if (existingLog?.mailStatus === "Sent") return;
 
-  let log;
-
-  if (!existingLog) {
-    log = await PendingMailLog.create({
-      application: application._id,
-      recipient: recipient._id,
-      recipientEmail: recipient.email,
-      targetType,
-      facultyAcr,
-      mailStatus: "Pending",
-    });
-  } else {
-    log = existingLog;
-  }
+  const log = existingLog || await PendingMailLog.create({
+    application: application._id,
+    recipient: recipient._id,
+    recipientEmail: recipient.email,
+    targetType,
+    facultyAcr,
+    mailStatus: "Pending",
+  });
 
   try {
     await sendEmail({
@@ -264,79 +214,45 @@ const sendPendingMailToRecipient = async ({
     log.mailStatus = "Failed";
     log.errorMessage = error.message;
     await log.save();
-
     console.error("Pending mail send failed:", error.message);
   }
 };
 
-export const notifyPendingApplicationUsers = async (
-  applicationId
-) => {
+// Notify authority and faculty users
+export const notifyPendingApplicationUsers = async (applicationId) => {
   try {
-    const application =
-      await StudentApplication.findById(applicationId);
+    const application = await StudentApplication.findById(applicationId);
 
     if (!application) {
       console.log("Application not found");
       return;
     }
 
+    // Send mail to authority users
     if (application.authorityStatus === "Pending") {
-      const authorityUsers =
-        await getAuthorityRecipients(application);
-
-      console.log(
-        "Authority users:",
-        authorityUsers.length
-      );
+      const authorityUsers = await getAuthorityRecipients(application);
 
       for (const authorityUser of authorityUsers) {
-        try {
-          await sendPendingMailToRecipient({
-            application,
-            recipient: authorityUser,
-            targetType: "authority",
-          });
-
-          console.log(
-            "Authority mail sent:",
-            authorityUser.email
-          );
-        } catch (error) {
-          console.error(error);
-        }
-      }
-    }
-
-    const facultyRecipients =
-      await getFacultyRecipients(application);
-
-    console.log(
-      "Faculty recipients:",
-      facultyRecipients.length
-    );
-
-    for (const item of facultyRecipients) {
-      try {
         await sendPendingMailToRecipient({
           application,
-          recipient: item.user,
-          targetType: "faculty",
-          facultyAcr: item.facultyAcr,
+          recipient: authorityUser,
+          targetType: "authority",
         });
-
-        console.log(
-          "Faculty mail sent:",
-          item.user.email
-        );
-      } catch (error) {
-        console.error(error);
       }
     }
+
+    // Send mail to faculty users
+    const facultyRecipients = await getFacultyRecipients(application);
+
+    for (const item of facultyRecipients) {
+      await sendPendingMailToRecipient({
+        application,
+        recipient: item.user,
+        targetType: "faculty",
+        facultyAcr: item.facultyAcr,
+      });
+    }
   } catch (error) {
-    console.error(
-      "notifyPendingApplicationUsers error:",
-      error
-    );
+    console.error("notifyPendingApplicationUsers error:", error);
   }
 };

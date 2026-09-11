@@ -22,7 +22,6 @@ export const uploadRoutine = async (req, res) => {
             return res.status(400).json({ success: false, error: "No file uploaded" });
         }
         
-        // Save to Database
         const newRoutine = new Routine({
             filename: req.file.filename
         });
@@ -57,13 +56,11 @@ export const deleteRoutine = async (req, res) => {
             return res.status(404).json({ success: false, error: "Routine not found" });
         }
 
-        // 1. Folder theke file delete kora
         const filePath = path.join("uploads/routines", routine.filename);
         if (fs.existsSync(filePath)) {
             fs.unlinkSync(filePath);
         }
 
-        // 2. Database theke record delete kora
         await Routine.findByIdAndDelete(id);
 
         res.status(200).json({ success: true, message: "Routine deleted successfully" });

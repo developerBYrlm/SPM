@@ -1,9 +1,6 @@
-
-
-/* ===== Card ===== */
+/* routine card */
 .routine-card {
   margin-left: 265px;
-
 
   width: 900px;
   max-width: 95%;
@@ -17,7 +14,7 @@
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.514);
 }
 
-/* ===== Header ===== */
+/* header */
 .routine-header {
   text-align: center;
   margin-bottom: 30px;
@@ -40,15 +37,12 @@
   margin-top: 6px;
 }
 
-/* ===== Body ===== */
+/* body */
 .routine-body {
   width: 100%;
 }
 
-/* =========================================================
-   =============== UPLOAD SECTION ===========================
-   ========================================================= */
-
+/* upload section */
 .upload-wrapper {
   display: flex;
   justify-content: center;
@@ -59,7 +53,6 @@
   max-width: 520px;
 }
 
-/* Upload Area */
 .upload-area {
   border: 2px dashed rgba(255, 255, 255, 0.35);
   border-radius: 22px;
@@ -99,19 +92,19 @@
   color: rgba(255, 255, 255, 0.7);
 }
 
-/* Publish Button */
 .loading {
   margin-top: 30px;
- 
+
   padding: 14px 0;
 
   border-radius: 30px;
   border: none;
 
-  color:  #ffffff;
+  color: #ffffff;
   font-size: 35px;
   font-weight: 700;
 }
+
 .publish-btn {
   margin-top: 25px;
   width: 100%;
@@ -137,23 +130,20 @@
   background: rgba(255, 255, 255, 0.95);
   color: #159bd9;
   transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4),
-              0 0 12px rgba(50, 150, 255, 0.7);
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.4),
+    0 0 12px rgba(50, 150, 255, 0.7);
 }
 
 .publish-btn:active {
   transform: scale(0.96);
 }
 
-/* =========================================================
-   =============== DISPLAY SECTION ==========================
-   ========================================================= */
-
+/* display section */
 .display-wrapper {
   width: 100%;
 }
 
-/* Actions */
 .display-actions {
   display: flex;
   justify-content: space-between;
@@ -161,7 +151,6 @@
   margin-bottom: 18px;
 }
 
-/* Active Status */
 .current-status {
   font-size: 22px;
   font-weight: 700;
@@ -178,7 +167,6 @@
   margin-right: 10px;
   box-shadow: 0 0 12px #00ff85;
 }
-
 
 .none {
   text-align: center;
@@ -203,22 +191,20 @@
   animation: fadeInSoft 0.6s ease forwards;
 }
 
-
-
 /* animation */
 @keyframes fadeInSoft {
   from {
     opacity: 0;
     transform: translateY(6px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-
-/* Delete Button */
+/* delete button */
 .delete-routine-btn {
   padding: 10px 18px;
   border-radius: 22px;
@@ -246,7 +232,7 @@
   transform: scale(0.9);
 }
 
-/* PDF Viewer */
+/* pdf viewer */
 .pdf-viewer-frame {
   width: 100%;
   overflow: hidden;
@@ -260,9 +246,7 @@
   border-radius: 22px;
 }
 
-/* =========================================================
-   =================== MOBILE =================================
-   ========================================================= */
+/* mobile */
 @media (max-width: 768px) {
   .routine-card {
     padding: 25px;
@@ -278,6 +262,4 @@
   }
 }
 
-
-
-/* just paragraph */
+/* paragraph */

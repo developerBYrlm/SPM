@@ -1,7 +1,7 @@
 import ExamSchedule from "../models/ExamSchedule.js";
 import User from "../models/User.js";
 
-
+// Get authority department
 const getAuthorityDepartment = async (req) => {
   const userId = req.user?.id || req.user?._id;
 
@@ -18,10 +18,10 @@ const getAuthorityDepartment = async (req) => {
   return authorityUser.department;
 };
 
+// Get department exam schedule
 export const getExamSchedule = async (req, res) => {
   try {
     const department = await getAuthorityDepartment(req);
-
     const schedule = await ExamSchedule.findOne({ department });
 
     return res.json({
@@ -30,6 +30,7 @@ export const getExamSchedule = async (req, res) => {
     });
   } catch (error) {
     console.error("Get exam schedule error:", error);
+
     return res.status(500).json({
       success: false,
       error: "Failed to fetch exam schedule",
@@ -37,10 +38,10 @@ export const getExamSchedule = async (req, res) => {
   }
 };
 
+// Create or update exam schedule
 export const upsertExamSchedule = async (req, res) => {
   try {
     const department = await getAuthorityDepartment(req);
-
     const {
       applicationDeadlineDate,
       applicationDeadlineText,
@@ -59,6 +60,7 @@ export const upsertExamSchedule = async (req, res) => {
       specialExamText,
     };
 
+    // Reset deadline email status if date changes
     if (
       !existingSchedule ||
       new Date(existingSchedule.applicationDeadlineDate).getTime() !==
@@ -67,6 +69,7 @@ export const upsertExamSchedule = async (req, res) => {
       updatePayload.applicationDeadlineEmailSent = false;
     }
 
+    // Reset reminder email status if date changes
     if (
       !existingSchedule ||
       new Date(existingSchedule.specialExamStartDate).getTime() !==
@@ -88,6 +91,7 @@ export const upsertExamSchedule = async (req, res) => {
     });
   } catch (error) {
     console.error("Save exam schedule error:", error);
+
     return res.status(500).json({
       success: false,
       error: "Failed to save exam schedule",

@@ -88,7 +88,7 @@ const ITSidebar = () =>  {
 
         <div className='developer'>
           <a href="https://www.facebook.com/robiulislam.RLM"  target="_blank"  rel="noopener noreferrer">
-          Developer by RLM (NUBian)            
+          Developed by RLM (NUBian)            
           </a>
         </div>
 

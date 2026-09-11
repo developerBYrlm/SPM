@@ -1,67 +1,59 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import './ViewActionButton.css'; 
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import "./ViewActionButton.css";
 
 const AActionButton = () => {
-  const { id } = useParams()             
-  const [student, setStudent] = useState(null) 
-  const [loading, setLoading] = useState(true)
+  // Get ID from URL
+  const { id } = useParams();
+  const [student, setStudent] = useState(null);
+  const [loading, setLoading] = useState(true);
 
+  // Get ACAD data
   useEffect(() => {
     const fetchStudent = async () => {
       try {
         const response = await axios.get(
           `https://spm-1-u37a.onrender.com/api/acad/acad-view/${id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        )
+          { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
+        );
 
-        if (response.data.success) {
-          setStudent(response.data.student)
-        }
+        if (response.data.success) setStudent(response.data.student);
       } catch (error) {
-        console.error(error)
-        alert("ACAD not found")
+        console.error(error);
+        alert("ACAD not found");
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    fetchStudent()
-  }, [id])
+    fetchStudent();
+  }, [id]);
 
+  // Show loading
+  if (loading) return <div className="loading"><div className="ring"></div></div>;
 
-  if (loading) { 
-    return ( 
-     <div className="loading">
-        <div className="ring"></div>
-    </div>
-    );
-  }
-  if (!student) { return <div>No student data found</div> }
+  // Show message if data is not found
+  if (!student) return <div>No student data found</div>;
 
   return (
     <div className="main-content">
       <div className="dashboard-container">
         <h2 className="dashboard-title">ACAD Details</h2>
 
+        {/* Back button */}
         <div className="back">
           <Link to="/authority-dashboard/acad">
             <i className="fa-solid fa-backward"></i>
           </Link>
         </div>
 
+        {/* Profile image */}
         <div className="ImageFrame">
-          <img
-            src={`https://spm-1-u37a.onrender.com/imageUploads/uploads/${student.user.profileImage}`}
-            alt="ACAD"
-          />
+          {`https://spm-1-u37a.onrender.com/imageUploads/uploads/${student.user.profileImage}`}
         </div>
 
+        {/* ACAD details */}
         <div className="student-info">
           <p><strong>ACAD Department:</strong> {student.user.department}</p>
           <p><strong>ACAD ID:</strong> {student.studentId}</p>

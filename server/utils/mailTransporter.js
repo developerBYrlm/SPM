@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
 
+// Create mail transporter
 const createMailTransporter = () => {
   return nodemailer.createTransport({
     host: process.env.SMTP_HOST,

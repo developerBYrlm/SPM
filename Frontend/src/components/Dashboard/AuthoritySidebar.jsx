@@ -42,13 +42,13 @@ const AuthoritySidebar = () => {
             </NavLink>
           </li>
 
+          {/* under work.. */}
           {/* <li>
             <NavLink to="/authority-dashboard/students-routine"  className="sidebar-item custom-hover">
               <i class="fa-solid fa-calendar-days"></i>
               <span>Exam Routine</span>
             </NavLink>
           </li> */}
-
 
           <li>
             <NavLink to="/authority-dashboard/date-time" className="sidebar-item custom-hover">
@@ -105,7 +105,7 @@ const AuthoritySidebar = () => {
 
         <div className='developer'>
           <a href="https://www.facebook.com/robiulislam.RLM"  target="_blank"  rel="noopener noreferrer">
-          Developer by RLM (NUBian)            
+          Developed by RLM (NUBian)            
           </a>
         </div>
 

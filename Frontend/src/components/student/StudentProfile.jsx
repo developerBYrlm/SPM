@@ -78,7 +78,7 @@ const StudentProfile = () =>{
             <p><strong>Gender:</strong> {student.gender}</p>
             <p className="special-exam-count">
               <strong>
-                Approved Special Exam Count: 
+                Total participation in Special Exams:
               </strong>
               
               <span>

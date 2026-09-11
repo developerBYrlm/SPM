@@ -1,558 +1,509 @@
-/* =====================================================
-   GLOBAL RESET & DEFAULT FONT
-   ===================================================== */
-
+/* global reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "League Spartan", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "League Spartan", sans-serif;
 }
 
-/* =====================================================
-   BODY STYLING (CENTERED GLASS UI BACKGROUND)
-   ===================================================== */
-
+/* body */
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 
-    background-image: url("/ghghgh.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  background-image: url("/ghghgh.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-/* =====================================================
-   MAIN WRAPPER (GLASS CONTAINER)
-   ===================================================== */
-
+/* wrapper */
 .wrapper {
-    width: 580px;
-    padding: 55px 50px;
+  width: 580px;
+  padding: 55px 50px;
 
-    background: rgba(0, 0, 0, 0.123);
-    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.514);  backdrop-filter: blur(12px);  backdrop-filter: blur(14px);
-    color: #ffffff;
+  background: rgba(0, 0, 0, 0.123);
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.514);
 
-    border: 2.5px solid rgba(255, 255, 255, 0.3);
-    border-radius: 30px;
-    backdrop-filter: blur(20px);
+  color: #ffffff;
+
+  border: 2.5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 30px;
+
+  backdrop-filter: blur(20px);
 }
 
-/* =====================================================
-   HEADINGS
-   ===================================================== */
-
+/* headings */
 .wrapper h1 {
-    font-size: 27px;
-    font-weight: 650;
-    text-align: center;
+  font-size: 27px;
+  font-weight: 650;
+  text-align: center;
 }
 
 .wrapper h2 {
-    font-size: 40px;
-    font-weight: 650;
-    text-align: center;
-    margin-top: 10px;
-    margin-bottom: -15px;
+  font-size: 40px;
+  font-weight: 650;
+  text-align: center;
+
+  margin-top: 10px;
+  margin-bottom: -15px;
 }
 
-/* =====================================================
-   INPUT BOX WRAPPER (GLASS FIELD)
-   ===================================================== */
-
+/* input box */
 .wrapper .input-box {
-    position: relative;
-    width: 100%;
-    height: 40px;
-    margin: 25px 0;
+  position: relative;
 
-    display: flex;
-    align-items: center;
-    padding: 0 15px;
+  width: 100%;
+  height: 40px;
+  margin: 25px 0;
 
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
 
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 30px;
+  padding: 0 15px;
 
-    transition: 0.3s ease;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 30px;
+
+  transition: 0.3s ease;
 }
 
-/* Hover effect on input container */
 .wrapper .input-box:hover {
-    background: rgba(255, 255, 255, 0.18);
-    border-color: rgba(255, 255, 255, 0.5);
-    box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.5);
+
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
 }
 
-/* Focus glow when input is active */
 .wrapper .input-box:focus-within {
-    background: rgba(255, 255, 255, 0.22);
-    border-color: rgba(50, 150, 255, 0.9);
-    box-shadow: 0 0 15px rgba(50, 150, 255, 0.6);
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(50, 150, 255, 0.9);
+
+  box-shadow: 0 0 15px rgba(50, 150, 255, 0.6);
 }
 
-/* =====================================================
-   INPUT FIELD (FIRST DEFINITION - BASE GLASS TEXT)
-   ===================================================== */
-
+/* input field */
 .wrapper .input-box input {
-    width: 100%;
-    height: 100%;
-    background: transparent;
+  width: 100%;
+  height: 100%;
 
-    border: none;
-    outline: none;
+  background: transparent;
+  border: none;
+  outline: none;
 
-    font-size: 15px;
-    color: #fff;
+  font-size: 15px;
+  color: #fff;
 }
 
-/* Keep text white on focus */
 .wrapper .input-box input:focus {
-    color: #fff;
+  color: #fff;
 }
-
-/* =====================================================
-   INPUT FIELD (SECOND DEFINITION - VISUAL OVERRIDE)
-   NOTE: This overrides the earlier definition
-   ===================================================== */
 
 .input-box input {
-    width: 100%;
-    height: 100%;
-    padding: 0 20px;
+  width: 100%;
+  height: 100%;
+  padding: 0 20px;
 
-    background: transparent;
-    outline: none;
+  background: transparent;
+  outline: none;
 
-    border: 2px solid rgba(255, 255, 255, 0.6);
-    border-radius: 40px;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 40px;
 
-    font-size: 20px;
-    font-weight: 300;
-    color: #ffffff;
+  font-size: 20px;
+  font-weight: 300;
+
+  color: #ffffff;
 }
 
-/* Input placeholder styling */
 .input-box input::placeholder {
-    color: #ffffff85;
+  color: #ffffff85;
 }
 
-/* Icon inside input */
 .input-box i {
-    position: absolute;
-    right: 20px;
-    top: 50%;
+  position: absolute;
+  right: 20px;
+  top: 50%;
 
-    transform: translateY(-50%);
-    font-size: 15px;
+  transform: translateY(-50%);
+  font-size: 15px;
 }
 
-/* =====================================================
-   ERROR / TEXT MESSAGE
-   ===================================================== */
-
-/* =====================================================
-   MODERN ERROR / ALERT MESSAGE
-   ===================================================== */
-
+/* error message */
 .text {
-    margin: 25px auto -15px;
-    padding: 10px 18px;
-    width: fit-content;
+  margin: 25px auto -15px;
+  padding: 10px 18px;
 
-    font-size: 18px;
-    font-weight: 600;
-    letter-spacing: 0.3px;
+  width: fit-content;
 
-    color: #ff4d4d; /* modern soft red */
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
 
-    background: rgba(255, 77, 77, 0.301); /* glass red */
-    border: 2px solid rgba(255, 77, 77, 0.623);
-    border-radius: 14px;
+  color: #ff4d4d;
 
-    backdrop-filter: blur(15px);
+  background: rgba(255, 77, 77, 0.301);
+  border: 2px solid rgba(255, 77, 77, 0.623);
+  border-radius: 14px;
 
-    text-align: center;
+  backdrop-filter: blur(15px);
 
-    box-shadow:
-        0 4px 15px rgba(255, 0, 0, 0.637),
-        inset 0 0 8px rgba(255, 0, 0, 0.582);
+  text-align: center;
 
-    animation: errorFade 0.35s ease-in-out;
+  box-shadow:
+    0 4px 15px rgba(255, 0, 0, 0.637),
+    inset 0 0 8px rgba(255, 0, 0, 0.582);
+
+  animation: errorFade 0.35s ease-in-out;
 }
 
-/* subtle entrance animation */
+/* animation */
 @keyframes errorFade {
-    from {
-        opacity: 0;
-        transform: translateY(-6px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* =====================================================
-   REMEMBER ME & FORGOT PASSWORD
-   ===================================================== */
-
+/* remember forgot */
 .wrapper .remember-forgot {
-    display: flex;
-    justify-content: flex-end;
+  display: flex;
+  justify-content: flex-end;
 
-    font-size: 15px;
-    margin: -10px 0 15px;
+  font-size: 15px;
+  margin: -10px 0 15px;
 }
 
-/* Checkbox styling */
 .remember-forgot label input {
-    accent-color: #fff;
-    margin-right: 6px;
+  accent-color: #fff;
+  margin-right: 6px;
 }
 
-/* Forgot password link */
 .remember-forgot a {
-    color: #fff;
-    text-decoration: none;
+  color: #fff;
+  text-decoration: none;
 }
 
 .remember-forgot a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
-/* =====================================================
-   BUTTON (FIRST DEFINITION - BASE)
-   ===================================================== */
-
+/* button */
 .wrapper .button {
-    width: 100%;
-    height: 40px;
+  width: 100%;
+  height: 40px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    background: #fff;
-    color: #266bdb;
+  background: rgb(255, 255, 255);
+  color: #266bdb;
 
-    font-size: 25px;
-    font-weight: 650;
+  font-size: 25px;
+  font-weight: 650;
 
-    border: none;
-    outline: none;
-    border-radius: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  outline: none;
+  border-radius: 40px;
 
-    cursor: pointer;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
-    transition: 0.3s ease;
+  cursor: pointer;
+
+  backdrop-filter: blur(10px);
+
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transition: 0.3s ease;
 }
 
-/* =====================================================
-   BUTTON (SECOND DEFINITION - GLASS OVERRIDE)
-   NOTE: Overrides previous button styles
-   ===================================================== */
-
-.wrapper .button {
-    background: rgb(255, 255, 255);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(10px);
-
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
-
-/* Hover effect */
 .wrapper .button:hover {
-    background: rgba(255, 255, 255, 0.22);
-    color: #fff;
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
 
-    transform: translateY(-4px);
-    border-color: rgba(255, 255, 255, 0.55);
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.55);
 
-    box-shadow:
-        0 10px 25px rgba(0, 0, 0, 0.35),
-        0 0 12px rgba(50, 150, 255, 0.7);
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.35),
+    0 0 12px rgba(50, 150, 255, 0.7);
 }
 
-/* Click effect */
 .wrapper .button:active {
-    transform: scale(0.96);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  transform: scale(0.96);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
-/* =====================================================
-   POPUP OVERLAY (SUCCESS MESSAGE)
-   ===================================================== */
-
+/* popup overlay */
 .popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
 
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 9999;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
 }
 
-/* Popup container */
+/* popup box */
 .popup-box {
-    padding: 14px 45px;
-    gap: 18px;
+  padding: 14px 45px;
+  gap: 18px;
 
-    background: transparent;
-    color: #fff;
+  background: transparent;
+  color: #fff;
 
-    font-size: 18px;
-    text-align: center;
+  font-size: 18px;
+  text-align: center;
 
-    border-radius: 19px;
-    border: 2.5px solid rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(8px);
+  border-radius: 19px;
+  border: 2.5px solid rgba(255, 255, 255, 0.3);
+
+  backdrop-filter: blur(8px);
 }
 
-/* Popup heading */
 .popup-box h2 {
-    margin-bottom: 7px;
+  margin-bottom: 7px;
 }
 
-/* =====================================================
-   POPUP BUTTON (OK)
-   ===================================================== */
-
+/* popup button */
 .popup-box button {
-    margin-top: 10px;
-    padding: 8px 22px;
+  margin-top: 10px;
+  padding: 8px 22px;
 
-    font-size: 17px;
-    font-weight: 600;
+  font-size: 17px;
+  font-weight: 600;
 
-    background: rgba(76, 175, 80, 0.25);
-    backdrop-filter: blur(10px);
+  background: rgba(76, 175, 80, 0.25);
+  backdrop-filter: blur(10px);
 
-    color: #fff;
-    cursor: pointer;
+  color: #fff;
+  cursor: pointer;
 
-    border: 1px solid rgba(76, 175, 80, 0.4);
-    border-radius: 50px;
+  border: 1px solid rgba(76, 175, 80, 0.4);
+  border-radius: 50px;
 
-    box-shadow: 0 0 10px rgba(76, 175, 80, 0.4);
-    transition: 0.3s ease;
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.4);
+
+  transition: 0.3s ease;
 }
 
-/* Popup button hover */
 .popup-box button:hover {
-    background: rgb(76, 175, 79);
-    transform: translateY(-3px);
+  background: rgb(76, 175, 79);
+  transform: translateY(-3px);
 
-    border-color: rgba(76, 175, 80, 0.7);
-    box-shadow:
-        0 8px 20px rgba(0, 0, 0, 0.25),
-        0 0 12px rgba(76, 175, 80, 0.7);
+  border-color: rgba(76, 175, 80, 0.7);
+
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.25),
+    0 0 12px rgba(76, 175, 80, 0.7);
 }
 
-/* Popup button active */
 .popup-box button:active {
-    transform: scale(0.95);
-    box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+  transform: scale(0.95);
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
 }
 
-/* Popup Overlay */
+/* loading popup */
 .loading-popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.6);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 1000;
 }
 
-/* Popup Box */
 .loading-popup-box {
-    background: #ffffff00;
-    padding: 30px 40px;
-    border-radius: 10px;
-    text-align: center;
+  background: #ffffff00;
+
+  padding: 30px 40px;
+  border-radius: 10px;
+
+  text-align: center;
 }
 
 .loading-popup-box p {
-    margin-top: 15px;
-    font-size: 16px;
-    color: #ffffff;
-    font-weight: 500;
+  margin-top: 15px;
+
+  font-size: 16px;
+  font-weight: 500;
+
+  color: #ffffff;
 }
 
-/* Simple Spinner Animation */
 .spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid #f3f3f300;
-    border-top: 4px solid #3498db; /* Spinner color */
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin: 0 auto;
+  width: 40px;
+  height: 40px;
+
+  border: 4px solid #f3f3f300;
+  border-top: 4px solid #3498db;
+
+  border-radius: 50%;
+
+  animation: spin 1s linear infinite;
+
+  margin: 0 auto;
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-/* ==========================================
-   TABLET (768px)
-   ========================================== */
+/* tablet */
 @media (max-width: 768px) {
+  body {
+    padding: 20px;
+  }
 
-    body {
-        padding: 20px;
-    }
+  .wrapper {
+    width: 100%;
+    max-width: 550px;
+    padding: 40px 30px;
+  }
 
-    .wrapper {
-        width: 100%;
-        max-width: 550px;
-        padding: 40px 30px;
-    }
+  .wrapper h1 {
+    font-size: 24px;
+  }
 
-    .wrapper h1 {
-        font-size: 24px;
-    }
+  .wrapper h2 {
+    font-size: 32px;
+  }
 
-    .wrapper h2 {
-        font-size: 32px;
-    }
+  .input-box input {
+    font-size: 18px;
+  }
 
-    .input-box input {
-        font-size: 18px;
-    }
+  .wrapper .button {
+    font-size: 20px;
+  }
 
-    .wrapper .button {
-        font-size: 20px;
-    }
-
-    .text {
-        font-size: 16px;
-        width: 100%;
-    }
+  .text {
+    font-size: 16px;
+    width: 100%;
+  }
 }
 
-
-/* ==========================================
-   MOBILE (576px)
-   ========================================== */
+/* mobile */
 @media (max-width: 576px) {
+  body {
+    padding: 15px;
+    align-items: center;
+  }
 
-    body {
-        padding: 15px;
-        align-items: center;
-    }
+  .wrapper {
+    width: 100%;
+    padding: 30px 20px;
+    border-radius: 20px;
+  }
 
-    .wrapper {
-        width: 100%;
-        padding: 30px 20px;
-        border-radius: 20px;
-    }
+  .wrapper h1 {
+    font-size: 20px;
+  }
 
-    .wrapper h1 {
-        font-size: 20px;
-    }
+  .wrapper h2 {
+    font-size: 26px;
+  }
 
-    .wrapper h2 {
-        font-size: 26px;
-    }
+  .wrapper .input-box {
+    height: 50px;
+    margin: 18px 0;
+  }
 
-    .wrapper .input-box {
-        height: 50px;
-        margin: 18px 0;
-    }
+  .input-box input {
+    font-size: 16px;
+    padding: 0 15px;
+  }
 
-    .input-box input {
-        font-size: 16px;
-        padding: 0 15px;
-    }
+  .input-box i {
+    right: 15px;
+    font-size: 14px;
+  }
 
-    .input-box i {
-        right: 15px;
-        font-size: 14px;
-    }
+  .wrapper .button {
+    height: 50px;
+    font-size: 18px;
+  }
 
-    .wrapper .button {
-        height: 50px;
-        font-size: 18px;
-    }
+  .remember-forgot {
+    font-size: 13px !important;
+  }
 
-    .remember-forgot {
-        font-size: 13px !important;
-    }
+  .text {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+  }
 
-    .text {
-        width: 100%;
-        font-size: 14px;
-        padding: 10px;
-    }
+  .popup-box {
+    width: 90%;
+    padding: 20px;
+  }
 
-    .popup-box {
-        width: 90%;
-        padding: 20px;
-    }
+  .popup-box h2 {
+    font-size: 22px;
+  }
 
-    .popup-box h2 {
-        font-size: 22px;
-    }
-
-    .popup-box p {
-        font-size: 14px;
-    }
-
+  .popup-box p {
+    font-size: 14px;
+  }
 }
 
-
-/* ==========================================
-   SMALL MOBILE (375px)
-   ========================================== */
+/* small mobile */
 @media (max-width: 375px) {
+  .wrapper {
+    padding: 25px 15px;
+  }
 
-    .wrapper {
-        padding: 25px 15px;
-    }
+  .wrapper h1 {
+    font-size: 18px;
+  }
 
-    .wrapper h1 {
-        font-size: 18px;
-    }
+  .wrapper h2 {
+    font-size: 22px;
+  }
 
-    .wrapper h2 {
-        font-size: 22px;
-    }
+  .input-box input {
+    font-size: 14px;
+  }
 
-    .input-box input {
-        font-size: 14px;
-    }
+  .wrapper .button {
+    font-size: 16px;
+  }
 
-    .wrapper .button {
-        font-size: 16px;
-    }
+  .remember-forgot {
+    font-size: 12px !important;
+  }
 
-    .remember-forgot {
-        font-size: 12px !important;
-    }
-
-    .text {
-        font-size: 13px;
-    }
-
+  .text {
+    font-size: 13px;
+  }
 }

@@ -1,32 +1,25 @@
-/* =====================================================
-   MAIN CONTENT AREA
-   ===================================================== */
-
+/* main content */
 .main-content {
-  margin-left: 265px;             /* Sidebar width offset */
+  margin-left: 265px;
   min-height: 100vh;
 
   display: flex;
-  justify-content: center;        /* Horizontal center */
-  align-items: center;            /* Vertical center */
+  justify-content: center;
+  align-items: center;
 
   padding: 40px 30px;
 }
 
-/* =====================================================
-   DASHBOARD CONTAINER (GLASS CARD)
-   ===================================================== */
-
+/* dashboard container */
 .dashboard-container {
   width: 100%;
   max-width: 1400px;
-  
 
   padding: 45px 50px;
 
   display: flex;
   flex-direction: column;
-  align-items: center;            /* Title & image centered */
+  align-items: center;
 
   background: rgba(0, 0, 0, 0.164);
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.514);
@@ -38,10 +31,7 @@
   border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
-/* =====================================================
-   DASHBOARD TITLE
-   ===================================================== */
-
+/* dashboard title */
 .dashboard-title {
   font-size: 42px;
   font-weight: 700;
@@ -51,10 +41,7 @@
   margin-bottom: 8px;
 }
 
-/* =====================================================
-   PROFILE IMAGE
-   ===================================================== */
-
+/* profile image */
 .ImageFrame {
   display: flex;
   justify-content: center;
@@ -70,10 +57,7 @@
   border: 3px solid #00b7ff87;
 }
 
-/* =====================================================
-   STUDENT INFO SECTION
-   ===================================================== */
-
+/* student info section */
 .student-info {
   width: 100%;
   max-width: 600px;
@@ -95,10 +79,7 @@
   color: #56c0fe;
 }
 
-/* =====================================================
-   RESPONSIVE (SMALL DEVICES)
-   ===================================================== */
-
+/* responsive */
 @media (max-width: 500px) {
   .dashboard-container {
     padding: 30px 20px;
@@ -114,49 +95,7 @@
   }
 }
 
-/* =====================================================
-   BACK BUTTON (FIXED)
-   ===================================================== */
-
-/* .back {
-  position: fixed;
-  top: 25px;
-  left: 10px;
-  z-index: 1000;
-}
-
-.back a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  text-decoration: none;
-  color: #fff;
-
-  background-color: #1e1e1e00;
-  padding: 22px 14px;
-  border-radius: 8px;
-  font-size: 18px;
-
-  transition: all 0.3s ease;
-}
-
-.back a:hover {
-  transform: translateX(-6px);
-}
-
-.back i {
-  font-size: 23px;
-}
-
-.back:active {
-  transform: scale(0.96);
-} */
-
-/* =====================================================
-   DETAILS CARD (APPLICATION INFO)
-   ===================================================== */
-
+/* details card */
 .details-card {
   width: 100%;
   max-width: 900px;
@@ -180,10 +119,7 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* =====================================================
-   REASON BOX
-   ===================================================== */
-
+/* reason box */
 .reason-box {
   width: 100%;
   max-width: 750px;
@@ -203,16 +139,12 @@
   white-space: pre-wrap;
 }
 
-/* Section heading */
 h3 {
   font-size: 30px;
   font-weight: 600;
 }
 
-/* =====================================================
-   PDF VIEWER
-   ===================================================== */
-
+/* pdf viewer */
 .pdf-view {
   margin-top: 15px;
   display: flex;
@@ -232,13 +164,10 @@ h3 {
 
   border: none;
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* =====================================================
-   COURSE LIST
-   ===================================================== */
-
+/* course list */
 .details-card ul {
   list-style-type: disc;
   padding-left: 20px;
@@ -251,10 +180,7 @@ h3 {
   margin-bottom: 4px;
 }
 
-/* =====================================================
-   DETAILS RESPONSIVE
-   ===================================================== */
-
+/* details responsive */
 @media (max-width: 600px) {
   .details-card {
     padding: 20px;
@@ -275,10 +201,7 @@ h3 {
   }
 }
 
-/* =====================================================
-   ACTION BUTTONS (APPROVE / REJECT)
-   ===================================================== */
-
+/* action buttons */
 .action-buttons {
   display: flex;
   gap: 12px;
@@ -286,7 +209,6 @@ h3 {
   margin-bottom: 16px;
 }
 
-/* Default button */
 .btn-authority,
 .btn-faculty {
   background-color: #00b7ff87;
@@ -306,20 +228,17 @@ h3 {
     box-shadow 0.15s ease;
 }
 
-/* Hover */
 .btn-authority:hover,
 .btn-faculty:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
 }
 
-/* Active */
 .btn-authority:active,
 .btn-faculty:active {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Approved state */
 .btn-authority.approved,
 .btn-faculty.approved {
   background-color: #18d72552;
@@ -330,7 +249,6 @@ h3 {
   background-color: #0ba744;
 }
 
-/* Rejected state */
 .btn-authority.rejected,
 .btn-faculty.rejected {
   background-color: #ef4444af;
@@ -341,17 +259,13 @@ h3 {
   background-color: #dc2626;
 }
 
-/* Disabled */
 button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   box-shadow: none;
 }
 
-/* =====================================================
-   CONSIDER AMOUNT SECTION
-   ===================================================== */
-
+/* consider amount section */
 .consider-amount {
   display: flex;
   align-items: center;
@@ -413,8 +327,7 @@ button:disabled {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 
-
-/* LOADER ANIMATION */
+/* loader animation */
 .ring {
   width: 60px;
   height: 60px;
@@ -432,12 +345,8 @@ button:disabled {
   }
 }
 
-
-
-/* just view status */
-
-
-.status-container-view{
+/* view status */
+.status-container-view {
   position: absolute;
   top: 8px;
   right: 25px;
@@ -447,7 +356,7 @@ button:disabled {
   font-weight: 500;
 }
 
-.status-text-view.approved{
+.status-text-view.approved {
   color: #00ff66;
   font-weight: 600;
   text-shadow:
@@ -457,7 +366,7 @@ button:disabled {
     0 0 40px #00ff661e;
 }
 
-.status-text-view.rejected{
+.status-text-view.rejected {
   color: #ff3b3b;
   font-weight: 600;
   text-shadow:
@@ -467,7 +376,7 @@ button:disabled {
     0 0 40px #ff3b3b;
 }
 
-.status-text-view.pending{
+.status-text-view.pending {
   color: #ffe600bb;
   text-shadow:
     0 0 5px #ffe600bb,
@@ -489,12 +398,8 @@ button:disabled {
   width: fit-content;
 }
 
-
-/* ==========================================
-   TABLET
-========================================== */
+/* tablet */
 @media (max-width: 992px) {
-
   .main-content {
     margin-left: 0;
     padding: 20px;
@@ -526,12 +431,8 @@ button:disabled {
   }
 }
 
-
-/* ==========================================
-   MOBILE
-========================================== */
+/* mobile */
 @media (max-width: 768px) {
-
   .main-content {
     margin-left: 0;
     padding: 12px;
@@ -604,15 +505,10 @@ button:disabled {
     justify-content: center;
     flex-wrap: wrap;
   }
-
 }
 
-
-/* ==========================================
-   SMALL MOBILE
-========================================== */
+/* small mobile */
 @media (max-width: 480px) {
-
   .dashboard-title {
     font-size: 20px;
   }
@@ -642,9 +538,7 @@ button:disabled {
   .pdf-view iframe {
     height: 180px;
   }
-
 }
-
 
 /* exam count */
 .special-exam-count span {

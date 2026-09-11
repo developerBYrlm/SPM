@@ -3,27 +3,21 @@ import ExamSchedule from "../models/ExamSchedule.js";
 import User from "../models/User.js";
 import createMailTransporter from "../utils/mailTransporter.js";
 
-const isSameDate = (dateOne, dateTwo) => {
-  return (
-    dateOne.getFullYear() === dateTwo.getFullYear() &&
-    dateOne.getMonth() === dateTwo.getMonth() &&
-    dateOne.getDate() === dateTwo.getDate()
-  );
-};
+// Check if two dates are the same
+const isSameDate = (dateOne, dateTwo) => (
+  dateOne.getFullYear() === dateTwo.getFullYear() &&
+  dateOne.getMonth() === dateTwo.getMonth() &&
+  dateOne.getDate() === dateTwo.getDate()
+);
 
-const getOneDayBeforeDate = (date) => {
+// Get date before the given date
+const getBeforeDate = (date, days) => {
   const result = new Date(date);
-  result.setDate(result.getDate() - 1);
+  result.setDate(result.getDate() - days);
   return result;
 };
 
-const getTwoDaysBeforeDate = (date) => {
-  const result = new Date(date);
-  result.setDate(result.getDate() - 2);
-  return result;
-};
-
-
+// Send email to department students
 const sendMailToStudents = async ({ department, subject, message }) => {
   const students = await User.find({
     role: "student",
@@ -55,6 +49,7 @@ const sendMailToStudents = async ({ department, subject, message }) => {
           </div>
         `,
       });
+
       console.log(`Mail sent to ${student.email} (${department})`);
     } catch (error) {
       console.error(`Failed to send mail to ${student.email}:`, error.message);
@@ -62,25 +57,25 @@ const sendMailToStudents = async ({ department, subject, message }) => {
   }
 };
 
-
+// Check schedules and send reminder emails
 const checkExamScheduleAndSendMail = async () => {
   try {
     const schedules = await ExamSchedule.find();
-
-    if (!schedules.length) {
-      return;
-    }
+    if (!schedules.length) return;
 
     const today = new Date();
 
     for (const schedule of schedules) {
-      const deadlineReminderDate = getOneDayBeforeDate(
-        schedule.applicationDeadlineDate
+      const deadlineReminderDate = getBeforeDate(
+        schedule.applicationDeadlineDate,
+        1
       );
-      const specialExamReminderDate = getTwoDaysBeforeDate(
-        schedule.specialExamStartDate
+      const specialExamReminderDate = getBeforeDate(
+        schedule.specialExamStartDate,
+        2
       );
 
+      // Send application deadline reminder
       if (
         isSameDate(today, deadlineReminderDate) &&
         !schedule.applicationDeadlineEmailSent
@@ -99,6 +94,7 @@ const checkExamScheduleAndSendMail = async () => {
         );
       }
 
+      // Send special exam reminder
       if (
         isSameDate(today, specialExamReminderDate) &&
         !schedule.specialExamReminderEmailSent
@@ -122,6 +118,7 @@ const checkExamScheduleAndSendMail = async () => {
   }
 };
 
+// Start cron job
 const startExamScheduleMailJob = () => {
   cron.schedule("* * * * *", async () => {
     console.log("Checking exam schedule mail job...");

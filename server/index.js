@@ -5,6 +5,7 @@ import cors from "cors";
 import path from "path";
 import dns from "dns";
 
+// Global Connection
 dns.setServers([
   "1.1.1.1",
   "8.8.8.8"
