@@ -20,7 +20,6 @@ body {
   align-items: center;
 
   position: relative;
-  overflow: hidden;
 
   color: #fff;
 
@@ -37,11 +36,11 @@ body {
     ),
     linear-gradient(
       115deg,
-      #152663 0%,
-      #14469c 32%,
+      #020b2b 0%,
+      #06275f 32%,
       #0b5fa8 48%,
-      #248aaf 68%,
-      #05479c 100%
+      #19a9df 68%,
+      #67dcf7 100%
     );
 }
 
