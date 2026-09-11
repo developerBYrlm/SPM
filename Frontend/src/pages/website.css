@@ -8,16 +8,66 @@
 
 /* body */
 body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "League Spartan", sans-serif;
+
+  min-height: 100vh;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
 
-  background-image: url("/ghghgh.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+
+  color: #fff;
+
+  background:
+    radial-gradient(
+      ellipse at 18% 50%,
+      rgba(20, 95, 220, 0.35) 0%,
+      transparent 45%
+    ),
+    radial-gradient(
+      ellipse at 82% 50%,
+      rgba(70, 225, 255, 0.35) 0%,
+      transparent 45%
+    ),
+    linear-gradient(
+      115deg,
+      #152663 0%,
+      #14469c 32%,
+      #0b5fa8 48%,
+      #248aaf 68%,
+      #05479c 100%
+    );
 }
+
+body::before {
+  content: "";
+  position: fixed;
+
+  width: 75vw;
+  height: 75vw;
+
+  left: 22%;
+  top: -20%;
+
+  border-radius: 50%;
+
+  background: linear-gradient(
+    135deg,
+    rgba(0, 110, 255, 0.25),
+    rgba(80, 230, 255, 0.18)
+  );
+
+  filter: blur(70px);
+
+  pointer-events: none;
+}
+
 
 /* wrapper */
 .wrapper {
