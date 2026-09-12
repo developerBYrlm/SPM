@@ -36,40 +36,26 @@ const facultyList = () => {
     );
 
   // Table columns
-  const columns = [
-    {
-      name: "Student ID",
-      selector: (row) => row.studentId,
-      sortable: true,
-      width: "170px",
-    },
+   const columns = [
+    // { name: "S No", selector: (row) => row.sno, width: "120px" },
+    { name: "Student ID", selector: (row) => row.studentId, sortable: true, width: "170px" },
     {
       name: "Image",
       cell: (row) => (
-        row.profileImage ? (
-          <img
-            src={row.profileImage}
-            alt={`${row.name} profile`}
-            className="student-profile-image"
-          />
-        ) : (
-          <span>No image</span>
-        )
+        <img
+          src={row.profileImage || "/default.png"}
+          alt="IMG"
+          className="student-image"
+        />
       ),
       width: "160px",
     },
-    {
-      name: "Name",
-      selector: (row) => row.name,
-      sortable: true,
-      width: "310px",
-    },
+    { name: "Name", selector: (row) => row.name, sortable: true, width: "310px" },
     {
       name: "Action",
-      cell: (row) => <StudentButtonForFaculty id={row._id} />,
-      width: "150px",
-    },
-  ];
+      cell: (row) => <StudentButtonForFaculty id={row._id} />, width: "290px", center: "true"
+    }
+  ];  
 
   // Get faculty profile and student list
   useEffect(() => {
