@@ -216,7 +216,7 @@
 }
 
 /* tablet */
-@media (max-width: 992px) {
+/* @media (max-width: 992px) {
   .admit-main-content,
   .admit-loading {
     margin-left: 0;
@@ -230,10 +230,10 @@
   .admit-title {
     font-size: 30px;
   }
-}
+} */
 
 /* mobile */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .admit-container {
     padding: 25px 20px;
   }
@@ -261,10 +261,10 @@
   .admit-info-card li {
     font-size: 14px;
   }
-}
+} */
 
 /* small mobile */
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
   .admit-title {
     font-size: 20px;
   }
@@ -277,4 +277,4 @@
   .admit-info-card h3 {
     font-size: 18px;
   }
-}
+} */

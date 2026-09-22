@@ -428,7 +428,7 @@ body::before {
 }
 
 /* tablet */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   body {
     padding: 20px;
   }
@@ -459,10 +459,10 @@ body::before {
     font-size: 16px;
     width: 100%;
   }
-}
+} */
 
 /* mobile */
-@media (max-width: 576px) {
+/* @media (max-width: 576px) {
   body {
     padding: 15px;
     align-items: center;
@@ -524,10 +524,10 @@ body::before {
   .popup-box p {
     font-size: 14px;
   }
-}
+} */
 
 /* small mobile */
-@media (max-width: 375px) {
+/* @media (max-width: 375px) {
   .wrapper {
     padding: 25px 15px;
   }
@@ -555,4 +555,4 @@ body::before {
   .text {
     font-size: 13px;
   }
-}
+} */

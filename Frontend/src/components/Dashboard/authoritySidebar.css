@@ -236,7 +236,7 @@
 }
 
 /* tablet */
-@media (max-width: 992px) {
+/* @media (max-width: 992px) {
   .sidebar {
     width: 220px;
   }
@@ -257,10 +257,10 @@
   .logout-btn {
     font-size: 18px;
   }
-}
+} */
 
 /* mobile */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .sidebar {
     width: 100%;
     height: auto;
@@ -320,10 +320,10 @@
   .developer:hover {
     transform: none;
   }
-}
+} */
 
 /* small mobile */
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
   .sidebar {
     padding: 15px 10px;
   }
@@ -353,4 +353,4 @@
   .developer {
     font-size: 11px;
   }
-}
+} */

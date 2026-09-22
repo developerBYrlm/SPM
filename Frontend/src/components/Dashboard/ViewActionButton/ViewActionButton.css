@@ -398,8 +398,13 @@ button:disabled {
   width: fit-content;
 }
 
+/* exam count */
+.special-exam-count span {
+  margin-left: 8px;
+}
+
 /* tablet */
-@media (max-width: 992px) {
+/* @media (max-width: 992px) {
   .main-content {
     margin-left: 0;
     padding: 20px;
@@ -429,10 +434,10 @@ button:disabled {
   .reason-box {
     width: 100%;
   }
-}
+} */
 
 /* mobile */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .main-content {
     margin-left: 0;
     padding: 12px;
@@ -505,10 +510,10 @@ button:disabled {
     justify-content: center;
     flex-wrap: wrap;
   }
-}
+} */
 
 /* small mobile */
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
   .dashboard-title {
     font-size: 20px;
   }
@@ -538,9 +543,4 @@ button:disabled {
   .pdf-view iframe {
     height: 180px;
   }
-}
-
-/* exam count */
-.special-exam-count span {
-  margin-left: 8px;
-}
+} */

@@ -268,13 +268,13 @@
 }
 
 /* tablet */
-@media (max-width: 1024px) {
+/* @media (max-width: 1024px) {
   .dashboard-cards {
     grid-template-columns: repeat(1, 5fr);
   }
-}
+} */
 
-@media (max-width: 992px) {
+/* @media (max-width: 992px) {
   .main-content {
     margin-left: 0;
     padding: 25px 15px;
@@ -300,10 +300,10 @@
   .card4 {
     min-width: 250px;
   }
-}
+} */
 
 /* mobile */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .main-content {
     margin-left: 0;
     padding: 15px 10px;
@@ -367,16 +367,16 @@
     right: -4px;
     font-size: 10px;
   }
-}
+} */
 
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
   .dashboard-cards {
     grid-template-columns: repeat(1, 5fr);
   }
-}
+} */
 
 /* small mobile */
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
   .dashboard-container {
     padding: 15px 10px;
   }
@@ -411,10 +411,10 @@
     font-size: 14px;
     padding: 12px;
   }
-}
+} */
 
 /* extra small */
-@media (max-width: 320px) {
+/* @media (max-width: 320px) {
   .dashboard-title,
   .dashboard-title_unknown {
     font-size: 18px;
@@ -437,4 +437,4 @@
   .user {
     font-size: 13px;
   }
-}
+} */
