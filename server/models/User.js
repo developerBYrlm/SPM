@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
     },
     department: { 
         type: String, 
-        enum: ["CSE", "EEE", "BBA", "Law", "IT team"], 
+        enum: ["Developer", "CSE", "EEE", "BBA", "Law", "IT team"], 
         required: true 
     },
 

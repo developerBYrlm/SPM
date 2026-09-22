@@ -1,6 +1,13 @@
 import dotenv from 'dotenv';
 dotenv.config(); 
 
+import dns from "dns";
+
+dns.setServers([
+  "8.8.8.8",
+  "1.1.1.1"
+]);
+
 import User from './models/User.js';
 import bcrypt from 'bcrypt';
 import connectToDatabase from './db/db.js';
@@ -18,7 +25,7 @@ const userRegister = async () => {
 
     const newUser = new User({
       name: "Super Admin",
-      email: "superAdmin@gmail.com",
+      email: "SuperAdmin@rlm.dev",
       userID: "cse111",
       password: hashPassword,
       role: "IT",      
@@ -26,7 +33,7 @@ const userRegister = async () => {
     });
 
     await newUser.save();
-    console.log(" Authority user created successfully in SpecialXm");
+    console.log("IT user created successfully in SpecialXm");
     process.exit(0);
 
   } catch (error) {
