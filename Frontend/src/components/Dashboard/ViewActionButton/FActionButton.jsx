@@ -43,7 +43,7 @@ const FActionButton = () => {
     </div>
     );
   }
-  if (!student) { return <div>No student data found</div> }
+  if (!student) { return <div>No Faculty data found</div> }
 
   return (
     <div className="main-content">
@@ -77,3 +77,4 @@ const FActionButton = () => {
 };
 
 export default FActionButton
+

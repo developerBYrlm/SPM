@@ -8,6 +8,7 @@ const ExamDateTime = () => {
     specialExamStartDate: "",
     specialExamText: "",
   });
+
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const token = localStorage.getItem("token");
@@ -15,24 +16,40 @@ const ExamDateTime = () => {
   // Change date to input format
   const formatDateForInput = (dateValue) => {
     if (!dateValue) return "";
-    return new Date(dateValue).toISOString().slice(0, 10);
+
+    const date = new Date(dateValue);
+
+    if (isNaN(date.getTime())) return "";
+
+    return date.toISOString().slice(0, 10);
   };
 
   // Get saved exam schedule
   useEffect(() => {
     const fetchExamSchedule = async () => {
       try {
-        const response = await fetch("https://spm-1-u37a.onrender.com/api/exam-schedule", {
-          method: "GET",
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const response = await fetch(
+          "https://spm-1-u37a.onrender.com/api/exam-schedule",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
         const data = await response.json();
 
         if (data.success && data.schedule) {
           setFormData({
-            applicationDeadlineDate: formatDateForInput(data.schedule.applicationDeadlineDate),
-            applicationDeadlineText: data.schedule.applicationDeadlineText || "",
-            specialExamStartDate: formatDateForInput(data.schedule.specialExamStartDate),
+            applicationDeadlineDate: formatDateForInput(
+              data.schedule.applicationDeadlineDate
+            ),
+            applicationDeadlineText:
+              data.schedule.applicationDeadlineText || "",
+            specialExamStartDate: formatDateForInput(
+              data.schedule.specialExamStartDate
+            ),
             specialExamText: data.schedule.specialExamText || "",
           });
         }
@@ -41,13 +58,19 @@ const ExamDateTime = () => {
       }
     };
 
-    if (token) fetchExamSchedule();
+    if (token) {
+      fetchExamSchedule();
+    }
   }, [token]);
 
   // Update input data
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData((previousData) => ({ ...previousData, value }));
+
+    setFormData((previousData) => ({
+      ...previousData,
+      [name]: value,
+    }));
   };
 
   // Save or update exam schedule
@@ -57,18 +80,43 @@ const ExamDateTime = () => {
     setMessage("");
 
     try {
-      const response = await fetch("https://spm-1-u37a.onrender.com/api/exam-schedule", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://spm-1-u37a.onrender.com/api/exam-schedule",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
       const data = await response.json();
 
-      if (data.success) setMessage(data.message || "Exam schedule saved successfully");
-      else setMessage(data.error || "Failed to save exam schedule");
+      if (data.success) {
+        setMessage(
+          data.message || "Exam schedule saved successfully"
+        );
+
+        if (data.schedule) {
+          setFormData({
+            applicationDeadlineDate: formatDateForInput(
+              data.schedule.applicationDeadlineDate
+            ),
+            applicationDeadlineText:
+              data.schedule.applicationDeadlineText || "",
+            specialExamStartDate: formatDateForInput(
+              data.schedule.specialExamStartDate
+            ),
+            specialExamText: data.schedule.specialExamText || "",
+          });
+        }
+      } else {
+        setMessage(
+          data.error || "Failed to save exam schedule"
+        );
+      }
     } catch (error) {
       console.error("Save exam schedule error:", error);
       setMessage("Server error. Please try again.");
@@ -81,20 +129,28 @@ const ExamDateTime = () => {
     <div className="main-content">
       <div className="user-dashboard">
         <h2 className="form-title">Exam Date & Mail Notice</h2>
+
         {message && <p className="exam-message">{message}</p>}
 
-        <form className="glass-form exam-date-form" onSubmit={handleSubmit}>
+        <form
+          className="glass-form exam-date-form"
+          onSubmit={handleSubmit}
+        >
           <div className="form-group">
             <label>Application Deadline Date</label>
+
             <input
-              type="date" name="applicationDeadlineDate"
+              type="date"
+              name="applicationDeadlineDate"
               value={formData.applicationDeadlineDate}
-              onChange={handleChange} required
+              onChange={handleChange}
+              required
             />
           </div>
 
           <div className="form-group exam-textarea-group">
             <label>Application Deadline Mail Text</label>
+
             <textarea
               name="applicationDeadlineText"
               value={formData.applicationDeadlineText}
@@ -106,15 +162,19 @@ const ExamDateTime = () => {
 
           <div className="form-group">
             <label>Special Exam Start Date</label>
+
             <input
-              type="date" name="specialExamStartDate"
+              type="date"
+              name="specialExamStartDate"
               value={formData.specialExamStartDate}
-              onChange={handleChange} required
+              onChange={handleChange}
+              required
             />
           </div>
 
           <div className="form-group exam-textarea-group">
             <label>Special Exam Mail Text</label>
+
             <textarea
               name="specialExamText"
               value={formData.specialExamText}
@@ -124,7 +184,11 @@ const ExamDateTime = () => {
             />
           </div>
 
-          <button type="submit" className="submit-btn" disabled={loading}>
+          <button
+            type="submit"
+            className="submit-btn"
+            disabled={loading}
+          >
             {loading ? "Saving..." : "Submit / Update"}
             <i className="fa-solid fa-paper-plane"></i>
           </button>
