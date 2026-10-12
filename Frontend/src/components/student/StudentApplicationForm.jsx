@@ -258,8 +258,8 @@ const ApplyMissedExam = () => {
                 onChange={handleChange}
               >
                 <option value="">Select</option>
-                <option value="Mid">Mid</option>
-                <option value="Final">Final</option>
+                <option value="Special Mid">Special Mid</option>
+                <option value="Special Final">Special Final</option>
               </select>
             </div>
 

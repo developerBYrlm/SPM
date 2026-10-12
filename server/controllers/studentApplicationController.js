@@ -3,6 +3,9 @@ import User from "../models/User.js";
 import Student from "../models/Student.js";
 import multer from "multer";
 import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 import fs from "fs";
 import PDFDocument from "pdfkit";
 import ExamSchedule from "../models/ExamSchedule.js";
@@ -326,10 +329,6 @@ export const removeApplication = async (req, res) => {
       fs.unlinkSync(application.attachment);
     }
 
-    /*
-      শুধু application delete হবে।
-      Student profile-এর specialExamCount কমবে না।
-    */
     await application.deleteOne();
 
     return res.status(200).json({
@@ -467,10 +466,6 @@ export const updateApplicationStatus = async (req, res) => {
         });
       }
 
-      /*
-        Student profile অবশ্যই Student collection-এ থাকতে হবে।
-        Faculty, ACAD, Authority বা IT-এর কোনো profile count হবে না।
-      */
       const studentProfile = await Student.findOne({
         user: application.user
       }).populate({
@@ -495,16 +490,11 @@ export const updateApplicationStatus = async (req, res) => {
 
       application.authorityStatus = "Approved";
 
-      /*
-        যে authority approve করছে তার User ObjectId save হবে।
-        Admit card-এ এই reference populate করে authority name দেখাবে।
-      */
+
       application.approvedByAuthority =
         loggedUser._id;
 
-      /*
-        এই application আগে count না হলে শুধু একবার count বাড়বে।
-      */
+
       if (application.specialExamCounted !== true) {
         const updatedStudent =
           await Student.findOneAndUpdate(
@@ -531,10 +521,6 @@ export const updateApplicationStatus = async (req, res) => {
           });
         }
 
-        /*
-          Count বাড়ানোর পরে application-এ record রাখা হচ্ছে।
-          এটি পরবর্তী approval-এ duplicate count আটকাবে।
-        */
         application.specialExamCounted = true;
 
         console.log("Special exam count increased:", {
@@ -578,15 +564,6 @@ export const updateApplicationStatus = async (req, res) => {
 
       application.authorityStatus = "Rejected";
       application.approvedByAuthority = null;
-
-      /*
-        specialExamCounted false করা হবে না।
-
-        কারণ application একবার approved হওয়ার পরে count
-        permanent history হিসেবে Student profile-এ থাকবে।
-
-        Reject করে আবার Approve করলেও count দ্বিতীয়বার বাড়বে না।
-      */
 
       changedRole = `Authority (${loggedUser.name})`;
       changedStatus = "Rejected";
@@ -759,6 +736,10 @@ export const updateConsiderAmount = async (req, res) => {
 // Download professional A4 admit card PDF
 export const downloadAdmitCard = async (req, res) => {
   try {
+    // ==========================================
+    // APPLICATION INFORMATION
+    // ==========================================
+
     const application = await StudentApplication.findOne({
       user: req.user.id
     })
@@ -786,10 +767,6 @@ export const downloadAdmitCard = async (req, res) => {
       });
     }
 
-    /*
-      Authority name ছাড়া admit card generate হবে না।
-      পুরোনো application হলে authority দিয়ে আবার approve করতে হবে।
-    */
     if (!application.approvedByAuthority?.name) {
       return res.status(409).json({
         success: false,
@@ -813,7 +790,7 @@ export const downloadAdmitCard = async (req, res) => {
 
     const facultyMap = {};
 
-    facultyUsers.forEach(faculty => {
+    facultyUsers.forEach((faculty) => {
       const facultyAcronym = faculty.userID
         ?.toString()
         .trim()
@@ -830,19 +807,50 @@ export const downloadAdmitCard = async (req, res) => {
 
     const examSchedule = await ExamSchedule.findOne({
       department: application.department
-    }); 
-
-    console.log("Admit card authority:", {
-      authorityId:
-        application.approvedByAuthority._id.toString(),
-      authorityName: approvingAuthorityName
     });
+
+    // ==========================================
+    // FONT AND IMAGE PATHS
+    // ==========================================
+
+    const signatureFontPath = path.resolve(
+      __dirname,
+      "../assets/fonts/GreatVibes-Regular.ttf"
+    );
+
+    const stampPath = path.resolve(
+      __dirname,
+      "../assets/approved-stamp.png"
+    );
+
+    console.log("Signature font path:", signatureFontPath);
+    console.log(
+      "Signature font exists:",
+      fs.existsSync(signatureFontPath)
+    );
+
+    console.log("Stamp path:", stampPath);
+    console.log(
+      "Stamp exists:",
+      fs.existsSync(stampPath)
+    );
+
+    if (!fs.existsSync(signatureFontPath)) {
+      return res.status(500).json({
+        success: false,
+        message:
+          "Signature font file not found inside server/assets/fonts"
+      });
+    }
 
     // ==========================================
     // RESPONSE HEADERS
     // ==========================================
 
-    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader(
+      "Content-Type",
+      "application/pdf"
+    );
 
     res.setHeader(
       "Content-Disposition",
@@ -860,11 +868,22 @@ export const downloadAdmitCard = async (req, res) => {
       info: {
         Title: "Special Exam Admit Card",
         Author: "Northern University Bangladesh",
-        Subject: `Special Exam Admit Card for ${application.studentId}`
+        Subject:
+          `Special Exam Admit Card for ${application.studentId}`
       }
     });
 
+    // Register signature font
+    doc.registerFont(
+      "SignatureFont",
+      signatureFontPath
+    );
+
     doc.pipe(res);
+
+    // ==========================================
+    // PAGE SETTINGS
+    // ==========================================
 
     const pageWidth = doc.page.width;
     const pageHeight = doc.page.height;
@@ -880,18 +899,11 @@ export const downloadAdmitCard = async (req, res) => {
     const lightBackground = "#F0F2F5";
     const greenColor = "#008C2E";
 
-    // University title font size
-    const universityTitleFontSize = 18;
-
-    // University title-এর চেয়ে 40% ছোট
-    const admitTitleFontSize =
-      universityTitleFontSize * 0.6;
-
     // ==========================================
     // HELPER FUNCTIONS
     // ==========================================
 
-    const safeText = value => {
+    const safeText = (value) => {
       if (
         value === undefined ||
         value === null ||
@@ -903,10 +915,27 @@ export const downloadAdmitCard = async (req, res) => {
       return String(value);
     };
 
-    /*
-      Available width অনুযায়ী text ছোট করবে।
-      Text কোনো column-এর বাইরে যাবে না।
-    */
+    const formatPdfDate = (date) => {
+      if (!date) {
+        return "N/A";
+      }
+
+      const parsedDate = new Date(date);
+
+      if (Number.isNaN(parsedDate.getTime())) {
+        return "N/A";
+      }
+
+      return parsedDate.toLocaleDateString(
+        "en-GB",
+        {
+          day: "2-digit",
+          month: "short",
+          year: "numeric"
+        }
+      );
+    };
+
     const fitText = (
       text,
       x,
@@ -916,7 +945,8 @@ export const downloadAdmitCard = async (req, res) => {
     ) => {
       const value = safeText(text);
 
-      let fontSize = options.fontSize || 10;
+      let fontSize =
+        options.fontSize || 10;
 
       const minimumFontSize =
         options.minimumFontSize || 7;
@@ -940,21 +970,23 @@ export const downloadAdmitCard = async (req, res) => {
       }
 
       doc
-        .fillColor(options.color || primaryColor)
-        .text(value, x, y, {
-          width,
-          align: options.align || "left",
-          lineBreak: false,
-          ellipsis: true
-        });
+        .fillColor(
+          options.color || primaryColor
+        )
+        .text(
+          value,
+          x,
+          y,
+          {
+            width,
+            align:
+              options.align || "left",
+            lineBreak: false,
+            ellipsis: true
+          }
+        );
     };
 
-    /*
-      Section heading:
-      1. STUDENT INFORMATION
-      2. MISSED EXAM(S)
-      3. SPECIAL EXAM DETAILS
-    */
     const drawSectionTitle = (
       number,
       title,
@@ -977,9 +1009,6 @@ export const downloadAdmitCard = async (req, res) => {
       return y + 16;
     };
 
-    /*
-      Student এবং exam information line।
-    */
     const drawInfoLine = (
       label,
       value,
@@ -992,10 +1021,15 @@ export const downloadAdmitCard = async (req, res) => {
         .font("Helvetica-Bold")
         .fontSize(8.5)
         .fillColor(primaryColor)
-        .text(`${label}:`, x, y, {
-          width: labelWidth,
-          lineBreak: false
-        });
+        .text(
+          `${label}:`,
+          x,
+          y,
+          {
+            width: labelWidth,
+            lineBreak: false
+          }
+        );
 
       fitText(
         value,
@@ -1016,13 +1050,9 @@ export const downloadAdmitCard = async (req, res) => {
 
     let currentY = 27;
 
-    /*
-      RED MARKED AREA:
-      University name এখন bold।
-    */
     doc
       .font("Helvetica-Bold")
-      .fontSize(universityTitleFontSize)
+      .fontSize(18)
       .fillColor(primaryColor)
       .text(
         "NORTHERN UNIVERSITY BANGLADESH",
@@ -1035,19 +1065,11 @@ export const downloadAdmitCard = async (req, res) => {
         }
       );
 
-    /*
-      RED এবং BLUE heading-এর মাঝখানের gap কমানো হয়েছে।
-    */
     currentY += 22;
 
-    /*
-      BLUE MARKED AREA:
-      University title-এর চেয়ে 40% ছোট।
-      18 × 0.6 = 10.8 approximately 11pt
-    */
     doc
       .font("Helvetica-Bold")
-      .fontSize(admitTitleFontSize)
+      .fontSize(10.8)
       .fillColor(primaryColor)
       .text(
         "SPECIAL EXAM ADMIT CARD",
@@ -1060,14 +1082,14 @@ export const downloadAdmitCard = async (req, res) => {
         }
       );
 
-    /*
-      Admit title এবং horizontal line-এর gap-ও compact।
-    */
     currentY += 20;
 
     doc
       .moveTo(leftMargin, currentY)
-      .lineTo(pageWidth - rightMargin, currentY)
+      .lineTo(
+        pageWidth - rightMargin,
+        currentY
+      )
       .lineWidth(0.8)
       .strokeColor(borderColor)
       .stroke();
@@ -1085,11 +1107,13 @@ export const downloadAdmitCard = async (req, res) => {
     );
 
     const firstColumnX = leftMargin;
-    const secondColumnX = leftMargin + 270;
+    const secondColumnX =
+      leftMargin + 270;
 
     drawInfoLine(
       "Name",
-      application.name || application.user?.name,
+      application.name ||
+        application.user?.name,
       firstColumnX,
       currentY,
       78,
@@ -1181,10 +1205,7 @@ export const downloadAdmitCard = async (req, res) => {
     const headerHeight = 27;
     const rowHeight = 27;
 
-    // ==========================================
-    // TABLE HEADER BACKGROUND
-    // ==========================================
-
+    // Table header background
     doc
       .rect(
         tableX,
@@ -1195,6 +1216,7 @@ export const downloadAdmitCard = async (req, res) => {
       .fillColor(lightBackground)
       .fill();
 
+    // Table header border
     doc
       .rect(
         tableX,
@@ -1206,6 +1228,7 @@ export const downloadAdmitCard = async (req, res) => {
       .strokeColor(borderColor)
       .stroke();
 
+    // Header column lines
     doc
       .moveTo(dateColumnX, currentY)
       .lineTo(
@@ -1264,19 +1287,16 @@ export const downloadAdmitCard = async (req, res) => {
     currentY += headerHeight;
 
     // ==========================================
-    // MISSED COURSE ROWS
+    // COURSE ROWS
     // ==========================================
 
-    const courses =
-      Array.isArray(application.courses)
-        ? application.courses
-        : [];
+    const courses = Array.isArray(
+      application.courses
+    )
+      ? application.courses
+      : [];
 
-    /*
-      একাধিক course থাকলে প্রত্যেকটি আলাদা row হবে।
-      একই faculty-এর একাধিক course-ও আলাদা row হবে।
-    */
-    courses.forEach(course => {
+    courses.forEach((course) => {
       const facultyAcronym =
         course.facultyAcr
           ?.toString()
@@ -1284,14 +1304,19 @@ export const downloadAdmitCard = async (req, res) => {
           .toUpperCase() || "N/A";
 
       const facultyName =
-        facultyMap[facultyAcronym] || "N/A";
+        facultyMap[facultyAcronym] ||
+        "N/A";
 
-      const courseId = safeText(course.courseId);
-      const courseTitle = safeText(course.courseTitle)
-      
-      const courseText = `${courseTitle} (${courseId})`;
+      const courseId =
+        safeText(course.courseId);
 
-      const missedDate = formatDate(
+      const courseTitle =
+        safeText(course.courseTitle);
+
+      const courseText =
+        `${courseTitle} (${courseId})`;
+
+      const missedDate = formatPdfDate(
         course.missedExamDate ||
           application.missedExamDate
       );
@@ -1324,7 +1349,7 @@ export const downloadAdmitCard = async (req, res) => {
         .strokeColor(borderColor)
         .stroke();
 
-      // Column border
+      // Column lines
       doc
         .moveTo(dateColumnX, currentY)
         .lineTo(
@@ -1334,7 +1359,10 @@ export const downloadAdmitCard = async (req, res) => {
         .stroke();
 
       doc
-        .moveTo(facultyColumnX, currentY)
+        .moveTo(
+          facultyColumnX,
+          currentY
+        )
         .lineTo(
           facultyColumnX,
           currentY + rowHeight
@@ -1405,7 +1433,8 @@ export const downloadAdmitCard = async (req, res) => {
           currentY + 8,
           {
             width: tableWidth,
-            align: "center"
+            align: "center",
+            lineBreak: false
           }
         );
 
@@ -1424,13 +1453,10 @@ export const downloadAdmitCard = async (req, res) => {
       currentY
     );
 
-    /*
-      PINK marked section-এর মতো line gap compact করা হয়েছে।
-    */
     drawInfoLine(
       "Special Exam Date",
       examSchedule?.specialExamStartDate
-        ? formatDate(
+        ? formatPdfDate(
             examSchedule.specialExamStartDate
           )
         : "To be announced",
@@ -1445,7 +1471,7 @@ export const downloadAdmitCard = async (req, res) => {
     drawInfoLine(
       "Application Deadline",
       examSchedule?.applicationDeadlineDate
-        ? formatDate(
+        ? formatPdfDate(
             examSchedule.applicationDeadlineDate
           )
         : "N/A",
@@ -1455,83 +1481,131 @@ export const downloadAdmitCard = async (req, res) => {
       contentWidth
     );
 
-    currentY += 21;
+    currentY += 20;
 
+// ==========================================
+// APPROVAL AND SIGNATURE AREA
+// ==========================================
+
+const approvalBlockWidth = 230;
+
+const approvalBlockX =
+  pageWidth -
+  rightMargin -
+  approvalBlockWidth -
+  5;
+
+// Approved by label
+doc
+  .font("Helvetica")
+  .fontSize(8.5)
+  .fillColor(primaryColor)
+  .text(
+    "Approved by:",
+    approvalBlockX,
+    currentY,
+    {
+      width: approvalBlockWidth,
+      align: "center",
+      lineBreak: false
+    }
+  );
+
+currentY += 10;
+
+// Signature-style authority name
+doc
+  .font(signatureFontPath)
+  .fontSize(30)
+  .fillColor("#008C2E")
+  .text(
+    approvingAuthorityName,
+    approvalBlockX,
+    currentY,
+    {
+      width: approvalBlockWidth,
+      height: 50,
+      align: "center",
+      lineBreak: false
+    }
+  );
+
+// Signature name এবং line-এর gap
+currentY += 37;
+
+// Signature line
+doc
+  .moveTo(
+    approvalBlockX + 25,
+    currentY
+  )
+  .lineTo(
+    approvalBlockX +
+      approvalBlockWidth -
+      25,
+    currentY
+  )
+  .lineWidth(0.6)
+  .strokeColor("#555555")
+  .stroke();
+
+currentY += 5;
+
+// Signature label
+doc
+  .font("Helvetica")
+  .fontSize(7)
+  .fillColor(primaryColor)
+  .text(
+    "Authorized Signature",
+    approvalBlockX,
+    currentY,
+    {
+      width: approvalBlockWidth,
+      align: "center",
+      lineBreak: false
+    }
+  );
     // ==========================================
-    // APPROVAL AREA
+    // SIGNATURE-STYLE AUTHORITY NAME
     // ==========================================
 
-    const approvalBlockWidth = 200;
-
-    const approvalBlockX =
-      pageWidth -
-      rightMargin -
-      approvalBlockWidth;
-
-    /*
-      Pink area-এর line gap কমানো হয়েছে।
-    */
     doc
-      .font("Helvetica")
-      .fontSize(8.5)
-      .fillColor(primaryColor)
+      .font("SignatureFont")
+      .fontSize(27)
+      .fillColor(greenColor)
       .text(
-        "Approved by:",
+        approvingAuthorityName,
         approvalBlockX,
         currentY,
         {
           width: approvalBlockWidth,
+          height: 45,
           align: "center",
           lineBreak: false
         }
       );
 
-    currentY += 12;
+    // Signature থেকে line-এর distance
+    currentY += 33;
 
-    /*
-      Authority name bold থাকবে।
-    */
-    fitText(
-      approvingAuthorityName,
-      approvalBlockX,
-      currentY,
-      approvalBlockWidth,
-      {
-        font: "Helvetica-Bold",
-        fontSize: 10,
-        minimumFontSize: 7.5,
-        color: greenColor,
-        align: "center"
-      }
-    );
-
-    /*
-      GREEN MARKED AREA:
-      Authority ID সম্পূর্ণ remove করা হয়েছে।
-      এখানে আর userID বা ID: CSE দেখানো হবে না।
-    */
-
-    currentY += 15;
-
-    /*
-      Signature line authority name-এর কাছাকাছি আনা হয়েছে।
-    */
+    // Signature line
     doc
       .moveTo(
-        approvalBlockX + 25,
+        approvalBlockX + 30,
         currentY
       )
       .lineTo(
         approvalBlockX +
           approvalBlockWidth -
-          25,
+          30,
         currentY
       )
       .lineWidth(0.6)
       .strokeColor(borderColor)
       .stroke();
 
-    currentY += 4;
+    currentY += 5;
 
     doc
       .font("Helvetica")
@@ -1549,38 +1623,49 @@ export const downloadAdmitCard = async (req, res) => {
       );
 
     // ==========================================
-    // APPROVED STAMP
+    // OPTIONAL APPROVED STAMP
     // ==========================================
 
-    const stampPath = path.join(
-      process.cwd(),
-      "assets",
-      "approved-stamp.png"
-    );
+    /*
+      approved-stamp.png valid হলে stamp দেখাবে।
+      Image invalid হলে PDF generation যেন বন্ধ না হয়,
+      তাই try/catch ব্যবহার করা হয়েছে।
+    */
 
     if (fs.existsSync(stampPath)) {
-      doc
-        .opacity(0.85)
-        .image(
-          stampPath,
-          leftMargin + 45,
-          currentY - 52,
-          {
-            width: 80
-          }
+      try {
+        doc
+          .save()
+          .opacity(0.85)
+          .image(
+            stampPath,
+            leftMargin + 45,
+            currentY - 52,
+            {
+              width: 80
+            }
+          )
+          .restore();
+      } catch (stampError) {
+        console.error(
+          "Approved stamp could not be loaded:",
+          stampError.message
         );
-
-      doc.opacity(1);
+      }
     }
 
     // ==========================================
     // FOOTER
     // ==========================================
 
-    const footerY = pageHeight - 38;
+    const footerY =
+      pageHeight - 38;
 
     doc
-      .moveTo(leftMargin, footerY - 7)
+      .moveTo(
+        leftMargin,
+        footerY - 7
+      )
       .lineTo(
         pageWidth - rightMargin,
         footerY - 7
@@ -1604,6 +1689,7 @@ export const downloadAdmitCard = async (req, res) => {
         }
       );
 
+    // Finalize PDF
     doc.end();
   } catch (error) {
     console.error(

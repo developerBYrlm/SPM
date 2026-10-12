@@ -403,6 +403,10 @@ button:disabled {
   margin-left: 8px;
 }
 
+.special-exam-warning {
+  color: #e57373;
+}
+
 /* tablet */
 /* @media (max-width: 992px) {
   .main-content {

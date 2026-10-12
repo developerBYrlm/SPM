@@ -85,7 +85,12 @@ const StudentProfile = () =>{
                 {student.specialExamCount ?? 0}
               </span>
             </p>
-           </div>
+            <p>
+              <strong style={{ color: "#ffffff" }}>
+               You may not attend the Special Exam more than <u>5 times</u>.
+              </strong>
+            </p>           
+            </div>
           </div>
         </div>
   )

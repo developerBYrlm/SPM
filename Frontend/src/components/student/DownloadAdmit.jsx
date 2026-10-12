@@ -67,7 +67,7 @@ const DownloadAdmit = () => {
         {approved ? (
           <>
             <div className="admit-status approved">
-              ✅ Authority Approved Successfully
+              Authority Approved Successfully
             </div>
             <button type="button" className="download-btn" onClick={downloadAdmit}>
               <i className="fa-solid fa-download"></i> Download Admit Card
