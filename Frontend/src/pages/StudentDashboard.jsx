@@ -1,26 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../context/authContext';
 import StudentSidebar from '../components/student/StudentSidebar';
-import { useNavigate, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import './website.css';
 
 const StudentDashboard = () => {
-
     const { user } = useAuth();
 
-    const [success, setSuccess] = useState(false);
-
-    // Popup will show only ONCE after login
-        useEffect(() => {
-        if (user) {
-            const popupShown = sessionStorage.getItem("studentLoginPopup");
-    
-            if (!popupShown) {
-                setSuccess(true);
-                sessionStorage.setItem("studentLoginPopup", "true");
-                    }
-                }
-            }, [user]);
+    const [success, setSuccess] = useState(() => {
+        const popupShown = sessionStorage.getItem("studentLoginPopup");
+        if (!popupShown) {
+            sessionStorage.setItem("studentLoginPopup", "true");
+            return true;
+        }
+        return false;
+    });
     return (
         <>
             {/* SUCCESS POPUP */}

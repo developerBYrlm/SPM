@@ -1,8 +1,6 @@
 import Student from "../models/Student.js";
 import User from "../models/User.js";
-import bcrypt from "bcrypt";
-import multer from "multer";
-import path from "path";
+
 
  
 

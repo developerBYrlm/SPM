@@ -13,50 +13,50 @@ const FacultyStudentView = () =>  {
   const token = localStorage.getItem("token");
   const fId = localStorage.getItem("studentId");
 
-  const fetchFacultyProfile = async () => {
-    try {
-      const res = await fetch("https://spm-1-u37a.onrender.com/api/auth/me", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      const data = await res.json();
-
-      if (data.success) {
-        setFaculty(data.user);
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const fetchApplications = async () => {
-    try {
-      const res = await fetch(
-        "https://spm-1-u37a.onrender.com/api/student-application",
-        {
+  useEffect(() => {
+    const fetchFacultyProfile = async () => {
+      try {
+        const res = await fetch("https://spm-1-u37a.onrender.com/api/auth/me", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+          setFaculty(data.user);
         }
-      );
-
-      const data = await res.json();
-
-      if (data.success) {
-        console.log(data.applications);
-        setApplications(data.applications);
+      } catch (err) {
+        console.error(err);
       }
-    } catch (err) {
-      console.error(err);
-    }
-  };
+    };
 
-  useEffect(() => {
+    const fetchApplications = async () => {
+      try {
+        const res = await fetch(
+          "https://spm-1-u37a.onrender.com/api/student-application",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const data = await res.json();
+
+        if (data.success) {
+          console.log(data.applications);
+          setApplications(data.applications);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
     fetchFacultyProfile();
     fetchApplications();
-  }, []);
+  }, [token]);
 
   const filteredApps = applications.filter((app) => {
   if (!faculty) return false;
@@ -109,29 +109,27 @@ const FacultyStudentView = () =>  {
 
         {/* Dashboard Cards */}
         <div className="dashboard-three-cards">
+          <Link to="/faculty-dashboard/students-applications-approve" >
+            <button className="card-common card2"  >
+              <span><i className="fa-solid fa-circle-check" style={{ marginRight: "8px" }}></i> Applications Approved</span> 
+              <span className="badge">{approved}</span>
+            </button>
+          </Link>
 
-        <Link to="/faculty-dashboard/students-applications-approve" >
-          <button className="card-common card2"  >
-            Applications Approved 
-            <span className="badge">{approved}</span>
-          </button>
-        </Link>
+          <Link to="/faculty-dashboard/students-applications-pending"  >
+            <button className="card-common card3" >
+              <span><i className="fa-solid fa-clock" style={{ marginRight: "8px" }}></i> Applications Pending</span> 
+              <span className="badge">{pending}</span>
+            </button>
+          </Link>
 
-        <Link to="/faculty-dashboard/students-applications-pending"  >
-          <button className="card-common card3" >
-            Applications Pending 
-            <span className="badge">{pending}</span>
-          </button>
-        </Link>
-
-        <Link to="/faculty-dashboard/students-applications-rejected" >
-          <button className="card-common card4" >
-            Applications Rejected 
-            <span className="badge">{rejected}</span>
-          </button>
-        </Link>
-       
-      </div>
+          <Link to="/faculty-dashboard/students-applications-rejected" >
+            <button className="card-common card4" >
+              <span><i className="fa-solid fa-circle-xmark" style={{ marginRight: "8px" }}></i> Applications Rejected</span> 
+              <span className="badge">{rejected}</span>
+            </button>
+          </Link>
+        </div>
 
         {/* Profile */}
         <div className='user-design'>
@@ -143,7 +141,7 @@ const FacultyStudentView = () =>  {
               disabled={!fId}
               style={{ textDecoration: "none", borderBottom: "none" }}
             >
-              Profile
+              <i className="fa-solid fa-id-badge"></i> Profile
             </button>
           </Link>
 
@@ -165,7 +163,7 @@ const FacultyStudentView = () =>  {
               disabled={!fId}
               style={{ textDecoration: "none", borderBottom: "none" }}
             >
-              Update Profile
+              <i className="fa-solid fa-user-pen"></i> Update Profile
             </button>
           </Link>
 

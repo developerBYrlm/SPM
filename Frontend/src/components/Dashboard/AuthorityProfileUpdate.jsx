@@ -170,7 +170,7 @@ const AuthorityProfileUpdate = () => {
           </div>
 
           <button type="submit" className="submit-btn">
-            Submit
+            <i className="fa-solid fa-floppy-disk"></i> Update Profile
           </button>
 
         </form>

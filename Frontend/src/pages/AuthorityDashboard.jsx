@@ -1,27 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../context/authContext';
 import './website.css';
 import AuthoritySidebar from '../components/Dashboard/AuthoritySidebar';
-import AuthoritySummary from '../components/Dashboard/AuthoritySummary';
 import { Outlet } from 'react-router-dom';
  
 const AuthorityDashboard = () => {
- 
     const { user } = useAuth();
   
-    const [success, setSuccess] = useState(false);
-
-    // Popup will show only ONCE after login
-    useEffect(() => {
-    if (user) {
+    const [success, setSuccess] = useState(() => {
         const popupShown = sessionStorage.getItem("authorityLoginPopup");
-
         if (!popupShown) {
-            setSuccess(true);
             sessionStorage.setItem("authorityLoginPopup", "true");
-                }
-            }
-        }, [user]);
+            return true;
+        }
+        return false;
+    });
 
 
     return (

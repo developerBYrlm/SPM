@@ -51,8 +51,7 @@ const AList = () => {
 
 
   const columns = [
-    // { name: "S No", selector: (row) => row.sno, width: "120px" },
-    { name: "ACAD ID", selector: (row) => row.studentId, sortable: true, width: "170px" },
+    { name: "ACAD ID", selector: (row) => row.studentId, sortable: true, grow: 1.3, minWidth: "130px" },
     {
       name: "Image",
       cell: (row) => (
@@ -62,12 +61,16 @@ const AList = () => {
           className="student-image"
         />
       ),
-      width: "160px",
+      width: "70px",
+      center: true,
     },
-    { name: "Name", selector: (row) => row.name, sortable: true, width: "310px" },
+    { name: "Name", selector: (row) => row.name, sortable: true, grow: 2, minWidth: "150px" },
     {
       name: "Action",
-      cell: (row) => <AcadButtons id={row._id} />, width: "290px", center: "true"
+      cell: (row) => <AcadButtons id={row._id} />, 
+      grow: 1.2,
+      minWidth: "125px", 
+      center: true,
     },
   ];
 
@@ -137,6 +140,7 @@ const AList = () => {
             data={filteredStudents}
             progressPending={loading}
             pagination
+            responsive
           />
         </div>
       </div>

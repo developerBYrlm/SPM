@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import DataTable from "react-data-table-component";
@@ -52,17 +52,18 @@ const filteredApplications = applications
       .includes(search.toLowerCase())
   );
   const columns = [
-    // { name: "S No", selector: (row) => row.sno, width: "100px" },
-    { name: "Student ID", selector: (row) => row.studentId, sortable: true, width: "170px" },
-    { name: "Name", selector: (row) => row.name, sortable: true, width: "310px" },
+    { name: "Student ID", selector: (row) => row.studentId, sortable: true, grow: 1.1, minWidth: "115px" },
+    { name: "Name", selector: (row) => row.name, sortable: true, grow: 1.6, minWidth: "140px" },
     { 
       name: "Exam Type", 
       selector: (row) => row.missedExamType, 
       sortable: true, 
-      width: "150px",
+      grow: 1.2,
+      minWidth: "125px",
+      center: true,
       cell: (row) => <span style={{textTransform: 'capitalize'}}>{row.missedExamType}</span>
     },
-    { name: "Faculty Status", selector: (row) => row.facultyStatus, sortable: true, width: "190px", },
+    { name: "Faculty Status", selector: (row) => row.facultyStatus, sortable: true, grow: 1.3, minWidth: "135px", center: true },
     { 
       name: "Action",
       cell: (row) => (
@@ -71,12 +72,13 @@ const filteredApplications = applications
           onDeleteSuccess={fetchApplications} 
         />
       ), 
-      width: "250px", 
-      center: "true"
+      grow: 1,
+      minWidth: "105px", 
+      center: true,
     },
   ];
 
-const fetchApplications = async () => {
+const fetchApplications = useCallback(async () => {
   setLoading(true);
 
   try {
@@ -115,7 +117,7 @@ const fetchApplications = async () => {
   } finally {
     setLoading(false);
   }
-};
+}, [faculty]);
 
 useEffect(() => {
   fetchFacultyProfile();
@@ -125,7 +127,7 @@ useEffect(() => {
   if (faculty) {
     fetchApplications();
   }
-}, [faculty]);
+}, [faculty, fetchApplications]);
 
     if (loading) {
     return (
@@ -154,6 +156,7 @@ useEffect(() => {
             data={filteredApplications}
             progressPending={loading}
             pagination
+            responsive
           />
         </div>
       </div>

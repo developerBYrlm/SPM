@@ -1,182 +1,393 @@
-/* main content */
-.main-content {
-  margin-left: 265px;
-  min-height: 100vh;
+/* ==========================================================================
+   DATA TABLE & LIST VIEWS
+   Special Exam Management System
+   Theme: Frosted Translucent Glass (30% Opacity) with Luminous Box Shadow
+   ========================================================================== */
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  padding: 40px 30px;
-}
-
-/* dashboard container */
-.dashboard-container {
-  width: 100%;
-  max-width: 1400px;
-
-  padding: 45px 50px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  background: rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-
-  border-radius: 26px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-}
-
-/* title */
-.dashboard-title {
-  font-size: 42px;
-  font-weight: 700;
-  color: #ffffff;
-
-  margin-bottom: 8px;
-  text-align: center;
-}
-
-/* search box */
+/* Search Filter Box with Rich Box Shadow */
 .search-box {
   width: 100%;
-  max-width: 220px;
-  margin-bottom: 9px;
+  max-width: 460px;
+  margin-bottom: 24px;
+  position: relative;
 }
 
+.search-box.glass input,
 .search-box input {
   width: 100%;
-  padding: 6px 15px;
-
-  border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.393);
-
-  background: rgba(4, 4, 4, 0.255);
-  backdrop-filter: blur(12px);
-
-  color: #fff;
-  font-size: 17px;
+  height: 50px;
+  padding: 0 20px 0 50px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  border-radius: 9999px;
+  font-size: 14.5px;
+  font-family: inherit;
+  font-weight: 500;
+  color: #ffffff;
   outline: none;
-  display: flex;
-  text-align: center;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 
+    0 8px 30px rgba(0, 0, 0, 0.28),
+    0 0 20px rgba(50, 198, 244, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .search-box input::placeholder {
-  text-align: center;
-  color: rgba(255, 255, 255, 0.459);
+  color: rgba(255, 255, 255, 0.65);
 }
 
-/* table wrapper */
-.table-wrapper {
-  width: 100%;
-  max-width: 1200px;
-  padding: 30px;
-
-  border-radius: 22px;
-  background: rgba(0, 0, 0, 0) !important;
-  backdrop-filter: blur(20px);
-
-  border: 1px solid rgba(255, 255, 255, 0.2);
+.search-box::before {
+  font-family: "Font Awesome 6 Free";
+  content: "\f002";
+  font-weight: 900;
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 16px;
+  pointer-events: none;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
-.rdt_Table,
-.rdt_TableRow,
-.rdt_TableCell {
-  font-size: 20px;
+.search-box.glass input:focus,
+.search-box input:focus {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 
+    0 12px 36px rgba(0, 0, 0, 0.35),
+    0 0 30px rgba(50, 198, 244, 0.45),
+    inset 0 1px 2px rgba(255, 255, 255, 0.3);
   color: #ffffff;
 }
 
-.rdt_TableHead {
-  background: transparent !important;
-}
-
-.rdt_TableHeadRow {
-  background: rgba(4, 4, 4, 0.204) !important;
-}
-
-.rdt_TableCol {
+.search-box input:focus + ::before,
+.search-box:focus-within::before {
   color: #ffffff;
-  font-size: 20px;
-  font-weight: 600;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+  transform: translateY(-50%) scale(1.1);
 }
 
-.rdt_Pagination {
-  background: transparent !important;
-  color: #ffffff !important;
-  font-size: 18px;
-}
-
-.rdt_Pagination select,
-.rdt_Pagination option {
-  background: #22222272;
-  color: #fff;
-  border-radius: 7px;
-}
-
-/* datatable override */
-.student-image {
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-  object-fit: cover;
-  background-color: rgba(4, 4, 4, 0.295);
-}
-
-.rdt_Table {
-  background: transparent !important;
-}
-
-.rdt_TableHead {
-  background: rgba(255, 255, 255, 0.316);
-}
-
-.rdt_TableRow {
-  background: transparent !important;
-  color: #ffffff;
-}
-
-.rdt_TableRow:hover {
-  background: rgba(68, 115, 160, 0.596) !important;
-  transition: 0.3s;
-}
-
-.rdt_Pagination {
-  background: transparent !important;
-  color: #ffffff;
-}
-
-/* back button */
+/* Back Navigation Button */
 .back {
-  position: fixed;
-  top: 27px;
-  left: 2px;
-  z-index: 1000;
+  margin-bottom: 16px;
+  display: block;
+  width: fit-content;
 }
 
 .back a {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  border-radius: 9999px;
+  font-size: 15px;
   text-decoration: none;
-  background-color: #1e1e1e00;
-  color: #ffffff52;
-  padding: 22px 14px;
-  border-radius: 8px;
-  font-size: 18px;
-  transition: all 0.2s ease;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.25),
+    0 0 15px rgba(50, 198, 244, 0.18);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .back a:hover {
-  color: #fff;
-  transform: translateX(-2px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0);
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  border-color: #ffffff;
+  transform: translateX(-3px);
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.35),
+    0 0 25px rgba(50, 198, 244, 0.4);
 }
 
-.back i {
-  font-size: 23px;
+.dashboard-container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
 }
 
-.back:active {
-  transform: scale(0.96);
+/* ==========================================================================
+   REACT DATA TABLE COMPONENT STYLING (30% OPACITY TRANSLUCENT GLASS)
+   ========================================================================== */
+
+.table-wrapper {
+  background: rgba(7, 24, 60, 0.30);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 22px;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(50, 198, 244, 0.1);
+  overflow-x: auto !important;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch !important;
+  margin-bottom: 30px;
+  position: relative;
+  width: 100%;
 }
+
+.table-wrapper::-webkit-scrollbar {
+  height: 6px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 9999px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.35);
+  border-radius: 9999px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: rgba(56, 189, 248, 0.6);
+}
+
+.table-wrapper.glass {
+  background: rgba(7, 24, 60, 0.30);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Data Table Override */
+.rdt_Table {
+  background: transparent !important;
+  color: #ffffff !important;
+  width: 100% !important;
+}
+
+/* Table Header */
+.rdt_TableHeadRow {
+  background: rgba(255, 255, 255, 0.10) !important;
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.18) !important;
+  min-height: 52px !important;
+}
+
+.rdt_TableCol {
+  font-size: 13px !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+  padding: 12px 14px !important;
+}
+
+.rdt_TableCol div {
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
+  line-height: 1.25 !important;
+}
+
+.rdt_TableCol_Sortable {
+  display: inline-flex !important;
+  align-items: center !important;
+  white-space: normal !important;
+}
+
+.rdt_TableCol_Sortable:hover {
+  color: #ffffff !important;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Table Body Rows */
+.rdt_TableRow {
+  min-height: 64px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+  font-size: 14.5px !important;
+  font-weight: 500 !important;
+  background-color: transparent !important;
+  transition: background-color 0.15s ease !important;
+}
+
+.rdt_TableRow:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+.rdt_TableRow:hover {
+  background-color: rgba(255, 255, 255, 0.12) !important;
+  box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.05) !important;
+}
+
+.rdt_TableCell {
+  padding: 12px 18px !important;
+  display: flex !important;
+  align-items: center !important;
+  color: #ffffff !important;
+}
+
+/* Table Thumbnail Images */
+.student-image {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 12px rgba(50, 198, 244, 0.4);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Table Pagination Bar */
+.rdt_Pagination {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-size: 13.5px !important;
+  padding: 12px 16px !important;
+}
+
+.rdt_Pagination select {
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  border-radius: 8px !important;
+  padding: 4px 8px !important;
+  outline: none !important;
+}
+
+.rdt_Pagination select option {
+  background: #031445 !important;
+  color: #ffffff !important;
+}
+
+.rdt_Pagination button {
+  border-radius: 8px !important;
+  transition: all 0.15s ease !important;
+  fill: #ffffff !important;
+}
+
+.rdt_Pagination button:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  fill: #ffffff !important;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3) !important;
+}
+
+.rdt_Pagination button:disabled {
+  fill: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* ==========================================================================
+   LOADING RING SPINNER
+   ========================================================================== */
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 350px;
+  width: 100%;
+}
+
+.ring {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  border-top: 4px solid #ffffff;
+  border-right: 4px solid #32c6f4;
+  border-radius: 50%;
+  animation: spinRing 0.8s linear infinite;
+  box-shadow: 0 0 20px rgba(50, 198, 244, 0.4);
+}
+
+@keyframes spinRing {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   RESPONSIVE TABLE WRAPPER
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .search-box {
+    max-width: 100%;
+  }
+
+  .table-wrapper {
+    border-radius: 14px;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    margin-bottom: 20px;
+  }
+
+  .rdt_Table {
+    width: 100% !important;
+    min-width: 100% !important;
+  }
+
+  .rdt_TableHeadRow {
+    min-height: 44px !important;
+  }
+
+  .rdt_TableRow {
+    min-height: 52px !important;
+  }
+
+  .rdt_TableCol {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    padding: 8px 6px !important;
+    min-width: 0 !important;
+  }
+
+  .rdt_TableCell {
+    font-size: 11.5px !important;
+    padding: 8px 6px !important;
+    min-width: 0 !important;
+  }
+
+  .student-image {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .rdt_Pagination {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    font-size: 11.5px !important;
+    padding: 8px 10px !important;
+    gap: 4px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-title {
+    font-size: 20px !important;
+  }
+
+  .search-box input {
+    font-size: 13px !important;
+    padding: 10px 14px !important;
+  }
+
+  .table-wrapper {
+    border-radius: 12px;
+  }
+
+  .rdt_TableCol {
+    font-size: 9.5px !important;
+    padding: 6px 3px !important;
+    letter-spacing: 0 !important;
+  }
+
+  .rdt_TableCell {
+    font-size: 10.5px !important;
+    padding: 6px 3px !important;
+  }
+
+  .student-image {
+    width: 28px !important;
+    height: 28px !important;
+  }
+}
+

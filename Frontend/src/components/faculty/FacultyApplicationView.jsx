@@ -115,7 +115,7 @@ const FacultyApplicationView = () => {
               onClick={() => handleStatusChange("approved_by_faculty")}
               disabled={actionLoading}
             >
-              {facultyStatus.toLowerCase() === "approved" ? "Approved" : "Approve (Faculty)"}
+              <i className="fa-solid fa-circle-check"></i> {facultyStatus.toLowerCase() === "approved" ? "Approved" : "Approve (Faculty)"}
             </button>
 
             <button
@@ -129,7 +129,7 @@ const FacultyApplicationView = () => {
               onClick={() => handleStatusChange("rejected_by_faculty")}
               disabled={actionLoading}
             >
-              {facultyStatus.toLowerCase() === "rejected" ? "Rejected" : "Reject (Faculty)"}
+              <i className="fa-solid fa-circle-xmark"></i> {facultyStatus.toLowerCase() === "rejected" ? "Rejected" : "Reject (Faculty)"}
             </button>
           </div>
 

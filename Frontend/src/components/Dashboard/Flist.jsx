@@ -47,8 +47,7 @@ const FList = () => {
 
 
   const columns = [
-    // { name: "S No", selector: (row) => row.sno, width: "120px" },
-    { name: "Faculty Acronym", selector: (row) => row.studentId, sortable: true, width: "200px" },
+    { name: "Faculty Acronym", selector: (row) => row.studentId, sortable: true, grow: 1.3, minWidth: "130px" },
     {
       name: "Image",
       cell: (row) => (
@@ -58,12 +57,16 @@ const FList = () => {
           className="student-image"
         />
       ),
-      width: "160px",
+      width: "70px",
+      center: true,
     },
-    { name: "Name", selector: (row) => row.name, sortable: true, width: "310px" },
+    { name: "Name", selector: (row) => row.name, sortable: true, grow: 2, minWidth: "150px" },
     {
       name: "Action",
-      cell: (row) => <FacultyButtons id={row._id} />, width: "290px", center: "true"
+      cell: (row) => <FacultyButtons id={row._id} />, 
+      grow: 1.2,
+      minWidth: "125px", 
+      center: true,
     },
   ];
 
@@ -133,6 +136,7 @@ const FList = () => {
             data={filteredStudents}
             progressPending={loading}
             pagination
+            responsive
           />
         </div>
       </div>

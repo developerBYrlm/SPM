@@ -298,13 +298,15 @@ const ApplyMissedExam = () => {
                 />
 
                 {courses.length > 1 && (
-                  <button type="button" onClick={() => removeCourse(index)}>❌</button>
+                  <button type="button" onClick={() => removeCourse(index)}>
+                    <i className="fa-solid fa-trash-can"></i> Remove Course
+                  </button>
                 )}
               </div>
             ))}
 
             <button type="button" className="add-btn" onClick={addCourse}>
-              + Add Another Course
+              <i className="fa-solid fa-plus"></i> Add Another Course
             </button>
 
             <div className="form-group">
@@ -331,7 +333,9 @@ const ApplyMissedExam = () => {
               />
             </div>
 
-            <button type="submit" className="submit-btn">Submit Application</button>
+            <button type="submit" className="submit-btn">
+              <i className="fa-solid fa-paper-plane"></i> Submit Application
+            </button>
           </form>
         </div>
       )}

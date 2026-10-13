@@ -33,23 +33,26 @@ const StudentActionButtons = ({ id }) =>{
     <div className="action-btn-group">
       <button
         className="student-action-btn btn-view" 
-        onClick={() => navigate(`/it-dashboard/students/view/${id}`)} 
+        onClick={() => navigate(`/it-dashboard/students/view/${id}`)}
+        title="View"
       >
-        View 
+        <i className="fa-solid fa-eye"></i>
       </button>
 
       <button
         className="student-action-btn btn-edit"
         onClick={() => navigate(`/it-dashboard/students/edit/${id}`)}
+        title="Edit"
       >
-        Edit
+        <i className="fa-solid fa-pen-to-square"></i>
       </button>
  
       <button
         className="student-action-btn btn-leave"
         onClick={handleRemove}
+        title="Remove"
       >
-        Remove
+        <i className="fa-solid fa-trash-can"></i>
       </button>
     </div>
   );

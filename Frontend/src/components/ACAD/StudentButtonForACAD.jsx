@@ -11,8 +11,9 @@ const StudentButtonForACAD = ({ id }) => {
         type="button"
         className="student-action-btn btn-view"
         onClick={() => navigate(`/acad-dashboard/student-application-view/${id}`)}
+        title="View"
       >
-        View
+        <i className="fa-solid fa-eye"></i>
       </button>
     </div>
   );

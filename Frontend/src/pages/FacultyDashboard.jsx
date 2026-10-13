@@ -1,28 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../context/authContext';
 import { Outlet } from 'react-router-dom';
 import './website.css';
 import FacultySidebar from '../components/faculty/facultySidebar';
 
-
-
 const FacultyDashboard = () => {
-
-     const { user } = useAuth();
+    const { user } = useAuth();
     
-        const [success, setSuccess] = useState(false);
-    
-        // Popup will show only ONCE after login
-            useEffect(() => {
-            if (user) {
-                const popupShown = sessionStorage.getItem("facultyLoginPopup");
-        
-                if (!popupShown) {
-                    setSuccess(true);
-                    sessionStorage.setItem("facultyLoginPopup", "true");
-                        }
-                    }
-                }, [user]);
+    const [success, setSuccess] = useState(() => {
+        const popupShown = sessionStorage.getItem("facultyLoginPopup");
+        if (!popupShown) {
+            sessionStorage.setItem("facultyLoginPopup", "true");
+            return true;
+        }
+        return false;
+    });
 
       return (
         <>

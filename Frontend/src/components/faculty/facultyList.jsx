@@ -5,7 +5,7 @@ import StudentButtonForFaculty from "./StudentButtonForFaculty";
 import "../Dashboard/list.css";
 import "../Dashboard/ViewActionButton/ViewActionButton.css";
 
-const facultyList = () => {
+const FacultyList = () => {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
@@ -37,8 +37,7 @@ const facultyList = () => {
 
   // Table columns
    const columns = [
-    // { name: "S No", selector: (row) => row.sno, width: "120px" },
-    { name: "Student ID", selector: (row) => row.studentId, sortable: true, width: "170px" },
+    { name: "Student ID", selector: (row) => row.studentId, sortable: true, grow: 1.3, minWidth: "130px" },
     {
       name: "Image",
       cell: (row) => (
@@ -48,12 +47,16 @@ const facultyList = () => {
           className="student-image"
         />
       ),
-      width: "160px",
+      width: "70px",
+      center: true,
     },
-    { name: "Name", selector: (row) => row.name, sortable: true, width: "310px" },
+    { name: "Name", selector: (row) => row.name, sortable: true, grow: 2, minWidth: "150px" },
     {
       name: "Action",
-      cell: (row) => <StudentButtonForFaculty id={row._id} />, width: "290px", center: "true"
+      cell: (row) => <StudentButtonForFaculty id={row._id} />, 
+      grow: 1.2,
+      minWidth: "115px", 
+      center: true,
     }
   ];  
 
@@ -116,6 +119,7 @@ const facultyList = () => {
             data={filteredStudents}
             progressPending={loading}
             pagination
+            responsive
           />
         </div>
       </div>
@@ -123,4 +127,4 @@ const facultyList = () => {
   );
 };
 
-export default facultyList;
+export default FacultyList;

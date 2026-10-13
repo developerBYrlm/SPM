@@ -44,7 +44,7 @@ const StudentFacultyView = () => {
 
 
   const columns = [
-    { name: "Faculty Acronym", selector: (row) => row.studentId, sortable: true, width: "200px" },
+    { name: "Faculty Acronym", selector: (row) => row.studentId, sortable: true, grow: 1.2, minWidth: "125px" },
     {
       name: "Image",
       cell: (row) => (
@@ -54,11 +54,11 @@ const StudentFacultyView = () => {
           className="student-image"
         />
       ),
-      width: "160px",
+      width: "70px",
+      center: true,
     },
-    { name: "Name", selector: (row) => row.name, sortable: true, width: "310px" },
-    { name: "E-mail", selector: (row) => row.email, sortable: true, width: "310px" },
-    
+    { name: "Name", selector: (row) => row.name, sortable: true, grow: 1.8, minWidth: "140px" },
+    { name: "E-mail", selector: (row) => row.email, sortable: true, grow: 1.8, minWidth: "150px" },
   ];
 
   useEffect(() => {
@@ -128,6 +128,7 @@ const StudentFacultyView = () => {
             data={filteredStudents}
             progressPending={loading}
             pagination
+            responsive
           />
         </div>
       </div>

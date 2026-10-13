@@ -53,5 +53,6 @@ const AuthContext = ({ children }) => {
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => useContext(userContext);
 export default AuthContext;

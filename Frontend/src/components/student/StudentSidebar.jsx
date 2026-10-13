@@ -24,8 +24,10 @@ const StudentSidebar = () => {
         <h3 className="sidebar-titles">Special Exam Application</h3>
 
         <div className="sidebar-welcome">
-          <p className="welcome-text">Welcome <br className='gap' /> {user.name}</p>
-                 
+          <p className="welcome-text">
+            <span className="welcome-tag">Welcome</span>
+            <span className="sidebar-user-name">{user?.name || "Student"}</span>
+          </p>
         </div>
 
         <ul className="sidebar-menu">

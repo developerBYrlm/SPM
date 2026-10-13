@@ -76,6 +76,7 @@ export const UpdateStudentApplication = async (req, res) => {
     try {
       parsedCourses = JSON.parse(courses);
     } catch (error) {
+      console.error(error);
       return res.status(400).json({
         success: false,
         message: "Invalid courses format"

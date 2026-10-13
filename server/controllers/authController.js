@@ -125,6 +125,7 @@ const getMe = async (req, res) => {
       user,
     });
   } catch (err) {
+    console.error(err);
     return res.status(500).json({
       success: false,
       error: "Server error",

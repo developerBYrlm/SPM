@@ -206,7 +206,7 @@ const EditStudent = () => {
           </div>
 
           <button type="submit" className="submit-btn">
-            Submit
+            <i className="fa-solid fa-floppy-disk"></i> Save Changes
           </button>
 
         </form>

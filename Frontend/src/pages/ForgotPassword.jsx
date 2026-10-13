@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./website.css";
+import "./pageAnimation.css";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -290,6 +292,7 @@ const ForgotPassword = () => {
                   className="submit-btn forgot-submit-btn"
                   disabled={loading}
                 >
+                  <i className="fa-solid fa-paper-plane"></i>
                   {loading ? "Sending..." : "Send OTP"}
                 </button>
               </>
@@ -297,6 +300,11 @@ const ForgotPassword = () => {
 
             {step === 2 && (
               <>
+                {emailHint && (
+                  <p style={{ textAlign: "center", fontSize: "13px", opacity: 0.8, marginBottom: "10px" }}>
+                    Sent to: {emailHint}
+                  </p>
+                )}
                 <div className="form-group forgot-input-group">
                   <label>OTP</label>
 
@@ -330,6 +338,7 @@ const ForgotPassword = () => {
                   className="submit-btn forgot-submit-btn"
                   disabled={loading || timeLeft <= 0}
                 >
+                  <i className="fa-solid fa-shield-halved"></i>
                   {loading ? "Verifying..." : "Verify OTP"}
                 </button>
 
@@ -340,6 +349,7 @@ const ForgotPassword = () => {
                     onClick={handleSendAgain}
                     disabled={loading}
                   >
+                    <i className="fa-solid fa-rotate-right" style={{ marginRight: "6px" }}></i>
                     {loading ? "Sending..." : "Send OTP Again"}
                   </button>
                 )}
@@ -377,6 +387,7 @@ const ForgotPassword = () => {
                   className="submit-btn forgot-submit-btn"
                   disabled={loading}
                 >
+                  <i className="fa-solid fa-key"></i>
                   {loading ? "Updating..." : "Update Password"}
                 </button>
               </>

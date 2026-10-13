@@ -6,7 +6,7 @@ import StudentApplicationsButtonsForACAD from "../StudentApplicationButtonsForAC
 import "../../Dashboard/list.css" 
 import '../../Dashboard/ViewActionButton/ViewActionButton.css'
 
-const APending = () => {
+const ARejected = () => {
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
@@ -39,17 +39,18 @@ const APending = () => {
   );
  
   const columns = [
-    // { name: "S No", selector: (row) => row.sno, width: "100px" },
-    { name: "Student ID", selector: (row) => row.studentId, sortable: true, width: "170px" },
-    { name: "Name", selector: (row) => row.name, sortable: true, width: "310px" },
+    { name: "Student ID", selector: (row) => row.studentId, sortable: true, grow: 1.1, minWidth: "115px" },
+    { name: "Name", selector: (row) => row.name, sortable: true, grow: 1.6, minWidth: "140px" },
     { 
       name: "Exam Type", 
       selector: (row) => row.missedExamType, 
       sortable: true, 
-      width: "150px",
+      grow: 1.2,
+      minWidth: "125px",
+      center: true,
       cell: (row) => <span style={{textTransform: 'capitalize'}}>{row.missedExamType}</span>
     },
-    { name: "Status", selector: (row) => row.authorityStatus, sortable: true, width: "140px" },
+    { name: "Status", selector: (row) => row.authorityStatus, sortable: true, grow: 1.3, minWidth: "135px", center: true },
     { 
       name: "Action",
       cell: (row) => (
@@ -58,8 +59,9 @@ const APending = () => {
           onDeleteSuccess={fetchApplications} 
         />
       ), 
-      width: "250px", 
-      center: "true"
+      grow: 1,
+      minWidth: "105px", 
+      center: true
     },
   ];
 
@@ -124,6 +126,7 @@ const APending = () => {
             data={filteredApplications}
             progressPending={loading}
             pagination
+            responsive
           />
         </div>
       </div>
@@ -131,4 +134,4 @@ const APending = () => {
   );
 };
 
-export default APending
+export default ARejected;

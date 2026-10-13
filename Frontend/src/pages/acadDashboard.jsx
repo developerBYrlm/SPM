@@ -1,26 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../context/authContext';
 import { Outlet } from 'react-router-dom';
 import './website.css';
 import ACADsidebar from '../components/ACAD/ACADsidebar';
 
-const acadDashboard = () => {
-
+const AcadDashboard = () => {
     const { user } = useAuth();
 
-    const [success, setSuccess] = useState(false);
-
-    // Popup will show only ONCE after login
-        useEffect(() => {
-        if (user) {
-            const popupShown = sessionStorage.getItem("acadLoginPopup");
-    
-            if (!popupShown) {
-                setSuccess(true);
-                sessionStorage.setItem("acadLoginPopup", "true");
-                    }
-                }
-            }, [user]);
+    const [success, setSuccess] = useState(() => {
+        const popupShown = sessionStorage.getItem("acadLoginPopup");
+        if (!popupShown) {
+            sessionStorage.setItem("acadLoginPopup", "true");
+            return true;
+        }
+        return false;
+    });
 
     return (
         <>
@@ -43,4 +37,4 @@ const acadDashboard = () => {
     );
 };
 
-export default acadDashboard
+export default AcadDashboard;

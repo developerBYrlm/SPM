@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import './studentButtons.css'
 
 
-const acadButtons = ({ id }) =>{
+const AcadButtons = ({ id }) =>{
     const navigate = useNavigate();
 
     const handleRemove = async () => {
@@ -34,28 +34,30 @@ const acadButtons = ({ id }) =>{
     <div className="action-btn-group">
       <button
         className="student-action-btn btn-view"
-        onClick={() => navigate(`/authority-dashboard/acad/acad-view/${id}`)} 
+        onClick={() => navigate(`/authority-dashboard/acad/acad-view/${id}`)}
+        title="View"
       >
-        View
+        <i className="fa-solid fa-eye"></i>
       </button>
 
       <button
         className="student-action-btn btn-edit"
         onClick={() => navigate(`/authority-dashboard/acad/acad-edit/${id}`)}
+        title="Edit"
       >
-        Edit
+        <i className="fa-solid fa-pen-to-square"></i>
       </button>
-
 
       <button
         className="student-action-btn btn-leave"
         onClick={handleRemove}
+        title="Remove"
       >
-        Remove
+        <i className="fa-solid fa-trash-can"></i>
       </button>
     </div>
   );
 
 };
 
-export default acadButtons;
+export default AcadButtons;

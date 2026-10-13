@@ -1,47 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../Dashboard/routine.css'; 
-import { Link, useNavigate } from "react-router-dom"
 
 const RoutineFacultySh = () => {
-    const [file, setFile] = useState(null);
     const [latestRoutine, setLatestRoutine] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [message, setMessage] = useState("");
 
     // Page load holei check korbe routine ache kina
     useEffect(() => {
+        const fetchRoutine = async () => {
+            try {
+                const res = await axios.get("https://spm-1-u37a.onrender.com/api/routine/latest");
+                if (res.data.success) {
+                    setLatestRoutine(res.data.routine);
+                }
+            } catch {
+                setLatestRoutine(null); // Routine na thakle null thakbe
+            }
+        };
+
         fetchRoutine();
     }, []);
-
-    const fetchRoutine = async () => {
-        try {
-            const res = await axios.get("https://spm-1-u37a.onrender.com/api/routine/latest");
-            if (res.data.success) {
-                setLatestRoutine(res.data.routine);
-            }
-        } catch (err) {
-            setLatestRoutine(null); // Routine na thakle null thakbe
-        }
-    };
-
-    const handleFileChange = (e) => {
-        setFile(e.target.files[0]);
-    };
-
-    
-    const handleUpload = async (e) => {
-    e.preventDefault();
-
-    setLoading(true);
-    try {
-        await fetchRoutine(); 
-    } catch (err) {
-        console.error(err);
-    } finally {
-        setLoading(false);
-    }
-};
 
 
 

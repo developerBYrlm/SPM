@@ -91,19 +91,23 @@ const ApplicationApprove = () => {
       name: "Student ID",
       selector: (row) => row.studentId,
       sortable: true,
-      width: "170px",
+      grow: 1.1,
+      minWidth: "115px",
     },
     {
       name: "Name",
       selector: (row) => row.name,
       sortable: true,
-      width: "310px",
+      grow: 1.6,
+      minWidth: "140px",
     },
     {
       name: "Exam Type",
       selector: (row) => row.missedExamType,
       sortable: true,
-      width: "150px",
+      grow: 1.2,
+      minWidth: "125px",
+      center: true,
       cell: (row) => (
         <span style={{ textTransform: "capitalize" }}>
           {row.missedExamType}
@@ -114,7 +118,9 @@ const ApplicationApprove = () => {
       name: "Status",
       selector: (row) => row.authorityStatus,
       sortable: true,
-      width: "140px",
+      grow: 1.3,
+      minWidth: "135px",
+      center: true,
     },
     {
       name: "Action",
@@ -124,7 +130,8 @@ const ApplicationApprove = () => {
           onDeleteSuccess={fetchApplications}
         />
       ),
-      width: "250px",
+      grow: 1,
+      minWidth: "105px",
       center: true,
     },
   ];
@@ -165,6 +172,7 @@ const ApplicationApprove = () => {
             data={filteredApplications}
             progressPending={loading}
             pagination
+            responsive
           />
         </div>
       </div>

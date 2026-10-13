@@ -57,6 +57,7 @@ const UpdateMissedExam = () => {
         setTotalFine((fixedCourses || []).length * 2000);
         setReason(app.reason || "");
       } catch (err) {
+        console.error(err);
         alert("No application found");
         navigate("/student-dashboard");
       } finally {
@@ -227,14 +228,14 @@ const UpdateMissedExam = () => {
 
               {courses.length > 1 && (
                 <button type="button" onClick={() => removeCourse(index)}>
-                  ❌
+                  <i className="fa-solid fa-trash-can"></i> Remove Course
                 </button>
               )}
             </div>
           ))}
 
           <button type="button" className="add-btn" onClick={addCourse}>
-            + Add Another Course
+            <i className="fa-solid fa-plus"></i> Add Another Course
           </button>
 
           <div className="form-group">
@@ -264,7 +265,7 @@ const UpdateMissedExam = () => {
           </div>
 
           <button type="submit" className="submit-btn" disabled={isLocked}>
-            Update Application
+            <i className="fa-solid fa-floppy-disk"></i> Update Application
           </button>
         </form>
       </div>

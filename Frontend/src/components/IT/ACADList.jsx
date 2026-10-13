@@ -9,39 +9,16 @@ const ACADList = () => {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
-  const [authority, setAuthority] = useState(null); 
 
- 
-  const fetchAuthorityProfile = async () => {
-    try {
-      const res = await axios.get("https://spm-1-u37a.onrender.com/api/auth/me", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-
-      if (res.data.success) {
-        setAuthority(res.data.user); 
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
- 
   const filteredStudents = students
-  
-    
     .filter((student) =>
       (student.studentId || "")
         .toLowerCase()
         .includes(search.toLowerCase())
     );
 
-
-
   const columns = [
-    // { name: "S No", selector: (row) => row.sno, width: "120px" },
-    { name: "ACAD ID", selector: (row) => row.studentId, sortable: true, width: "170px" },
+    { name: "ACAD ID", selector: (row) => row.studentId, sortable: true, grow: 1.2, minWidth: "125px" },
     {
       name: "Image",
       cell: (row) => (
@@ -51,13 +28,17 @@ const ACADList = () => {
           className="student-image"
         />
       ),
-      width: "160px",
+      width: "70px",
+      center: true,
     },
-    { name: "Name", selector: (row) => row.name, sortable: true, width: "310px" },
-    { name: "Department", selector: (row) => row.department, sortable: true, width: "170px" },
+    { name: "Name", selector: (row) => row.name, sortable: true, grow: 1.8, minWidth: "140px" },
+    { name: "Department", selector: (row) => row.department, sortable: true, grow: 1, minWidth: "105px", center: true },
     {
       name: "Action",
-      cell: (row) => <AcadButtons id={row._id} />, width: "290px", center: "true"
+      cell: (row) => <AcadButtons id={row._id} />, 
+      grow: 1.2,
+      minWidth: "125px", 
+      center: true,
     },
   ];
 
@@ -87,7 +68,6 @@ const ACADList = () => {
       }
     }; 
 
-    fetchAuthorityProfile(); 
     fetchStudents();
   }, []);
 
@@ -127,6 +107,7 @@ const ACADList = () => {
             data={filteredStudents}
             progressPending={loading}
             pagination
+            responsive
           />
         </div>
       </div>

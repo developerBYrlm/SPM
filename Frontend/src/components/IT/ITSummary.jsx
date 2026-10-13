@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "../Dashboard/authoritySummary.css";
 
@@ -15,16 +15,15 @@ const ITSummary = () => {
 
 
         <div className="user-design">
-
           <Link to="/IT-dashboard/add-users">
             <button className="user">
-              + Add New User
+              <i className="fa-solid fa-user-plus"></i> Add New User
             </button>
           </Link>
 
           <Link to={fId ? `/IT-dashboard/IT-profile/${fId}` : "#"}>
             <button className="user" disabled={!fId}>
-              Profile
+              <i className="fa-solid fa-id-badge"></i> Profile
             </button>
           </Link>
 
@@ -36,7 +35,7 @@ const ITSummary = () => {
             }
           >
             <button className="user" disabled={!fId}>
-              Update Profile
+              <i className="fa-solid fa-user-pen"></i> Update Profile
             </button>
           </Link>
 

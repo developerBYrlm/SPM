@@ -11,62 +11,23 @@ const List = () => {
   const [search, setSearch] = useState("");
   const [acad, setAcad] = useState(null);
 
-  const fetchAcadProfile = async () => {
-    try {
-      const res = await axios.get("https://spm-1-u37a.onrender.com/api/auth/me", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-
-      if (res.data.success) {
-        setAuthority(res.data.user); 
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const filteredApplications = applications
-
-  .filter((student) => {
-      if (!acad) return false;
-
-      return (
-        student.department?.toLowerCase() ===
-        acad.department?.toLowerCase()
-      );
-    })
-  
-    .filter((student) =>
-      (student.studentId || "")
-        .toLowerCase()
-        .includes(search.toLowerCase())
-    );
-
-
-  const columns = [
-    // { name: "S No", selector: (row) => row.sno, width: "120px" },
-    { name: "Student ID", selector: (row) => row.studentId, sortable: true, width: "170px" },
-    {
-      name: "Image",
-      cell: (row) => (
-        <img
-          src={row.profileImage || "/default.png"}
-          alt="IMG"
-          className="student-image"
-        />
-      ),
-      width: "160px",
-    },
-    { name: "Name", selector: (row) => row.name, sortable: true, width: "310px" },
-    {
-      name: "Action",
-      cell: (row) => <StudentButtonForACAD id={row._id} />, width: "150px"
-    },
-  ];
-
   useEffect(() => {
+    const fetchAcadProfile = async () => {
+      try {
+        const res = await axios.get("https://spm-1-u37a.onrender.com/api/auth/me", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+
+        if (res.data.success) {
+          setAcad(res.data.user); 
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
     const fetchStudents = async () => {
       setLoading(true);
       try {
@@ -81,7 +42,7 @@ const List = () => {
             sno: i++,
             studentId: s.user?.userID || "N/A",
             name: s.user?.name || "N/A",
-            department: app.department,
+            department: s.user?.department || "N/A",
             profileImage: s.user?.profileImage  ? `https://spm-1-u37a.onrender.com/imageUploads/uploads/${s.user.profileImage}`: "",
           })));
         }
@@ -96,7 +57,45 @@ const List = () => {
     fetchStudents();
   }, []);
 
-    
+  const filteredStudents = students
+    .filter((student) => {
+      if (!acad) return true;
+
+      return (
+        student.department?.toLowerCase() ===
+        acad.department?.toLowerCase()
+      );
+    })
+    .filter((student) =>
+      (student.studentId || "")
+        .toLowerCase()
+        .includes(search.toLowerCase())
+    );
+
+  const columns = [
+    { name: "Student ID", selector: (row) => row.studentId, sortable: true, grow: 1.3, minWidth: "130px" },
+    {
+      name: "Image",
+      cell: (row) => (
+        <img
+          src={row.profileImage || "/default.png"}
+          alt="IMG"
+          className="student-image"
+        />
+      ),
+      width: "70px",
+      center: true,
+    },
+    { name: "Name", selector: (row) => row.name, sortable: true, grow: 2, minWidth: "150px" },
+    {
+      name: "Action",
+      cell: (row) => <StudentButtonForACAD id={row._id} />, 
+      grow: 1.2,
+      minWidth: "115px",
+      center: true
+    },
+  ];
+
   if (loading) { 
     return ( 
      <div className="loading">
@@ -129,6 +128,7 @@ const List = () => {
             data={filteredStudents}
             progressPending={loading}
             pagination
+            responsive
           />
         </div>
       </div>

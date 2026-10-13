@@ -67,7 +67,7 @@ const StudentApplication = () => {
                 className="user"
                 style={{ textDecoration: "none", borderBottom: "none" }}
               >
-                New Applications
+                <i className="fa-solid fa-file-circle-plus"></i> New Applications
               </button>
             </a>
             <a
@@ -78,7 +78,7 @@ const StudentApplication = () => {
                 className="user"
                 style={{ textDecoration: "none", borderBottom: "none" }}
               >
-                Update Applications
+                <i className="fa-solid fa-file-pen"></i> Update Applications
               </button>
             </a>
             <a
@@ -89,7 +89,7 @@ const StudentApplication = () => {
                 className="user"
                 style={{ textDecoration: "none", borderBottom: "none" }}
               >
-                Application Status
+                <i className="fa-solid fa-clock-rotate-left"></i> Application Status
               </button>
             </a>
             <a
@@ -100,7 +100,7 @@ const StudentApplication = () => {
                 className="user"
                 style={{ textDecoration: "none", borderBottom: "none" }}
               >
-                Download Admit
+                <i className="fa-solid fa-id-card"></i> Download Admit
               </button>
             </a>
             <a
@@ -112,7 +112,7 @@ const StudentApplication = () => {
                 disabled={!sId}
                 style={{ textDecoration: "none", borderBottom: "none" }}
               >
-                Profile
+                <i className="fa-solid fa-user"></i> Profile
               </button>
             </a>
             {!sId && (
@@ -129,7 +129,7 @@ const StudentApplication = () => {
                 disabled={!sId}
                 style={{ textDecoration: "none", borderBottom: "none" }}
               >
-                Update Profile
+                <i className="fa-solid fa-user-pen"></i> Update Profile
               </button>
             </a>
             {!sId && (

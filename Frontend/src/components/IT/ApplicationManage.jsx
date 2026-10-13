@@ -88,25 +88,31 @@ const ApplicationManage = () => {
       name: "Student ID",
       selector: (row) => row.studentId,
       sortable: true,
-      width: "170px",
+      grow: 1.1,
+      minWidth: "115px",
     },
     {
       name: "Name",
       selector: (row) => row.name,
       sortable: true,
-      width: "250px",
+      grow: 1.5,
+      minWidth: "140px",
     },
     {
       name: "Department",
       selector: (row) => row.department,
       sortable: true,
-      width: "170px",
+      grow: 1,
+      minWidth: "105px",
+      center: true,
     },
     {
       name: "Exam Type",
       selector: (row) => row.missedExamType,
       sortable: true,
-      width: "150px",
+      grow: 1.2,
+      minWidth: "125px",
+      center: true,
       cell: (row) => (
         <span style={{ textTransform: "capitalize" }}>
           {row.missedExamType}
@@ -117,7 +123,9 @@ const ApplicationManage = () => {
       name: "Status",
       selector: (row) => row.authorityStatus,
       sortable: true,
-      width: "180px",
+      grow: 1.3,
+      minWidth: "135px",
+      center: true,
     },
     {
       name: "Action",
@@ -127,7 +135,8 @@ const ApplicationManage = () => {
           onDeleteSuccess={fetchApplications}
         />
       ),
-      width: "210px",
+      grow: 1,
+      minWidth: "105px",
       center: true,
     },
   ];
@@ -156,14 +165,6 @@ const ApplicationManage = () => {
           />
         </div>
 
-        <button
-          type="button"
-          className="student-action-btn btn-allLeave"
-          onClick={handleRemoveAll}
-        >
-          Remove All Applications
-        </button>
-
         {/* Back button */}
         <div className="back">
           <Link to="/it-dashboard">
@@ -171,12 +172,21 @@ const ApplicationManage = () => {
           </Link>
         </div>
 
+        <button
+          type="button"
+          className="student-action-btn btn-allLeave"
+          onClick={handleRemoveAll}
+        >
+          <i className="fa-solid fa-trash-can"></i> Remove All Applications
+        </button>
+
         <div className="table-wrapper glass">
           <DataTable
             columns={columns}
             data={filteredApplications}
             progressPending={loading}
             pagination
+            responsive
           />
         </div>
       </div>

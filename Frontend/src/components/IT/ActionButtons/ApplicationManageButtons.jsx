@@ -1,11 +1,8 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios'; 
 import "../../Dashboard/studentButtons.css"
 
 const StudentApplicationButtons = ({ id, onDeleteSuccess }) => {
-  const navigate = useNavigate();
-
   const handleRemove = async () => {
     if (window.confirm("Are you sure you want to remove this application?")) {
       try {
@@ -17,6 +14,7 @@ const StudentApplicationButtons = ({ id, onDeleteSuccess }) => {
           onDeleteSuccess(); 
         }
       } catch (err) {
+        console.error(err);
         alert("Failed to remove application");
       }
     }
@@ -24,12 +22,12 @@ const StudentApplicationButtons = ({ id, onDeleteSuccess }) => {
 
   return (
     <div className="action-btn-group">
-      
       <button 
         className="student-action-btn btn-leave" 
         onClick={handleRemove}
+        title="Remove"
       >
-        Remove
+        <i className="fa-solid fa-trash-can"></i>
       </button>
     </div>
   );

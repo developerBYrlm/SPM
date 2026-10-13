@@ -67,14 +67,7 @@ const ensureFacultyStatuses = async application => {
   return application;
 };
 
-const formatDate = (date) => {
-  if (!date) return "N/A";
-  return new Date(date).toLocaleDateString("en-GB", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  });
-};
+
 
 // Apply student application
 export const applyStudentApplication = async (req, res) => {
@@ -122,6 +115,7 @@ export const applyStudentApplication = async (req, res) => {
     try {
       parsedCourses = JSON.parse(courses);
     } catch (error) {
+      console.error(error);
       return res.status(400).json({
         success: false,
         message: "Invalid courses format"

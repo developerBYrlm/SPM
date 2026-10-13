@@ -26,6 +26,7 @@ const MyApplication = () => {
           setApp(res.data.application);
         }
       } catch (err) {
+        console.error(err);
         alert("Error fetching data");
       } finally {
         setLoading(false);

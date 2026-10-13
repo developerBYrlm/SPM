@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import '../Dashboard/studentButtons.css'
 
@@ -11,10 +10,10 @@ const StudentButtonForFaculty = ({ id }) =>{
       <button
         className="student-action-btn btn-view"
         onClick={() => navigate(`/faculty-dashboard/students/view/${id}`)}
+        title="View"
       >
-        View
+        <i className="fa-solid fa-eye"></i>
       </button>
-
     </div>
   );
 

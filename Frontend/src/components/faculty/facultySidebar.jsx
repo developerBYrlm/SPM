@@ -23,7 +23,8 @@ const FacultySidebar = () => {
 
         <div className="sidebar-welcome">
           <p className="welcome-text">
-            Welcome <br className="gap" /> {user?.name || "Faculty"}
+            <span className="welcome-tag">Welcome</span>
+            <span className="sidebar-user-name">{user?.name || "Faculty"}</span>
           </p>
         </div>
 

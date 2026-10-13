@@ -110,7 +110,7 @@ const ApplicationView = () => {
                 onClick={() => handleStatusChange("approved_by_authority")}
                 disabled={actionLoading}
               >
-                {app.authorityStatus.toLowerCase() === "approved" ? "Approved" : "Approve (Authority)"}
+                <i className="fa-solid fa-circle-check"></i> {app.authorityStatus.toLowerCase() === "approved" ? "Approved" : "Approve (Authority)"}
               </button>
 
               <button
@@ -118,7 +118,7 @@ const ApplicationView = () => {
                 onClick={() => handleStatusChange("rejected_by_authority")}
                 disabled={actionLoading}
               >
-                {app.authorityStatus.toLowerCase() === "rejected" ? "Rejected" : "Reject (Authority)"}
+                <i className="fa-solid fa-circle-xmark"></i> {app.authorityStatus.toLowerCase() === "rejected" ? "Rejected" : "Reject (Authority)"}
               </button>
             </div>
 
@@ -129,7 +129,7 @@ const ApplicationView = () => {
                   key={index}
                   className={`status-text-view faculty-status-item ${item.status === "Approved" ? "approved" : item.status === "Rejected" ? "rejected" : "pending"}`}
                 >
-                  Faculty: {item.status} [{item.facultyAcr}]
+                  <i className={`fa-solid ${item.status === "Approved" ? "fa-circle-check" : item.status === "Rejected" ? "fa-circle-xmark" : "fa-clock"}`}></i> Faculty: {item.status} [{item.facultyAcr}]
                 </span>
               ))}
             </div>
@@ -161,7 +161,7 @@ const ApplicationView = () => {
                 </select>
               </label>
               <button onClick={handleConsiderAmount} disabled={actionLoading} style={{ marginLeft: "10px" }}>
-                Apply
+                <i className="fa-solid fa-check"></i> Apply
               </button>
             </div>
           </div>

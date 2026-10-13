@@ -77,17 +77,18 @@ const ApplicationList = () => {
   };
  
   const columns = [
-    // { name: "S No", selector: (row) => row.sno, width: "100px" },
-    { name: "Student ID", selector: (row) => row.studentId, sortable: true, width: "170px" },
-    { name: "Name", selector: (row) => row.name, sortable: true, width: "310px" },
+    { name: "Student ID", selector: (row) => row.studentId, sortable: true, grow: 1.1, minWidth: "115px" },
+    { name: "Name", selector: (row) => row.name, sortable: true, grow: 1.6, minWidth: "140px" },
     { 
       name: "Exam Type", 
       selector: (row) => row.missedExamType, 
       sortable: true, 
-      width: "150px",
+      grow: 1.2,
+      minWidth: "125px",
+      center: true,
       cell: (row) => <span style={{textTransform: 'capitalize'}}>{row.missedExamType}</span>
     },
-    { name: "Authority Status", selector: (row) => row.authorityStatus, sortable: true, width: "200px" },
+    { name: "Authority Status", selector: (row) => row.authorityStatus, sortable: true, grow: 1.4, minWidth: "155px", center: true },
     { 
       name: "Action",
       cell: (row) => (
@@ -96,8 +97,9 @@ const ApplicationList = () => {
           onDeleteSuccess={fetchApplications} 
         />
       ), 
-      width: "250px", 
-      center: "true"
+      grow: 1,
+      minWidth: "105px", 
+      center: true,
     },
   ];
 
@@ -154,24 +156,25 @@ const ApplicationList = () => {
           />
         </div>
 
-        <button 
-            className="student-action-btn btn-allLeave" 
-            onClick={handleRemoveAll}
-          >
-            Remove All Applications
-        </button>
-        
         <div className="back">
           <Link to="/authority-dashboard">
             <i className="fa-solid fa-backward"></i>
           </Link>
         </div>
+
+        <button 
+            className="student-action-btn btn-allLeave" 
+            onClick={handleRemoveAll}
+          >
+            <i className="fa-solid fa-trash-can"></i> Remove All Applications
+        </button>
         <div className="table-wrapper glass">
           <DataTable
             columns={columns}
             data={filteredApplications}
             progressPending={loading}
             pagination
+            responsive
           />
         </div>
       </div>

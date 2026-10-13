@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import DataTable from "react-data-table-component";
 import StudentApplicationsButtonsForFaculty from "../StudentApplicationButtonsForFaculty";
@@ -26,7 +26,7 @@ const FApprove = () => {
   };
 
   // Get all applications
-  const fetchApplications = async () => {
+  const fetchApplications = useCallback(async () => {
     setLoading(true);
 
     try {
@@ -55,7 +55,7 @@ const FApprove = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [faculty]);
 
   // Get faculty profile when page loads
   useEffect(() => {
@@ -65,7 +65,7 @@ const FApprove = () => {
   // Get applications after getting faculty profile
   useEffect(() => {
     if (faculty) fetchApplications();
-  }, [faculty]);
+  }, [faculty, fetchApplications]);
 
   // Show approved applications for the current faculty
   const filteredApplications = applications
@@ -92,19 +92,23 @@ const FApprove = () => {
       name: "Student ID",
       selector: (row) => row.studentId,
       sortable: true,
-      width: "170px",
+      grow: 1.1,
+      minWidth: "115px",
     },
     {
       name: "Name",
       selector: (row) => row.name,
       sortable: true,
-      width: "310px",
+      grow: 1.6,
+      minWidth: "140px",
     },
     {
       name: "Exam Type",
       selector: (row) => row.missedExamType,
       sortable: true,
-      width: "150px",
+      grow: 1.2,
+      minWidth: "125px",
+      center: true,
       cell: (row) => (
         <span style={{ textTransform: "capitalize" }}>
           {row.missedExamType}
@@ -115,7 +119,9 @@ const FApprove = () => {
       name: "Faculty Status",
       selector: (row) => row.facultyStatus,
       sortable: true,
-      width: "190px",
+      grow: 1.3,
+      minWidth: "135px",
+      center: true,
     },
     {
       name: "Action",
@@ -125,7 +131,8 @@ const FApprove = () => {
           onDeleteSuccess={fetchApplications}
         />
       ),
-      width: "250px",
+      grow: 1,
+      minWidth: "105px",
       center: true,
     },
   ];
@@ -155,6 +162,7 @@ const FApprove = () => {
             data={filteredApplications}
             progressPending={loading}
             pagination
+            responsive
           />
         </div>
       </div>

@@ -9,24 +9,6 @@ const ITList = () =>  {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
-  const [authority, setAuthority] = useState(null); 
-
- 
-  const fetchAuthorityProfile = async () => {
-    try {
-      const res = await axios.get("https://spm-1-u37a.onrender.com/api/auth/me", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-
-      if (res.data.success) {
-        setAuthority(res.data.user); 
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
  
   const filteredStudents = students
     
@@ -39,8 +21,7 @@ const ITList = () =>  {
 
 
   const columns = [
-    // { name: "S No", selector: (row) => row.sno, width: "120px" },
-    { name: "IT ID", selector: (row) => row.studentId, sortable: true, width: "170px" },
+    { name: "IT ID", selector: (row) => row.studentId, sortable: true, grow: 1.3, minWidth: "130px" },
     {
       name: "Image",
       cell: (row) => (
@@ -50,12 +31,16 @@ const ITList = () =>  {
           className="student-image"
         />
       ),
-      width: "160px",
+      width: "70px",
+      center: true,
     },
-    { name: "Name", selector: (row) => row.name, sortable: true, width: "310px" },
+    { name: "Name", selector: (row) => row.name, sortable: true, grow: 2, minWidth: "150px" },
     {
       name: "Action",
-      cell: (row) => <ITButtons id={row._id} />, width: "290px", center: "true"
+      cell: (row) => <ITButtons id={row._id} />, 
+      grow: 1.2,
+      minWidth: "125px", 
+      center: true,
     },
   ];
 
@@ -85,7 +70,6 @@ const ITList = () =>  {
       }
     }; 
 
-    fetchAuthorityProfile(); 
     fetchStudents();
   }, []);
 
@@ -125,6 +109,7 @@ const ITList = () =>  {
             data={filteredStudents}
             progressPending={loading}
             pagination
+            responsive
           />
         </div>
       </div>

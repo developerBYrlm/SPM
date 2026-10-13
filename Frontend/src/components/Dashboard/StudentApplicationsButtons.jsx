@@ -17,6 +17,7 @@ const StudentApplicationButtons = ({ id, onDeleteSuccess }) => {
           onDeleteSuccess(); 
         }
       } catch (err) {
+        console.error(err);
         alert("Failed to remove application");
       }
     }
@@ -27,14 +28,16 @@ const StudentApplicationButtons = ({ id, onDeleteSuccess }) => {
       <button 
         className="student-action-btn btn-view" 
         onClick={() => navigate(`/authority-dashboard/application/application-view/${id}`)}
+        title="View"
       >
-        View
+        <i className="fa-solid fa-eye"></i>
       </button>
       <button 
         className="student-action-btn btn-leave" 
         onClick={handleRemove}
+        title="Remove"
       >
-        Remove
+        <i className="fa-solid fa-trash-can"></i>
       </button>
     </div>
   );

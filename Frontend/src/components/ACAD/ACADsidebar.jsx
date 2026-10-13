@@ -22,7 +22,8 @@ const ACADsidebar = () => {
 
         <div className="sidebar-welcome">
           <p className="welcome-text">
-            Welcome <br className="gap" /> {user?.name || "ACAD"}
+            <span className="welcome-tag">Welcome</span>
+            <span className="sidebar-user-name">{user?.name || "ACAD"}</span>
           </p>
         </div>
 

@@ -1,6 +1,6 @@
 import User from "../models/User.js";
 import Student from "../models/Student.js";
-import bcrypt from "bcrypt";
+
 
 // Get all IT members
 const getITUsers = async (req, res) => {
