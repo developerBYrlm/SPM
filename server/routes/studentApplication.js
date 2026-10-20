@@ -10,7 +10,9 @@ import {
   getMyApplication,
   updateApplicationStatus,
   updateConsiderAmount,
-  downloadAdmitCard
+  downloadAdmitCard,
+  grantSpecialPermissionFromEmail,
+  grantSpecialPermissionAuth
 } from "../controllers/studentApplicationController.js";
 
 import authMiddleware from "../middleware/authMiddlware.js";
@@ -21,6 +23,8 @@ import {
 } from "../controllers/UpdateControllers/studentApplicationUpdateController.js";
 
 const router = express.Router();
+
+router.get("/grant-special-permission", grantSpecialPermissionFromEmail);
 
 router.post("/apply", authMiddleware, upload.single("attachment"), applyStudentApplication);
 
@@ -33,6 +37,8 @@ router.delete("/application-remove-all", authMiddleware, removeAllApplications);
 router.delete("/application-remove/:id", authMiddleware, removeApplication);
 
 router.put("/update-status/:id", authMiddleware, updateApplicationStatus);
+
+router.put("/grant-permission/:id", authMiddleware, grantSpecialPermissionAuth);
 
 router.put("/application-update", authMiddleware, uploadUpdatePDF.single("attachment"), UpdateStudentApplication);
 

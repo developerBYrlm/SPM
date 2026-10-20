@@ -4,8 +4,8 @@ import { Link, useParams } from 'react-router-dom'
 import '../../Dashboard/ViewActionButton/ViewActionButton.css';
 
 const ACADProfileView = () => {
-  const { id } = useParams()             
-  const [student, setStudent] = useState(null) 
+  const { id } = useParams()
+  const [student, setStudent] = useState(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -35,11 +35,11 @@ const ACADProfileView = () => {
   }, [id])
 
 
-  if (loading) { 
-    return ( 
-     <div className="loading">
+  if (loading) {
+    return (
+      <div className="loading">
         <div className="ring"></div>
-    </div>
+      </div>
     );
   }
   if (!student) { return <div>No student data found</div> }

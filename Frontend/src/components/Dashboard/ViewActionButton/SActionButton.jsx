@@ -2,14 +2,14 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import './ViewActionButton.css'
-  
+
 const SActionButton = () => {
-  const { id } = useParams()             
+  const { id } = useParams()
   const [student, setStudent] = useState(null)
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => { 
-    const fetchStudent = async () => { 
+  useEffect(() => {
+    const fetchStudent = async () => {
       try {
         const response = await axios.get(
           `https://spm-1-u37a.onrender.com/api/students/view/${id}`,
@@ -24,7 +24,7 @@ const SActionButton = () => {
           setStudent(response.data.student)
         }
       } catch (error) {
-        console.error(error) 
+        console.error(error)
         alert("Student not found")
       } finally {
         setLoading(false)
@@ -34,12 +34,12 @@ const SActionButton = () => {
     fetchStudent()
   }, [id])
 
-  
-  if (loading) { 
-    return ( 
-     <div className="loading">
+
+  if (loading) {
+    return (
+      <div className="loading">
         <div className="ring"></div>
-    </div>
+      </div>
     );
   }
 
@@ -47,42 +47,42 @@ const SActionButton = () => {
 
   return (
     <div className="main-content">
-         <div className="dashboard-container">
-         <h2 className="dashboard-title">  Student Details</h2>
+      <div className="dashboard-container">
+        <h2 className="dashboard-title">  Student Details</h2>
 
-            <div className="back">
+        <div className="back">
           <Link to="/authority-dashboard/students">
             <i className="fa-solid fa-backward"></i>
           </Link>
 
         </div>
-          <div className="ImageFrame">
-            <img
-              src={`https://spm-1-u37a.onrender.com/imageUploads/uploads/${student.user.profileImage}`}
-              alt="Student"
-             />
-           </div>
-
-           <div className="student-info">
-            <p><strong>Department:</strong> {student.user.department}</p>
-            <p><strong>Student ID:</strong> {student.studentId}</p>
-            <p><strong>Student Name:</strong> {student.user.name}</p>
-            <p><strong>Email:</strong> {student.user.email}</p>
-            <p><strong>Phone:</strong> {student.phone}</p>
-            <p><strong>Gender:</strong> {student.gender}</p>
-            <p className="special-exam-count">
-              <strong>
-                Approved Special Exam Count: 
-              </strong>
-              
-              <span>
-                {student.specialExamCount ?? 0}
-              </span>
-            </p>
-           </div>
-          </div>
+        <div className="ImageFrame">
+          <img
+            src={`https://spm-1-u37a.onrender.com/imageUploads/uploads/${student.user.profileImage}`}
+            alt="Student"
+          />
         </div>
+
+        <div className="student-info">
+          <p><strong>Department:</strong> {student.user.department}</p>
+          <p><strong>Student ID:</strong> {student.studentId}</p>
+          <p><strong>Student Name:</strong> {student.user.name}</p>
+          <p><strong>Email:</strong> {student.user.email}</p>
+          <p><strong>Phone:</strong> {student.phone}</p>
+          <p><strong>Gender:</strong> {student.gender}</p>
+          <p className="special-exam-count">
+            <strong>
+              Approved Special Exam Count:
+            </strong>
+
+            <span>
+              {student.specialExamCount ?? 0}
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
   )
-}  
+}
 
 export default SActionButton

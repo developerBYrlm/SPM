@@ -144,8 +144,9 @@ const sendPasswordResetOtp = async (req, res) => {
       });
     }
 
+    const trimmedId = studentId.trim();
     const user = await User.findOne({
-      userID: studentId.trim(),
+      userID: { $regex: new RegExp(`^${trimmedId}$`, "i") },
     });
 
     if (!user) {

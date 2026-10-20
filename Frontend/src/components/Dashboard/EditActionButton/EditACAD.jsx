@@ -4,16 +4,16 @@ import axios from 'axios'
 import '../add.css'
 import '../ViewActionButton/ViewActionButton.css'
 
-const EditACAD = () =>{
+const EditACAD = () => {
   const navigate = useNavigate()
-  const { id } = useParams() 
+  const { id } = useParams()
   const [loading, setLoading] = useState(true)
 
   const [formData, setFormData] = useState({
     email: '',
     studentId: '',
     name: '',
-    phone: '', 
+    phone: '',
     password: '',
     image: null
   })
@@ -37,7 +37,7 @@ const EditACAD = () =>{
 
           setFormData({
             email: s.user.email,
-            studentId: s.studentId,   
+            studentId: s.studentId,
             name: s.user.name,
             phone: s.phone,
             password: '',
@@ -54,7 +54,7 @@ const EditACAD = () =>{
     fetchStudent()
   }, [id])
 
-   if (loading) {
+  if (loading) {
     return (
       <div className="loading">
         <div className="ring"></div>
@@ -74,7 +74,7 @@ const EditACAD = () =>{
     e.preventDefault()
 
     const token = localStorage.getItem("token")
-    
+
     if (!token) {
       alert("Unauthorized")
       return
@@ -111,55 +111,55 @@ const EditACAD = () =>{
       )
     }
   }
- 
+
   return (
     <div className="main-content">
       <div className="user-dashboard">
 
         <h2 className="form-title">Update Student Information</h2>
 
-            <div className="back">
-              
-                  <Link to="/authority-dashboard/acad">
-                    <i className="fa-solid fa-backward"></i>
-                  </Link>
-        
-            </div>
+        <div className="back">
+
+          <Link to="/authority-dashboard/acad">
+            <i className="fa-solid fa-backward"></i>
+          </Link>
+
+        </div>
 
         <form className="glass-form" onSubmit={handleSubmit}>
 
           <div className="form-group">
             <label>Email</label>
-            <input type="email" name="email" placeholder='Insert Email' 
-            onInput={(e) => e.target.value = e.target.value.replace(/[^0-9a-z@.]/g, '')}
-            onChange={handleChange} />
+            <input type="email" name="email" placeholder='Insert Email'
+              onInput={(e) => e.target.value = e.target.value.replace(/[^0-9a-z@.]/g, '')}
+              onChange={handleChange} />
           </div>
 
           <div className="form-group">
             <label>ID </label>
             <input type="text" name="studentId" placeholder='Insert ID' value={formData.studentId} required
-            onInput={(e) => e.target.value = e.target.value.replace(/[^A-Z0-9 ]/g, '')}
-            onChange={handleChange} />
+              onInput={(e) => e.target.value = e.target.value.replace(/[^A-Z0-9 ]/g, '')}
+              onChange={handleChange} />
           </div>
 
           <div className="form-group">
             <label>Name</label>
-            <input type="text" name="name" placeholder='Insert Full Name'   value={formData.name} 
-            onInput={(e) => e.target.value = e.target.value.replace(/[^A-Za-z.\s]/g, '')}
-            onChange={handleChange} />
+            <input type="text" name="name" placeholder='Insert Full Name' value={formData.name}
+              onInput={(e) => e.target.value = e.target.value.replace(/[^A-Za-z.\s]/g, '')}
+              onChange={handleChange} />
           </div>
 
           <div className="form-group">
             <label>Phone</label>
             <input type="tel" name="phone" placeholder='01*********' maxLength={11}
-            onInput={(e) => e.target.value = e.target.value.replace(/[^0-9]/g, '')}
-            onChange={handleChange}
-             />
+              onInput={(e) => e.target.value = e.target.value.replace(/[^0-9]/g, '')}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="form-group">
             <label>Password</label>
-            <input type="password" minLength={6} placeholder='Include letters, symbol & numbers'  name="password"  onChange={handleChange} />
+            <input type="password" minLength={6} placeholder='Include letters, symbol & numbers' name="password" onChange={handleChange} />
           </div>
 
           <div className="form-group">

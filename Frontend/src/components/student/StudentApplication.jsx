@@ -4,7 +4,7 @@ import '../Dashboard/authoritySummary.css';
 
 const StudentApplication = () => {
   const sId = localStorage.getItem("studentId");
-  
+
   const [isDeadlinePassed, setIsDeadlinePassed] = useState(false);
   const [showDeadlinePopup, setShowDeadlinePopup] = useState(false);
 
@@ -21,7 +21,7 @@ const StudentApplication = () => {
         if (res.data.success && res.data.schedule) {
           const deadline = new Date(res.data.schedule.applicationDeadlineDate);
           deadline.setHours(23, 59, 59, 999);
-          
+
           if (new Date() > deadline) {
             setIsDeadlinePassed(true);
           }
@@ -35,8 +35,8 @@ const StudentApplication = () => {
 
   const handleNewApplicationClick = (e) => {
     if (isDeadlinePassed) {
-      e.preventDefault(); 
-      setShowDeadlinePopup(true); 
+      e.preventDefault();
+      setShowDeadlinePopup(true);
     }
   };
 
@@ -45,9 +45,9 @@ const StudentApplication = () => {
       {showDeadlinePopup && (
         <div className="popup-overlay">
           <div className="popup-box">
-            <h2 style={{color: "red"}}>Application Date is Over!</h2>
+            <h2 style={{ color: "red" }}>Application Date is Over!</h2>
             <p>You can no longer submit a new application.</p>
-            <button onClick={() => setShowDeadlinePopup(false)} style={{padding: '10px 20px', marginTop: '15px', cursor: 'pointer'}}>
+            <button onClick={() => setShowDeadlinePopup(false)} style={{ padding: '10px 20px', marginTop: '15px', cursor: 'pointer' }}>
               Close
             </button>
           </div>

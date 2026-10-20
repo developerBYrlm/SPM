@@ -68,7 +68,7 @@ const removeITUser = async (req, res) => {
     if (!student) {
       return res.status(404).json({
         success: false,
-        error: "Faculty not found"
+        error: "IT member not found"
       });
     }
 
@@ -77,7 +77,7 @@ const removeITUser = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "Faculty removed successfully"
+      message: "IT member removed successfully"
     });
 
   } catch (error) {

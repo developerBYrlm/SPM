@@ -4,7 +4,7 @@ import axios from "axios";
 import DataTable from "react-data-table-component";
 import StudentApplicationButtons from "../StudentApplicationsButtons";
 import '../list.css';
-import '../ViewActionButton/ViewActionButton.css'; 
+import '../ViewActionButton/ViewActionButton.css';
 
 const ApplicationApprove = () => {
   const [applications, setApplications] = useState([]);

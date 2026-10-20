@@ -40,7 +40,7 @@ const Login = () => {
           else if (user.role === "IT") navigate("/it-dashboard");
           else if (user.role === "student") navigate("/student-dashboard");
           else if (user.role === "faculty") navigate("/faculty-dashboard");
-          else navigate("/ACAD-dashboard");
+          else navigate("/acad-dashboard");
 
           setLoading(false);
         }, 2000);

@@ -68,7 +68,9 @@ const AuthoritySummary = () => {
   ).length;
 
   const pending = filteredApps.filter(
-    (a) => a.authorityStatus === "Pending"
+    (a) =>
+      a.authorityStatus === "Pending" &&
+      (!a.requiresSpecialPermission || a.specialPermissionGranted === true)
   ).length;
 
   const rejected = filteredApps.filter(
@@ -78,7 +80,7 @@ const AuthoritySummary = () => {
   return (
     <div className="main-content">
       <div className="dashboard-container">
-        
+
         <h3 className="dashboard-title">Authority Dashboard</h3>
 
         <div className="dashboard-cards">

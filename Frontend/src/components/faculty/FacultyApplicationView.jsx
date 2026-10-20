@@ -92,26 +92,24 @@ const FacultyApplicationView = () => {
           <div className="action-buttons">
             <div className="status-container-view">
               <span
-                className={`status-text-view ${
-                  app.authorityStatus === "Approved"
-                    ? "approved"
-                    : app.authorityStatus === "Rejected"
+                className={`status-text-view ${app.authorityStatus === "Approved"
+                  ? "approved"
+                  : app.authorityStatus === "Rejected"
                     ? "rejected"
                     : "pending"
-                }`}
+                  }`}
               >
                 Authority: {app.authorityStatus || "Pending"}
               </span>
             </div>
 
             <button
-              className={`btn-faculty ${
-                facultyStatus.toLowerCase() === "approved"
-                  ? "approved"
-                  : facultyStatus.toLowerCase() === "rejected"
+              className={`btn-faculty ${facultyStatus.toLowerCase() === "approved"
+                ? "approved"
+                : facultyStatus.toLowerCase() === "rejected"
                   ? "rejected"
                   : ""
-              }`}
+                }`}
               onClick={() => handleStatusChange("approved_by_faculty")}
               disabled={actionLoading}
             >
@@ -119,13 +117,12 @@ const FacultyApplicationView = () => {
             </button>
 
             <button
-              className={`btn-faculty ${
-                facultyStatus.toLowerCase() === "rejected"
-                  ? "rejected"
-                  : facultyStatus.toLowerCase() === "approved"
+              className={`btn-faculty ${facultyStatus.toLowerCase() === "rejected"
+                ? "rejected"
+                : facultyStatus.toLowerCase() === "approved"
                   ? "approved"
                   : ""
-              }`}
+                }`}
               onClick={() => handleStatusChange("rejected_by_faculty")}
               disabled={actionLoading}
             >

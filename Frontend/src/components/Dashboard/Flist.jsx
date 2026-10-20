@@ -11,9 +11,9 @@ const FList = () => {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
-  const [authority, setAuthority] = useState(null); 
+  const [authority, setAuthority] = useState(null);
 
- 
+
   const fetchAuthorityProfile = async () => {
     try {
       const res = await axios.get("https://spm-1-u37a.onrender.com/api/auth/me", {
@@ -23,13 +23,13 @@ const FList = () => {
       });
 
       if (res.data.success) {
-        setAuthority(res.data.user); 
+        setAuthority(res.data.user);
       }
     } catch (err) {
       console.error(err);
     }
   };
- 
+
   const filteredStudents = students
     .filter((student) => {
       if (!authority) return false;
@@ -63,9 +63,9 @@ const FList = () => {
     { name: "Name", selector: (row) => row.name, sortable: true, grow: 2, minWidth: "150px" },
     {
       name: "Action",
-      cell: (row) => <FacultyButtons id={row._id} />, 
+      cell: (row) => <FacultyButtons id={row._id} />,
       grow: 1.2,
-      minWidth: "125px", 
+      minWidth: "125px",
       center: true,
     },
   ];
@@ -86,7 +86,7 @@ const FList = () => {
             studentId: s.user?.userID || "N/A",
             name: s.user?.name || "N/A",
             department: s.user?.department,
-            profileImage: s.user?.profileImage  ? `https://spm-1-u37a.onrender.com/imageUploads/uploads/${s.user.profileImage}`: "",
+            profileImage: s.user?.profileImage ? `https://spm-1-u37a.onrender.com/imageUploads/uploads/${s.user.profileImage}` : "",
           })));
         }
       } catch (err) {
@@ -94,18 +94,18 @@ const FList = () => {
       } finally {
         setLoading(false);
       }
-    }; 
+    };
 
-    fetchAuthorityProfile(); 
+    fetchAuthorityProfile();
     fetchStudents();
   }, []);
 
-  
-  if (loading) { 
-    return ( 
-     <div className="loading">
+
+  if (loading) {
+    return (
+      <div className="loading">
         <div className="ring"></div>
-    </div>
+      </div>
     );
   }
 
@@ -116,10 +116,10 @@ const FList = () => {
 
         <div className="search-box glass">
           <input
-              type="text"
-             placeholder="Search by Faculty Acronym"
-             value={search}
-             onChange={(e) => setSearch(e.target.value)}
+            type="text"
+            placeholder="Search by Faculty Acronym"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
 
         </div>

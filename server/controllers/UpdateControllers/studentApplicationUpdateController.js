@@ -1,4 +1,5 @@
 import StudentApplication from "../../models/StudentApplication.js";
+import { syncUpdatedApplicationToSheet } from "../../googleSheet/googleSheetService.js";
 import multer from "multer";
 import path from "path";
 import fs from "fs";
@@ -118,6 +119,15 @@ export const UpdateStudentApplication = async (req, res) => {
       { $set: updateData },
       { new: true, runValidators: true }
     );
+
+    // Sync updated application fields to Google Sheet
+    if (updatedApplication) {
+      try {
+        await syncUpdatedApplicationToSheet(updatedApplication);
+      } catch (error) {
+        console.error("Google Sheet update sync error:", error.message);
+      }
+    }
 
     return res.status(200).json({
       success: true,

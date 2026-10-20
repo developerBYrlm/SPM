@@ -5,13 +5,13 @@ import DataTable from "react-data-table-component";
 import ITButtons from "./ActionButtons/ITActionButtons"; // default import
 import "../Dashboard/list.css";
 
-const ITList = () =>  {
+const ITList = () => {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
- 
+
   const filteredStudents = students
-    
+
     .filter((student) =>
       (student.studentId || "")
         .toLowerCase()
@@ -37,9 +37,9 @@ const ITList = () =>  {
     { name: "Name", selector: (row) => row.name, sortable: true, grow: 2, minWidth: "150px" },
     {
       name: "Action",
-      cell: (row) => <ITButtons id={row._id} />, 
+      cell: (row) => <ITButtons id={row._id} />,
       grow: 1.2,
-      minWidth: "125px", 
+      minWidth: "125px",
       center: true,
     },
   ];
@@ -60,7 +60,7 @@ const ITList = () =>  {
             studentId: s.user?.userID || "N/A",
             name: s.user?.name || "N/A",
             department: s.user?.department,
-            profileImage: s.user?.profileImage  ? `https://spm-1-u37a.onrender.com/imageUploads/uploads/${s.user.profileImage}`: "",
+            profileImage: s.user?.profileImage ? `https://spm-1-u37a.onrender.com/imageUploads/uploads/${s.user.profileImage}` : "",
           })));
         }
       } catch (err) {
@@ -68,17 +68,17 @@ const ITList = () =>  {
       } finally {
         setLoading(false);
       }
-    }; 
+    };
 
     fetchStudents();
   }, []);
 
-  
-  if (loading) { 
-    return ( 
-     <div className="loading">
+
+  if (loading) {
+    return (
+      <div className="loading">
         <div className="ring"></div>
-    </div>
+      </div>
     );
   }
 
@@ -89,10 +89,10 @@ const ITList = () =>  {
 
         <div className="search-box glass">
           <input
-              type="text"
-             placeholder="Search by IT ID"
-             value={search}
-             onChange={(e) => setSearch(e.target.value)}
+            type="text"
+            placeholder="Search by IT ID"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
 
         </div>

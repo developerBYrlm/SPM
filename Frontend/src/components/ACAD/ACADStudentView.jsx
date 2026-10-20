@@ -79,7 +79,7 @@ const ACADStudentView = () => {
   return (
     <div className="main-content">
       <div className="dashboard-container">
-        
+
         <h3 className="dashboard-title">ACAD Dashboard</h3>
 
         <div className="dashboard-cards">

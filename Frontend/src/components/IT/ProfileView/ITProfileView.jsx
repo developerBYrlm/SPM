@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom'
 import '../../Dashboard/ViewActionButton/ViewActionButton.css'
 
 const ITProfileView = () => {
-  const { id } = useParams()             
+  const { id } = useParams()
   const [student, setStudent] = useState(null)
   const [loading, setLoading] = useState(true)
 
@@ -35,11 +35,11 @@ const ITProfileView = () => {
   }, [id])
 
 
-  if (loading) { 
-    return ( 
-     <div className="loading">
+  if (loading) {
+    return (
+      <div className="loading">
         <div className="ring"></div>
-    </div>
+      </div>
     );
   }
   if (!student) { return <div>No IT data found</div> }

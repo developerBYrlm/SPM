@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../Dashboard/routine.css'; 
+import '../Dashboard/routine.css';
 
 const RoutineFacultySh = () => {
     const [latestRoutine, setLatestRoutine] = useState(null);
@@ -72,7 +72,7 @@ const RoutineFacultySh = () => {
                             <h3 className="current-status">
                                 <span className="status-dot"></span> Active Routine
                             </h3>
-                            
+
                         </div>
 
                         <div className="pdf-viewer-frame">
@@ -88,7 +88,7 @@ const RoutineFacultySh = () => {
             </div>
         </div>
 
-);
+    );
 };
 
 

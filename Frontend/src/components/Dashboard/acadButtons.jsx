@@ -3,34 +3,34 @@ import { useNavigate } from "react-router-dom";
 import './studentButtons.css'
 
 
-const AcadButtons = ({ id }) =>{
-    const navigate = useNavigate();
+const AcadButtons = ({ id }) => {
+  const navigate = useNavigate();
 
-    const handleRemove = async () => {
-        const confirmRemove = window.confirm("Are you sure you want to remove this ACAD member?");
-        
-        if (confirmRemove) {
-            try {
-                const response = await axios.delete(
-                    `https://spm-1-u37a.onrender.com/api/acad/acad-remove/${id}`,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${localStorage.getItem("token")}`,
-                        },
-                    }
-                );
-                
-                if (response.data.success) {
-                    alert("ACAD removed successfully");
-                    window.location.reload();
-                }
-            } catch (error) { 
-                alert(error.response?.data?.error || "Delete failed");
-            }
+  const handleRemove = async () => {
+    const confirmRemove = window.confirm("Are you sure you want to remove this ACAD member?");
+
+    if (confirmRemove) {
+      try {
+        const response = await axios.delete(
+          `https://spm-1-u37a.onrender.com/api/acad/acad-remove/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+
+        if (response.data.success) {
+          alert("ACAD removed successfully");
+          window.location.reload();
         }
-    };
+      } catch (error) {
+        alert(error.response?.data?.error || "Delete failed");
+      }
+    }
+  };
 
-     return (
+  return (
     <div className="action-btn-group">
       <button
         className="student-action-btn btn-view"

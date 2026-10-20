@@ -35,9 +35,9 @@ const AuthorityList = () => {
     { name: "Department", selector: (row) => row.department, sortable: true, grow: 1, minWidth: "105px", center: true },
     {
       name: "Action",
-      cell: (row) => <AuthorityButtons id={row._id} />, 
+      cell: (row) => <AuthorityButtons id={row._id} />,
       grow: 1.2,
-      minWidth: "125px", 
+      minWidth: "125px",
       center: true,
     },
   ];
@@ -58,7 +58,7 @@ const AuthorityList = () => {
             studentId: s.user?.userID || "N/A",
             name: s.user?.name || "N/A",
             department: s.user?.department,
-            profileImage: s.user?.profileImage  ? `https://spm-1-u37a.onrender.com/imageUploads/uploads/${s.user.profileImage}`: "",
+            profileImage: s.user?.profileImage ? `https://spm-1-u37a.onrender.com/imageUploads/uploads/${s.user.profileImage}` : "",
           })));
         }
       } catch (err) {
@@ -66,17 +66,17 @@ const AuthorityList = () => {
       } finally {
         setLoading(false);
       }
-    }; 
+    };
 
     fetchStudents();
   }, []);
 
-  
-  if (loading) { 
-    return ( 
-     <div className="loading">
+
+  if (loading) {
+    return (
+      <div className="loading">
         <div className="ring"></div>
-    </div>
+      </div>
     );
   }
 
@@ -87,10 +87,10 @@ const AuthorityList = () => {
 
         <div className="search-box glass">
           <input
-              type="text"
-             placeholder="Search by Authority Acronym"
-             value={search}
-             onChange={(e) => setSearch(e.target.value)}
+            type="text"
+            placeholder="Search by Authority Acronym"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
 
         </div>

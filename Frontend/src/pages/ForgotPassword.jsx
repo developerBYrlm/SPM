@@ -190,7 +190,7 @@ const ForgotPassword = () => {
 
       setMessage(
         error.response?.data?.error ||
-          "Failed to update password. Please try again."
+        "Failed to update password. Please try again."
       );
 
       setMessageType("error");
@@ -204,7 +204,7 @@ const ForgotPassword = () => {
     setTimeLeft(60);
 
     await handleSendOtp({
-      preventDefault: () => {},
+      preventDefault: () => { },
     });
   };
 
@@ -256,8 +256,8 @@ const ForgotPassword = () => {
               step === 1
                 ? handleSendOtp
                 : step === 2
-                ? handleVerifyOtp
-                : handleUpdatePassword
+                  ? handleVerifyOtp
+                  : handleUpdatePassword
             }
           >
             {message && (

@@ -2,10 +2,10 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import '../../Dashboard/ViewActionButton/ViewActionButton.css'
-  
 
-const FacultyProfileView = () =>  {
-  const { id } = useParams()             
+
+const FacultyProfileView = () => {
+  const { id } = useParams()
   const [student, setStudent] = useState(null)
   const [loading, setLoading] = useState(true)
 
@@ -36,11 +36,11 @@ const FacultyProfileView = () =>  {
   }, [id])
 
 
-  if (loading) { 
-    return ( 
-     <div className="loading">
+  if (loading) {
+    return (
+      <div className="loading">
         <div className="ring"></div>
-    </div>
+      </div>
     );
   }
   if (!student) { return <div>No student data found</div> }

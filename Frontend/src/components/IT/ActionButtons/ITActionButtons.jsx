@@ -3,33 +3,33 @@ import { useNavigate } from "react-router-dom";
 import "../../Dashboard/studentButtons.css";
 
 
-const ITActionButtons = ({ id }) =>{
-    const navigate = useNavigate();
+const ITActionButtons = ({ id }) => {
+  const navigate = useNavigate();
 
-    const handleRemove = async () => {
-        const confirmRemove = window.confirm("Are you sure you want to remove this Faculty Member?");
-        
-        if (confirmRemove) {
-            try {
-                const response = await axios.delete(
-                    `https://spm-1-u37a.onrender.com/api/faculty/faculty-remove/${id}`,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${localStorage.getItem("token")}`,
-                        },
-                    }
-                );
-                
-                if (response.data.success) {
-                    alert("IT removed successfully");
-                    window.location.reload();
-                }
-            } catch (error) { 
-                alert(error.response?.data?.error || "Delete failed");
-            }
+  const handleRemove = async () => {
+    const confirmRemove = window.confirm("Are you sure you want to remove this IT member?");
+
+    if (confirmRemove) {
+      try {
+        const response = await axios.delete(
+          `https://spm-1-u37a.onrender.com/api/it/it-remove/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+
+        if (response.data.success) {
+          alert("IT member removed successfully");
+          window.location.reload();
         }
-    };
-     return (
+      } catch (error) {
+        alert(error.response?.data?.error || "Delete failed");
+      }
+    }
+  };
+  return (
     <div className="action-btn-group">
       <button
         className="student-action-btn btn-view"

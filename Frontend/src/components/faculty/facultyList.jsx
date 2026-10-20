@@ -36,7 +36,7 @@ const FacultyList = () => {
     );
 
   // Table columns
-   const columns = [
+  const columns = [
     { name: "Student ID", selector: (row) => row.studentId, sortable: true, grow: 1.3, minWidth: "130px" },
     {
       name: "Image",
@@ -53,12 +53,12 @@ const FacultyList = () => {
     { name: "Name", selector: (row) => row.name, sortable: true, grow: 2, minWidth: "150px" },
     {
       name: "Action",
-      cell: (row) => <StudentButtonForFaculty id={row._id} />, 
+      cell: (row) => <StudentButtonForFaculty id={row._id} />,
       grow: 1.2,
-      minWidth: "115px", 
+      minWidth: "115px",
       center: true,
     }
-  ];  
+  ];
 
   // Get faculty profile and student list
   useEffect(() => {

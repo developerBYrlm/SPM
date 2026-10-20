@@ -13,9 +13,9 @@ const AList = () => {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
-  const [authority, setAuthority] = useState(null); 
+  const [authority, setAuthority] = useState(null);
 
- 
+
   const fetchAuthorityProfile = async () => {
     try {
       const res = await axios.get("https://spm-1-u37a.onrender.com/api/auth/me", {
@@ -25,13 +25,13 @@ const AList = () => {
       });
 
       if (res.data.success) {
-        setAuthority(res.data.user); 
+        setAuthority(res.data.user);
       }
     } catch (err) {
       console.error(err);
     }
   };
- 
+
   const filteredStudents = students
     .filter((student) => {
       if (!authority) return true;
@@ -41,7 +41,7 @@ const AList = () => {
         authority.department?.toLowerCase()
       );
     })
-    
+
     .filter((student) =>
       (student.studentId || "")
         .toLowerCase()
@@ -67,9 +67,9 @@ const AList = () => {
     { name: "Name", selector: (row) => row.name, sortable: true, grow: 2, minWidth: "150px" },
     {
       name: "Action",
-      cell: (row) => <AcadButtons id={row._id} />, 
+      cell: (row) => <AcadButtons id={row._id} />,
       grow: 1.2,
-      minWidth: "125px", 
+      minWidth: "125px",
       center: true,
     },
   ];
@@ -90,7 +90,7 @@ const AList = () => {
             studentId: s.user?.userID || "N/A",
             name: s.user?.name || "N/A",
             department: s.user?.department,
-            profileImage: s.user?.profileImage  ? `https://spm-1-u37a.onrender.com/imageUploads/uploads/${s.user.profileImage}`: "",
+            profileImage: s.user?.profileImage ? `https://spm-1-u37a.onrender.com/imageUploads/uploads/${s.user.profileImage}` : "",
           })));
         }
       } catch (err) {
@@ -98,18 +98,18 @@ const AList = () => {
       } finally {
         setLoading(false);
       }
-    }; 
+    };
 
-    fetchAuthorityProfile(); 
+    fetchAuthorityProfile();
     fetchStudents();
   }, []);
 
-  
-  if (loading) { 
-    return ( 
-     <div className="loading">
+
+  if (loading) {
+    return (
+      <div className="loading">
         <div className="ring"></div>
-    </div>
+      </div>
     );
   }
 
@@ -120,10 +120,10 @@ const AList = () => {
 
         <div className="search-box glass">
           <input
-              type="text"
-             placeholder="Search by ACAD ID"
-             value={search}
-             onChange={(e) => setSearch(e.target.value)}
+            type="text"
+            placeholder="Search by ACAD ID"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
 
         </div>

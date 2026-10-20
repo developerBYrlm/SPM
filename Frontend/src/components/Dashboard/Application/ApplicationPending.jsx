@@ -82,6 +82,10 @@ const ApplicationPending = () => {
       );
     })
     .filter((app) => app.authorityStatus === "Pending")
+    .filter(
+      (app) =>
+        !app.requiresSpecialPermission || app.specialPermissionGranted === true
+    )
     .filter((app) =>
       app.studentId.toLowerCase().includes(search.toLowerCase())
     );

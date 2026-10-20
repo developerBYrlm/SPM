@@ -57,6 +57,17 @@ const studentApplicationSchema = new mongoose.Schema({
 
   specialExamCounted: { type: Boolean, default: false },
 
+  specialExamCountAtSubmission: { type: Number, default: 0 },
+  requiresSpecialPermission: { type: Boolean, default: false },
+  specialPermissionGranted: { type: Boolean, default: false },
+  specialPermissionToken: { type: String, default: null },
+  specialPermissionGrantedAt: { type: Date, default: null },
+  specialPermissionGrantedBy: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    default: null
+  },
+
   createdAt: { type: Date, default: Date.now }
 });
 

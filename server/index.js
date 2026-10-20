@@ -6,10 +6,9 @@ import path from "path";
 import dns from "dns";
 
 // Global Connection
-dns.setServers([
-  "1.1.1.1",
-  "8.8.8.8"
-]);
+if (dns.setDefaultResultOrder) {
+  dns.setDefaultResultOrder("ipv4first");
+}
 
 import connectToDatabase from "./db/db.js";
 
@@ -24,6 +23,8 @@ import studentApplicationRouter from "./routes/studentApplication.js";
 import routineRouter from "./routes/routine.js";
 import examScheduleRouter from "./routes/examSchedule.js";
 import startExamScheduleMailJob from "./jobs/examScheduleMailJob.js";
+import StudentApplication from "./models/StudentApplication.js";
+import { syncAllApplicationsToSheet } from "./googleSheet/googleSheetService.js";
 
 const app = express();
 
@@ -38,7 +39,20 @@ app.use("/uploads", express.static("uploads"));
 app.use("/uploads/routines", express.static("uploads/routines"));
 
 // Connect to MongoDB
-connectToDatabase();
+connectToDatabase().then(() => {
+  // Sync applications to Google Sheet backup on startup
+  StudentApplication.find({}).then((apps) => {
+    if (apps && apps.length > 0) {
+      syncAllApplicationsToSheet(apps).catch((err) => {
+        console.warn("Startup Google Sheet sync warning:", err.message);
+      });
+    }
+  }).catch((err) => {
+    console.warn("Startup Google Sheet sync query error:", err.message);
+  });
+}).catch((err) => {
+  console.error("Database connection failure:", err.message);
+});
 
 // API Routes
 app.use("/api/auth", authRouter);

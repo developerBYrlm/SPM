@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios'; 
+import axios from 'axios';
 import "./studentButtons.css"
 
 const StudentApplicationButtons = ({ id, onDeleteSuccess }) => {
@@ -14,7 +14,7 @@ const StudentApplicationButtons = ({ id, onDeleteSuccess }) => {
         });
         if (res.data.success) {
           alert("Application removed");
-          onDeleteSuccess(); 
+          onDeleteSuccess();
         }
       } catch (err) {
         console.error(err);
@@ -25,15 +25,15 @@ const StudentApplicationButtons = ({ id, onDeleteSuccess }) => {
 
   return (
     <div className="action-btn-group">
-      <button 
-        className="student-action-btn btn-view" 
+      <button
+        className="student-action-btn btn-view"
         onClick={() => navigate(`/authority-dashboard/application/application-view/${id}`)}
         title="View"
       >
         <i className="fa-solid fa-eye"></i>
       </button>
-      <button 
-        className="student-action-btn btn-leave" 
+      <button
+        className="student-action-btn btn-leave"
         onClick={handleRemove}
         title="Remove"
       >

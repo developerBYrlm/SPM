@@ -4,7 +4,7 @@ import { sendEmail } from "./emailService.js";
 
 // Build application view link
 const buildStudentApplicationLink = () => {
-  const baseUrl = process.env.FRONTEND_URL || "https://spm-1-u37a.onrender.com";
+  const baseUrl = process.env.FRONTEND_URL || "https://spm-2-j7gf.onrender.com";
   return `${baseUrl}/student-dashboard/current-application`;
 };
 

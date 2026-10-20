@@ -8,9 +8,9 @@ const StudentFacultyView = () => {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
-  const [authority, setAuthority] = useState(null); 
+  const [authority, setAuthority] = useState(null);
 
- 
+
   const fetchAuthorityProfile = async () => {
     try {
       const res = await axios.get("https://spm-1-u37a.onrender.com/api/auth/me", {
@@ -20,13 +20,13 @@ const StudentFacultyView = () => {
       });
 
       if (res.data.success) {
-        setAuthority(res.data.user); 
+        setAuthority(res.data.user);
       }
     } catch (err) {
       console.error(err);
     }
   };
- 
+
   const filteredStudents = students
     .filter((student) => {
       if (!authority) return false;
@@ -78,7 +78,7 @@ const StudentFacultyView = () => {
             name: s.user?.name || "N/A",
             email: s.user?.email || "N/A",
             department: s.user?.department,
-            profileImage: s.user?.profileImage  ? `https://spm-1-u37a.onrender.com/imageUploads/uploads/${s.user.profileImage}`: "",
+            profileImage: s.user?.profileImage ? `https://spm-1-u37a.onrender.com/imageUploads/uploads/${s.user.profileImage}` : "",
           })));
         }
       } catch (err) {
@@ -86,18 +86,18 @@ const StudentFacultyView = () => {
       } finally {
         setLoading(false);
       }
-    }; 
+    };
 
-    fetchAuthorityProfile(); 
+    fetchAuthorityProfile();
     fetchStudents();
   }, []);
 
-  
-  if (loading) { 
-    return ( 
-     <div className="loading">
+
+  if (loading) {
+    return (
+      <div className="loading">
         <div className="ring"></div>
-    </div>
+      </div>
     );
   }
 
@@ -108,10 +108,10 @@ const StudentFacultyView = () => {
 
         <div className="search-box glass">
           <input
-              type="text"
-             placeholder="Search by Faculty Acronym"
-             value={search}
-             onChange={(e) => setSearch(e.target.value)}
+            type="text"
+            placeholder="Search by Faculty Acronym"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
 
         </div>

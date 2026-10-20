@@ -71,7 +71,7 @@ const ITAdd = () => {
 
       alert(
         error.response?.data?.error ||
-          "Server error occurred while creating account"
+        "Server error occurred while creating account"
       );
     } finally {
       setSubmitting(false);
@@ -227,9 +227,8 @@ const ITAdd = () => {
               />
 
               <i
-                className={`fa-solid ${
-                  showPassword ? "fa-eye-slash" : "fa-eye"
-                }`}
+                className={`fa-solid ${showPassword ? "fa-eye-slash" : "fa-eye"
+                  }`}
                 onClick={() => setShowPassword((previous) => !previous)}
                 style={{ cursor: "pointer" }}
               ></i>

@@ -4,7 +4,7 @@ import axios from "axios";
 import DataTable from "react-data-table-component";
 import StudentButtonForACAD from "./StudentButtonForACAD";
 import "../Dashboard/list.css"
- 
+
 const List = () => {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -21,7 +21,7 @@ const List = () => {
         });
 
         if (res.data.success) {
-          setAcad(res.data.user); 
+          setAcad(res.data.user);
         }
       } catch (err) {
         console.error(err);
@@ -43,7 +43,7 @@ const List = () => {
             studentId: s.user?.userID || "N/A",
             name: s.user?.name || "N/A",
             department: s.user?.department || "N/A",
-            profileImage: s.user?.profileImage  ? `https://spm-1-u37a.onrender.com/imageUploads/uploads/${s.user.profileImage}`: "",
+            profileImage: s.user?.profileImage ? `https://spm-1-u37a.onrender.com/imageUploads/uploads/${s.user.profileImage}` : "",
           })));
         }
       } catch (err) {
@@ -89,18 +89,18 @@ const List = () => {
     { name: "Name", selector: (row) => row.name, sortable: true, grow: 2, minWidth: "150px" },
     {
       name: "Action",
-      cell: (row) => <StudentButtonForACAD id={row._id} />, 
+      cell: (row) => <StudentButtonForACAD id={row._id} />,
       grow: 1.2,
       minWidth: "115px",
       center: true
     },
   ];
 
-  if (loading) { 
-    return ( 
-     <div className="loading">
+  if (loading) {
+    return (
+      <div className="loading">
         <div className="ring"></div>
-    </div>
+      </div>
     );
   }
 
@@ -110,10 +110,10 @@ const List = () => {
         <h2 className="dashboard-title">Manage Students</h2>
         <div className="search-box glass">
           <input
-              type="text"
-             placeholder="Search by student ID"
-             value={search}
-             onChange={(e) => setSearch(e.target.value)}
+            type="text"
+            placeholder="Search by student ID"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
         </div>
         <div className="back">

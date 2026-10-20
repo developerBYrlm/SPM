@@ -12,6 +12,7 @@ const ApplyMissedExam = () => {
   const [totalFine, setTotalFine] = useState(2000);
   const [showPopup, setShowPopup] = useState(true);
   const [deadlinePassedPopup, setDeadlinePassedPopup] = useState(false);
+  const [showSpecialWarningPopup, setShowSpecialWarningPopup] = useState(false);
   const getTodayDate = () => new Date().toISOString().split("T")[0];
 
   const [formData, setFormData] = useState({
@@ -146,8 +147,12 @@ const ApplyMissedExam = () => {
       );
 
       if (res.data.success) {
-        alert("Application submitted successfully");
-        navigate("/student-dashboard");
+        if (res.data.requiresSpecialPermission) {
+          setShowSpecialWarningPopup(true);
+        } else {
+          alert("Application submitted successfully");
+          navigate("/student-dashboard");
+        }
       }
     } catch (err) {
       alert(
@@ -160,6 +165,72 @@ const ApplyMissedExam = () => {
 
   return (
     <div className="main-content">
+      {/* Show 5+ special exams red warning popup */}
+      {showSpecialWarningPopup && (
+        <div className="popup-overlay" style={{ zIndex: 9999 }}>
+          <div
+            className="popup-box"
+            style={{
+              border: "3px solid #ef4444",
+              boxShadow: "0 15px 35px rgba(239, 68, 68, 0.45)",
+              background: "linear-gradient(145deg, #181824, #2c151c)",
+              color: "#ffffff",
+              maxWidth: "490px",
+              padding: "30px 24px",
+              borderRadius: "14px",
+              textAlign: "center"
+            }}
+          >
+            <div style={{ fontSize: "50px", color: "#ef4444", marginBottom: "14px" }}>
+              <i className="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <h2
+              style={{
+                color: "#ef4444",
+                fontSize: "20px",
+                fontWeight: "800",
+                textTransform: "uppercase",
+                letterSpacing: "0.5px",
+                margin: "0 0 14px"
+              }}
+            >
+              Special Exam Warning
+            </h2>
+            <p
+              style={{
+                color: "#fecaca",
+                fontSize: "15px",
+                fontWeight: "600",
+                lineHeight: "1.6",
+                margin: "0 0 24px"
+              }}
+            >
+              You already attend 5 times on special exam and now you meet on Head of department to approve your application with necessary documents IF you have!
+            </p>
+            <button
+              type="button"
+              onClick={() => {
+                setShowSpecialWarningPopup(false);
+                navigate("/student-dashboard/current-application");
+              }}
+              style={{
+                backgroundColor: "#ef4444",
+                color: "#ffffff",
+                border: "none",
+                padding: "12px 34px",
+                fontSize: "15px",
+                fontWeight: "700",
+                borderRadius: "8px",
+                cursor: "pointer",
+                boxShadow: "0 4px 14px rgba(239, 68, 68, 0.5)"
+              }}
+            >
+              OK, I Understand
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Show deadline message */}
       {deadlinePassedPopup && (
         <div className="popup-overlay">
@@ -174,7 +245,7 @@ const ApplyMissedExam = () => {
       )}
 
       {/* Show welcome message */}
-      {showPopup && !deadlinePassedPopup && (
+      {showPopup && !deadlinePassedPopup && !showSpecialWarningPopup && (
         <div className="popup-overlay">
           <div className="popup-box">
             <h2>Fill the Application Carefully</h2>

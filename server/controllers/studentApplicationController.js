@@ -9,8 +9,14 @@ const __dirname = path.dirname(__filename);
 import fs from "fs";
 import PDFDocument from "pdfkit";
 import ExamSchedule from "../models/ExamSchedule.js";
+import crypto from "crypto";
 import { notifyPendingApplicationUsers } from "../services/pendingApplicationMailService.js";
 import { notifyStudentApplicationStatusChanged } from "../services/applicationStatusMailService.js";
+import { notifyAuthoritySpecialPermission } from "../services/specialPermissionMailService.js";
+import {
+  syncNewApplicationToSheet,
+  syncAuthorityStatusToSheet
+} from "../googleSheet/googleSheetService.js";
 
 // PDF upload
 const storage = multer.diskStorage({
@@ -132,6 +138,17 @@ export const applyStudentApplication = async (req, res) => {
 
     const facultyStatuses = buildFacultyStatuses(fixedCourses);
 
+    // Check student previous special exam participation count
+    const studentProfile = await Student.findOne({ user: user._id });
+    const specialExamCount = studentProfile ? Number(studentProfile.specialExamCount) || 0 : 0;
+
+    // Students who already attended 5 or more times need Head of Department (Authority) permission for 6th+ attempt
+    const requiresSpecialPermission = specialExamCount >= 5;
+    const specialPermissionToken = requiresSpecialPermission
+      ? crypto.randomBytes(32).toString("hex")
+      : null;
+    const specialPermissionGranted = !requiresSpecialPermission;
+
     const application = new StudentApplication({
       user: user._id,
       studentId: user.userID,
@@ -146,20 +163,52 @@ export const applyStudentApplication = async (req, res) => {
       facultyStatuses,
       totalFine: Number(totalFine) || fixedCourses.length * 2000,
       attachment: req.file ? req.file.path : null,
-      specialExamCounted: false
+      specialExamCounted: false,
+      specialExamCountAtSubmission: specialExamCount,
+      requiresSpecialPermission,
+      specialPermissionGranted,
+      specialPermissionToken
     });
 
     await application.save();
 
-    notifyPendingApplicationUsers(application._id).catch((error) => {
+    // If 6th+ special exam, notify authority with permission authorization email
+    if (requiresSpecialPermission) {
+      try {
+        await notifyAuthoritySpecialPermission({
+          application,
+          studentUser: user,
+          specialExamCount,
+          token: specialPermissionToken
+        });
+      } catch (err) {
+        console.error("Special permission authority email error:", err.message);
+      }
+    }
 
+    // Always notify assigned faculty so faculty can see and approve the application normally
+    try {
+      await notifyPendingApplicationUsers(application._id);
+    } catch (error) {
       console.error("Pending mail notification error:", error.message);
-    });
+    }
+
+    // Automatically sync new application to Google Sheet backup (default status: "Pending")
+    try {
+      await syncNewApplicationToSheet(application);
+    } catch (error) {
+      console.error("Google Sheet initial sync error:", error.message);
+    }
 
     res.status(201).json({
       success: true,
       message: "Application submitted successfully",
-      application
+      application,
+      requiresSpecialPermission,
+      specialExamCount,
+      warningMessage: requiresSpecialPermission
+        ? "You already attend 5 times on special exam and now you meet on Head of department to approve your application with necessary documents IF you have!"
+        : null
     });
 
   } catch (error) {
@@ -659,17 +708,28 @@ export const updateApplicationStatus = async (req, res) => {
     });
 
     if (statusChanged) {
-      notifyStudentApplicationStatusChanged({
-        applicationId: application._id,
-        changedByUserId: req.user.id,
-        changedRole,
-        changedStatus
-      }).catch(error => {
+      try {
+        await notifyStudentApplicationStatusChanged({
+          applicationId: application._id,
+          changedByUserId: req.user.id,
+          changedRole,
+          changedStatus
+        });
+      } catch (error) {
         console.error(
           "Student status mail error:",
           error.message
         );
-      });
+      }
+    }
+
+    // Sync updated authority status to Google Sheet
+    if (status === "approved_by_authority" || status === "rejected_by_authority") {
+      try {
+        await syncAuthorityStatusToSheet(application.studentId, application.authorityStatus);
+      } catch (error) {
+        console.error("Google Sheet authority status sync error:", error.message);
+      }
     }
 
     return res.status(200).json({
@@ -1706,6 +1766,222 @@ doc
         streamError.message
       );
     }
+  }
+};
+
+// Grant special permission when authority clicks the button in the permission request email
+export const grantSpecialPermissionFromEmail = async (req, res) => {
+  try {
+    const { token, appId } = req.query;
+
+    if (!token || !appId) {
+      return res.status(400).send(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <title>Special Exam Permission - Invalid Request</title>
+          <style>
+            body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8fafc; color: #1e293b; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; }
+            .card { background: #ffffff; max-width: 520px; width: 100%; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); padding: 36px 30px; text-align: center; border-top: 5px solid #dc2626; }
+            h2 { color: #dc2626; margin: 0 0 12px; font-size: 22px; }
+            p { color: #475569; font-size: 15px; line-height: 1.6; margin: 0 0 20px; }
+          </style>
+        </head>
+        <body>
+          <div class="card">
+            <h2>⚠️ Invalid Permission Link</h2>
+            <p>The permission link is missing required authorization parameters or has expired.</p>
+          </div>
+        </body>
+        </html>
+      `);
+    }
+
+    const application = await StudentApplication.findById(appId);
+
+    if (!application) {
+      return res.status(404).send(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <title>Special Exam Permission - Not Found</title>
+          <style>
+            body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8fafc; color: #1e293b; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; }
+            .card { background: #ffffff; max-width: 520px; width: 100%; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); padding: 36px 30px; text-align: center; border-top: 5px solid #dc2626; }
+            h2 { color: #dc2626; margin: 0 0 12px; font-size: 22px; }
+            p { color: #475569; font-size: 15px; line-height: 1.6; margin: 0 0 20px; }
+          </style>
+        </head>
+        <body>
+          <div class="card">
+            <h2>⚠️ Application Not Found</h2>
+            <p>The requested student application could not be found in the database.</p>
+          </div>
+        </body>
+        </html>
+      `);
+    }
+
+    if (application.specialPermissionToken !== token) {
+      return res.status(403).send(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <title>Special Exam Permission - Unauthorized</title>
+          <style>
+            body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8fafc; color: #1e293b; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; }
+            .card { background: #ffffff; max-width: 520px; width: 100%; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); padding: 36px 30px; text-align: center; border-top: 5px solid #dc2626; }
+            h2 { color: #dc2626; margin: 0 0 12px; font-size: 22px; }
+            p { color: #475569; font-size: 15px; line-height: 1.6; margin: 0 0 20px; }
+          </style>
+        </head>
+        <body>
+          <div class="card">
+            <h2>⚠️ Invalid Token</h2>
+            <p>This authorization token does not match the application record or has been superseded.</p>
+          </div>
+        </body>
+        </html>
+      `);
+    }
+
+    const frontendBaseUrl =
+      process.env.FRONTEND_URL || "https://spm-2-j7gf.onrender.com";
+    const pendingDashboardUrl = `${frontendBaseUrl}/authority-dashboard/students-applications-pending`;
+
+    if (application.specialPermissionGranted === true) {
+      return res.status(200).send(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <title>Special Exam Permission - Already Granted</title>
+          <style>
+            body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8fafc; color: #1e293b; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; }
+            .card { background: #ffffff; max-width: 540px; width: 100%; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); padding: 36px 30px; text-align: center; border-top: 5px solid #16a34a; }
+            .icon { font-size: 48px; color: #16a34a; margin-bottom: 14px; }
+            h2 { color: #0f172a; margin: 0 0 12px; font-size: 22px; font-weight: 700; }
+            p { color: #475569; font-size: 15px; line-height: 1.6; margin: 0 0 20px; }
+            .info-box { background: #f1f5f9; border-radius: 8px; padding: 14px 18px; margin: 18px 0; text-align: left; font-size: 14px; }
+            .info-row { display: flex; justify-content: space-between; padding: 4px 0; }
+            .btn { display: inline-block; background: #2563eb; color: #ffffff; text-decoration: none; padding: 12px 26px; font-size: 15px; font-weight: 600; border-radius: 6px; box-shadow: 0 4px 12px rgba(37,99,235,0.25); }
+          </style>
+        </head>
+        <body>
+          <div class="card">
+            <div class="icon">✅</div>
+            <h2>Permission Already Granted</h2>
+            <p>You have already granted special examination permission for this student. The application is currently sorted in your Authority Pending List.</p>
+            <div class="info-box">
+              <div class="info-row"><strong>Student Name:</strong> <span>${application.name}</span></div>
+              <div class="info-row"><strong>Student ID:</strong> <span>${application.studentId}</span></div>
+              <div class="info-row"><strong>Department:</strong> <span>${application.department}</span></div>
+              <div class="info-row"><strong>Status:</strong> <span>${application.authorityStatus}</span></div>
+            </div>
+            <a href="${pendingDashboardUrl}" class="btn">Open Pending Applications</a>
+          </div>
+        </body>
+        </html>
+      `);
+    }
+
+    // Grant permission
+    application.specialPermissionGranted = true;
+    application.specialPermissionGrantedAt = new Date();
+    await application.save();
+
+    return res.status(200).send(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Special Exam Permission - Granted</title>
+        <style>
+          body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8fafc; color: #1e293b; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; }
+          .card { background: #ffffff; max-width: 540px; width: 100%; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); padding: 36px 30px; text-align: center; border-top: 5px solid #16a34a; }
+          .icon { font-size: 52px; color: #16a34a; margin-bottom: 14px; }
+          h2 { color: #0f172a; margin: 0 0 10px; font-size: 22px; font-weight: 700; }
+          .sub { color: #16a34a; font-weight: 600; font-size: 15px; margin: 0 0 16px; }
+          p { color: #475569; font-size: 14.5px; line-height: 1.6; margin: 0 0 20px; }
+          .info-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px 18px; margin: 18px 0; text-align: left; font-size: 14px; }
+          .info-row { display: flex; justify-content: space-between; padding: 4px 0; }
+          .btn { display: inline-block; background: #2563eb; color: #ffffff; text-decoration: none; padding: 12px 28px; font-size: 15px; font-weight: 600; border-radius: 6px; box-shadow: 0 4px 12px rgba(37,99,235,0.3); }
+        </style>
+      </head>
+      <body>
+        <div class="card">
+          <div class="icon">🎉</div>
+          <h2>Special Permission Granted!</h2>
+          <div class="sub">Authority Authorization Successful</div>
+          <p>
+            You have granted permission for <strong>${application.name}</strong> (${application.studentId}) to participate in their special examination (5+ times exception).
+          </p>
+          <div class="info-box">
+            <div class="info-row"><strong>Student ID:</strong> <span>${application.studentId}</span></div>
+            <div class="info-row"><strong>Student Name:</strong> <span>${application.name}</span></div>
+            <div class="info-row"><strong>Department:</strong> <span>${application.department}</span></div>
+            <div class="info-row"><strong>Sorting:</strong> <span style="color:#16a34a;font-weight:600;">Added to Authority Pending List</span></div>
+          </div>
+          <p style="font-size: 13.5px; color: #64748b;">
+            This application is now sorted in your Authority Pending List. You can now open your dashboard to give final approval or review the application.
+          </p>
+          <a href="${pendingDashboardUrl}" class="btn">View in Authority Pending List</a>
+        </div>
+      </body>
+      </html>
+    `);
+
+  } catch (error) {
+    console.error("grantSpecialPermissionFromEmail error:", error);
+    return res.status(500).send("Server error processing special permission");
+  }
+};
+
+// Grant special permission directly by authenticated authority inside dashboard
+export const grantSpecialPermissionAuth = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (req.user?.role?.toLowerCase() !== "authority") {
+      return res.status(403).json({
+        success: false,
+        message: "Only authority can grant special permission"
+      });
+    }
+
+    const application = await StudentApplication.findById(id);
+
+    if (!application) {
+      return res.status(404).json({
+        success: false,
+        message: "Application not found"
+      });
+    }
+
+    application.specialPermissionGranted = true;
+    application.specialPermissionGrantedAt = new Date();
+    application.specialPermissionGrantedBy = req.user.id;
+    await application.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Special exam permission granted successfully. Application is now visible in Pending list.",
+      application
+    });
+  } catch (error) {
+    console.error("grantSpecialPermissionAuth error:", error);
+    return res.status(500).json({
+      success: false,
+      error: error.message
+    });
   }
 };
 

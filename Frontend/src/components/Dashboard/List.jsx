@@ -4,16 +4,16 @@ import axios from "axios";
 import DataTable from "react-data-table-component";
 import StudentButtons from "./studentButtons"; // default import
 import "./list.css";
- 
+
 
 //student list
 const List = () => {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
-  const [authority, setAuthority] = useState(null); 
-  
-  
+  const [authority, setAuthority] = useState(null);
+
+
   const fetchAuthorityProfile = async () => {
     try {
       const res = await axios.get("https://spm-1-u37a.onrender.com/api/auth/me", {
@@ -23,13 +23,13 @@ const List = () => {
       });
 
       if (res.data.success) {
-        setAuthority(res.data.user); 
+        setAuthority(res.data.user);
       }
     } catch (err) {
       console.error(err);
     }
   };
- 
+
   const filteredStudents = students
     .filter((student) => {
       if (!authority) return false;
@@ -65,13 +65,13 @@ const List = () => {
     { name: "S.E.P.", selector: (row) => row.specialExamCount, sortable: true, grow: 0.9, minWidth: "85px", center: true },
     {
       name: "Action",
-      cell: (row) => <StudentButtons id={row._id} />, 
+      cell: (row) => <StudentButtons id={row._id} />,
       grow: 1.2,
-      minWidth: "125px", 
+      minWidth: "125px",
       center: true,
     },
-  ];  
- 
+  ];
+
   useEffect(() => {
     const fetchStudents = async () => {
       setLoading(true);
@@ -89,26 +89,26 @@ const List = () => {
             name: s.user?.name || "N/A",
             department: s.user?.department || "N/A",
             specialExamCount: s.specialExamCount ?? 0,
-            profileImage: s.user?.profileImage  ? `https://spm-1-u37a.onrender.com/imageUploads/uploads/${s.user.profileImage}`: "",
+            profileImage: s.user?.profileImage ? `https://spm-1-u37a.onrender.com/imageUploads/uploads/${s.user.profileImage}` : "",
           })));
         }
       } catch (err) {
-        console.error(err); 
+        console.error(err);
       } finally {
         setLoading(false);
       }
-    }; 
+    };
 
-    fetchAuthorityProfile(); 
+    fetchAuthorityProfile();
     fetchStudents();
   }, []);
 
-  
-  if (loading) { 
-    return ( 
-     <div className="loading">
+
+  if (loading) {
+    return (
+      <div className="loading">
         <div className="ring"></div>
-    </div>
+      </div>
     );
   }
 
@@ -119,13 +119,13 @@ const List = () => {
 
         <div className="search-box glass">
           <input
-              type="text"
-             placeholder="Search by Student ID"
-             value={search}
-             onChange={(e) => setSearch(e.target.value)}
+            type="text"
+            placeholder="Search by Student ID"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
 
-        </div> 
+        </div>
 
         <div className="back">
           <Link to="/authority-dashboard">

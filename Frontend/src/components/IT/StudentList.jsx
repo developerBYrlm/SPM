@@ -4,14 +4,14 @@ import axios from "axios";
 import DataTable from "react-data-table-component";
 import StudentButtons from "./ActionButtons/StudentActionButtons"; // default import
 import "../Dashboard/list.css";
- 
+
 const StudentList = () => {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
- 
+
   const filteredStudents = students
-    
+
     .filter((student) =>
       (student.studentId || "")
         .toLowerCase()
@@ -38,13 +38,13 @@ const StudentList = () => {
     { name: "Department", selector: (row) => row.department, sortable: true, grow: 1, minWidth: "105px", center: true },
     {
       name: "Action",
-      cell: (row) => <StudentButtons id={row._id} />, 
+      cell: (row) => <StudentButtons id={row._id} />,
       grow: 1.2,
-      minWidth: "125px", 
+      minWidth: "125px",
       center: true,
     },
-  ];  
- 
+  ];
+
   useEffect(() => {
     const fetchStudents = async () => {
       setLoading(true);
@@ -61,25 +61,25 @@ const StudentList = () => {
             studentId: s.user?.userID || "N/A",
             name: s.user?.name || "N/A",
             department: s.user?.department,
-            profileImage: s.user?.profileImage  ? `https://spm-1-u37a.onrender.com/imageUploads/uploads/${s.user.profileImage}`: "",
+            profileImage: s.user?.profileImage ? `https://spm-1-u37a.onrender.com/imageUploads/uploads/${s.user.profileImage}` : "",
           })));
         }
       } catch (err) {
-        console.error(err); 
+        console.error(err);
       } finally {
         setLoading(false);
       }
-    }; 
+    };
 
     fetchStudents();
   }, []);
 
-  
-  if (loading) { 
-    return ( 
-     <div className="loading">
+
+  if (loading) {
+    return (
+      <div className="loading">
         <div className="ring"></div>
-    </div>
+      </div>
     );
   }
 
@@ -90,13 +90,13 @@ const StudentList = () => {
 
         <div className="search-box glass">
           <input
-              type="text"
-             placeholder="Search by Student ID"
-             value={search}
-             onChange={(e) => setSearch(e.target.value)}
+            type="text"
+            placeholder="Search by Student ID"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
 
-        </div> 
+        </div>
 
         <div className="back">
           <Link to="/it-dashboard">

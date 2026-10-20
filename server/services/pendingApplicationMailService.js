@@ -11,7 +11,7 @@ const getUserRole = (user) => user.role?.toString().trim().toLowerCase() || "";
 
 // Build application view link
 const buildApplicationViewLink = (applicationId, targetType) => {
-  const baseUrl = process.env.FRONTEND_URL || "https://spm-1-u37a.onrender.com";
+  const baseUrl = process.env.FRONTEND_URL || "https://spm-2-j7gf.onrender.com";
 
   if (targetType === "faculty") {
     return `${baseUrl}/faculty-dashboard/application/application-view/${applicationId}`;
@@ -228,8 +228,13 @@ export const notifyPendingApplicationUsers = async (applicationId) => {
       return;
     }
 
-    // Send mail to authority users
-    if (application.authorityStatus === "Pending") {
+    // Send mail to authority users (only if not awaiting 5+ special permission)
+    const canNotifyAuthority =
+      application.authorityStatus === "Pending" &&
+      (!application.requiresSpecialPermission ||
+        application.specialPermissionGranted === true);
+
+    if (canNotifyAuthority) {
       const authorityUsers = await getAuthorityRecipients(application);
 
       for (const authorityUser of authorityUsers) {
